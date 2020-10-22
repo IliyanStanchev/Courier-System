@@ -1,10 +1,8 @@
-package tu_varna.project.courier_system.roles;
+package tu_varna.project.courier_system.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
-import tu_varna.project.courier_system.entity.CourierFirm;
-import tu_varna.project.courier_system.entity.User;
 
 @Entity
 public class Courier extends User {

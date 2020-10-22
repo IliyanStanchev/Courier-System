@@ -1,12 +1,16 @@
 package tu_varna.project.courier_system.entity;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import tu_varna.project.courier_system.roles.Client;
+
+
 
 
 @Entity
@@ -15,17 +19,23 @@ public class Shipment {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
+	@Enumerated(EnumType.STRING)
 	private Status.status status;
+	@Enumerated(EnumType.STRING)
 	private Type.type type;
 	private Date dateCreated;
 	private Date dateShipped;
 	private double shipmentPrice;
-	
-	@ManyToOne
-	private Client client;
+	@ManyToOne(cascade = {CascadeType.ALL})
+	private Client sender;
+	@ManyToOne(cascade = {CascadeType.ALL})
+	private Client receiver;
 	@ManyToOne
 	private Office office;
 	public int getId() {
+		
+		
+		
 		return id;
 	}
 	public void setId(int id) {
@@ -65,11 +75,20 @@ public class Shipment {
 	public void setShipmentPrice(double shipmentPrice) {
 		this.shipmentPrice = shipmentPrice;
 	}
-	public Client getClient() {
-		return client;
+	
+	
+	
+	public Client getSender() {
+		return sender;
 	}
-	public void setClient(Client client) {
-		this.client = client;
+	public void setSender(Client sender) {
+		this.sender =  sender;
+	}
+	public Client getReceiver() {
+		return receiver;
+	}
+	public void setReceiver(Client receiver) {
+		this.receiver = receiver;
 	}
 	public Office getOffice() {
 		return office;

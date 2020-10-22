@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import tu_varna.project.courier_system.embeddable.Address;
 
 @Entity
 public class Office {
@@ -22,7 +21,15 @@ public class Office {
 	@ManyToOne
 	private CourierFirm firm;
 	
-	@OneToMany//(mappedBy="office")
+	public List<Shipment> getShipments() {
+		return shipments;
+	}
+
+	public void setShipments(List<Shipment> shipments) {
+		this.shipments = shipments;
+	}
+
+	@OneToMany(mappedBy="office")
 	private List<Shipment> shipments= new ArrayList<Shipment>();
 
 	public int getId() {

@@ -1,5 +1,6 @@
 package tu_varna.project.courier_system.entity;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,11 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 
-import tu_varna.project.courier_system.embeddable.Address;
 
 @Entity
-@Inheritance(strategy=  InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy=  InheritanceType.JOINED)
 @DiscriminatorColumn(name= "user_type")
 public class User {
 	
@@ -19,7 +20,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
  
-    
+    @Column(unique=true)
     private String loginUsername;
     
    
@@ -31,7 +32,22 @@ public class User {
    
     private String email;
     
- 
+    @OneToOne(mappedBy="user")
+    private Notification notification;
+    
+    
+    
+    public Notification getNotification() {
+		return notification;
+	}
+
+
+	public void setNotification(Notification notification) {
+		this.notification = notification;
+	}
+
+
+	@Column(unique=true)
     private String phoneNumber;
     
     private Address address;
@@ -109,8 +125,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", loginUsername=" + loginUsername + ", loginPassword=" + loginPassword + ", name="
-				+ name + ", email=" + email + ", phoneNumber=" + phoneNumber + ", address=" + address + "]";
+		return "User id=" + id + ", loginUsername=" + loginUsername + ", loginPassword=" + loginPassword + ", name="
+				+ name + ", email=" + email + ", phoneNumber=" + phoneNumber + ", address=" + address + "\n";
 	}
 
 
