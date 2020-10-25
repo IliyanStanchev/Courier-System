@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.view.AdminFormControler">
+   <children>
+      <AnchorPane layoutY="-4.0" prefHeight="391.0" prefWidth="712.0" style="-fx-background-color: #ffffff;" AnchorPane.leftAnchor="0.0">
+         <children>
+            <AnchorPane fx:id="workPane" layoutX="304.0" prefHeight="746.0" prefWidth="582.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <ImageView fitHeight="758.0" fitWidth="595.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/618715-637286223526815738-16x9.jpg" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="-0.09" contrast="0.1" hue="0.35" />
+                     </effect>
+                  </ImageView>
+               </children></AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="-2.0" layoutY="-6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="758.0" prefWidth="306.0" style="-fx-background-color: #660066;" stylesheets="@administratorStyle.css">
+         <children>
+            <AnchorPane layoutX="48.0" layoutY="-3.0" prefHeight="761.0" prefWidth="252.0" style="-fx-background-color: #CC99FF;">
+               <children>
+                  <Line endX="251.60000610351562" endY="206.20001220703125" layoutX="-2.0" layoutY="316.0" startX="3.999988555908203" startY="206.20001220703125" stroke="#660066" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="2.0" />
+                  <Button layoutX="6.0" layoutY="203.0" mnemonicParsing="false" onAction="#controlShipments" prefHeight="48.0" prefWidth="234.0" style="-fx-background-color: transparent;" text="Create/Delete Shipment">
+                     <font>
+                        <Font name="Modern No. 20" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="4.0" layoutY="264.0" mnemonicParsing="false" onAction="#controlCouriers" prefHeight="48.0" prefWidth="242.0" style="-fx-background-color: transparent;" text="Create/Delete Courier">
+                     <font>
+                        <Font name="Modern No. 20" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="5.0" layoutY="322.0" mnemonicParsing="false" onAction="#controlClients" prefHeight="48.0" prefWidth="242.0" style="-fx-background-color: transparent;" text="Create/Delete Client">
+                     <font>
+                        <Font name="Modern No. 20" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="2.0" layoutY="381.0" mnemonicParsing="false" onAction="#controlCourierSystems" prefHeight="48.0" prefWidth="242.0" style="-fx-background-color: transparent;" text="Create/Delete Corier System">
+                     <font>
+                        <Font name="Modern No. 20" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="2.0" layoutY="447.0" mnemonicParsing="false" onAction="#controlOffices" prefHeight="48.0" prefWidth="242.0" style="-fx-background-color: transparent;" text="Create/Delete Office">
+                     <font>
+                        <Font name="Modern No. 20" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="-1.0" layoutY="536.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="244.0" style="-fx-background-color: transparent;" text="About Courier">
+                     <font>
+                        <Font name="Modern No. 20" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="-3.0" layoutY="606.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="244.0" style="-fx-background-color: transparent;" text="About Shipment">
+                     <font>
+                        <Font name="Modern No. 20" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="1.0" layoutY="678.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="244.0" style="-fx-background-color: transparent;" text="About Courier System">
+                     <font>
+                        <Font name="Modern No. 20" size="17.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="94.0" fitWidth="93.0" layoutX="73.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/java.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <effect>
+                  <DropShadow color="#ede8eb" radius="26.645" width="87.58" />
+               </effect>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

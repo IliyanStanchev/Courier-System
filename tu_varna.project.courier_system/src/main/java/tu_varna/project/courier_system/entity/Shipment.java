@@ -26,12 +26,20 @@ public class Shipment {
 	private Date dateCreated;
 	private Date dateShipped;
 	private double shipmentPrice;
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Client sender;
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	private Client receiver;
 	@ManyToOne
 	private Office office;
+	@ManyToOne(cascade = {CascadeType.MERGE})
+	private Courier courier;
+	public Courier getCourier() {
+		return courier;
+	}
+	public void setCourier(Courier courier) {
+		this.courier = courier;
+	}
 	public int getId() {
 		
 		

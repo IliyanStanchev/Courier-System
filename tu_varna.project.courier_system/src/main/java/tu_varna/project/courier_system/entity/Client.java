@@ -2,16 +2,18 @@ package tu_varna.project.courier_system.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+
 
 @Entity
 public class Client extends User{
 	
-    @OneToMany(mappedBy="receiver")
+    @OneToMany(cascade = CascadeType.MERGE,mappedBy="receiver")
 	private List<Shipment> receivedShipments= new ArrayList<Shipment>();
     
-    @OneToMany(mappedBy="sender")
+    @OneToMany(cascade = CascadeType.MERGE,mappedBy="sender")
   	private List<Shipment> sendShipments= new ArrayList<Shipment>();
 
 	public List<Shipment> getReceivedShipments() {
@@ -28,6 +30,12 @@ public class Client extends User{
 
 	public void setSendShipments(List<Shipment> sendShipments) {
 		this.sendShipments = sendShipments;
+	}
+
+	@Override
+	public String loadView() {
+		return "ClientWorkspaceForm.fxml";
+		
 	}
     
      

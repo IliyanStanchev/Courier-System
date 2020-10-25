@@ -1,7 +1,12 @@
 package tu_varna.project.courier_system.dao;
 
 import java.util.List;
+
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
+
+
+
 import tu_varna.project.courier_system.entity.User;
 
 public class UserDaoImpl extends entityManager implements BaseDao<User>{
@@ -37,6 +42,22 @@ public class UserDaoImpl extends entityManager implements BaseDao<User>{
 		return getEntityManager().find(User.class, id);
 	}
 
+	
+	public User getUserByName(String name)
+	{
+		User user;
+		try {
+			user= (User) getEntityManager().createQuery("FROM User WHERE loginUsername=: name")
+					.setParameter("name", name)
+					.getSingleResult();
+		}catch(NoResultException e)
+		{
+			user=null;
+		}
+		return user;
+	
+		
+	}
 		
 	
 

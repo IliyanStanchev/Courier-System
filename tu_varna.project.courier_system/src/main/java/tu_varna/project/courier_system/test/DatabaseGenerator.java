@@ -70,6 +70,8 @@ public class DatabaseGenerator {
         ship.setShipmentPrice(25.2);
         ship.setStatus(Status.status.not_delivered);
         ship.setType(Type.type.packet);
+        ship.setCourier(usr);
+        usr.getShipmentsForDelivery().add(ship);
         client.getReceivedShipments().add(ship);
         office.getShipments().add(ship);
         Admin adm= new Admin();

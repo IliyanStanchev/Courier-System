@@ -11,10 +11,11 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 
 
+
 @Entity
 @Inheritance(strategy=  InheritanceType.JOINED)
-@DiscriminatorColumn(name= "user_type")
-public class User {
+//@DiscriminatorColumn(name= "user_type")
+public abstract class User {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +35,9 @@ public class User {
     
     @OneToOne(mappedBy="user")
     private Notification notification;
+    
+    public abstract String loadView();
+    
     
     
     
