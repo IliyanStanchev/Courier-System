@@ -1,4 +1,4 @@
-package tu_varna.project.courier_system.view;
+package tu_varna.project.courier_system.controllers;
 
 import java.io.IOException;
 import java.net.URL;

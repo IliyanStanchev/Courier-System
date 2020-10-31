@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="572.0" prefWidth="822.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+   <children>
+      <AnchorPane layoutY="7.0" prefHeight="563.0" prefWidth="832.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <TableView layoutY="7.0" prefHeight="556.0" prefWidth="842.0" style="-fx-background-color: #FFFD61;">
+               <columns>
+                  <TableColumn prefWidth="117.60003662109375" text="Shipment №" />
+                  <TableColumn prefWidth="189.59999084472656" text="From" />
+                  <TableColumn prefWidth="262.4000244140625" text="To" />
+                  <TableColumn prefWidth="271.20001220703125" text="Delivery date " />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -13,11 +9,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.view.ShipmentsViewFormControler">
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.ShipmentsViewFormController">
    <children>
       <AnchorPane prefHeight="704.0" prefWidth="535.0" style="-fx-background-color: #ffffff;">
          <children>
-            <TableView layoutY="290.0" prefHeight="243.0" prefWidth="535.0" style="-fx-background-color: #FFFD61;">
+            <TableView layoutY="304.0" prefHeight="243.0" prefWidth="535.0" style="-fx-background-color: #FFFD61;">
               <columns>
                 <TableColumn prefWidth="115.2000732421875" text="Shipment №" />
                 <TableColumn prefWidth="129.60003662109375" text="Date created" />
@@ -25,17 +21,8 @@
                   <TableColumn prefWidth="101.60002441406255" text="Status" />
               </columns>
             </TableView>
-            <Button layoutX="62.0" layoutY="553.0" mnemonicParsing="false" onAction="#createShipment" prefHeight="44.0" prefWidth="143.0" style="-fx-background-color: #FFFF99;" text="Create shipment " />
-            <Button layoutX="314.0" layoutY="553.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="143.0" style="-fx-background-color: #FFFF99;" text="Delete shipment" />
-            <Button layoutX="195.0" layoutY="623.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="144.0" style="-fx-background-color: #FFFF66;" text="Save" textFill="#131313" textOverrun="CLIP">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Button>
-            <TextField disable="true" layoutX="107.0" layoutY="244.0" prefHeight="30.0" prefWidth="321.0" />
+            <Button layoutX="64.0" layoutY="586.0" mnemonicParsing="false" onAction="#createShipment" prefHeight="56.0" prefWidth="143.0" style="-fx-background-color: #FFFF99;" text="Create shipment " />
+            <Button layoutX="313.0" layoutY="586.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="143.0" style="-fx-background-color: #FFFF99;" text="Delete shipment" />
             <TextField layoutX="86.0" layoutY="71.0" prefHeight="35.0" prefWidth="362.0" promptText="shipment №" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -46,7 +33,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </TextField>
-            <Button layoutX="206.0" layoutY="179.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="122.0" style="-fx-background-color: #FFFF66;" text="Search" textFill="#131313" textOverrun="CLIP">
+            <Button layoutX="202.0" layoutY="210.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="130.0" style="-fx-background-color: #FFFF66;" text="Search" textFill="#131313" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -54,6 +41,16 @@
                   <DropShadow />
                </effect>
             </Button>
+            <Label layoutX="86.0" layoutY="172.0" prefHeight="0.0" prefWidth="429.0" text="Label" textFill="#fa0000">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="79.0" layoutY="661.0" prefHeight="0.0" prefWidth="429.0" text="Label" textFill="#fa0000">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

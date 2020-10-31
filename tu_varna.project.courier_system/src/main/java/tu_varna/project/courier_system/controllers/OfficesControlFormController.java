@@ -1,4 +1,4 @@
-package tu_varna.project.courier_system.view;
+package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -7,7 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-public class OfficesControlFormControler implements Initializable {
+public class OfficesControlFormController implements Initializable {
 
 	@FXML
 

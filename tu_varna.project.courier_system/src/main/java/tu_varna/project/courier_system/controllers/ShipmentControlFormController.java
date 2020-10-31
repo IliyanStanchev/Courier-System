@@ -1,4 +1,4 @@
-package tu_varna.project.courier_system.view;
+package tu_varna.project.courier_system.controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 
-public class ShipmentControlFormControler implements Initializable {
+public class ShipmentControlFormController implements Initializable {
 
 	@FXML
 	public void viewShipmentsList(ActionEvent event) throws IOException {

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="685.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="1.0" prefHeight="718.0" prefWidth="698.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <ImageView fitHeight="302.0" fitWidth="298.0" layoutX="400.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/cs.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="93.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shipment №:" wrappingWidth="226.4250030517578">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="28.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From (address):">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="28.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To (address):">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="28.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sender name:">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="28.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver name:">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="28.0" layoutY="551.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="33.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information:">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="28.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shipment price:">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="27.0" layoutY="618.0" strokeType="OUTSIDE" strokeWidth="0.0" text="At the expense of the:" wrappingWidth="255.98800659179688">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="27.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Due amount:" wrappingWidth="179.66363525390625">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="33.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of ordering:">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Text>
+            <Label layoutX="240.0" layoutY="294.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="240.0" layoutY="333.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="203.0" layoutY="373.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="207.0" layoutY="416.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="203.0" layoutY="454.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="203.0" layoutY="496.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="196.0" layoutY="530.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="203.0" layoutY="563.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="252.0" layoutY="597.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="196.0" layoutY="631.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="34.0" layoutY="140.0" prefHeight="53.0" prefWidth="282.0" text="Label" textFill="#b200a9">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
