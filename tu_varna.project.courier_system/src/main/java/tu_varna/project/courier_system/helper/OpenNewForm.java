@@ -8,21 +8,24 @@ import javafx.stage.Stage;
 
 public class OpenNewForm {
 
-	public static void openNewForm(String fxmlFileName, String formTitle) {
+	public static FXMLLoader openNewForm(String fxmlFileName, String formTitle) {
+		FXMLLoader fxmlLoad = null;
 		try {
-			FXMLLoader fxmlLoad = new FXMLLoader(
+			fxmlLoad = new FXMLLoader(
 					new OpenNewForm().getClass().getResource("/tu_varna/project/courier_system/view/" + fxmlFileName));
-			Parent root;
-			root = (Parent) fxmlLoad.load();
+
+			Parent root = (Parent) fxmlLoad.load();
 			Stage stage = new Stage();
 			stage.setTitle(formTitle);
 			stage.setScene(new Scene(root));
 			stage.getIcons().add(new Image(new OpenNewForm().getClass()
 					.getResourceAsStream("/tu_varna/project/courier_system/img/appIcon.png")));
 			stage.show();
+
 		} catch (Exception e) {
 			System.out.println("Can't load new window. ");
 		}
+		return fxmlLoad;
 
 	}
 }

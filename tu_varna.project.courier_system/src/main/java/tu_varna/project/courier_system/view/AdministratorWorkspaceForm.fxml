@@ -46,7 +46,7 @@
                         <Font name="Modern No. 20" size="17.0" />
                      </font>
                   </Button>
-                  <Button layoutX="3.0" layoutY="360.0" mnemonicParsing="false" onAction="#controlCourierSystems" prefHeight="48.0" prefWidth="242.0" style="-fx-background-color: transparent;" text="Create/Delete Corier System">
+                  <Button layoutX="3.0" layoutY="360.0" mnemonicParsing="false" onAction="#controlCourierSystems" prefHeight="48.0" prefWidth="242.0" style="-fx-background-color: transparent;" text="Create/Delete Courier Company">
                      <font>
                         <Font name="Modern No. 20" size="17.0" />
                      </font>
@@ -71,7 +71,7 @@
                         <Font name="Modern No. 20" size="17.0" />
                      </font>
                   </Button>
-                  <ImageView fitHeight="94.0" fitWidth="93.0" layoutX="73.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="112.0" fitWidth="107.0" layoutX="68.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/java.png" />
                      </image>

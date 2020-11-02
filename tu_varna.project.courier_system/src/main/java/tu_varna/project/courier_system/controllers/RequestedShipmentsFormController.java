@@ -10,6 +10,7 @@ public class RequestedShipmentsFormController {
 
 	
 
+
 	@FXML
 	private void trackShipment(ActionEvent event) throws IOException {
 		OpenNewForm.openNewForm("TrackShipmentForm.fxml", "Shipment state");

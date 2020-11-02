@@ -5,7 +5,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -13,40 +12,22 @@
    <children>
       <AnchorPane prefHeight="704.0" prefWidth="535.0" style="-fx-background-color: #ffffff;">
          <children>
-            <TableView layoutY="304.0" prefHeight="243.0" prefWidth="535.0" style="-fx-background-color: #FFFD61;">
+            <TableView fx:id="shipmentsView" layoutY="219.0" prefHeight="308.0" prefWidth="535.0">
               <columns>
-                <TableColumn prefWidth="115.2000732421875" text="Shipment №" />
-                <TableColumn prefWidth="129.60003662109375" text="Date created" />
-                  <TableColumn prefWidth="186.39996337890625" text="Contact phone number" />
-                  <TableColumn prefWidth="101.60002441406255" text="Status" />
+                <TableColumn fx:id="numberColumn" prefWidth="115.2000732421875" text="Shipment №" />
+                <TableColumn fx:id="dateColumn" prefWidth="129.60003662109375" text="Date created" />
+                  <TableColumn fx:id="phoneNmbColumn" prefWidth="186.39996337890625" text="Contact phone number" />
+                  <TableColumn fx:id="statusColumn" prefWidth="101.60002441406255" text="Status" />
               </columns>
             </TableView>
             <Button layoutX="64.0" layoutY="586.0" mnemonicParsing="false" onAction="#createShipment" prefHeight="56.0" prefWidth="143.0" style="-fx-background-color: #FFFF99;" text="Create shipment " />
-            <Button layoutX="313.0" layoutY="586.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="143.0" style="-fx-background-color: #FFFF99;" text="Delete shipment" />
-            <TextField layoutX="86.0" layoutY="71.0" prefHeight="35.0" prefWidth="362.0" promptText="shipment №" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
+            <Button layoutX="313.0" layoutY="586.0" mnemonicParsing="false" onAction="#deleteShipment" prefHeight="56.0" prefWidth="143.0" style="-fx-background-color: #FFFF99;" text="Delete shipment" />
+            <TextField fx:id="number" layoutX="86.0" layoutY="92.0" prefHeight="50.0" prefWidth="362.0" promptText="shipment №" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </TextField>
-            <TextField layoutX="86.0" layoutY="124.0" prefHeight="35.0" prefWidth="362.0" promptText="phone number" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </TextField>
-            <Button layoutX="202.0" layoutY="210.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="130.0" style="-fx-background-color: #FFFF66;" text="Search" textFill="#131313" textOverrun="CLIP">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Button>
-            <Label layoutX="86.0" layoutY="172.0" prefHeight="0.0" prefWidth="429.0" text="Label" textFill="#fa0000">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label layoutX="79.0" layoutY="661.0" prefHeight="0.0" prefWidth="429.0" text="Label" textFill="#fa0000">
+            <Label fx:id="resultLabel" layoutX="33.0" layoutY="538.0" prefHeight="0.0" prefWidth="429.0" text="Label" textFill="#fa0000">
                <font>
                   <Font size="15.0" />
                </font>

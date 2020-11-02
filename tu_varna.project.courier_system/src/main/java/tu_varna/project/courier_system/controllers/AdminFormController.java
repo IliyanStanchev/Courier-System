@@ -24,7 +24,7 @@ public class AdminFormController implements Initializable {
 
 	@FXML
 	private void controlClients(ActionEvent event) throws IOException {
-		BuiltInForm.built_inForm("Create_DeleteClientForm.fxml", workPane);
+		BuiltInForm.built_inForm("ControlClientForm.fxml", workPane);
 	}
 
 	@FXML
@@ -34,7 +34,7 @@ public class AdminFormController implements Initializable {
 
 	@FXML
 	private void controlCourierSystems(ActionEvent event) throws IOException {
-		BuiltInForm.built_inForm("Create_DeleteCompanyForm.fxml", workPane);
+		BuiltInForm.built_inForm("ControlCompanyForm.fxml", workPane);
 	}
 
 	@FXML
@@ -46,6 +46,8 @@ public class AdminFormController implements Initializable {
 	private void controlShipments(ActionEvent event) throws IOException {
 		BuiltInForm.built_inForm("ShipmentControlForm.fxml", workPane);
 	}
+	
+	
 
 	@FXML
 	private void aboutCourier(ActionEvent event) throws IOException {
