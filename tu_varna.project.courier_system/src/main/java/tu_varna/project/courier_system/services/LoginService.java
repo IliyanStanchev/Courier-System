@@ -8,7 +8,7 @@ public class LoginService {
 	private UserDaoImpl userDao = new UserDaoImpl();
 
 	public User authenticateUserLogin(String username, String password) {
-		User user = userDao.getUserByName(username);
+		User user = userDao.getUserByUsername(username);
 		if (user != null) {
 			if (user.getLoginPassword().equals(password)) {
 				return user;

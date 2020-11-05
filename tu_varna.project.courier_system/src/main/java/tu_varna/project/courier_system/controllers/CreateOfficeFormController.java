@@ -1,6 +1,7 @@
 package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -11,8 +12,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class CreateOfficeFormController implements Initializable {
+	
+	UserService service = new UserServiceImpl();
 
 	@FXML
 	private TextField country;
@@ -53,7 +58,7 @@ public class CreateOfficeFormController implements Initializable {
 	@FXML
 	private Label cityValidationLabel;
 
-	private ObservableList<String> companyList = FXCollections.observableArrayList("fff", "ggg");
+	private ObservableList<String> companyList = FXCollections.observableArrayList();
 
 	@FXML
 	void createOffice(ActionEvent event) {
@@ -66,12 +71,17 @@ public class CreateOfficeFormController implements Initializable {
 		String company = this.companyCombo.getSelectionModel().getSelectedItem().toString();
 		System.out.println(company);
 
-		// DBsuzdaiOffice(country, city, streetN, agent, phoneNmb, company);
+		service.CreateOffice(company,country, city, streetN, agent, phoneNmb,service.getBulstatByFirmName(company));
 
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		List<Object[]> list= service.getAllCompanies();
+		for(Object[] column: list)
+		{
+			fillCompanyCombo((String)column[0]);
+		}
 		companyCombo.setItems(companyList);
 
 	}

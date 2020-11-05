@@ -3,7 +3,9 @@ package tu_varna.project.courier_system.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,21 +18,29 @@ public class Office {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
+	
+	private String name;
+	
 	private Address address;
 	
-	@ManyToOne
+	private Manager manager;
+	
+	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.DETACH)
 	private CourierFirm firm;
 	
-	public List<Shipment> getShipments() {
-		return shipments;
+	
+	
+	public Office(String name, String country, String city, String streetN,String managerName, String managerPhone, CourierFirm firm) {
+		super();
+		this.name = name;
+		this.address = new Address(country,city,streetN);
+		this.manager = new Manager(managerName, managerPhone);
+		this.firm = firm;
 	}
 
-	public void setShipments(List<Shipment> shipments) {
-		this.shipments = shipments;
+	public Office() {
+		// TODO Auto-generated constructor stub
 	}
-
-	@OneToMany(mappedBy="office")
-	private List<Shipment> shipments= new ArrayList<Shipment>();
 
 	public int getId() {
 		return id;
@@ -38,6 +48,15 @@ public class Office {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Address getAddress() {
@@ -54,6 +73,14 @@ public class Office {
 
 	public void setFirm(CourierFirm firm) {
 		this.firm = firm;
+	}
+
+	public Manager getManager() {
+		return manager;
+	}
+
+	public void setManager(Manager manager) {
+		this.manager = manager;
 	}
 	
 	

@@ -23,6 +23,7 @@ public class OpenNewForm {
 			stage.show();
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Can't load new window. ");
 		}
 		return fxmlLoad;

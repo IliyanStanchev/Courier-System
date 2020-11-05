@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,9 +17,19 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
+import tu_varna.project.courier_system.entity.CourierFirm;
+import tu_varna.project.courier_system.entity.Manager;
+import tu_varna.project.courier_system.entity.Type;
+import tu_varna.project.courier_system.entity.Type.type;
+import tu_varna.project.courier_system.entity.User;
 import tu_varna.project.courier_system.helper.FieldValidation;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class RequestShipmentFormController implements Initializable {
+	
+	private UserService service= new UserServiceImpl();
+	private User usr;
 
 	@FXML
 	private TextField phoneNmb;
@@ -35,6 +47,8 @@ public class RequestShipmentFormController implements Initializable {
 	private TextField price;
 	@FXML
 	private TextField dueAmount;
+	@FXML
+	private Label company_name;
 	@FXML
 	private Label searchResultLabel;
 	@FXML
@@ -78,7 +92,7 @@ public class RequestShipmentFormController implements Initializable {
 	@FXML
 	private Label fieldsValidationLabel;
 	@FXML
-	private ComboBox<String> typeCombo;
+	private ComboBox<type> typeCombo;
 
 	@FXML
 	private ComboBox<String> officeCombo;
@@ -87,9 +101,11 @@ public class RequestShipmentFormController implements Initializable {
 	private ComboBox<String> companyCombo;
 	@FXML
 	private DatePicker dateCreation;
+	
+	private int id;
+	
 
-	private ObservableList<String> typeList = FXCollections.observableArrayList("bag", "packet", "parcel", "cargo",
-			"document");
+	private ObservableList<type> typeList = FXCollections.observableArrayList(type.bag,type.cargo,type.document,type.packet,type.parcel);
 	private ObservableList<String> companyList = FXCollections.observableArrayList();
 	private ObservableList<String> officeList = FXCollections.observableArrayList();
 
@@ -161,10 +177,18 @@ public class RequestShipmentFormController implements Initializable {
 		if (numberValidation()) {
 
 			String clientID = phoneNmb.getText();
-			System.out.println(clientID);
-			// if(DBsearchCLient(clientID)==false){
-			searchResultLabel.setText("No client with this phone number.");
-			name.requestFocus();
+			this.usr=service.SearchUserByPhone(clientID);
+			if(usr!=null)
+			{
+				loadInfo(usr.getName(), usr.getEmail(), usr.getAddress().getCountry(), usr.getAddress().getCity(), usr.getAddress().getStreet());
+				
+			}
+			else
+			{
+				searchResultLabel.setText("No client with this phone number.");
+				name.requestFocus();
+			}
+			
 		}
 
 		// -->a ako go nameri shte izvika v sebe si loadInfo();
@@ -184,19 +208,50 @@ public class RequestShipmentFormController implements Initializable {
 		String city = this.city.getText();
 		String streetN = this.streetN.getText();
 		Double price = Double.parseDouble(this.price.getText());
+		String office;
 		String company = this.companyCombo.getSelectionModel().getSelectedItem();
-		// String sendTo = selectedRadioButtonfromSendTo.getText();
-		// String expenseOf = selectedRadioButtonfromExpenseOf.getText();
-		String office = this.officeCombo.getSelectionModel().getSelectedItem().toString();
-		String type = this.typeCombo.getSelectionModel().getSelectedItem();
-		System.out.println(sendTo);
-
+		if(selectedRadioButtonfromSendTo.getText().equals("address"))
+		{
+			office=null;
+		}
+		else {
+			
+		    office = this.officeCombo.getSelectionModel().getSelectedItem().toString();
+			
+		}
+		
+		type type = this.typeCombo.getSelectionModel().getSelectedItem();
 		boolean combo = checkComboBoxes(); // vrushta false ako ima neizbrano
 		boolean radio = checkRadioButtons(); // vrushta false ako ima necheknato
 		boolean field = checkFields(); // vrushta true ako ima prazno pole
 		if (combo && radio && !field) { // tuka ne e taka
-			resultLabel.setText("ffffff");
-			// GBFunckiq ( wsichki poleta da se prashtat);
+			if(selectedRadioButtonfromExpenseOf.getText().equals("receiver"))
+			{
+				dueAmount.setText("0.00");
+				price= price+type.showPrice();
+			}
+			else
+			{
+				dueAmount.setText(Double.toString(type.showPrice()));
+			}
+			if(usr!=null && office!=null)
+			{
+			service.CreateShipment(type, dateCreation.getValue(), price, id, usr,service.getBulstatByFirmName(company),service.getIdByOfficeName(office));
+			}
+			if(usr!=null && office==null)
+			{
+				service.CreateShipment(type, dateCreation.getValue(), price, id, usr,service.getBulstatByFirmName(company));
+			}
+			if(usr==null && office==null)
+			{
+				service.CreateClient(phoneNmb, phoneNmb, name, email, phoneNmb, country, city, streetN);
+				service.CreateShipment(type, dateCreation.getValue(), price, id, service.SearchUserByPhone(phoneNmb),service.getBulstatByFirmName(company));
+			}
+			if(usr==null && office!=null)
+			{
+				service.CreateClient(phoneNmb, phoneNmb, name, email, phoneNmb, country, city, streetN);
+				service.CreateShipment(type, dateCreation.getValue(), price, id, service.SearchUserByPhone(phoneNmb),service.getBulstatByFirmName(company),service.getIdByOfficeName(office));
+			}
 		} else
 			resultLabel.setText("Fill in all fields correct.");
 
@@ -205,6 +260,13 @@ public class RequestShipmentFormController implements Initializable {
 	@FXML
 	private void activateOfficeCombo(ActionEvent event) {
 		officeCombo.setDisable(false);
+		officeCombo.getItems().clear();
+		List <String> list = service.getOfficesList(service.getBulstatByFirmName(companyCombo.getValue()));
+		for(String column : list)
+		{
+		    fillOfficeCombo(column);
+		}
+		officeCombo.setItems(officeList);	
 	}
 
 	@FXML
@@ -280,6 +342,30 @@ public class RequestShipmentFormController implements Initializable {
 
 	public void fillCompanyCombo(String companyName) { // pulni kombocompany w init pak;
 		companyList.add(companyName);
+	}
+	
+	public void getCompanyForAdmin(CourierFirm choosedCompany)
+	{
+		companyList.add(choosedCompany.getCompanyName());
+		company_name.setText(choosedCompany.getCompanyName());
+		companyCombo.setItems(companyList);
+		companyCombo.getSelectionModel().select(choosedCompany.getCompanyName());
+		companyCombo.setDisable(true);
+		this.id=3;
+			
+	}
+	
+	public void getCompanyForClient(int id)
+	{
+		List<Object[]> list = service.getAllCompanies();
+		for(Object[] column : list)
+		{
+			companyList.add((String)column[0]);
+		}
+		companyCombo.setItems(companyList);
+		companyCombo.getSelectionModel().selectFirst();
+		this.id=id;
+	   
 	}
 
 }

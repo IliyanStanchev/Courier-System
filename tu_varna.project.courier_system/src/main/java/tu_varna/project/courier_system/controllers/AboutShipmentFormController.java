@@ -6,9 +6,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import tu_varna.project.courier_system.entity.Shipment;
+import tu_varna.project.courier_system.entity.Status;
+import tu_varna.project.courier_system.entity.Type;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class AboutShipmentFormController {
-
+    
+	
+	private UserService service= new UserServiceImpl();
 	@FXML
 	private TextField number;
 
@@ -31,12 +38,6 @@ public class AboutShipmentFormController {
 	private Label price;
 
 	@FXML
-	private Label expenseOf;
-
-	@FXML
-	private Label dueAmount;
-
-	@FXML
 	private Label to;
 
 	@FXML
@@ -52,28 +53,41 @@ public class AboutShipmentFormController {
 	private Label result;
 
 	@FXML
-	private boolean searchShipment(ActionEvent event) {
+	private void searchShipment(ActionEvent event) {
 
-		int phoneNmb = Integer.parseInt(this.number.getText());
-		boolean isFound = false;// dbsearch(phoneNmb));
+		int shipment_id = Integer.parseInt(this.number.getText());
+		Shipment shipment = service.SearchShipmentByID(shipment_id);
+		if(shipment!=null)
+		{
+			String oORa="address";
+			if(shipment.getToOffice()!=null)
+			{
+				oORa="office";
+			}
+			loadInfo(shipment.getStatus(),shipment.getFirm().getCompanyName(),shipment.getDateCreated(),shipment.getSender().getAddress().toString(),shipment.getReceiver().getAddress().toString(),oORa,
+				shipment.getSender().getName(),shipment.getReceiver().getName(),shipment.getType(),shipment.getShipmentPrice());
+		}
+		else
+		{
+			result.setText("Shipment not found!");
+		}
+		
 
-		return isFound;
+		
 	}
 
-	public void loadInfo(String state, String company, String dateOfOrdering, String from, String to, String oORa,
-			String sender, String receiver, String type, String price, String expenseOf, String dueAmount) {
-		this.state.setText(state);
+	public void loadInfo(Status.status state, String company, LocalDate dateOfOrdering, String from, String to, String oORa,
+			String sender, String receiver, Type.type type, double price) {
+		this.state.setText(state.toString());
 		this.company.setText(company);
-		this.dateOfOrdering.setText(dateOfOrdering);
+		this.dateOfOrdering.setText(dateOfOrdering.toString());
 		this.from.setText(from);
 		this.to.setText(to);
 		this.oORa.setText(oORa);
 		this.senderName.setText(sender);
 		this.receiverName.setText(receiver);
-		this.type.setText(type);
-		this.price.setText(price);
-		this.expenseOf.setText(expenseOf);
-		this.dueAmount.setText(dueAmount);
+		this.type.setText(type.toString());
+		this.price.setText(Double.toString(price));
 	}
 
 }

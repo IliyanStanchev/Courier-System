@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
@@ -9,7 +15,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="583.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.CourierWorkspaceFormController">
+<AnchorPane prefHeight="583.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.CourierWorkspaceFormController">
    <children>
       <AnchorPane prefHeight="585.0" prefWidth="910.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -36,7 +42,7 @@
                         <Image url="@../img/courierLogo.jpg" />
                      </image>
                   </ImageView>
-                  <Label layoutX="28.0" layoutY="138.0" prefHeight="27.0" prefWidth="207.0" text="Label">
+                  <Label fx:id="welcomeUser" layoutX="28.0" layoutY="138.0" prefHeight="27.0" prefWidth="207.0">
                      <font>
                         <Font name="System Bold Italic" size="17.0" />
                      </font>

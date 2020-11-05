@@ -9,7 +9,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		try {
 
-			OpenNewForm.openNewForm("AdministratorWorkspaceForm.fxml", "Welcome! ");
+			OpenNewForm.openNewForm("WelcomeForm.fxml", "Welcome! ");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

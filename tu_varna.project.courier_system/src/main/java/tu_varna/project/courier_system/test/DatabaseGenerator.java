@@ -1,5 +1,6 @@
 package tu_varna.project.courier_system.test;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.hibernate.Session;
@@ -12,6 +13,7 @@ import tu_varna.project.courier_system.entity.Admin;
 import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.entity.CourierFirm;
+import tu_varna.project.courier_system.entity.Manager;
 import tu_varna.project.courier_system.entity.Notification;
 import tu_varna.project.courier_system.entity.Office;
 import tu_varna.project.courier_system.entity.Shipment;
@@ -27,6 +29,8 @@ public class DatabaseGenerator {
     	CourierFirm firm= new CourierFirm();
     	firm.setId(122313);
     	firm.setCompanyName("Sach Firm");
+    	firm.setManager(new Manager("Desislav","089777777"));
+    	firm.setAddress(new Address("Bulgaria","Varna","Mir 17"));
     	Address adr= new Address();
     	adr.setCountry("Bulgaria");
     	adr.setCity("Kotel");
@@ -35,12 +39,15 @@ public class DatabaseGenerator {
     	
     	office.setAddress(adr1);
     	office.setFirm(firm);
+    	office.setName("Sach Firm Levski");
+    	office.setManager(new Manager("Mitko","083123123"));
     	Client client = new Client();
         client.setName("Iliyan");
         client.setEmail("Ench3r@gmail.com");
         client.setLoginPassword("client");
         client.setLoginUsername("client");
         client.setPhoneNumber("0897875640");
+        client.setAddress(adr1);
         
         Client client1 = new Client();
         client1.setName("Boyan");
@@ -48,6 +55,7 @@ public class DatabaseGenerator {
         client1.setLoginPassword("client11");
         client1.setLoginUsername("client11");
         client1.setPhoneNumber("0897875230");
+        client1.setAddress(adr1);
         
         
     	Courier usr = new Courier();
@@ -60,20 +68,21 @@ public class DatabaseGenerator {
         usr.setFirm(firm);
         firm.getEmployees().add(usr);
         firm.getOffices().add(office);
+        
         usr.setAddress(adr);
         Shipment ship= new Shipment();
         ship.setReceiver(client);
         ship.setSender(client1);
-        ship.setOffice(office);
-        ship.setDateCreated(new Date());
-        ship.setDateShipped(new Date());
+        ship.setFirm(firm);
+        ship.setDateCreated(LocalDate.now());
+        ship.setDateShipped(LocalDate.now());
         ship.setShipmentPrice(25.2);
-        ship.setStatus(Status.status.not_delivered);
+        ship.setStatus(Status.status.delivered);
         ship.setType(Type.type.packet);
         ship.setCourier(usr);
         usr.getShipmentsForDelivery().add(ship);
         client.getReceivedShipments().add(ship);
-        office.getShipments().add(ship);
+        firm.getShipments().add(ship);
         Admin adm= new Admin();
         adm.setAddress(new Address("Bulgaria","Varna","Dobrovnik"));
         adm.setEmail("desislava@gmail.com");
@@ -92,10 +101,11 @@ public class DatabaseGenerator {
         Session session = sf.openSession();
         Transaction tx= session.beginTransaction();
         session.save(notif);
+        session.save(firm);
         session.save(adm);
         session.save(office);
         session.save(usr);
-        session.save(firm);
+        
         session.save(client1);
         session.save(client);
         session.save(ship);

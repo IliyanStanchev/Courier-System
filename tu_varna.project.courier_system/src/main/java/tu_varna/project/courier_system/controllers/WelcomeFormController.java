@@ -4,12 +4,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.mysql.cj.xdevapi.Client;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import tu_varna.project.courier_system.entity.Admin;
+import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.entity.User;
 import tu_varna.project.courier_system.helper.DataValidation;
 import tu_varna.project.courier_system.helper.LogOut;
@@ -52,7 +57,8 @@ public class WelcomeFormController implements Initializable {
 			user = login.authenticateUserLogin(username, password);
 
 			if (user != null) {
-				OpenNewForm.openNewForm(user.loadView(), user.getClass().getSimpleName() + " workspace");
+				FXMLLoader loader=OpenNewForm.openNewForm(user.loadView(), user.getClass().getSimpleName() + " workspace");
+				user.loadController(loader);
 				try {
 					LogOut.logOut(event);
 				} catch (IOException e) {

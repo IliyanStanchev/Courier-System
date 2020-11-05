@@ -1,10 +1,12 @@
 package tu_varna.project.courier_system.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,87 +25,150 @@ public class Shipment {
 	private Status.status status;
 	@Enumerated(EnumType.STRING)
 	private Type.type type;
-	private Date dateCreated;
-	private Date dateShipped;
+	private LocalDate dateCreated;
+	private LocalDate dateShipped;
 	private double shipmentPrice;
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.DETACH)
 	private Client sender;
-	@ManyToOne(cascade = {CascadeType.MERGE})
+	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.DETACH)
 	private Client receiver;
-	@ManyToOne
-	private Office office;
-	@ManyToOne(cascade = {CascadeType.MERGE})
+	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.DETACH)
+	private CourierFirm firm;
+	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.DETACH)
 	private Courier courier;
-	public Courier getCourier() {
-		return courier;
+	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.DETACH)
+	private Office toOffice;
+	
+	
+	public Shipment() {
+		// TODO Auto-generated constructor stub
 	}
-	public void setCourier(Courier courier) {
-		this.courier = courier;
+	
+	public Shipment(Type.type type, LocalDate localDate, double shipmentPrice,
+			User sender, User receiver, CourierFirm firm,Office toOffice) {
+		this.type = type;
+		this.dateCreated = localDate;
+		this.shipmentPrice = shipmentPrice;
+		this.sender = (Client) sender;
+		this.receiver = (Client) receiver;
+		this.firm = firm;
+		this.setToOffice(toOffice);
+		this.status= Status.status.pending;
 	}
+	
+	public Shipment(Type.type type, LocalDate localDate, double shipmentPrice,
+			User sender, User receiver, CourierFirm firm) {
+		this.type = type;
+		this.dateCreated = localDate;
+		this.shipmentPrice = shipmentPrice;
+		this.sender = (Client) sender;
+		this.receiver = (Client) receiver;
+		this.firm = firm;
+		this.status= Status.status.pending;
+	}
+
+	@Override
+	public String toString() {
+		return "Shipment id=" + id + ", status=" + status + ", type=" + type +"date created: " + dateCreated +"\n";
+						
+	}
+
 	public int getId() {
-		
-		
-		
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	
 	public Status.status getStatus() {
 		return status;
 	}
-	public Type.type getType() {
-		return type;
-	}
+
 	public void setStatus(Status.status status) {
 		this.status = status;
 	}
-	
-	
+
+	public Type.type getType() {
+		return type;
+	}
+
 	public void setType(Type.type type) {
 		this.type = type;
 	}
-	public Date getDateCreated() {
+
+	
+
+	public LocalDate getDateCreated() {
 		return dateCreated;
 	}
-	public void setDateCreated(Date dateCreated) {
+
+	public void setDateCreated(LocalDate dateCreated) {
 		this.dateCreated = dateCreated;
 	}
-	public Date getDateShipped() {
+
+	public LocalDate getDateShipped() {
 		return dateShipped;
 	}
-	public void setDateShipped(Date dateShipped) {
+
+	public void setDateShipped(LocalDate dateShipped) {
 		this.dateShipped = dateShipped;
 	}
+
 	public double getShipmentPrice() {
 		return shipmentPrice;
 	}
+
 	public void setShipmentPrice(double shipmentPrice) {
 		this.shipmentPrice = shipmentPrice;
 	}
-	
-	
-	
+
 	public Client getSender() {
 		return sender;
 	}
+
 	public void setSender(Client sender) {
-		this.sender =  sender;
+		this.sender = sender;
 	}
+
 	public Client getReceiver() {
 		return receiver;
 	}
+
 	public void setReceiver(Client receiver) {
 		this.receiver = receiver;
 	}
-	public Office getOffice() {
-		return office;
+
+	public CourierFirm getFirm() {
+		return firm;
 	}
-	public void setOffice(Office office) {
-		this.office = office;
+
+	public void setFirm(CourierFirm firm) {
+		this.firm = firm;
 	}
+
+
+	public Courier getCourier() {
+		return courier;
+	}
+
+	public void setCourier(Courier courier) {
+		this.courier = courier;
+	}
+
+	public Office getToOffice() {
+		return toOffice;
+	}
+
+	public void setToOffice(Office toOffice) {
+		this.toOffice = toOffice;
+	}
+	
+
+	
+	
+	
+	
 	
 	
 	

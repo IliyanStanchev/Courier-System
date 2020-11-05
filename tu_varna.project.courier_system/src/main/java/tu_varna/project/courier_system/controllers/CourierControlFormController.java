@@ -1,9 +1,12 @@
 package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import tu_varna.project.courier_system.helper.OpenNewForm;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 import tu_varna.project.courier_system.tabelviewClasses.CourierView;
 import javafx.collections.FXCollections;
@@ -21,6 +24,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
 public class CourierControlFormController implements Initializable {
+	
+	private UserService service= new UserServiceImpl();
 
 	@FXML
 	private TableView<CourierView> courierView;
@@ -49,10 +54,13 @@ public class CourierControlFormController implements Initializable {
 		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		this.phoneNColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNmb")); // kak raboti?
 		this.companyColumn.setCellValueFactory(new PropertyValueFactory<>("company"));
-
+        List<Object[]> list = service.getAllCouriers();
+        for(Object[] column : list)
+        {
+        	addToListTabel((String)column[0],(String)column[1],(String)column[2]);
+        }
 		courierView.setItems(couriers);
-		addToListTabel("aa", "ddd", "fff");
-		addToListTabel("bbb", "ddd", "fff");
+		
 		
 	}
 
@@ -85,9 +93,7 @@ public class CourierControlFormController implements Initializable {
 	void removeCourier(ActionEvent event) {
 		CourierView selectedCourier = courierView.getSelectionModel().getSelectedItem();
 		if(selectedCourier != null) {
-		System.out.println(selectedCourier.getPhoneNmb());
-		// tabwat exsepsani tuk tam mai
-		//if DBremoveCorier(String selectedCourier.getPhoneNmb()) == true{ .. else neuspeshno iztriwane i ne se trie ot tablicata
+		service.DeleteUser(service.SearchUserByPhone(selectedCourier.getPhoneNmb()));
 		courierView.getItems().remove(selectedCourier);
 		}
 		else

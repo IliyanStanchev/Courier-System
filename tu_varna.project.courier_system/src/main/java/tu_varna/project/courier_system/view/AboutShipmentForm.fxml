@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -9,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="746.0" prefWidth="581.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.AboutShipmentFormController">
+<AnchorPane prefHeight="746.0" prefWidth="581.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.AboutShipmentFormController">
    <children>
       <TextField fx:id="number" layoutX="115.0" layoutY="75.0" prefHeight="51.0" prefWidth="362.0" promptText="shipment №" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
          <font>
@@ -54,16 +60,6 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="18.0" layoutY="696.0" strokeType="OUTSIDE" strokeWidth="0.0" text="At the expense of the:" wrappingWidth="219.9879913330078">
-         <font>
-            <Font name="Arial Bold" size="20.0" />
-         </font>
-      </Text>
-      <Text layoutX="21.0" layoutY="725.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Due amount:" wrappingWidth="179.66363525390625">
-         <font>
-            <Font name="Arial Bold" size="20.0" />
-         </font>
-      </Text>
       <Text layoutX="14.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of ordering:">
          <font>
             <Font name="Arial Bold" size="20.0" />
@@ -95,16 +91,6 @@
          </font>
       </Label>
       <Label fx:id="price" layoutX="196.0" layoutY="640.0" prefHeight="27.0" prefWidth="393.0" text="Label">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="expenseOf" layoutX="246.0" layoutY="676.0" prefHeight="27.0" prefWidth="332.0" text="Label">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="dueAmount" layoutX="185.0" layoutY="704.0" prefHeight="27.0" prefWidth="314.0" text="Label">
          <font>
             <Font size="18.0" />
          </font>

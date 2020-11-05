@@ -1,6 +1,7 @@
 package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -14,10 +15,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tu_varna.project.courier_system.helper.OpenNewForm;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 import tu_varna.project.courier_system.tabelviewClasses.CourierView;
 
 public class CompanyControlFormController implements Initializable {
+	
+	private UserService serv=new UserServiceImpl();
 
 	@FXML
 	private TableView<CompanyView> companyView;
@@ -40,10 +45,7 @@ public class CompanyControlFormController implements Initializable {
 	void deleteCompany(ActionEvent event) {
 		CompanyView selectedCompany = companyView.getSelectionModel().getSelectedItem();
 		if (selectedCompany != null) {
-			System.out.println(selectedCompany.getBulstat());
-			// tabwat exsepsani tuk tam mai
-			// if DBremoveCorier(String selectedCourier.getPhoneNmb()) == true{ .. else
-			// neuspeshno iztriwane i ne se trie ot tablicata
+            serv.DeleteCompany(selectedCompany.getBulstat());
 			companyView.getItems().remove(selectedCompany);
 		} else
 			resultLabel.setText("First select");
@@ -62,8 +64,11 @@ public class CompanyControlFormController implements Initializable {
 		// TODO Auto-generated method stub
 		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		this.bulstatColumn.setCellValueFactory(new PropertyValueFactory<>("bulstat"));
-		addToListTabel("cc", 5);
-		addToListTabel("bc", 1);	
+		List<Object[]> list=serv.getAllCompanies();
+		for(Object[] column : list)
+		{
+			addToListTabel((String)column[0], (Integer)column[1]);
+		}	
 		companyView.setItems(companies);
 
 	}

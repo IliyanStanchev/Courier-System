@@ -1,7 +1,6 @@
 package tu_varna.project.courier_system.entity;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,11 +9,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 
-
+import javafx.fxml.FXMLLoader;
 
 @Entity
 @Inheritance(strategy=  InheritanceType.JOINED)
-//@DiscriminatorColumn(name= "user_type")
 public abstract class User {
 	
     @Id
@@ -36,12 +34,36 @@ public abstract class User {
     @OneToOne(mappedBy="user")
     private Notification notification;
     
+	@Column(unique=true)
+    private String phoneNumber;
+    
+	private Address address;
+    
     public abstract String loadView();
     
+    public abstract void loadController(FXMLLoader loader);
     
     
     
-    public Notification getNotification() {
+    public User() {
+    
+    }
+    
+    public User(String loginUsername, String loginPassword, String name, String email, String phoneNumber,
+			String country, String city, String street) {
+		
+		this.loginUsername = loginUsername;
+		this.loginPassword = loginPassword;
+		this.name = name;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.address = new Address(country,city,street);
+	}
+
+
+
+
+	public Notification getNotification() {
 		return notification;
 	}
 
@@ -51,10 +73,7 @@ public abstract class User {
 	}
 
 
-	@Column(unique=true)
-    private String phoneNumber;
-    
-    private Address address;
+
 
 
 	public Address getAddress() {
@@ -132,14 +151,5 @@ public abstract class User {
 		return "User id=" + id + ", loginUsername=" + loginUsername + ", loginPassword=" + loginPassword + ", name="
 				+ name + ", email=" + email + ", phoneNumber=" + phoneNumber + ", address=" + address + "\n";
 	}
-
-
-	
-    
-   
-  
-
-	
-    
 
 }

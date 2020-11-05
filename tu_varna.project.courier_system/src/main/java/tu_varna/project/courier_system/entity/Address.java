@@ -2,6 +2,8 @@ package tu_varna.project.courier_system.entity;
 
 import javax.persistence.Embeddable;
 
+
+
 @Embeddable
 public class Address {
 
@@ -41,7 +43,7 @@ public class Address {
 	}
 	@Override
 	public String toString() {
-		return "Address [country=" + country + ", city=" + city + ", street=" + street + "]";
+		return   country + " " + city + " " + street;
 	}
 	
 }

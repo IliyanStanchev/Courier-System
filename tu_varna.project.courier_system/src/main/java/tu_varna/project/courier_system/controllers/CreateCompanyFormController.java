@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class CreateCompanyFormController implements Initializable {
 
@@ -58,7 +60,8 @@ public class CreateCompanyFormController implements Initializable {
 
 	@FXML
 	void createCompany(ActionEvent event) {
-
+		
+		UserService serv= new UserServiceImpl();
 		String name = this.name.getText();
 		int bulstat = Integer.parseInt(this.bulstat.getText());
 		String manager = this.manager.getText();
@@ -66,8 +69,15 @@ public class CreateCompanyFormController implements Initializable {
 		String country = this.country.getText();
 		String city = this.city.getText();
 		String streetN = this.streetN.getText();
-		// gbcreatecompany(name,bulstat, manager, phoneNmb, country, city, streetN);
-		System.out.println(bulstat + "  " + city);
+		boolean check=serv.CreateCourierFirm(bulstat, name, manager, phoneNmb, country, city, streetN);
+		if(check)
+		{
+			resultLabel.setText("Company succesfully created!");
+		}
+		else
+		{
+			resultLabel.setText("Error!Company name or bulstat are already taken!");
+		}
 
 	}
 

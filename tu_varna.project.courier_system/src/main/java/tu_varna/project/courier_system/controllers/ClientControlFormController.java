@@ -1,6 +1,7 @@
 package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -14,10 +15,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tu_varna.project.courier_system.helper.OpenNewForm;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.ClientView;
 import tu_varna.project.courier_system.tabelviewClasses.CourierView;
 
 public class ClientControlFormController implements Initializable {
+	
+	private UserService service= new UserServiceImpl();
 
 	@FXML
 	private TextField phoneNmb;
@@ -44,10 +49,7 @@ public class ClientControlFormController implements Initializable {
 	void removeClient(ActionEvent event) {
 		ClientView selectedClient = clientView.getSelectionModel().getSelectedItem();
 		if (selectedClient != null) {
-			System.out.println(selectedClient.getPhoneNmb());
-			// tabwat exsepsani tuk tam mai
-			// if DBremoveCorier(String selectedClient.getPhoneNmb()) == true{ .. else
-			// neuspeshno iztriwane i ne se trie ot tablicata
+			service.DeleteUser(service.SearchUserByPhone(selectedClient.getPhoneNmb()));
 			clientView.getItems().remove(selectedClient);
 		} else
 			resultLabel.setText("First select");
@@ -62,9 +64,13 @@ public class ClientControlFormController implements Initializable {
 		// TODO Auto-generated method stub
 		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		this.phoneNmbColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNmb"));
+		List<Object[]> list = service.getAllClients();
+	        for(Object[] column : list)
+	        {
+	        	addToListTabel((String)column[0],(String)column[1]);
+	        }
 		clientView.setItems(clients);
-		addToListTabel("aa", "ffdd");
-		addToListTabel("bbb", "ddd");
+		
 
 	}
 

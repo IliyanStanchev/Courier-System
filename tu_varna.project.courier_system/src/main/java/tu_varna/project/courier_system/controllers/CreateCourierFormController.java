@@ -1,6 +1,7 @@
 package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -12,8 +13,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class CreateCourierFormController implements Initializable {
+	
+	private UserService service = new UserServiceImpl();
 
 	@FXML
 	private TextField username;
@@ -77,7 +82,7 @@ public class CreateCourierFormController implements Initializable {
 
 	@FXML
 	private Label resultLabel;
-	private ObservableList<String> companyList = FXCollections.observableArrayList("fff","ggg");
+	private ObservableList<String> companyList = FXCollections.observableArrayList();
 
 	@FXML
 	public void createCourier(ActionEvent event) {
@@ -90,17 +95,29 @@ public class CreateCourierFormController implements Initializable {
 		String country = this.country.getText();
 		String city = this.city.getText();
 		String streetN = this.streetN.getText();
-		String company = this.companyCombo.getSelectionModel().getSelectedItem().toString();
-		System.out.println(company);
-		// dbcreateCoureir(username, password, confirmPW, name, phoneNmb, email,
-		// country, city, streetN, company);
-		//ako se dobawi uspeshno resultLabel = "Uspeshno!" ako ne - neuspeshno suzdawane"
+		String company = this.companyCombo.getSelectionModel().getSelectedItem().toString();	
+		
+		boolean check=service.CreateCourier(username, password, name, phoneNmb, email,
+		 country, city, streetN, service.getBulstatByFirmName(company));
+		if(check)
+		{
+			resultLabel.setText("Courier succesfully created!");
+		}
+		else
+		{
+			resultLabel.setText("Error!Courier username or phone are already taken!");
+		}
+		
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		// db polzwa fillCompanyCombo();
+		List<Object[]> list= service.getAllCompanies();
+		for(Object[] column: list)
+		{
+			fillCompanyCombo((String)column[0]);
+		}
 		companyCombo.setItems(companyList);
 
 	}

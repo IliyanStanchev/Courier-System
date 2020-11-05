@@ -13,12 +13,11 @@
 
 <AnchorPane prefHeight="618.0" prefWidth="636.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.RequestedShipmentsFormController">
    <children>
-      <TableView layoutY="36.0" prefHeight="319.0" prefWidth="636.0" style="-fx-background-color: #FFFF66;">
+      <TableView fx:id="shipmentView" layoutX="17.0" layoutY="36.0" prefHeight="319.0" prefWidth="619.0">
          <columns>
-            <TableColumn prefWidth="167.20001792907715" text="Shipment info:" />
-            <TableColumn minWidth="8.7999267578125" prefWidth="112.0" text="Receiver:" />
-            <TableColumn prefWidth="160.79998779296875" text="Date of shipment:" />
-            <TableColumn prefWidth="178.39999389648438" text="Courier Company:" />
+            <TableColumn fx:id="shipmentNColumn" prefWidth="148.79999387264252" text="Shipment №" />
+            <TableColumn fx:id="receiverColumn" minWidth="8.7999267578125" prefWidth="232.0" text="Receiver:" />
+            <TableColumn fx:id="companyColumn" prefWidth="254.39999389648438" text="Courier Company:" />
          </columns>
       </TableView>
       <Button layoutX="67.0" layoutY="432.0" mnemonicParsing="false" onAction="#trackShipment" prefHeight="77.0" prefWidth="163.0" style="-fx-background-color: #FFFF66;" text="Track" textFill="#131313" textOverrun="CLIP">
@@ -37,7 +36,7 @@
             <ColorAdjust brightness="-0.44" contrast="0.41" hue="-0.67" saturation="0.18" />
          </effect>
       </ImageView>
-      <Label layoutX="35.0" layoutY="558.0" prefHeight="30.0" prefWidth="392.0" text="Label" textFill="RED">
+      <Label fx:id="resultLabel" layoutX="35.0" layoutY="558.0" prefHeight="30.0" prefWidth="392.0" text="Label" textFill="RED">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

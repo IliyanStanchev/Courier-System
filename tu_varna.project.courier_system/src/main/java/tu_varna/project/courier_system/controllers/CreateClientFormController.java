@@ -10,8 +10,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class CreateClientFormController implements Initializable {
+	
+	private UserService service= new UserServiceImpl();
 
 	@FXML
 	private TextField username;
@@ -82,11 +86,16 @@ public class CreateClientFormController implements Initializable {
 		String city = this.city.getText();
 		String streetN = this.streetN.getText();
 		System.out.println(password);
-
-		// dbcreateClient(username, password, confirmPW, name, phoneNmb, email,
-		// country, city, streetN);
-		// ako se dobawi uspeshno resultLabel = "Uspeshno!" ako ne - neuspeshno
-		// suzdawane"
+        boolean check=service.CreateClient(username, password, name, email, phoneNmb, country, city, streetN);
+        if(check)
+        {
+        	resultLabel.setText("Client created succesfully!");
+        }
+        else
+        {
+        	resultLabel.setText("Error!Username or phone number already exist!");
+        }
+        
 	}
 
 	@Override

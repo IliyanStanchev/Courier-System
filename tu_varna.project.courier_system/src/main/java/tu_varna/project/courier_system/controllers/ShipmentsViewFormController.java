@@ -2,10 +2,19 @@ package tu_varna.project.courier_system.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import tu_varna.project.courier_system.entity.CourierFirm;
+import tu_varna.project.courier_system.entity.Status;
+import tu_varna.project.courier_system.entity.Status.status;
+import tu_varna.project.courier_system.entity.Type;
+import tu_varna.project.courier_system.entity.Type.type;
 import tu_varna.project.courier_system.helper.OpenNewForm;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 import tu_varna.project.courier_system.tabelviewClasses.CourierView;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
@@ -24,7 +33,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ShipmentsViewFormController implements Initializable {
+	
+	private UserService service= new UserServiceImpl();
 
+	@FXML
+	private Label company_id;
 	@FXML
 	private TextField number;
 	@FXML
@@ -48,31 +61,25 @@ public class ShipmentsViewFormController implements Initializable {
 
 	private FilteredList<ShipmentView> filteredData = new FilteredList<>(shipment, b -> true);
 
-	private int choosedCompanyID;
+	private CourierFirm choosedCompany;
 
-	public int getCompany() {
-		return choosedCompanyID;
+
+	public void setChoosedCompany(CourierFirm choosedCompany) {
+		this.choosedCompany = choosedCompany;
+		
 	}
-
-	public void setChoosedCompany(int bulstat) {
-		this.choosedCompanyID = bulstat;
-		System.out.println(this.choosedCompanyID);
-
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		numberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
-		dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-		phoneNmbColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNmb"));
-		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-		shipmentsView.setItems(shipment);
-		shipmentsView.setItems(shipment);
-		// DBfunkciq(choosedCompanyID) --> izpolzwa addToList;
-		addToList(1, new Date(5, 5, 2000), "0896145500", "in progress");
-		addToList(2, new Date(5, 10, 1988), "0116145500", "delivered");
-
-		/*number.textProperty().addListener((observable, oldValue, newValue) -> {
+    public void viewShipmentsList()
+    {
+		
+    	List<Object[]> list= service.getShipmentsList(choosedCompany.getId());
+		for(Object[] column: list)
+		{
+			addToList((Integer)column[0], (LocalDate)column[1], (String)column[2], (Status.status)column[3]);
+		}
+		
+		
+        /*
+		number.textProperty().addListener((observable, oldValue, newValue) -> {
 			filteredData.setPredicate(shipment -> {
 
 				if (newValue == null || newValue.isEmpty()) {
@@ -93,23 +100,34 @@ public class ShipmentsViewFormController implements Initializable {
 		SortedList<ShipmentView> sortedData = new SortedList<>(filteredData);
 		sortedData.comparatorProperty().bind(shipmentsView.comparatorProperty());
 		shipmentsView.setItems(sortedData);
-*/
-	}
+		*/
 
-	public void addToList(int number, Date date, String phoneNmb, String status) {
-		shipment.add(new ShipmentView(number, date, phoneNmb, status));
+    }
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		numberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
+		dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+		phoneNmbColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNmb"));
+		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+		shipmentsView.setItems(shipment);
+		
+		}
+
+	public void addToList(int number, LocalDate column2, String phoneNmb, status column) {
+		shipment.add(new ShipmentView(number, column2, phoneNmb, column));
 	}
 
 	@FXML
 	public void createShipment(ActionEvent event) {
-	
+	        
 			//int number = (shipmentsView.getSelectionModel().getSelectedItems().get(0).getNumber());
 			try {
 				FXMLLoader loader = OpenNewForm.openNewForm("RequestShipmentForm.fxml", "Create Shipment");
 				RequestShipmentFormController next = loader.getController();
-				//next.setChoosedShipment(number);
+				next.getCompanyForAdmin(choosedCompany);
 			} catch (Exception e) {
-				System.out.println("loader is null.");
+				e.printStackTrace();
+				//System.out.println("loader is null.");
 				//e.printStackTrace();
 			}
 
@@ -123,9 +141,7 @@ public class ShipmentsViewFormController implements Initializable {
 		ShipmentView selectedShipment = shipmentsView.getSelectionModel().getSelectedItem();
 		if (selectedShipment != null) {
 			System.out.println(selectedShipment.getNumber());
-			// tabwat exsepsani tuk tam mai
-			// if DBremoveCorier(String selectedCourier.getPhoneNmb()) == true{ .. else
-			// neuspeshno iztriwane i ne se trie ot tablicata
+			service.deleteShipment(selectedShipment.getNumber());
 			shipmentsView.getItems().remove(selectedShipment);
 		} else
 			resultLabel.setText("First select");

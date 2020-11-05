@@ -3,16 +3,34 @@ package tu_varna.project.courier_system.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import tu_varna.project.courier_system.entity.User;
 import tu_varna.project.courier_system.helper.BuiltInForm;
 import tu_varna.project.courier_system.helper.LogOut;
 import tu_varna.project.courier_system.helper.OpenNewForm;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 public class AdminFormController implements Initializable {
+	
+	private UserService service = new UserServiceImpl();
+	
+    public void setUserID(int id)
+	    {
+	    	this.id=id;
+	    	welcomeUser.setText("Welcome "+ service.getUserName(id));
+	    }
 
+    @FXML
+	private Label welcomeUser;
+    
+    private int id;
+	
 	@FXML
 	private AnchorPane workPane;
 
@@ -69,5 +87,6 @@ public class AdminFormController implements Initializable {
 		LogOut.logOut(event);
 		OpenNewForm.openNewForm("WelcomeForm.fxml", "Welcome");
 	}
+
 
 }

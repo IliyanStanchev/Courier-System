@@ -1,9 +1,15 @@
 package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import tu_varna.project.courier_system.entity.Address;
+import tu_varna.project.courier_system.entity.CourierFirm;
+import tu_varna.project.courier_system.entity.Manager;
 import tu_varna.project.courier_system.helper.OpenNewForm;
-import tu_varna.project.courier_system.tabelviewClasses.CourierView;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.OfficeView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +26,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class OfficesControlFormController implements Initializable {
+	
+	UserService service= new UserServiceImpl();
 
 	@FXML
 	private TableView<OfficeView> officeView;
@@ -57,10 +65,7 @@ public class OfficesControlFormController implements Initializable {
 	void deleteOffice(ActionEvent event) {
 		OfficeView selectedOffice = officeView.getSelectionModel().getSelectedItem();
 		if (selectedOffice != null) {
-			System.out.println(selectedOffice.getCode());
-			// tabwat exsepsani tuk tam mai
-			// if DBremoveCorier(String selectedCourier.getPhoneNmb()) == true{ .. else
-			// neuspeshno iztriwane i ne se trie ot tablicata
+			service.deleteOffice(selectedOffice.getCode());
 			officeView.getItems().remove(selectedOffice);
 		} else
 			resultLabel.setText("First select");
@@ -72,10 +77,17 @@ public class OfficesControlFormController implements Initializable {
 		this.agentColumn.setCellValueFactory(new PropertyValueFactory<>("agent")); // kak raboti?
 		this.companyColumn.setCellValueFactory(new PropertyValueFactory<>("company"));
 		this.cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
-
+        List<Object[]> list= service.getAllOffices();
+        for(Object[] column : list)
+        {
+        	Manager manager= (Manager) column[1];
+        	Address address= (Address) column[3];
+        	CourierFirm firm= (CourierFirm) column[2];
+        	addToListTabel((Integer)column[0],manager.getManagerName(),firm.getCompanyName(),address.getCity());
+        }
 		officeView.setItems(offices);
-		addToListTabel(1, "aa", "ddd", "fff");
-		addToListTabel(2, "bbb", "ddd", "fff");
+		
+		
 
 	}
 

@@ -1,6 +1,8 @@
 package tu_varna.project.courier_system.dao;
 
 import java.util.List;
+
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import tu_varna.project.courier_system.entity.Notification;
 
@@ -15,8 +17,16 @@ public class NotificationDaoImpl extends entityManager implements BaseDao<Notifi
 	}
 
 	@Override
-	public void save(Notification t) {
-		executeInsideTransaction(entityManager -> entityManager.persist(t));
+	public boolean save(Notification t) {
+		try {
+			executeInsideTransaction(entityManager -> entityManager.persist(t));
+		}
+		catch(PersistenceException e)
+		{
+			System.out.println("Error saving object!");
+			return false;
+		}
+		return true;
 		
 	}
 

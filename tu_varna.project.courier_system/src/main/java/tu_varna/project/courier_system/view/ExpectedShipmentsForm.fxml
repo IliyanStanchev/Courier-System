@@ -13,15 +13,14 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.ExpectedShipmentsFormController">
    <children>
-      <AnchorPane prefHeight="598.0" prefWidth="620.0" style="-fx-background-color: #ffffff;">
+      <AnchorPane prefHeight="598.0" prefWidth="647.0" style="-fx-background-color: #ffffff;">
          <children>
-            <TableView layoutY="31.0" prefHeight="319.0" prefWidth="620.0" style="-fx-background-color: #FFFF66;">
+            <TableView fx:id="shipmentView" layoutX="14.0" layoutY="28.0" prefHeight="319.0" prefWidth="634.0">
               <columns>
-                <TableColumn prefWidth="136.00000607967377" text="Shipment info:" />
-                <TableColumn minWidth="8.7999267578125" prefWidth="100.79998779296875" text="Sender:" />
-                  <TableColumn prefWidth="137.60003662109375" text="Date of delivery:" />
-                  <TableColumn prefWidth="79.20001220703125" text="Price:" />
-                  <TableColumn prefWidth="163.19998168945312" text="Courier Company:" />
+                  <TableColumn fx:id="shipmentNColumn" prefWidth="186.40008544921875" text="Shipment №" />
+                <TableColumn fx:id="senderColumn" minWidth="8.7999267578125" prefWidth="184.0" text="Sender:" />
+                  <TableColumn fx:id="priceColumn" prefWidth="137.5999755859375" text="Price:" />
+                  <TableColumn fx:id="companyColumn" prefWidth="124.80002441406248" text="Courier Company:" />
               </columns>
             </TableView>
             <ImageView fitHeight="195.0" fitWidth="214.0" layoutX="213.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
@@ -32,7 +31,7 @@
                   <ColorAdjust contrast="1.0" hue="0.74" saturation="0.9" />
                </effect>
             </ImageView>
-            <Button layoutX="447.0" layoutY="427.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="118.0" style="-fx-background-color: #FFFF66;" text="Cancel" textFill="#131313" textOverrun="CLIP">
+            <Button layoutX="447.0" layoutY="427.0" mnemonicParsing="false" onAction="#cancelShipment" prefHeight="62.0" prefWidth="118.0" style="-fx-background-color: #FFFF66;" text="Cancel" textFill="#131313" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -48,7 +47,7 @@
                   <DropShadow color="#242223" />
                </effect>
             </Button>
-            <Label layoutX="46.0" layoutY="543.0" prefHeight="27.0" prefWidth="450.0" text="Label" textFill="RED">
+            <Label fx:id="resultLabel" layoutX="46.0" layoutY="543.0" prefHeight="27.0" prefWidth="450.0" text="Label" textFill="RED">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
