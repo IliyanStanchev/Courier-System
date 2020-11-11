@@ -19,8 +19,8 @@ import tu_varna.project.courier_system.services.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
 public class ClientStatisticsFormController implements Initializable {
-	
-	UserService service= new UserServiceImpl();
+
+	UserService service = new UserServiceImpl();
 
 	@FXML
 	private TextField name;
@@ -49,42 +49,32 @@ public class ClientStatisticsFormController implements Initializable {
 	private ObservableList<ShipmentView> shipmentsInProcess = FXCollections.observableArrayList();
 
 	private Client wantedClient;
-	
+
 	private int company_id;
 
 	@FXML
 	void searchClient(ActionEvent event) {
 
-		/// ZABEESKA LQNCE - da izvejda samo tezi shipmenti na klienta, koito sa kum
-		/// tekushatat kompaniq;
-		// obicam te mece <3
-         try {
-        	 this.wantedClient = (Client) service.SearchUser(this.name.getText(), this.phoneNmb.getText());
-        	 if (this.wantedClient != null) {
-        		 if(wantedClient.getShipmentInProcess()!=null)
-        		 {
-     			for(ShipmentView s: wantedClient.getShipmentInProcess())
-     			{
-     				addToListTabel(s.getNumber(),s.getCourier());
-     			}
-        		 }
-     			
-     			this.cancelledShipments.setText(Integer.toString(wantedClient.getDeclinedShipments(company_id)));
-     			 this.recievedShipments.setText(Integer.toString(wantedClient.getReceivedShipments(company_id)));
-     			this.shipmentsInProcessView.setItems(shipmentsInProcess);
+		try {
+			this.wantedClient = (Client) service.SearchUser(this.name.getText(), this.phoneNmb.getText());
+			if (this.wantedClient != null) {
+				for (ShipmentView s : wantedClient.getShipmentInProcess()) {
+					addToListTabel(s.getNumber(), s.getCourier());
+				}
 
-     		
-            }else
-     			resultLabel.setText("The client doesn't exist. Check client's phone number and name.");
-     		name.requestFocus();
-         }
-         catch(ClassCastException e)
-         {
-        	 resultLabel.setText("User with this username and phone is not Client!");
-        	 
-         }
-		
-		
+				this.cancelledShipments.setText(Integer.toString(wantedClient.getDeclinedShipments(company_id)));
+				this.recievedShipments.setText(Integer.toString(wantedClient.getReceivedShipments(company_id)));
+				this.shipmentsInProcessView.setItems(shipmentsInProcess);
+
+			} else {
+
+				resultLabel.setText("The client doesn't exist. Check client's phone number and name.");
+				name.requestFocus();
+			}
+		} catch (ClassCastException e) {
+			resultLabel.setText("User with this username and phone is not Client!");
+
+		}
 
 	}
 
@@ -97,14 +87,12 @@ public class ClientStatisticsFormController implements Initializable {
 
 	}
 
-	public void addToListTabel(int number, String courierInfo) {// wika se ot bd prawi String ot nomer i ime v
-																// courierInfo;
+	public void addToListTabel(int number, String courierInfo) {
 		shipmentsInProcess.add(new ShipmentView(number, courierInfo));
 	}
-	
-	public void setCompanyID(int id)
-	{
-		this.company_id=id;
+
+	public void setCompanyID(int id) {
+		this.company_id = id;
 	}
 
 }

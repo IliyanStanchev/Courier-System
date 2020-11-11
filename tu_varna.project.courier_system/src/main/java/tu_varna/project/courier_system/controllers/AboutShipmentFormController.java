@@ -1,21 +1,16 @@
 package tu_varna.project.courier_system.controllers;
 
-import java.time.LocalDate;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import tu_varna.project.courier_system.entity.Shipment;
-import tu_varna.project.courier_system.entity.Status;
-import tu_varna.project.courier_system.entity.Type;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class AboutShipmentFormController {
-    
-	
-	private UserService service= new UserServiceImpl();
+
+	private UserService service = new UserServiceImpl();
 	@FXML
 	private TextField number;
 
@@ -55,39 +50,32 @@ public class AboutShipmentFormController {
 	@FXML
 	private void searchShipment(ActionEvent event) {
 
-		int shipment_id = Integer.parseInt(this.number.getText());
-		Shipment shipment = service.SearchShipmentByID(shipment_id);
-		if(shipment!=null)
-		{
-			String oORa="address";
-			if(shipment.getToOffice()!=null)
-			{
-				oORa="office";
-			}
-			loadInfo(shipment.getStatus(),shipment.getFirm().getCompanyName(),shipment.getDateCreated(),shipment.getSender().getAddress().toString(),shipment.getReceiver().getAddress().toString(),oORa,
-				shipment.getSender().getName(),shipment.getReceiver().getName(),shipment.getType(),shipment.getShipmentPrice());
-		}
-		else
-		{
+		Shipment shipment = service.SearchShipmentByID(Integer.parseInt(this.number.getText()));
+		if (shipment != null) {
+			loadInfo(shipment);
+		} else {
 			result.setText("Shipment not found!");
 		}
-		
 
-		
 	}
 
-	public void loadInfo(Status.status state, String company, LocalDate dateOfOrdering, String from, String to, String oORa,
-			String sender, String receiver, Type.type type, double price) {
-		this.state.setText(state.toString());
-		this.company.setText(company);
-		this.dateOfOrdering.setText(dateOfOrdering.toString());
-		this.from.setText(from);
-		this.to.setText(to);
-		this.oORa.setText(oORa);
-		this.senderName.setText(sender);
-		this.receiverName.setText(receiver);
-		this.type.setText(type.toString());
-		this.price.setText(Double.toString(price));
+	public void loadInfo(Shipment shipment) {
+
+		String officeOrAddress = "address";
+		if (shipment.getToOffice() != null) {
+			officeOrAddress = "office";
+		}
+
+		this.state.setText(shipment.getStatus().toString());
+		this.company.setText(shipment.getFirm().getCompanyName());
+		this.dateOfOrdering.setText(shipment.getDateCreated().toString());
+		this.from.setText(shipment.getSender().getAddress().toString());
+		this.to.setText(shipment.getReceiver().getAddress().toString());
+		this.oORa.setText(officeOrAddress);
+		this.senderName.setText(shipment.getSender().getName());
+		this.receiverName.setText(shipment.getReceiver().getName());
+		this.type.setText(shipment.getType().toString());
+		this.price.setText(Double.toString(shipment.getShipmentPrice()));
 	}
 
 }

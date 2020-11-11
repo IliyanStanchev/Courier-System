@@ -4,6 +4,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,11 +21,12 @@ import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
-import tu_varna.project.courier_system.tabelviewClasses.CourierView;
 
 public class CompanyControlFormController implements Initializable {
-	
-	private UserService serv=new UserServiceImpl();
+
+	private static final Logger logger = LogManager.getLogger(CompanyControlFormController.class);
+
+	private UserService serv = new UserServiceImpl();
 
 	@FXML
 	private TableView<CompanyView> companyView;
@@ -45,8 +49,9 @@ public class CompanyControlFormController implements Initializable {
 	void deleteCompany(ActionEvent event) {
 		CompanyView selectedCompany = companyView.getSelectionModel().getSelectedItem();
 		if (selectedCompany != null) {
-            serv.DeleteCompany(selectedCompany.getBulstat());
+			serv.DeleteCompany(selectedCompany.getBulstat());
 			companyView.getItems().remove(selectedCompany);
+			logger.info("Company with id: " + selectedCompany.getBulstat() + " successfully removed from database!");
 		} else
 			resultLabel.setText("First select");
 	}
@@ -64,11 +69,10 @@ public class CompanyControlFormController implements Initializable {
 		// TODO Auto-generated method stub
 		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		this.bulstatColumn.setCellValueFactory(new PropertyValueFactory<>("bulstat"));
-		List<Object[]> list=serv.getAllCompanies();
-		for(Object[] column : list)
-		{
-			addToListTabel((String)column[0], (Integer)column[1]);
-		}	
+		List<Object[]> list = serv.getAllCompanies();
+		for (Object[] column : list) {
+			addToListTabel((String) column[0], (Integer) column[1]);
+		}
 		companyView.setItems(companies);
 
 	}

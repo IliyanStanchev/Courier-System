@@ -4,39 +4,34 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import tu_varna.project.courier_system.entity.User;
-import tu_varna.project.courier_system.helper.BuiltInForm;
-import tu_varna.project.courier_system.helper.LogOut;
-import tu_varna.project.courier_system.helper.OpenNewForm;
-import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import tu_varna.project.courier_system.helper.BuiltInForm;
+import tu_varna.project.courier_system.helper.LogOut;
+import tu_varna.project.courier_system.helper.OpenNewForm;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class AdminFormController implements Initializable {
-	
-	private UserService service = new UserServiceImpl();
-	
-    public void setUserID(int id)
-	    {
-	    	this.id=id;
-	    	welcomeUser.setText("Welcome "+ service.getUserName(id));
-	    }
 
-    @FXML
+	private static final Logger logger = LogManager.getLogger(AdminFormController.class);
+
+	private UserService service = new UserServiceImpl();
+
+	@FXML
 	private Label welcomeUser;
-    
-    private int id;
-	
+
 	@FXML
 	private AnchorPane workPane;
 
 	@Override
 	public void initialize(URL location, ResourceBundle bb) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -64,8 +59,6 @@ public class AdminFormController implements Initializable {
 	private void controlShipments(ActionEvent event) throws IOException {
 		BuiltInForm.built_inForm("ShipmentControlForm.fxml", workPane);
 	}
-	
-	
 
 	@FXML
 	private void aboutCourier(ActionEvent event) throws IOException {
@@ -86,7 +79,12 @@ public class AdminFormController implements Initializable {
 	private void logOut(ActionEvent event) throws IOException {
 		LogOut.logOut(event);
 		OpenNewForm.openNewForm("WelcomeForm.fxml", "Welcome");
+		logger.info("Administrator successfully logged out!");
 	}
 
+	public void setUserID(int id) {
+		welcomeUser.setText("Welcome " + service.getUserName(id));
+		logger.info("Administrator successfully logged in!");
+	}
 
 }

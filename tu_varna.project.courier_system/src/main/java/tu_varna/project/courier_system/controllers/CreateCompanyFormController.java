@@ -3,6 +3,9 @@ package tu_varna.project.courier_system.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +15,8 @@ import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class CreateCompanyFormController implements Initializable {
+
+	private static final Logger logger = LogManager.getLogger(CreateCompanyFormController.class);
 
 	@FXML
 	private TextField name;
@@ -60,8 +65,8 @@ public class CreateCompanyFormController implements Initializable {
 
 	@FXML
 	void createCompany(ActionEvent event) {
-		
-		UserService serv= new UserServiceImpl();
+
+		UserService serv = new UserServiceImpl();
 		String name = this.name.getText();
 		int bulstat = Integer.parseInt(this.bulstat.getText());
 		String manager = this.manager.getText();
@@ -69,13 +74,12 @@ public class CreateCompanyFormController implements Initializable {
 		String country = this.country.getText();
 		String city = this.city.getText();
 		String streetN = this.streetN.getText();
-		boolean check=serv.CreateCourierFirm(bulstat, name, manager, phoneNmb, country, city, streetN);
-		if(check)
-		{
+
+		boolean check = serv.CreateCourierFirm(bulstat, name, manager, phoneNmb, country, city, streetN);
+		if (check) {
 			resultLabel.setText("Company succesfully created!");
-		}
-		else
-		{
+			logger.info("Company [ " + bulstat + " , " + name + " ] successfully created by administrator! ");
+		} else {
 			resultLabel.setText("Error!Company name or bulstat are already taken!");
 		}
 

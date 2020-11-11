@@ -1,11 +1,10 @@
 package tu_varna.project.courier_system.tabelviewClasses;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import tu_varna.project.courier_system.entity.Address;
-import tu_varna.project.courier_system.entity.CourierFirm;
 import tu_varna.project.courier_system.entity.Status;
+import tu_varna.project.courier_system.entity.Type;
 
 public class ShipmentView {
 
@@ -21,54 +20,57 @@ public class ShipmentView {
 	private Address to;
 	private LocalDate deliveryDate;
 	private String courierInfo;
+	private Type.type type;
 
 	public ShipmentView(int number, LocalDate date, String phoneNmb, Status.status status) {
 		this.number = number;
 		this.phoneNmb = phoneNmb;
-		this.date=date;
+		this.date = date;
 		this.status = status;
 	}
-	
+
 	public ShipmentView(int number, String sender, Double price, String company) {
 		this.number = number;
 		this.sender = sender;
-		this.price= price;
-		this.company=company;
+		this.price = price;
+		this.company = company;
 	}
-
 
 	public ShipmentView(int number, String receiver, String company) {
 		this.number = number;
 		this.receiver = receiver;
-		this.company=company;
+		this.company = company;
 	}
-	
+
 	public ShipmentView(int number, Address from, Address to) {
 		this.number = number;
 		this.from = from;
 		this.to = to;
 	}
 
-	
-	
 	public ShipmentView(int number, Address from, Address to, LocalDate deliveryDate) {
 		this.number = number;
 		this.from = from;
 		this.to = to;
-		this.deliveryDate= deliveryDate;
+		this.deliveryDate = deliveryDate;
 	}
-	
-
 
 	public ShipmentView(int id, String courierInfo) {
-		this.number=id;
-		this.courierInfo=courierInfo;
-		
+		this.number = id;
+		this.courierInfo = courierInfo;
+
+	}
+
+	public ShipmentView(Integer number, String sender, Type.type type, Double price) {
+		this.number = number;
+		this.sender = sender;
+		this.setType(type);
+		this.price = price;
 	}
 
 	public ShipmentView(int number) {
-		this.number=number; 
-		
+		this.number = number;
+
 	}
 
 	public LocalDate getDeliveryDate() {
@@ -161,6 +163,14 @@ public class ShipmentView {
 
 	public String getCourier() {
 		return courierInfo;
+	}
+
+	public Type.type getType() {
+		return type;
+	}
+
+	public void setType(Type.type type) {
+		this.type = type;
 	}
 
 }

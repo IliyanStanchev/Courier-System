@@ -2,7 +2,6 @@ package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -14,7 +13,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import tu_varna.project.courier_system.entity.Address;
 import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.entity.Shipment;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
@@ -40,26 +38,22 @@ public class DailyProgressFormController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.numberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));		
+		this.numberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
 		shipmentsView.setItems(shipmentsInProcess);
 		this.date.setText(LocalDate.now().toString());
 	}
 
 	public void setCourier(Courier courier) {
-		 this.cancelledShipments.setText(Integer.toString(courier.getCancelledShipments()));
-		 this.deliveredShipments.setText(Integer.toString(courier.getDeliveredOrders().size()));
-		 for(Shipment shipment : courier.getShipmentsInProgress())
-		 {
-			 addToListTabel(shipment.getId());
-		 }
-		 
-		
+		this.cancelledShipments.setText(Integer.toString(courier.getCancelledShipments()));
+		this.deliveredShipments.setText(Integer.toString(courier.getDeliveredOrders().size()));
+		for (Shipment shipment : courier.getShipmentsInProgress()) {
+			addToListTabel(shipment.getId());
+		}
+
 	}
 
-	
-	  public void addToListTabel(int number) { 
-		  shipmentsInProcess.add(new ShipmentView(number)); 
-	  }
-	 
+	public void addToListTabel(int number) {
+		shipmentsInProcess.add(new ShipmentView(number));
+	}
 
 }

@@ -4,6 +4,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +20,9 @@ import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class CreateCourierFormController implements Initializable {
-	
+
+	private static final Logger logger = LogManager.getLogger(CreateCourierFormController.class);
+
 	private UserService service = new UserServiceImpl();
 
 	@FXML
@@ -88,35 +93,32 @@ public class CreateCourierFormController implements Initializable {
 	public void createCourier(ActionEvent event) {
 		String username = this.username.getText();
 		String password = this.password.getText();
-		String confirmPW = this.confirmPW.getText();
+		// String confirmPW = this.confirmPW.getText();
 		String name = this.name.getText();
 		String phoneNmb = this.phoneNmb.getText();
 		String email = this.email.getText();
 		String country = this.country.getText();
 		String city = this.city.getText();
 		String streetN = this.streetN.getText();
-		String company = this.companyCombo.getSelectionModel().getSelectedItem().toString();	
-		
-		boolean check=service.CreateCourier(username, password, name, phoneNmb, email,
-		 country, city, streetN, service.getBulstatByFirmName(company));
-		if(check)
-		{
+		String company = this.companyCombo.getSelectionModel().getSelectedItem().toString();
+
+		boolean check = service.CreateCourier(username, password, name, phoneNmb, email, country, city, streetN,
+				service.getBulstatByFirmName(company));
+		if (check) {
 			resultLabel.setText("Courier succesfully created!");
-		}
-		else
-		{
+			logger.info("Courier [ " + username + " , " + password + " ] successfully created by administrator! ");
+		} else {
 			resultLabel.setText("Error!Courier username or phone are already taken!");
 		}
-		
+
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		List<Object[]> list= service.getAllCompanies();
-		for(Object[] column: list)
-		{
-			fillCompanyCombo((String)column[0]);
+		List<Object[]> list = service.getAllCompanies();
+		for (Object[] column : list) {
+			fillCompanyCombo((String) column[0]);
 		}
 		companyCombo.setItems(companyList);
 

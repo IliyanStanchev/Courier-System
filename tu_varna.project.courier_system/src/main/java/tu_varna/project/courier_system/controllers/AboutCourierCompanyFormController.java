@@ -7,18 +7,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import tu_varna.project.courier_system.entity.CourierFirm;
+import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
-
 public class AboutCourierCompanyFormController {
-	
-	private UserService service= new UserServiceImpl();
+
+	private UserService service = new UserServiceImpl();
 
 	@FXML
 	private TextField bulstat;
-	
+
 	@FXML
 	private Label bulstatL;
 
@@ -57,31 +56,26 @@ public class AboutCourierCompanyFormController {
 
 	@FXML
 	public void searchCompany(ActionEvent event) {
-		int bulstat = Integer.parseInt(this.bulstat.getText());
-		CourierFirm firm= service.getCompanyByID(bulstat);
-		if(firm!=null)
-		{
-			loadInfo(firm.getCompanyName(),firm.getId(),firm.getEmployees().size(),firm.getOffices().size(),firm.getManager().getManagerName(),firm.getManager().getManagerPhone(),firm.getAddress().getCountry(),firm.getAddress().getCity(),firm.getAddress().getStreet(),
-					firm.getSuccesfulOrders(),firm.getUnsuccesfulOrders(),firm.getActiveOrders());
-		}
-		else
-		{
+
+		Company firm = service.getCompanyByID(Integer.parseInt(this.bulstat.getText()));
+		if (firm != null) {
+			loadInfo(firm);
+		} else {
 			resultLabel.setText("Company not found!");
 		}
 	}
 
-	public void loadInfo(String name, int bulstat, int couriersNumber, int officesNumber, String manager, String phoneNmb,
-			String country, String city, String streetN, int successfulShipments,int unsuccessfulShipments, int activeShipments) {
-		this.name.setText(name);
-		this.bulstatL.setText(String.valueOf(bulstat));
-		this.couriersNumber.setText(String.valueOf(couriersNumber));
-		this.officesNumber.setText(String.valueOf(officesNumber));
-		this.manager.setText(manager);
-		this.phoneNmb.setText(phoneNmb);
-		this.address.setText(country+" "+city+" "+streetN);
-		this.successfulShipments.setText(String.valueOf(successfulShipments));
-		this.unsuccessfulShipments.setText(String.valueOf(unsuccessfulShipments));
-		this.activeShipments.setText(String.valueOf(activeShipments));
+	public void loadInfo(Company firm) {
+		this.name.setText(firm.getCompanyName());
+		this.bulstatL.setText(Integer.toString(firm.getId()));
+		this.couriersNumber.setText(Integer.toString(firm.getEmployees().size()));
+		this.officesNumber.setText(Integer.toString(firm.getOffices().size()));
+		this.manager.setText(firm.getManager().getManagerName());
+		this.phoneNmb.setText(firm.getManager().getManagerPhone());
+		this.address.setText(firm.getAddress().toString());
+		this.successfulShipments.setText(Integer.toString(firm.getSuccesfulOrders()));
+		this.unsuccessfulShipments.setText(Integer.toString(firm.getUnsuccesfulOrders()));
+		this.activeShipments.setText(Integer.toString(firm.getActiveOrders()));
 		this.date.setValue(LocalDate.now());
-}
+	}
 }

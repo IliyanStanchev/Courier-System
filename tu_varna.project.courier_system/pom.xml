@@ -15,6 +15,13 @@
     <artifactId>hibernate-core</artifactId>
     <version>5.4.22.Final</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/org.controlsfx/controlsfx -->
+<dependency>
+    <groupId>org.controlsfx</groupId>
+    <artifactId>controlsfx</artifactId>
+    <version>11.0.3</version>
+</dependency>
+
 <dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>

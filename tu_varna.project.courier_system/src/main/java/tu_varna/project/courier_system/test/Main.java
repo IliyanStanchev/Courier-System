@@ -5,10 +5,10 @@ import javafx.stage.Stage;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 
 public class Main extends Application {
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
-
 			OpenNewForm.openNewForm("WelcomeForm.fxml", "Welcome! ");
 		} catch (Exception e) {
 			e.printStackTrace();

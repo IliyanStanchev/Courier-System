@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,30 +19,26 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tu_varna.project.courier_system.entity.Client;
-import tu_varna.project.courier_system.entity.Shipment;
 import tu_varna.project.courier_system.entity.Status.status;
-import tu_varna.project.courier_system.entity.User;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
-import tu_varna.project.courier_system.tabelviewClasses.ClientView;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
 public class ExpectedShipmentsFormController implements Initializable {
 
-	private UserService service= new UserServiceImpl();
-	
-	public void setClient(Client user)
-	{
-		
-		List<ShipmentView> list= user.getExpectedShipments();
-		for(ShipmentView shipment : list)
-		{
+	private static final Logger logger = LogManager.getLogger(ExpectedShipmentsFormController.class);
+
+	private UserService service = new UserServiceImpl();
+
+	public void setClient(Client user) {
+
+		List<ShipmentView> list = user.getExpectedShipments();
+		for (ShipmentView shipment : list) {
 			addToListTabel(shipment);
 		}
 		shipmentView.setItems(shipments);
 	}
-	
 
 	@FXML
 	private TableView<ShipmentView> shipmentView;
@@ -66,9 +65,16 @@ public class ExpectedShipmentsFormController implements Initializable {
 		resultLabel.setText("");
 		ShipmentView selectedShipment = shipmentView.getSelectionModel().getSelectedItem();
 		if (selectedShipment != null) {
-			service.ChangeShipmentStatus(service.SearchShipmentByID(selectedShipment.getNumber()),status.declined);
-			shipmentView.getItems().remove(selectedShipment);
-			resultLabel.setText("Status set to declined!");
+			if (selectedShipment.getStatus() == status.pending) {
+				service.ChangeShipmentStatus(service.SearchShipmentByID(selectedShipment.getNumber()), status.declined);
+				shipmentView.getItems().remove(selectedShipment);
+				resultLabel.setText("Status set to declined!");
+				logger.info("Shipment with id: " + selectedShipment.getNumber()
+						+ " has been declined by client with phone: " + selectedShipment.getPhoneNmb());
+
+			} else {
+				resultLabel.setText(" You cannot decline shipments that are already in proccess of delivery! ");
+			}
 		} else
 			resultLabel.setText("First select.");
 	}
@@ -91,11 +97,9 @@ public class ExpectedShipmentsFormController implements Initializable {
 		this.senderColumn.setCellValueFactory(new PropertyValueFactory<>("sender"));
 		this.companyColumn.setCellValueFactory(new PropertyValueFactory<>("company"));
 		this.priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-		
-		
+
 	}
 
-	
 	public void addToListTabel(ShipmentView shipment) {
 		shipments.add(shipment);
 	}

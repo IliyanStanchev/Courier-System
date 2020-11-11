@@ -6,7 +6,7 @@ public class CourierView {
 	private String company;
 
 	public CourierView(String name, String phoneNmb, String company) {
-		
+
 		this.name = name;
 		this.phoneNmb = phoneNmb;
 		this.company = company;

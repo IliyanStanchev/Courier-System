@@ -4,29 +4,34 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import tu_varna.project.courier_system.entity.Address;
-import tu_varna.project.courier_system.entity.Courier;
-import tu_varna.project.courier_system.entity.Shipment;
-import tu_varna.project.courier_system.helper.OpenNewForm;
-import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
-import tu_varna.project.courier_system.tabelviewClasses.CourierView;
-import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import tu_varna.project.courier_system.entity.Address;
+import tu_varna.project.courier_system.entity.Courier;
+import tu_varna.project.courier_system.entity.Shipment;
+import tu_varna.project.courier_system.helper.OpenNewForm;
+import tu_varna.project.courier_system.services.ShipmentDelivery;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
 public class PendingShipmentsFormController implements Initializable {
-	
-	UserService service= new UserServiceImpl();
-	
+
+	private static final Logger logger = LogManager.getLogger(PendingShipmentsFormController.class);
+
+	UserService service = new UserServiceImpl();
+
 	private int courier_id;
 
 	@FXML
@@ -64,10 +69,14 @@ public class PendingShipmentsFormController implements Initializable {
 
 	@FXML
 	void acceptRequest(ActionEvent event) {
+
 		ShipmentView selectedShipment = requestedShipmentsView.getSelectionModel().getSelectedItem();
 		if (selectedShipment != null) {
 			acceptedShipments.add(selectedShipment);
-			service.setShipmentCourier(service.SearchShipmentByID(selectedShipment.getNumber()),courier_id);
+			Shipment shipment = service.SearchShipmentByID(selectedShipment.getNumber());
+			service.setShipmentCourier(shipment, courier_id);
+			logger.info("Shipment with id: " + shipment.getId() + " has been taken by courier with id: " + courier_id);
+			new ShipmentDelivery(shipment);
 			requestedShipmentsView.getItems().remove(selectedShipment);
 		} else
 			acceptValidationLabel.setText("First select");
@@ -80,8 +89,8 @@ public class PendingShipmentsFormController implements Initializable {
 		if (selectedShipment != null) {
 			FXMLLoader loader = OpenNewForm.openNewForm("ShipmentDetailsForm.fxml", "Details");
 			ShipmentDetailFormController next = loader.getController();
-			Shipment shipment= service.SearchShipmentByID(selectedShipment.getNumber());
-		    next.setChoosedShipment(shipment);
+			Shipment shipment = service.SearchShipmentByID(selectedShipment.getNumber());
+			next.setChoosedShipment(shipment);
 		} else
 			detailValidationLabel.setText("First select");
 
@@ -103,25 +112,19 @@ public class PendingShipmentsFormController implements Initializable {
 	public void addToListTabel(int number, Address from, Address to) {
 		requestedShipments.add(new ShipmentView(number, from, to));
 	}
-	
+
 	public void addToCourierShipmentsTable(int number, Address from, Address to) {
 		acceptedShipments.add(new ShipmentView(number, from, to));
 	}
-	
-	public void getPendingShipments(int courier_id,int company_id)
-	{
-		Courier courier = (Courier)service.getUserByID(courier_id);
-		this.courier_id=courier_id;
-		for(Shipment s :service.SearchCourierFirm(company_id).getPendingOrders())
-		{
-			addToListTabel(s.getId(),s.getSender().getAddress(),s.getReceiver().getAddress());
-		}
-		for(Shipment s : courier.getShipmentsForDelivery())
-		{
-			addToCourierShipmentsTable(s.getId(),s.getSender().getAddress(),s.getReceiver().getAddress());
-		}
-		
-		
-	}
 
+	public void getPendingShipments(int courier_id, int company_id) {
+		Courier courier = (Courier) service.getUserByID(courier_id);
+		this.courier_id = courier_id;
+		for (Shipment s : service.SearchCourierFirm(company_id).getPendingOrders()) {
+			addToListTabel(s.getId(), s.getSender().getAddress(), s.getReceiver().getAddress());
+		}
+		for (Shipment s : courier.getShipmentsInProgress()) {
+			addToCourierShipmentsTable(s.getId(), s.getSender().getAddress(), s.getReceiver().getAddress());
+		}
+	}
 }

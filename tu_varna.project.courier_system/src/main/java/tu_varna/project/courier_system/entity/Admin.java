@@ -4,15 +4,15 @@ import javax.persistence.Entity;
 
 import javafx.fxml.FXMLLoader;
 import tu_varna.project.courier_system.controllers.AdminFormController;
-
+import tu_varna.project.courier_system.helper.OpenNewForm;
 
 @Entity
 public class Admin extends User {
 
 	public Admin() {
-		
+
 	}
-	
+
 	public Admin(String loginUsername, String loginPassword, String name, String email, String phoneNumber,
 			String country, String city, String street) {
 		super(loginUsername, loginPassword, name, email, phoneNumber, country, city, street);
@@ -20,15 +20,10 @@ public class Admin extends User {
 	}
 
 	@Override
-	public String loadView() {
-		return "AdministratorWorkspaceForm.fxml";
-		
-	}
-
-	@Override
-	public void loadController(FXMLLoader loader) {
-		AdminFormController next=loader.getController();
+	public void loadController() {
+		FXMLLoader loader = OpenNewForm.openNewForm("AdministratorWorkspaceForm.fxml", "Admin workspace");
+		AdminFormController next = loader.getController();
 		next.setUserID(this.getId());
-		
+
 	}
 }

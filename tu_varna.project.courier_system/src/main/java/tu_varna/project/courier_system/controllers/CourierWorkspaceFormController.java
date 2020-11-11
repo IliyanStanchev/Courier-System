@@ -4,37 +4,41 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import tu_varna.project.courier_system.helper.LogOut;
-import tu_varna.project.courier_system.helper.OpenNewForm;
-import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
-import tu_varna.project.courier_system.entity.Courier;
-import tu_varna.project.courier_system.entity.User;
-import tu_varna.project.courier_system.helper.BuiltInForm;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import tu_varna.project.courier_system.entity.Courier;
+import tu_varna.project.courier_system.helper.BuiltInForm;
+import tu_varna.project.courier_system.helper.LogOut;
+import tu_varna.project.courier_system.helper.OpenNewForm;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class CourierWorkspaceFormController implements Initializable {
+
+	private static final Logger logger = LogManager.getLogger(CourierWorkspaceFormController.class);
+
 	private UserService service = new UserServiceImpl();
 
 	private int id;
-	
+
 	@FXML
 	private Label welcomeUser;
-	
-	public void setUserID(int id)
-    {
-    	this.id=id;
-    	welcomeUser.setText("Welcome "+ service.getUserName(id));
-    }
-	
+
+	public void setUserID(int id) {
+		this.id = id;
+		welcomeUser.setText("Welcome " + service.getUserName(id));
+		logger.info("Courier with id: " + id + " successfully logged in!");
+	}
+
 	@FXML
 	private Label label;
-	
 
 	@FXML
 	private AnchorPane workPane;
@@ -47,24 +51,25 @@ public class CourierWorkspaceFormController implements Initializable {
 
 	@FXML
 	private void loadHomePage(ActionEvent event) throws IOException {
-		FXMLLoader loader= BuiltInForm.built_inForm("CourierHomeForm.fxml", workPane);
+		FXMLLoader loader = BuiltInForm.built_inForm("CourierHomeForm.fxml", workPane);
 		CourierHomeFormController next = loader.getController();
 		next.setCourierInformation(id);
-		
+
 	}
 
 	@FXML
 	private void logOut(ActionEvent event) throws IOException {
 		LogOut.logOut(event);
+		logger.info("Courier with id: " + id + " successfully logged out!");
 		OpenNewForm.openNewForm("WelcomeForm.fxml", "Welcome");
 	}
 
 	@FXML
 	private void viewProfile(ActionEvent event) throws IOException {
-		FXMLLoader loader= BuiltInForm.built_inForm("CourierProfileForm.fxml", workPane);
+		FXMLLoader loader = BuiltInForm.built_inForm("CourierProfileForm.fxml", workPane);
 		CourierProfileFormController next = loader.getController();
-		next.setCourier((Courier)service.getUserByID(id));
-		
+		next.setCourier((Courier) service.getUserByID(id));
+
 	}
 
 }

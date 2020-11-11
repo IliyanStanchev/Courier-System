@@ -4,6 +4,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +19,9 @@ import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class CreateOfficeFormController implements Initializable {
-	
+
+	private static final Logger logger = LogManager.getLogger(CreateOfficeFormController.class);
+
 	UserService service = new UserServiceImpl();
 
 	@FXML
@@ -71,16 +76,22 @@ public class CreateOfficeFormController implements Initializable {
 		String company = this.companyCombo.getSelectionModel().getSelectedItem().toString();
 		System.out.println(company);
 
-		service.CreateOffice(company,country, city, streetN, agent, phoneNmb,service.getBulstatByFirmName(company));
+		boolean check = service.CreateOffice(company, country, city, streetN, agent, phoneNmb,
+				service.getBulstatByFirmName(company));
+		if (check) {
+			resultLabel.setText("Courier succesfully created!");
+			logger.info("Office [ " + company + " , " + streetN + " ] successfully created by administrator! ");
+		} else {
+			resultLabel.setText("Error!Office cannot be created!");
+		}
 
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		List<Object[]> list= service.getAllCompanies();
-		for(Object[] column: list)
-		{
-			fillCompanyCombo((String)column[0]);
+		List<Object[]> list = service.getAllCompanies();
+		for (Object[] column : list) {
+			fillCompanyCombo((String) column[0]);
 		}
 		companyCombo.setItems(companyList);
 

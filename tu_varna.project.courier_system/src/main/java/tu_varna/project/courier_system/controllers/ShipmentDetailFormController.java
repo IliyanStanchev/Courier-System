@@ -10,7 +10,6 @@ import tu_varna.project.courier_system.entity.Shipment;
 
 public class ShipmentDetailFormController implements Initializable {
 
-
 	@FXML
 	private Label dateOfOrdering;
 
@@ -40,29 +39,24 @@ public class ShipmentDetailFormController implements Initializable {
 
 	@FXML
 	private Label receiverName;
-	
-	private Shipment shipment;
 
 	public void setChoosedShipment(Shipment shipment) {
-	
-			this.shipment=shipment;	  
-			 number.setText(Integer.toString(shipment.getId()));
-			  dateOfOrdering.setText(shipment.getDateCreated().toString());
-			  from.setText(shipment.getSender().getAddress().toString());
-			  to.setText(shipment.getReceiver().getAddress().toString());
-			  senderPhone.setText(shipment.getSender().getPhoneNumber());
-			  senderName.setText(shipment.getSender().getName());
-			  receiverPhone.setText(shipment.getReceiver().getPhoneNumber()); 
-			  receiverName.setText(shipment.getReceiver().getName());
-			  type.setText(shipment.getType().toString());
-			  dueAmount.setText(Double.toString(shipment.getShipmentPrice()));
-				 
-	}
 
+		number.setText(Integer.toString(shipment.getId()));
+		dateOfOrdering.setText(shipment.getDateCreated().toString());
+		from.setText(shipment.getSender().getAddress().toString());
+		to.setText(shipment.getReceiver().getAddress().toString());
+		senderPhone.setText(shipment.getSender().getPhoneNumber());
+		senderName.setText(shipment.getSender().getName());
+		receiverPhone.setText(shipment.getReceiver().getPhoneNumber());
+		receiverName.setText(shipment.getReceiver().getName());
+		type.setText(shipment.getType().toString());
+		dueAmount.setText(Double.toString(shipment.getShipmentPrice()));
+
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		 
 	}
 }

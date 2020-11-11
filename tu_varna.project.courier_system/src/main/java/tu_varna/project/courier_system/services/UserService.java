@@ -3,11 +3,12 @@ package tu_varna.project.courier_system.services;
 import java.time.LocalDate;
 import java.util.List;
 
-import tu_varna.project.courier_system.entity.CourierFirm;
+import tu_varna.project.courier_system.entity.Company;
+import tu_varna.project.courier_system.entity.Notification;
 import tu_varna.project.courier_system.entity.Shipment;
+import tu_varna.project.courier_system.entity.Status.status;
 import tu_varna.project.courier_system.entity.Type;
 import tu_varna.project.courier_system.entity.User;
-import tu_varna.project.courier_system.entity.Status.status;
 
 public interface UserService {
 
@@ -20,7 +21,7 @@ public interface UserService {
 	boolean CreateCourierFirm(int id, String companyName, String manager, String phone, String country, String city,
 			String street);
 
-	CourierFirm SearchCourierFirm(int bulstat);
+	Company SearchCourierFirm(int bulstat);
 
 	List<Object[]> getShipmentsList(int bulstat);
 
@@ -60,12 +61,12 @@ public interface UserService {
 
 	void deleteOffice(int code);
 
-	void CreateOffice(String company, String country, String city, String streetN, String agent, String phoneNmb,
+	boolean CreateOffice(String company, String country, String city, String streetN, String agent, String phoneNmb,
 			int firm_id);
 
 	Shipment SearchShipmentByID(int shipment_id);
 
-	CourierFirm getCompanyByID(int bulstat);
+	Company getCompanyByID(int bulstat);
 
 	String getUserName(int id);
 
@@ -84,5 +85,11 @@ public interface UserService {
 	int getBulstatByCourier(int id);
 
 	void setShipmentCourier(Shipment shipment, int courier_id);
+
+	void handleUserNotificationAnswer(boolean answer, Notification notification);
+
+	Notification SearchNotificationByID(int notificationId);
+
+	void DeleteNotification(Notification notification);
 
 }

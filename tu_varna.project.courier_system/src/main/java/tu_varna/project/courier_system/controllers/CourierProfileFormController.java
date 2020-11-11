@@ -3,6 +3,9 @@ package tu_varna.project.courier_system.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,8 +21,10 @@ import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class CourierProfileFormController implements Initializable {
-	
-	UserService service= new UserServiceImpl();
+
+	private static final Logger logger = LogManager.getLogger(CourierProfileFormController.class);
+
+	UserService service = new UserServiceImpl();
 
 	@FXML
 	private Label company;
@@ -103,7 +108,8 @@ public class CourierProfileFormController implements Initializable {
 
 	@FXML
 	void saveAddress(ActionEvent event) {
-		service.ChangeUserAddress(courier, country.getText(),city.getText(),streetN.getText());
+		service.ChangeUserAddress(courier, country.getText(), city.getText(), streetN.getText());
+		logger.info("Courier with id: " + courier.getId() + " updated his address!");
 		this.country.setDisable(true);
 		this.city.setDisable(true);
 		this.streetN.setDisable(true);
@@ -112,6 +118,7 @@ public class CourierProfileFormController implements Initializable {
 	@FXML
 	void saveEmail(ActionEvent event) {
 		service.ChangeUserEmail(courier, email.getText());
+		logger.info("Courier with id: " + courier.getId() + " updated his email!");
 		this.email.setDisable(true);
 		this.emailSaveB.setDisable(true);
 
@@ -120,15 +127,17 @@ public class CourierProfileFormController implements Initializable {
 	@FXML
 	void savePassword(ActionEvent event) {
 		service.ChangeUserPassword(courier, password.getText());
+		logger.info("Courier with id: " + courier.getId() + " updated his password!");
 		this.password.setDisable(true);
 		this.passwordSaveB.setDisable(true);
 	}
 
 	@FXML
 	void savePhoneN(ActionEvent event) {
-		    service.ChangeUserPhone(courier, phoneN.getText());
-			this.phoneN.setDisable(true);
-			this.phoneNSaveB.setDisable(true);
+		service.ChangeUserPhone(courier, phoneN.getText());
+		logger.info("Courier with id: " + courier.getId() + " updated his phone number!");
+		this.phoneN.setDisable(true);
+		this.phoneNSaveB.setDisable(true);
 
 	}
 
@@ -186,21 +195,20 @@ public class CourierProfileFormController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-	
 
 	}
 
 	public void setCourier(Courier courier) {
-		 this.courier=courier;
-		 name.setText(courier.getName());
-		 company.setText(courier.getFirm().getCompanyName());
-		 password.setText(courier.getLoginPassword());
-		 email.setText(courier.getEmail());
-		 phoneN.setText(courier.getPhoneNumber());
-		 country.setText(courier.getAddress().getCountry());
-		 city.setText(courier.getAddress().getCity());
-		 streetN.setText(courier.getAddress().getStreet());
-		
+		this.courier = courier;
+		name.setText(courier.getName());
+		company.setText(courier.getFirm().getCompanyName());
+		password.setText(courier.getLoginPassword());
+		email.setText(courier.getEmail());
+		phoneN.setText(courier.getPhoneNumber());
+		country.setText(courier.getAddress().getCountry());
+		city.setText(courier.getAddress().getCity());
+		streetN.setText(courier.getAddress().getStreet());
+
 	}
 
 }

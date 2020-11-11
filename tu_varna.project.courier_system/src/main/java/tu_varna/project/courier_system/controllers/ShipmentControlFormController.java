@@ -4,32 +4,28 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import tu_varna.project.courier_system.helper.OpenNewForm;
-import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
-import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
+import tu_varna.project.courier_system.helper.OpenNewForm;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 
 public class ShipmentControlFormController implements Initializable {
 
-	private UserService service= new UserServiceImpl();
-	
+	private UserService service = new UserServiceImpl();
+
 	@FXML
 	private TextField name;
 
@@ -53,14 +49,12 @@ public class ShipmentControlFormController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-	this.bulstatColumn.setCellValueFactory(new PropertyValueFactory<>("bulstat"));
+		this.bulstatColumn.setCellValueFactory(new PropertyValueFactory<>("bulstat"));
 		companyView.setItems(company);
-		List<Object[]> list= service.getAllCompanies();
-		for(Object[] column : list)
-		{
-			addToListTabel((String)column[0], (Integer)column[1]);
+		List<Object[]> list = service.getAllCompanies();
+		for (Object[] column : list) {
+			addToListTabel((String) column[0], (Integer) column[1]);
 		}
-		
 
 		name.textProperty().addListener((observable, oldValue, newValue) -> {
 			filteredData.setPredicate(company -> {
@@ -94,7 +88,7 @@ public class ShipmentControlFormController implements Initializable {
 		try {
 			int bulstat = (companyView.getSelectionModel().getSelectedItems().get(0).getBulstat());
 			try {
-				
+
 				FXMLLoader loader = OpenNewForm.openNewForm("ViewShipmentsForm.fxml", "List of shipments");
 				ShipmentsViewFormController next = loader.getController();
 				next.setChoosedCompany(service.getCompanyByID(bulstat));

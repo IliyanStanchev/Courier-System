@@ -3,10 +3,12 @@ package tu_varna.project.courier_system.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -14,8 +16,10 @@ import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class CreateClientFormController implements Initializable {
-	
-	private UserService service= new UserServiceImpl();
+
+	private static final Logger logger = LogManager.getLogger(CreateClientFormController.class);
+
+	private UserService service = new UserServiceImpl();
 
 	@FXML
 	private TextField username;
@@ -78,7 +82,7 @@ public class CreateClientFormController implements Initializable {
 	public void createClient(ActionEvent event) {
 		String username = this.username.getText();
 		String password = this.password.getText();
-		String confirmPW = this.confirmPW.getText();
+		// String confirmPW = this.confirmPW.getText();
 		String name = this.name.getText();
 		String phoneNmb = this.phoneNmb.getText();
 		String email = this.email.getText();
@@ -86,16 +90,16 @@ public class CreateClientFormController implements Initializable {
 		String city = this.city.getText();
 		String streetN = this.streetN.getText();
 		System.out.println(password);
-        boolean check=service.CreateClient(username, password, name, email, phoneNmb, country, city, streetN);
-        if(check)
-        {
-        	resultLabel.setText("Client created succesfully!");
-        }
-        else
-        {
-        	resultLabel.setText("Error!Username or phone number already exist!");
-        }
-        
+
+		boolean check = service.CreateClient(username, password, name, email, phoneNmb, country, city, streetN);
+		if (check) {
+			resultLabel.setText("Client created succesfully!");
+			logger.info("Client [ " + username + " , " + password + " ] successfully created by administrator! ");
+
+		} else {
+			resultLabel.setText("Error!Username or phone number already exist!");
+		}
+
 	}
 
 	@Override

@@ -1,0 +1,78 @@
+10-11-2020 20:37:44 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged in!
+10-11-2020 20:37:51 tu_varna.project.courier_system.controllers.PendingShipmentsFormController - Shipment with id: 5 has been taken by courier with id: 2
+10-11-2020 20:37:53 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged out!
+10-11-2020 20:38:00 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
+10-11-2020 20:38:40 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged out!
+10-11-2020 20:38:47 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged in!
+10-11-2020 20:39:32 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged out!
+10-11-2020 20:39:40 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
+10-11-2020 20:39:46 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged out!
+10-11-2020 20:39:59 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged in!
+10-11-2020 20:40:21 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged out!
+10-11-2020 20:50:45 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged in!
+10-11-2020 20:50:51 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged out!
+10-11-2020 20:50:58 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged in!
+11-11-2020 13:24:17 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged in!
+11-11-2020 13:24:22 tu_varna.project.courier_system.controllers.PendingShipmentsFormController - Shipment with id: 6 has been taken by courier with id: 2
+11-11-2020 13:24:23 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged out!
+11-11-2020 13:24:31 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
+11-11-2020 13:27:13 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged in!
+11-11-2020 13:27:40 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged in!
+11-11-2020 13:28:21 tu_varna.project.courier_system.controllers.PendingShipmentsFormController - Shipment with id: 10 has been taken by courier with id: 2
+11-11-2020 13:28:23 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged out!
+11-11-2020 13:28:29 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged in!
+11-11-2020 13:30:23 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged in!
+11-11-2020 13:30:28 tu_varna.project.courier_system.controllers.PendingShipmentsFormController - Shipment with id: 7 has been taken by courier with id: 2
+11-11-2020 13:30:30 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged out!
+11-11-2020 13:30:36 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
+11-11-2020 13:30:50 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged out!
+11-11-2020 13:30:56 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged in!
+11-11-2020 13:31:06 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged out!
+11-11-2020 13:31:12 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged in!
+11-11-2020 13:31:25 tu_varna.project.courier_system.controllers.PendingShipmentsFormController - Shipment with id: 11 has been taken by courier with id: 2
+11-11-2020 13:31:27 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged out!
+11-11-2020 13:31:33 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged in!
+11-11-2020 13:36:56 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged in!
+11-11-2020 13:37:00 tu_varna.project.courier_system.controllers.PendingShipmentsFormController - Shipment with id: 8 has been taken by courier with id: 2
+11-11-2020 13:37:02 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged out!
+11-11-2020 13:37:10 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
+11-11-2020 13:37:30 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged out!
+11-11-2020 13:37:36 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged in!
+11-11-2020 13:37:50 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged out!
+11-11-2020 13:37:57 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
+11-11-2020 13:39:22 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged in!
+11-11-2020 13:39:26 tu_varna.project.courier_system.controllers.PendingShipmentsFormController - Shipment with id: 9 has been taken by courier with id: 2
+11-11-2020 13:39:28 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged out!
+11-11-2020 13:39:35 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
+11-11-2020 13:40:00 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged out!
+11-11-2020 13:40:07 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged in!
+11-11-2020 13:41:22 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged out!
+11-11-2020 13:41:30 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
+11-11-2020 13:42:13 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged out!
+11-11-2020 13:42:20 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
+11-11-2020 13:44:05 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged out!
+11-11-2020 13:46:00 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
+11-11-2020 13:46:25 tu_varna.project.courier_system.controllers.RequestShipmentFormController - Client with id: 3 requested a new shipment!
+11-11-2020 13:46:35 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged out!
+11-11-2020 13:46:41 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged in!
+11-11-2020 13:46:45 tu_varna.project.courier_system.controllers.PendingShipmentsFormController - Shipment with id: 2 has been taken by courier with id: 2
+11-11-2020 13:46:46 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged out!
+11-11-2020 13:46:53 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged in!
+11-11-2020 13:47:02 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged out!
+11-11-2020 13:47:10 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
+11-11-2020 13:50:24 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
+11-11-2020 13:51:33 tu_varna.project.courier_system.controllers.RequestShipmentFormController - Client with id: 3 requested a new shipment!
+11-11-2020 13:51:37 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged out!
+11-11-2020 13:51:43 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged in!
+11-11-2020 13:51:51 tu_varna.project.courier_system.controllers.PendingShipmentsFormController - Shipment with id: 4 has been taken by courier with id: 2
+11-11-2020 13:51:53 tu_varna.project.courier_system.controllers.CourierWorkspaceFormController - Courier with id: 2 successfully logged out!
+11-11-2020 13:52:00 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged in!
+11-11-2020 13:52:12 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged out!
+11-11-2020 13:52:20 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
+11-11-2020 13:53:05 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged out!
+11-11-2020 13:53:24 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 4 successfully logged in!
+11-11-2020 14:13:05 tu_varna.project.courier_system.controllers.AdminFormController - Administrator successfully logged in!
+11-11-2020 14:13:28 tu_varna.project.courier_system.controllers.RequestShipmentFormController - Client with id: 0 requested a new shipment!
+11-11-2020 14:14:33 tu_varna.project.courier_system.controllers.AdminFormController - Administrator successfully logged in!
+11-11-2020 14:14:39 tu_varna.project.courier_system.controllers.ShipmentsViewFormController - Shipment with id: 1 successfully removed by administrator!
+11-11-2020 14:14:53 tu_varna.project.courier_system.controllers.RequestShipmentFormController - Client with id: 2 requested a new shipment!

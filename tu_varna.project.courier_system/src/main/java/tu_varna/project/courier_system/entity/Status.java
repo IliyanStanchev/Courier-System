@@ -1,13 +1,14 @@
 package tu_varna.project.courier_system.entity;
 
 public class Status {
-	public enum status
-	{
-		pending,
+	public enum status {
+		pending, 
 		delivered,
-		not_delivered,
+		in_proccess_of_delivery, 
 		declined, 
-		taken_by_courier;
+		accepted, 
+		taken_by_courier,
+		in_proccess_of_return;
 	}
 
 }

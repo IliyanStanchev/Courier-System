@@ -1,25 +1,19 @@
 package tu_varna.project.courier_system.controllers;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import tu_varna.project.courier_system.entity.Courier;
-import tu_varna.project.courier_system.entity.User;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class AboutCourierFormController {
-	
-	UserService service= new UserServiceImpl();
+
+	UserService service = new UserServiceImpl();
 
 	@FXML
 	private AnchorPane workPane;
@@ -66,34 +60,34 @@ public class AboutCourierFormController {
 
 	@FXML
 	public void searchCourier(ActionEvent event) {
-		String name = this.name.getText();
-		String phoneNmb = this.phoneNmb.getText();
-		User usr = service.SearchUser(name, phoneNmb);
-		Courier courier;
-		if(usr instanceof Courier)
-		{
-			
-			courier = (Courier)usr;
-			loadInfo(courier.getName(),courier.getFirm().getCompanyName(),courier.getLoginUsername(),courier.getLoginPassword(),courier.getEmail(),courier.getPhoneNumber(),courier.getAddress().getCountry(),courier.getAddress().getCity(),courier.getAddress().getStreet(),Integer.toString(courier.getDeliveredOrders().size()));
-		}
-		else
-		{
-			resultLabel.setText("Courier not found!");
+
+		try {
+
+			Courier courier = (Courier) service.SearchUser(this.name.getText(), this.phoneNmb.getText());
+			if (courier != null) {
+				loadInfo(courier);
+			} else {
+				resultLabel.setText("Courier not found!");
+			}
+		} catch (ClassCastException e) {
+
+			resultLabel.setText("User with this username and phone is not Courier!");
+
 		}
 	}
 
-	public void loadInfo(String name, String company, String username, String password, String email, String phoneNmb,
-			String country, String city, String streetN, String deliveredShipments) {
-		this.nameL.setText(name);
-		this.companyName.setText(company);
-		this.username.setText(username);
-		this.password.setText(password);
-		this.email.setText(email);
-		this.address.setText(country + " " + city + " " + streetN);
-		this.deliveredShipments.setText(deliveredShipments);
+	public void loadInfo(Courier courier) {
+
+		this.nameL.setText(courier.getName());
+		this.companyName.setText(courier.getFirm().getCompanyName());
+		this.username.setText(courier.getLoginUsername());
+		this.password.setText(courier.getLoginPassword());
+		this.email.setText(courier.getEmail());
+		this.phoneN.setText(courier.getPhoneNumber());
+		this.address.setText(courier.getAddress().toString());
+		this.deliveredShipments.setText(Integer.toString(courier.getDeliveredOrders().size()));
 		this.date.setText(LocalDate.now().toString());
-	}
 
-	
+	}
 
 }

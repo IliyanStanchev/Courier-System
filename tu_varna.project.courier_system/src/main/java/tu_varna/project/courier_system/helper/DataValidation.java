@@ -1,8 +1,7 @@
 package tu_varna.project.courier_system.helper;
 
-import javafx.scene.control.TextField;
-
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 public class DataValidation {
 

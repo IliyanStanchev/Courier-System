@@ -1,7 +1,7 @@
 package tu_varna.project.courier_system.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,14 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-
-
-
 @Entity
 public class Shipment {
-	
+
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Enumerated(EnumType.STRING)
 	private Status.status status;
@@ -28,24 +25,23 @@ public class Shipment {
 	private LocalDate dateCreated;
 	private LocalDate dateShipped;
 	private double shipmentPrice;
-	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.DETACH)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
 	private Client sender;
-	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.DETACH)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
 	private Client receiver;
-	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.DETACH)
-	private CourierFirm firm;
-	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.DETACH)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+	private Company firm;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
 	private Courier courier;
-	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.DETACH)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
 	private Office toOffice;
-	
-	
+
 	public Shipment() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Shipment(Type.type type, LocalDate localDate, double shipmentPrice,
-			User sender, User receiver, CourierFirm firm,Office toOffice) {
+
+	public Shipment(Type.type type, LocalDate localDate, double shipmentPrice, User sender, User receiver,
+			Company firm, Office toOffice) {
 		this.type = type;
 		this.dateCreated = localDate;
 		this.shipmentPrice = shipmentPrice;
@@ -53,24 +49,37 @@ public class Shipment {
 		this.receiver = (Client) receiver;
 		this.firm = firm;
 		this.setToOffice(toOffice);
-		this.status= Status.status.pending;
+		this.status = Status.status.pending;
 	}
-	
-	public Shipment(Type.type type, LocalDate localDate, double shipmentPrice,
-			User sender, User receiver, CourierFirm firm) {
+
+	public Shipment(Type.type type, LocalDate localDate, double shipmentPrice, User sender, User receiver,
+			Company firm) {
 		this.type = type;
 		this.dateCreated = localDate;
 		this.shipmentPrice = shipmentPrice;
 		this.sender = (Client) sender;
 		this.receiver = (Client) receiver;
 		this.firm = firm;
-		this.status= Status.status.pending;
+		this.status = Status.status.pending;
+	}
+
+	public Shipment(Status.status status,
+			Type.type type, LocalDate localDate, double shipmentPrice, User sender,
+			User receiver,User courier, Company firm) {
+		this.type = type;
+		this.dateCreated = localDate;
+		this.shipmentPrice = shipmentPrice;
+		this.sender = (Client) sender;
+		this.receiver = (Client) receiver;
+		this.firm = firm;
+		this.courier= (Courier) courier;
+		this.status = status;		
 	}
 
 	@Override
 	public String toString() {
-		return "Shipment id=" + id + ", status=" + status + ", type=" + type +"date created: " + dateCreated +"\n";
-						
+		return "Shipment id=" + id + ", status=" + status + ", type=" + type + "date created: " + dateCreated + "\n";
+
 	}
 
 	public int getId() {
@@ -96,8 +105,6 @@ public class Shipment {
 	public void setType(Type.type type) {
 		this.type = type;
 	}
-
-	
 
 	public LocalDate getDateCreated() {
 		return dateCreated;
@@ -139,14 +146,13 @@ public class Shipment {
 		this.receiver = receiver;
 	}
 
-	public CourierFirm getFirm() {
+	public Company getFirm() {
 		return firm;
 	}
 
-	public void setFirm(CourierFirm firm) {
+	public void setFirm(Company firm) {
 		this.firm = firm;
 	}
-
 
 	public Courier getCourier() {
 		return courier;
@@ -163,14 +169,5 @@ public class Shipment {
 	public void setToOffice(Office toOffice) {
 		this.toOffice = toOffice;
 	}
-	
-
-	
-	
-	
-	
-	
-	
-	
 
 }
