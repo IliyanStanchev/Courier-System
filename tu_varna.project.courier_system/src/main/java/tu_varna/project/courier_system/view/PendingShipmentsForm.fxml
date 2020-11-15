@@ -12,7 +12,7 @@
    <children>
       <AnchorPane prefHeight="586.0" prefWidth="851.0" style="-fx-background-color: #ffffff;">
          <children>
-            <TableView fx:id="requestedShipmentsView" layoutY="29.0" prefHeight="200.0" prefWidth="850.0">
+            <TableView fx:id="requestedShipmentsView" layoutY="29.0" prefHeight="200.0" prefWidth="850.0" stylesheets="@tableView.css">
               <columns>
                 <TableColumn fx:id="numberColumn" prefWidth="117.60003662109375" text="Shipment №" />
                 <TableColumn fx:id="fromColumn" prefWidth="315.9999771118164" text="From" />
@@ -27,7 +27,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <TableView fx:id="acceptedShipmentsView" layoutY="312.0" prefHeight="200.0" prefWidth="850.0">
+            <TableView fx:id="acceptedShipmentsView" layoutY="312.0" prefHeight="200.0" prefWidth="850.0" stylesheets="@tableView.css">
                <columns>
                   <TableColumn fx:id="numberAColumn" prefWidth="117.60003662109375" text="Shipment №" />
                   <TableColumn fx:id="fromAColumn" prefWidth="320.00003814697266" text="From" />

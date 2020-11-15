@@ -13,59 +13,49 @@ public class AboutShipmentFormController {
 	private UserService service = new UserServiceImpl();
 	@FXML
 	private TextField number;
-
 	@FXML
 	private Label company;
-
 	@FXML
 	private Label from;
-
 	@FXML
 	private Label oORa;
-
 	@FXML
 	private Label senderName;
-
 	@FXML
 	private Label receiverName;
-
 	@FXML
 	private Label price;
-
 	@FXML
 	private Label to;
-
 	@FXML
 	private Label dateOfOrdering;
-
 	@FXML
 	private Label state;
-
 	@FXML
 	private Label type;
-
 	@FXML
-	private Label result;
+	private Label resultLabel;
 
 	@FXML
 	private void searchShipment(ActionEvent event) {
-
-		Shipment shipment = service.SearchShipmentByID(Integer.parseInt(this.number.getText()));
-		if (shipment != null) {
-			loadInfo(shipment);
-		} else {
-			result.setText("Shipment not found!");
+		resultLabel.setText("");
+		try {
+			Shipment shipment = service.SearchShipmentByID(Integer.parseInt(this.number.getText()));
+			if (shipment != null) {
+				loadInfo(shipment);
+			} else {
+				resultLabel.setText("Shipment not found!");
+			}
+		} catch (Exception e) {
+			resultLabel.setText("Shipment not found!");
 		}
-
 	}
 
 	public void loadInfo(Shipment shipment) {
-
 		String officeOrAddress = "address";
 		if (shipment.getToOffice() != null) {
 			officeOrAddress = "office";
 		}
-
 		this.state.setText(shipment.getStatus().toString());
 		this.company.setText(shipment.getFirm().getCompanyName());
 		this.dateOfOrdering.setText(shipment.getDateCreated().toString());

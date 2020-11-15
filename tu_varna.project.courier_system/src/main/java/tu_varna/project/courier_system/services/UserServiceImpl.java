@@ -123,6 +123,13 @@ public class UserServiceImpl implements UserService {
 		return user.getUserByPhone(phoneNmb);
 
 	}
+	
+	@Override
+	public User SearchUserByUsername(String username) {
+
+		return user.getUserByUsername(username);
+
+	}
 
 	@Override
 	public int getBulstatByFirmName(String name) {
@@ -255,5 +262,11 @@ public class UserServiceImpl implements UserService {
 	public void DeleteNotification(Notification notification) {
 		notif.delete(notification);
 
+	}
+
+	@Override
+	public Company SearchCompany(int bulstat) {
+		return firm.get(bulstat);
+		
 	}
 }

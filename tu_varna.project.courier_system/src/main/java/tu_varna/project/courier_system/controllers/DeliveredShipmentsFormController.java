@@ -3,7 +3,6 @@ package tu_varna.project.courier_system.controllers;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,19 +19,14 @@ public class DeliveredShipmentsFormController implements Initializable {
 
 	@FXML
 	private TableView<ShipmentView> deliveredShipmentsView;
-
 	@FXML
 	private TableColumn<ShipmentView, Integer> numberColumn;
-
 	@FXML
 	private TableColumn<ShipmentView, Address> fromColumn;
-
 	@FXML
 	private TableColumn<ShipmentView, Address> toColumn;
-
 	@FXML
 	private TableColumn<ShipmentView, Address> deliveryDateColumn;
-
 	private ObservableList<ShipmentView> deliveredShipments = FXCollections.observableArrayList();
 
 	@Override
@@ -44,7 +38,7 @@ public class DeliveredShipmentsFormController implements Initializable {
 
 	}
 
-	public void addToListTabel(int number, Address from, Address to, LocalDate deliveryDate) {
+	private void addToListTabel(int number, Address from, Address to, LocalDate deliveryDate) {
 		deliveredShipments.add(new ShipmentView(number, from, to, deliveryDate));
 	}
 

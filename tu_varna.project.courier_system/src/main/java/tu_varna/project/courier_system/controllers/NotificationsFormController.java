@@ -2,18 +2,18 @@ package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.entity.Notification;
+import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.NotificationsView;
@@ -21,64 +21,49 @@ import tu_varna.project.courier_system.tabelviewClasses.NotificationsView;
 public class NotificationsFormController implements Initializable {
 
 	private UserService service = new UserServiceImpl();
-
 	@FXML
 	private TableColumn<NotificationsView, Integer> numberColumn;
 	@FXML
 	private TableView<NotificationsView> notificationsTable;
-
 	@FXML
 	private TableColumn<NotificationsView, String> notificationColumn;
-
 	private ObservableList<NotificationsView> notifications = FXCollections.observableArrayList();
-
-	@FXML
-	private Label resultLabel;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.numberColumn.setCellValueFactory(new PropertyValueFactory<>("notificationId"));
 		this.notificationColumn.setCellValueFactory(new PropertyValueFactory<>("notificationText"));
 		notificationsTable.setItems(notifications);
-
 	}
 
 	@FXML
-	void acceptShipment(ActionEvent event) {
-
-		resultLabel.setText("");
+	private void processNoti(MouseEvent event) {
 		NotificationsView selected = notificationsTable.getSelectionModel().getSelectedItem();
-		if (selected != null) {
-			Notification notification = service.SearchNotificationByID(selected.getNotificationId());
-			service.handleUserNotificationAnswer(true, notification);
-			notifications.remove(selected);
+		Notification notification = service.SearchNotificationByID(selected.getNotificationId());
+		if (notification.isForAccept()) {
+			FXMLLoader loader = OpenNewForm.openNewForm("DoYouAcceptShipmentForm.fxml", "New shipment");
+			DoYouAcceptShipmentFormController next = loader.getController();
+			next.setSelectedNotification(notification);
+			service.DeleteNotification(notification);
+		} else {
+			FXMLLoader loader = OpenNewForm.openNewForm("ReturnedShipmentForm.fxml", "Returned shipment");
+			ReturnedShipmentFormController next = loader.getController();
+			next.setSelectedNotification(notification.getId());
+			service.DeleteNotification(notification);
 
-		} else
-			resultLabel.setText("First select");
+		}
+		notifications.remove(selected);
+
 	}
 
-	@FXML
-	void cancelShipment(ActionEvent event) {
-		resultLabel.setText("");
-		NotificationsView selected = notificationsTable.getSelectionModel().getSelectedItem();
-		if (selected != null) {
-			Notification notification = service.SearchNotificationByID(selected.getNotificationId());
-			service.handleUserNotificationAnswer(false, notification);
-			notifications.remove(selected);
-
-		} else
-			resultLabel.setText("First select");
-	}
-
-	public void addToListTabel(Integer number, String text) {
-		notifications.add(new NotificationsView(number, text));
+	private void addToListTable(Integer number, String text) {
+		this.notifications.add(new NotificationsView(number, text));
 	}
 
 	public void setNotifications(Client client) {
 		for (Notification notif : client.getNotifications()) {
-
-			addToListTabel(notif.getId(), notif.getNotification_text());
+			addToListTable(notif.getId(), notif.getNotification_text());
 		}
-
 	}
+
 }

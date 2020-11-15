@@ -12,22 +12,22 @@
    <children>
       <AnchorPane prefHeight="756.0" prefWidth="592.0" style="-fx-background-color: #ffffff;">
          <children>
-            <TextField fx:id="name" layoutX="87.0" layoutY="93.0" prefHeight="31.0" prefWidth="394.0" promptText="company name" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
+            <TextField fx:id="name" layoutX="87.0" layoutY="93.0" onKeyReleased="#nameValidation" prefHeight="31.0" prefWidth="394.0" promptText="company name" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="bulstat" layoutX="87.0" layoutY="165.0" prefHeight="31.0" prefWidth="394.0" promptText="bulstat" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
+            <TextField fx:id="bulstat" layoutX="87.0" layoutY="165.0" onKeyReleased="#bulstatValidation" prefHeight="31.0" prefWidth="394.0" promptText="bulstat" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="manager" layoutX="87.0" layoutY="290.0" prefHeight="31.0" prefWidth="394.0" promptText="manager name" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
+            <TextField fx:id="manager" layoutX="87.0" layoutY="290.0" onKeyReleased="#managerValidation" prefHeight="31.0" prefWidth="394.0" promptText="manager name" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="phoneNmb" layoutX="87.0" layoutY="358.0" prefHeight="31.0" prefWidth="394.0" promptText="phone number " style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
+            <TextField fx:id="phoneNmb" layoutX="87.0" layoutY="358.0" onKeyReleased="#phoneNmbValidation" prefHeight="31.0" prefWidth="394.0" promptText="phone number " style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -45,38 +45,38 @@
                   <Font size="13.0" />
                </font>
             </Text>
-            <TextField fx:id="country" layoutX="82.0" layoutY="473.0" prefHeight="27.0" prefWidth="180.0" promptText="country" style="-fx-background-color: transparent; -fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px;">
+            <TextField fx:id="country" layoutX="82.0" layoutY="473.0" onKeyReleased="#countryValidation" prefHeight="27.0" prefWidth="180.0" promptText="country" style="-fx-background-color: transparent; -fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px;">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="city" layoutX="317.0" layoutY="473.0" prefHeight="27.0" prefWidth="163.0" promptText="city" style="-fx-background-color: transparent; -fx-border-color: #660066; -fx-border-width: 0px 2px 2px;">
+            <TextField fx:id="city" layoutX="317.0" layoutY="473.0" onKeyReleased="#cityValidation" prefHeight="27.0" prefWidth="163.0" promptText="city" style="-fx-background-color: transparent; -fx-border-color: #660066; -fx-border-width: 0px 2px 2px;">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="streetN" layoutX="81.0" layoutY="528.0" prefHeight="34.0" prefWidth="400.0" promptText="street and №" style="-fx-background-color: transparent; -fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px;">
+            <TextField fx:id="streetN" layoutX="81.0" layoutY="528.0" onKeyReleased="#streetNValidation" prefHeight="34.0" prefWidth="400.0" promptText="street and №" style="-fx-background-color: transparent; -fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px;">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </TextField>
-            <Label fx:id="resultLabel" layoutX="69.0" layoutY="700.0" prefHeight="0.0" prefWidth="429.0" text="Label" textFill="#fa0000">
+            <Label fx:id="resultLabel" layoutX="18.0" layoutY="697.0" prefHeight="34.0" prefWidth="567.0" textFill="#fa0000">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="phoneNmbValidationLabel" layoutX="93.0" layoutY="389.0" prefHeight="0.0" prefWidth="429.0" text="Label" textFill="#fa0000" />
+            <Label fx:id="phoneNmbValidationLabel" layoutX="93.0" layoutY="389.0" prefHeight="0.0" prefWidth="429.0" textFill="#fa0000" />
             <Text layoutX="93.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contacts:  " wrappingWidth="179.66363525390625">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <Label fx:id="managerValidationLabel" layoutX="93.0" layoutY="321.0" prefHeight="0.0" prefWidth="429.0" text="Label" textFill="#fa0000" />
-            <Label fx:id="bulstatValidationLabel" layoutX="89.0" layoutY="196.0" prefHeight="18.0" prefWidth="366.0" text="Label" textFill="#fa0000" />
-            <Label fx:id="nameValidationLabel" layoutX="93.0" layoutY="124.0" prefHeight="18.0" prefWidth="305.0" text="Label" textFill="#fa0000" />
-            <Label fx:id="countryValidationLabel" layoutX="93.0" layoutY="500.0" prefHeight="18.0" prefWidth="163.0" text="Label" textFill="#fa0000" />
-            <Label fx:id="cityValidationLabel" layoutX="317.0" layoutY="500.0" prefHeight="18.0" prefWidth="151.0" text="Label" textFill="#fa0000" />
-            <Label fx:id="streetNValidationLabel" layoutX="87.0" layoutY="562.0" prefHeight="18.0" prefWidth="394.0" text="Label" textFill="#fa0000" />
+            <Label fx:id="managerValidationLabel" layoutX="93.0" layoutY="321.0" prefHeight="0.0" prefWidth="429.0" textFill="#fa0000" />
+            <Label fx:id="bulstatValidationLabel" layoutX="89.0" layoutY="196.0" prefHeight="18.0" prefWidth="366.0" textFill="#fa0000" />
+            <Label fx:id="nameValidationLabel" layoutX="93.0" layoutY="124.0" prefHeight="18.0" prefWidth="305.0" textFill="#fa0000" />
+            <Label fx:id="countryValidationLabel" layoutX="93.0" layoutY="500.0" prefHeight="18.0" prefWidth="163.0" textFill="#fa0000" />
+            <Label fx:id="cityValidationLabel" layoutX="317.0" layoutY="500.0" prefHeight="18.0" prefWidth="151.0" textFill="#fa0000" />
+            <Label fx:id="streetNValidationLabel" layoutX="87.0" layoutY="562.0" prefHeight="18.0" prefWidth="394.0" textFill="#fa0000" />
          </children>
       </AnchorPane>
    </children>

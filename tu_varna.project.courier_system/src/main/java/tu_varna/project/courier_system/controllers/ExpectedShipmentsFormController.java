@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,36 +28,28 @@ public class ExpectedShipmentsFormController implements Initializable {
 	private static final Logger logger = LogManager.getLogger(ExpectedShipmentsFormController.class);
 
 	private UserService service = new UserServiceImpl();
+	@FXML
+	private TableView<ShipmentView> shipmentView;
+	@FXML
+	private TableColumn<ShipmentView, String> senderColumn;
+	@FXML
+	private TableColumn<ShipmentView, Integer> shipmentNColumn;
+	@FXML
+	private TableColumn<ShipmentView, Double> priceColumn;
+	@FXML
+	private TableColumn<ShipmentView, String> companyColumn;
+	@FXML
+	private Label resultLabel;
+	private ObservableList<ShipmentView> shipments = FXCollections.observableArrayList();
 
 	public void setClient(Client user) {
-
 		List<ShipmentView> list = user.getExpectedShipments();
 		for (ShipmentView shipment : list) {
 			addToListTabel(shipment);
 		}
 		shipmentView.setItems(shipments);
 	}
-
-	@FXML
-	private TableView<ShipmentView> shipmentView;
-
-	@FXML
-	private TableColumn<ShipmentView, String> senderColumn;
-
-	@FXML
-	private TableColumn<ShipmentView, Integer> shipmentNColumn;
-
-	@FXML
-	private TableColumn<ShipmentView, Double> priceColumn;
-
-	@FXML
-	private TableColumn<ShipmentView, String> companyColumn;
-
-	@FXML
-	private Label resultLabel;
-
-	private ObservableList<ShipmentView> shipments = FXCollections.observableArrayList();
-
+	
 	@FXML
 	private void cancelShipment(ActionEvent event) {
 		resultLabel.setText("");
@@ -71,14 +61,14 @@ public class ExpectedShipmentsFormController implements Initializable {
 				resultLabel.setText("Status set to declined!");
 				logger.info("Shipment with id: " + selectedShipment.getNumber()
 						+ " has been declined by client with phone: " + selectedShipment.getPhoneNmb());
-
 			} else {
-				resultLabel.setText(" You cannot decline shipments that are already in proccess of delivery! ");
+				resultLabel.setText("You cannot decline shipments that are already in proccess of delivery! ");
 			}
 		} else
 			resultLabel.setText("First select.");
 	}
 
+	
 	@FXML
 	private void trackShipment(ActionEvent event) throws IOException {
 		resultLabel.setText("");
@@ -100,7 +90,7 @@ public class ExpectedShipmentsFormController implements Initializable {
 
 	}
 
-	public void addToListTabel(ShipmentView shipment) {
+	private void addToListTabel(ShipmentView shipment) {
 		shipments.add(shipment);
 	}
 

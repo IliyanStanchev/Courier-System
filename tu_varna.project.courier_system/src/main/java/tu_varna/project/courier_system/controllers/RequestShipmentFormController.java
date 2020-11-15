@@ -4,15 +4,14 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -23,17 +22,18 @@ import javafx.scene.input.KeyEvent;
 import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.entity.Type.type;
 import tu_varna.project.courier_system.entity.User;
+import tu_varna.project.courier_system.helper.DataValidation;
 import tu_varna.project.courier_system.helper.FieldValidation;
+import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class RequestShipmentFormController implements Initializable {
 
-	private static final Logger logger = LogManager.getLogger(RequestShipmentFormController.class);
-
+	private static final Logger LOGGER = LogManager.getLogger(RequestShipmentFormController.class);
+	private final String SYSTEM_CLIENT = "1111111111";
 	private UserService service = new UserServiceImpl();
 	private User usr;
-
 	@FXML
 	private TextField phoneNmb;
 	@FXML
@@ -93,25 +93,21 @@ public class RequestShipmentFormController implements Initializable {
 	@FXML
 	private Label resultLabel;
 	@FXML
-	private Label fieldsValidationLabel;
+	private Button statedButton;
 	@FXML
 	private ComboBox<type> typeCombo;
-
 	@FXML
 	private ComboBox<String> officeCombo;
-
 	@FXML
 	private ComboBox<String> companyCombo;
 	@FXML
 	private DatePicker dateCreation;
-
 	private int id;
-
+	private boolean isCompanyComboDisabled;
 	private ObservableList<type> typeList = FXCollections.observableArrayList(type.bag, type.cargo, type.document,
 			type.packet, type.parcel);
 	private ObservableList<String> companyList = FXCollections.observableArrayList();
 	private ObservableList<String> officeList = FXCollections.observableArrayList();
-
 	private int choosedShipmentID;
 
 	public int getChoosedShipment() {
@@ -120,108 +116,102 @@ public class RequestShipmentFormController implements Initializable {
 
 	public void setChoosedShipment(int number) {
 		this.choosedShipmentID = number;
-		System.out.println(choosedShipmentID);
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		this.dateCreation.setValue(LocalDate.now());
+		this.typeCombo.setItems(typeList);
+
 	}
 
 	private boolean numberValidation() {
-		return FieldValidation.numberValidation(phoneNmb, phoneNvalidationLabel);
+		return DataValidation.textNumeric(this.phoneNmb, this.phoneNvalidationLabel, "Wrong numeric format!");
 
 	}
 
 	@FXML
 	private void nameValidation(KeyEvent event) {
-		FieldValidation.alphabetValidation(name, nameValidationLabel);
+		FieldValidation.alphabetValidation(this.name, this.nameValidationLabel);
 
 	}
 
 	@FXML
 	private void emailValidation(KeyEvent event) {
-		FieldValidation.emailValidation(email, emailValidationLabel);
+		FieldValidation.emailValidation(this.email, this.emailValidationLabel);
 
 	}
 
 	@FXML
 	private void cityValidation(KeyEvent event) {
-		FieldValidation.alphabetValidation(city, cityValidationLabel);
+		FieldValidation.alphabetValidation(this.city, this.cityValidationLabel);
 
 	}
 
 	@FXML
 	private void countryValidation(KeyEvent event) {
-		FieldValidation.alphabetValidation(country, countryValidationLabel);
+		FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
 	}
 
 	@FXML
 	private void streetNValidation(KeyEvent event) {
-		FieldValidation.alphabetValidation(streetN, streetValidationLabel);
+		FieldValidation.streetNValidation(this.streetN, this.streetValidationLabel);
 
 	}
 
 	@FXML
 	private void priceValidation(KeyEvent event) {
-		FieldValidation.priceValidation(price, priceValidationLabel);
-
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-
-		dateCreation.setValue(LocalDate.now());
-		typeCombo.setItems(typeList);
+		FieldValidation.priceValidation(this.price, this.priceValidationLabel);
 
 	}
 
 	@FXML
 	public void loadClientInfo(ActionEvent event) {
-
 		searchResultLabel.setText("");
 		if (numberValidation()) {
-
-			String clientID = phoneNmb.getText();
-			this.usr = service.SearchUserByPhone(clientID);
-			if (usr != null) {
-				loadInfo(usr.getName(), usr.getEmail(), usr.getAddress().getCountry(), usr.getAddress().getCity(),
-						usr.getAddress().getStreet());
-
+			if (isUserFound()) {
+				if (this.usr.getId() != this.id) {
+					loadInfo(usr.getName(), usr.getEmail(), usr.getAddress().getCountry(), usr.getAddress().getCity(),
+							usr.getAddress().getStreet());
+					this.phoneNmb.setDisable(true);
+					activateShipmentInfoFields();
+				} else
+					phoneNvalidationLabel.setText("The reciever and  the sender cannot have the same phone numbers !");
 			} else {
 				searchResultLabel.setText("No client with this phone number.");
-				name.requestFocus();
+				this.phoneNmb.setDisable(true);
+				activatePersonalInfoFields();
+				activateShipmentInfoFields();
+				this.name.requestFocus();
 			}
-
 		}
-
-		// -->a ako go nameri shte izvika v sebe si loadInfo();
-		// else searchResultLabel.setText("Found in the client list.");
 	}
 
 	@FXML
 	private void statedShipment(ActionEvent event) {
-		resultLabel.setText("");
-		RadioButton selectedRadioButtonfromSendTo = (RadioButton) sendTo.getSelectedToggle();
+		this.phoneNvalidationLabel.setText("");
+		this.searchResultLabel.setText("");
+		this.resultLabel.setText("");
 
-		RadioButton selectedRadioButtonfromExpenseOf = (RadioButton) expenseOf.getSelectedToggle();
-		String name = this.name.getText();
-		String phoneNmb = this.phoneNmb.getText();
-		String email = this.email.getText();
-		String country = this.country.getText();
-		String city = this.city.getText();
-		String streetN = this.streetN.getText();
-		Double price = Double.parseDouble(this.price.getText());
-		String office;
-		String company = this.companyCombo.getSelectionModel().getSelectedItem();
-		if (selectedRadioButtonfromSendTo.getText().equals("address")) {
-			office = null;
-		} else {
+		if (areAllFieldsFull() && isSelectedFromComboBoxes() && isSelectedFromRadioButtons()) {
+			RadioButton selectedRadioButtonfromSendTo = (RadioButton) sendTo.getSelectedToggle();
+			RadioButton selectedRadioButtonfromExpenseOf = (RadioButton) expenseOf.getSelectedToggle();
+			String name = this.name.getText();
+			String phoneNmb = this.phoneNmb.getText();
+			String email = this.email.getText();
+			String country = this.country.getText();
+			String city = this.city.getText();
+			String streetN = this.streetN.getText();
+			Double price = Double.parseDouble(this.price.getText());
+			String office;
+			String company = this.companyCombo.getSelectionModel().getSelectedItem();
+			type type = this.typeCombo.getSelectionModel().getSelectedItem();
 
-			office = this.officeCombo.getSelectionModel().getSelectedItem().toString();
-
-		}
-
-		type type = this.typeCombo.getSelectionModel().getSelectedItem();
-		boolean combo = checkComboBoxes(); // vrushta false ako ima neizbrano
-		boolean radio = checkRadioButtons(); // vrushta false ako ima necheknato
-		boolean field = checkFields(); // vrushta true ako ima prazno pole
-		if (combo && radio && !field) { // tuka ne e taka
+			if (selectedRadioButtonfromSendTo.getText().equals("address")) {
+				office = null;
+			} else {
+				office = this.officeCombo.getSelectionModel().getSelectedItem().toString();
+			}
 			if (selectedRadioButtonfromExpenseOf.getText().equals("receiver")) {
 				dueAmount.setText("0.00");
 				price = price + type.showPrice();
@@ -246,10 +236,109 @@ public class RequestShipmentFormController implements Initializable {
 				service.CreateShipment(type, dateCreation.getValue(), price, id, service.SearchUserByPhone(phoneNmb),
 						service.getBulstatByFirmName(company), service.getIdByOfficeName(office));
 			}
-			logger.info("Client with id: " + id + " requested a new shipment!");
-		} else
-			resultLabel.setText("Fill in all fields correct.");
+			LOGGER.info("Client with id: " + id + " requested a new shipment!");
+			resultLabel.setText("You requested shipment succsefully!");
+			OpenNewForm.openNewForm("SuccessfulRequestForm.fxml", "Successful request");
+		}
+	}
 
+	private boolean isSelectedFromComboBoxes() {
+		this.typeComboValidationLabel.setText("");
+		this.officeComboValidationLabel.setText("");
+		this.companyComboValidationLabel.setText("");
+		boolean isSelectedFromComboBoxes = true;
+		boolean isCompanyComboEmpty = companyCombo.getSelectionModel().isEmpty();
+		boolean isOfficeComboEmpty = officeCombo.getSelectionModel().isEmpty();
+		boolean isTypeComboEmpty = typeCombo.getSelectionModel().isEmpty();
+		if (isCompanyComboEmpty) {
+			this.companyComboValidationLabel.setText("First select");
+			isSelectedFromComboBoxes = false;
+		}
+		if (radioOffice.isSelected()) {
+			if (isOfficeComboEmpty) {
+				this.officeComboValidationLabel.setText("First select");
+				isSelectedFromComboBoxes = false;
+			}
+		} else if (isTypeComboEmpty) {
+			this.typeComboValidationLabel.setText("First select");
+			isSelectedFromComboBoxes = false;
+		}
+		return isSelectedFromComboBoxes;
+	}
+
+	private boolean isSelectedFromRadioButtons() {
+
+		this.expenseOfGroupValidationLabel.setText("");
+		this.sendToGroupValidationLabel.setText("");
+		boolean isCheckedFromExpenceofGroup = true;
+		boolean isCheckedFromSendtoGroup = true;
+
+		if ((RadioButton) expenseOf.getSelectedToggle() == null) {
+			this.expenseOfGroupValidationLabel.setText("First select");
+			isCheckedFromExpenceofGroup = false;
+
+		}
+
+		if ((RadioButton) sendTo.getSelectedToggle() == null) {
+			this.sendToGroupValidationLabel.setText("First select");
+			isCheckedFromSendtoGroup = false;
+		}
+
+		return (isCheckedFromExpenceofGroup && isCheckedFromSendtoGroup);
+
+	}
+
+	private boolean areAllFieldsFull() {
+		boolean priceV = FieldValidation.priceValidation(this.price, this.priceValidationLabel);
+		boolean nameV = FieldValidation.alphabetValidation(this.name, this.nameValidationLabel);
+		boolean emailV = FieldValidation.emailValidation(this.email, this.emailValidationLabel);
+		boolean countryV = FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
+		boolean cityV = FieldValidation.alphabetValidation(this.city, this.cityValidationLabel);
+		boolean numberV = numberValidation();
+		boolean streetNV = FieldValidation.streetNValidation(this.streetN, this.streetValidationLabel);
+		return priceV && nameV && emailV && countryV && cityV && streetNV && numberV;
+	}
+
+	private void activatePersonalInfoFields() {
+		this.name.setDisable(false);
+		this.email.setDisable(false);
+		this.country.setDisable(false);
+		this.city.setDisable(false);
+		this.streetN.setDisable(false);
+
+	}
+
+	private void activateShipmentInfoFields() {
+		this.companyCombo.setDisable(this.isCompanyComboDisabled);
+		this.typeCombo.setDisable(false);
+		this.radioAddress.setDisable(false);
+		this.radioOffice.setDisable(false);
+		this.radioSender.setDisable(false);
+		this.radioReceiver.setDisable(false);
+		this.price.setDisable(false);
+		this.statedButton.setDisable(false);
+	}
+
+	private boolean isUserFound() {
+		String clientID = this.phoneNmb.getText();
+		this.usr = service.SearchUserByPhone(clientID);
+		return (this.usr != null);
+	}
+
+	public void loadInfo(String name, String email, String country, String city, String streetN) {
+		this.name.setText(name);
+		this.email.setText(email);
+		this.country.setText(country);
+		this.city.setText(city);
+		this.streetN.setText(streetN);
+	}
+
+	public void fillOfficeCombo(String officeName) {
+		officeList.add(officeName);
+	}
+
+	public void fillCompanyCombo(String companyName) {
+		companyList.add(companyName);
 	}
 
 	@FXML
@@ -268,83 +357,13 @@ public class RequestShipmentFormController implements Initializable {
 		officeCombo.setDisable(true);
 	}
 
-	private boolean checkComboBoxes() {
-		this.typeComboValidationLabel.setText("");
-		this.officeComboValidationLabel.setText("");
-		this.companyComboValidationLabel.setText("");
-		boolean isSelectedFromComboBoxes = true;
-		boolean isCompanyComboEmpty = (companyCombo.getValue() == null); // getSelectionModel().isEmpty();
-		boolean isOfficeComboEmpty = (officeCombo.getValue() == null); // getSelectionModel().isEmpty();
-		boolean isTypeComboEmpty = (typeCombo.getValue() == null); // getSelectionModel().isEmpty();
-		if (isCompanyComboEmpty) {
-			this.companyComboValidationLabel.setText("First select");
-			isSelectedFromComboBoxes = false;
-		}
-		if (radioOffice.isSelected()) {
-			if (isOfficeComboEmpty) {
-				this.officeComboValidationLabel.setText("First select");
-				isSelectedFromComboBoxes = false;
-			}
-		}
-		if (isTypeComboEmpty) {
-			this.typeComboValidationLabel.setText("First select");
-			isSelectedFromComboBoxes = false;
-		}
-		return isSelectedFromComboBoxes;
-	}
-
-	private boolean checkRadioButtons() {
-
-		this.expenseOfGroupValidationLabel.setText("");
-		this.sendToGroupValidationLabel.setText("");
-		boolean isCheckedFromExpenceofGroup = true;
-		boolean isCheckedFromSendtoGRoup = true;
-		boolean isSenderRadioChecked = radioSender.isSelected();
-		boolean isReceiverRadioChecked = radioReceiver.isSelected();
-		boolean isAddressRadioChecked = radioAddress.isSelected();
-		boolean isOfficeRadioChecked = radioOffice.isSelected();
-
-		if (!isSenderRadioChecked && !isReceiverRadioChecked) {
-			this.expenseOfGroupValidationLabel.setText("First select");
-			isCheckedFromExpenceofGroup = false;
-		}
-		if (!isAddressRadioChecked && !isOfficeRadioChecked) {
-			this.sendToGroupValidationLabel.setText("First select");
-			isCheckedFromSendtoGRoup = false;
-		}
-		return (isCheckedFromExpenceofGroup && isCheckedFromSendtoGRoup);
-
-	}
-
-	public void loadInfo(String name, String email, String country, String city, String streetN) {
-		this.name.setText(name);
-		this.email.setText(email);
-		this.country.setText(country);
-		this.city.setText(city);
-		this.streetN.setText(streetN); // zarejda poletata ako e otkrit client;
-	}
-
-	private boolean checkFields() {
-		return (name.getText().isEmpty() && phoneNmb.getText().isEmpty() && email.getText().isEmpty()
-				&& country.getText().isEmpty() && city.getText().isEmpty() && streetN.getText().isEmpty()
-				&& price.getText().isEmpty());
-	}
-
-	public void fillOfficeCombo(String officeName) {
-		officeList.add(officeName); // pulni kombooffice trqbwa da se ivika v init;
-	}
-
-	public void fillCompanyCombo(String companyName) { // pulni kombocompany w init pak;
-		companyList.add(companyName);
-	}
-
 	public void getCompanyForAdmin(Company choosedCompany) {
 		companyList.add(choosedCompany.getCompanyName());
 		company_name.setText(choosedCompany.getCompanyName());
 		companyCombo.setItems(companyList);
 		companyCombo.getSelectionModel().select(choosedCompany.getCompanyName());
-		companyCombo.setDisable(true);
-		this.id = service.SearchUserByPhone("1111111111").getId();
+		this.isCompanyComboDisabled = true;
+		this.id = service.SearchUserByPhone(SYSTEM_CLIENT).getId();
 
 	}
 
@@ -354,6 +373,7 @@ public class RequestShipmentFormController implements Initializable {
 			companyList.add((String) column[0]);
 		}
 		companyCombo.setItems(companyList);
+		this.isCompanyComboDisabled = false;
 		companyCombo.getSelectionModel().selectFirst();
 		this.id = id;
 

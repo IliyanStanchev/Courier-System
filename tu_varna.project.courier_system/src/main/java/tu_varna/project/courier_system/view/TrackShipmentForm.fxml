@@ -15,7 +15,7 @@
                   <Font name="System Bold" size="31.0" />
                </font>
             </Label>
-            <Label fx:id="stateLabel" layoutX="230.0" layoutY="224.0" prefHeight="18.0" prefWidth="481.0" text="Label">
+            <Label fx:id="stateLabel" layoutX="181.0" layoutY="224.0" prefHeight="26.0" prefWidth="531.0">
                <font>
                   <Font name="Arial" size="22.0" />
                </font>

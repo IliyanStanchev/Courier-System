@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -15,14 +9,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="746.0" prefWidth="581.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.AboutShipmentFormController">
+<AnchorPane prefHeight="746.0" prefWidth="581.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.AboutShipmentFormController">
    <children>
       <TextField fx:id="number" layoutX="115.0" layoutY="75.0" prefHeight="51.0" prefWidth="362.0" promptText="shipment №" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <Button layoutX="230.0" layoutY="167.0" mnemonicParsing="false" onAction="#searchShipment" prefHeight="51.0" prefWidth="132.0" style="-fx-background-color: #FFFF66;" text="Search" textFill="#131313" textOverrun="CLIP">
+      <Button layoutX="220.0" layoutY="152.0" mnemonicParsing="false" onAction="#searchShipment" prefHeight="51.0" prefWidth="132.0" style="-fx-background-color: #FFFF66;" text="Search" textFill="#131313" textOverrun="CLIP">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -30,7 +24,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Label fx:id="resultLabel" layoutX="115.0" layoutY="130.0" prefHeight="19.0" prefWidth="345.0" text="Label" textFill="#ff0303">
+      <Label fx:id="resultLabel" layoutX="93.0" layoutY="213.0" prefHeight="27.0" prefWidth="362.0" textFill="#ff0303">
          <font>
             <Font size="15.0" />
          </font>
@@ -40,7 +34,7 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="17.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To">
+      <Text layoutX="16.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
@@ -65,32 +59,32 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Text>
-      <Label fx:id="company" layoutX="264.0" layoutY="325.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+      <Label fx:id="company" layoutX="264.0" layoutY="325.0" prefHeight="27.0" prefWidth="393.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="from" layoutX="184.0" layoutY="402.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+      <Label fx:id="from" layoutX="184.0" layoutY="402.0" prefHeight="27.0" prefWidth="393.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="oORa" layoutX="52.0" layoutY="446.0" prefHeight="27.0" prefWidth="393.0" text="ofic ili addres?">
+      <Label fx:id="oORa" layoutX="56.0" layoutY="456.0" prefHeight="27.0" prefWidth="393.0">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="senderName" layoutX="196.0" layoutY="532.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+      <Label fx:id="senderName" layoutX="196.0" layoutY="532.0" prefHeight="27.0" prefWidth="393.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="receiverName" layoutX="195.0" layoutY="573.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+      <Label fx:id="receiverName" layoutX="195.0" layoutY="573.0" prefHeight="27.0" prefWidth="393.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="price" layoutX="196.0" layoutY="640.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+      <Label fx:id="price" layoutX="196.0" layoutY="640.0" prefHeight="27.0" prefWidth="393.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -100,7 +94,7 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Text>
-      <Label fx:id="to" layoutX="19.0" layoutY="471.0" prefHeight="27.0" prefWidth="558.0" text="Label">
+      <Label fx:id="to" layoutX="26.0" layoutY="497.0" prefHeight="27.0" prefWidth="558.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -110,7 +104,7 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Text>
-      <Label fx:id="dateOfOrdering" layoutX="213.0" layoutY="359.0" prefHeight="27.0" prefWidth="314.0" text="Label">
+      <Label fx:id="dateOfOrdering" layoutX="213.0" layoutY="359.0" prefHeight="27.0" prefWidth="314.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -120,12 +114,12 @@
             <Font size="23.0" />
          </font>
       </Text>
-      <Label fx:id="state" layoutX="163.0" layoutY="257.0" prefHeight="27.0" prefWidth="314.0" text="Label">
+      <Label fx:id="state" layoutX="163.0" layoutY="257.0" prefHeight="27.0" prefWidth="314.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="type" layoutX="193.0" layoutY="607.0" prefHeight="27.0" prefWidth="393.0" text="Label">
+      <Label fx:id="type" layoutX="193.0" layoutY="607.0" prefHeight="27.0" prefWidth="393.0">
          <font>
             <Font size="18.0" />
          </font>

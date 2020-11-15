@@ -113,6 +113,7 @@ public class Client extends User {
 		FXMLLoader loader = OpenNewForm.openNewForm("ClientWorkspaceForm.fxml", "Client workspace");
 		ClientWorkspaceFormController next = loader.getController();
 		next.setUserID(this.getId());
+		next.setNotiIcon(this);
 		if (this.getNotifications().size() != 0) {
 			Notification.sendNotification("You have new notifications about shipments!.", this);
 		}

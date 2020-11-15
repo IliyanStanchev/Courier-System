@@ -1,15 +1,10 @@
 package tu_varna.project.courier_system.controllers;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import tu_varna.project.courier_system.helper.BuiltInForm;
@@ -18,7 +13,7 @@ import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
-public class AdminFormController implements Initializable {
+public class AdminFormController {
 
 	private static final Logger logger = LogManager.getLogger(AdminFormController.class);
 
@@ -29,11 +24,6 @@ public class AdminFormController implements Initializable {
 
 	@FXML
 	private AnchorPane workPane;
-
-	@Override
-	public void initialize(URL location, ResourceBundle bb) {
-
-	}
 
 	@FXML
 	private void controlClients(ActionEvent event) throws IOException {

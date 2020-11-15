@@ -19,101 +19,101 @@
                   <Image url="@../img/clienticon.png" />
                </image>
             </ImageView>
-            <PasswordField fx:id="password" disable="true" layoutX="174.0" layoutY="239.0" onKeyReleased="#passwordValidation" prefHeight="26.0" prefWidth="271.0" />
+            <PasswordField fx:id="password" disable="true" layoutX="178.0" layoutY="280.0" onKeyReleased="#passwordValidation" prefHeight="26.0" prefWidth="271.0" />
             <Text layoutX="137.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="86.68945312500011">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
-            <Text layoutX="17.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:">
+            <Text layoutX="21.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Text>
-            <Text layoutX="21.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number:">
+            <Text layoutX="25.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number:">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Text>
-            <Text layoutX="15.0" layoutY="412.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:">
+            <Text layoutX="19.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Text>
-            <TextField fx:id="email" disable="true" layoutX="174.0" layoutY="286.0" onKeyReleased="#emailValidation" prefHeight="26.0" prefWidth="271.0" />
-            <TextField fx:id="phoneN" disable="true" layoutX="177.0" layoutY="333.0" onKeyReleased="#phoneNmbValidation" prefHeight="26.0" prefWidth="271.0" />
-            <TextField fx:id="city" disable="true" layoutX="344.0" layoutY="400.0" onKeyReleased="#cityValidation" prefHeight="27.0" prefWidth="138.0" />
+            <TextField fx:id="email" disable="true" layoutX="178.0" layoutY="327.0" onKeyReleased="#emailValidation" prefHeight="26.0" prefWidth="271.0" />
+            <TextField fx:id="phoneN" disable="true" layoutX="181.0" layoutY="374.0" onKeyReleased="#phoneNmbValidation" prefHeight="26.0" prefWidth="271.0" />
+            <TextField fx:id="city" disable="true" layoutX="348.0" layoutY="441.0" onKeyReleased="#cityValidation" prefHeight="27.0" prefWidth="138.0" />
             <Label fx:id="name" layoutX="295.0" layoutY="163.0" text="name:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Text layoutX="18.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
+            <Text layoutX="22.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Text>
-            <Text layoutX="359.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City:" />
-            <Text layoutX="124.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Street №:" />
-            <TextField fx:id="streetN" disable="true" layoutX="115.0" layoutY="473.0" onKeyReleased="#streetNValidation" prefHeight="27.0" prefWidth="286.0" />
-            <Button layoutX="454.0" layoutY="239.0" mnemonicParsing="false" onAction="#editPassword" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Edit" textFill="#131313" textOverrun="CLIP">
+            <Text layoutX="363.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City:" />
+            <Text layoutX="128.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Street №:" />
+            <TextField fx:id="streetN" disable="true" layoutX="119.0" layoutY="514.0" onKeyReleased="#streetNValidation" prefHeight="27.0" prefWidth="286.0" />
+            <Button layoutX="458.0" layoutY="280.0" mnemonicParsing="false" onAction="#editPassword" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Edit" textFill="#131313" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="passwordSaveB" disable="true" layoutX="528.0" layoutY="239.0" mnemonicParsing="false" onAction="#savePassword" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Save" textFill="#131313" textOverrun="CLIP">
+            <Button fx:id="passwordSaveB" disable="true" layoutX="532.0" layoutY="280.0" mnemonicParsing="false" onAction="#savePassword" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Save" textFill="#131313" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="455.0" layoutY="285.0" mnemonicParsing="false" onAction="#editEmail" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Edit" textFill="#131313" textOverrun="CLIP">
+            <Button layoutX="459.0" layoutY="326.0" mnemonicParsing="false" onAction="#editEmail" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Edit" textFill="#131313" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="emailSaveB" disable="true" layoutX="528.0" layoutY="286.0" mnemonicParsing="false" onAction="#saveEmail" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Save" textFill="#131313" textOverrun="CLIP">
+            <Button fx:id="emailSaveB" disable="true" layoutX="532.0" layoutY="327.0" mnemonicParsing="false" onAction="#saveEmail" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Save" textFill="#131313" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="458.0" layoutY="333.0" mnemonicParsing="false" onAction="#editPhoneN" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Edit" textFill="#131313" textOverrun="CLIP">
+            <Button layoutX="462.0" layoutY="374.0" mnemonicParsing="false" onAction="#editPhoneN" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Edit" textFill="#131313" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="phoneNSaveB" disable="true" layoutX="531.0" layoutY="333.0" mnemonicParsing="false" onAction="#savePhoneN" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Save" textFill="#131313" textOverrun="CLIP">
+            <Button fx:id="phoneNSaveB" disable="true" layoutX="535.0" layoutY="374.0" mnemonicParsing="false" onAction="#savePhoneN" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Save" textFill="#131313" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="449.0" layoutY="474.0" mnemonicParsing="false" onAction="#editAddress" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Edit" textFill="#131313" textOverrun="CLIP">
+            <Button layoutX="453.0" layoutY="515.0" mnemonicParsing="false" onAction="#editAddress" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Edit" textFill="#131313" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="addressSaveB" disable="true" layoutX="528.0" layoutY="474.0" mnemonicParsing="false" onAction="#saveAddress" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Save" textFill="#131313" textOverrun="CLIP">
+            <Button fx:id="addressSaveB" disable="true" layoutX="532.0" layoutY="515.0" mnemonicParsing="false" onAction="#saveAddress" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #FFFF66;" text="Save" textFill="#131313" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <TextField fx:id="country" disable="true" layoutX="120.0" layoutY="402.0" onKeyTyped="#countryValidation" prefHeight="27.0" prefWidth="168.0" />
-            <Text layoutX="135.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country:" />
-            <Text layoutX="134.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="110.68945312500011">
+            <TextField fx:id="country" disable="true" layoutX="124.0" layoutY="443.0" onKeyTyped="#countryValidation" prefHeight="27.0" prefWidth="168.0" />
+            <Text layoutX="139.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country:" />
+            <Text layoutX="137.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="110.68945312500011">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
-            <Label fx:id="username" layoutX="290.0" layoutY="186.0" text="username:">
+            <Label fx:id="username" layoutX="293.0" layoutY="205.0" text="username:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="passwordValidationLabel" layoutX="178.0" layoutY="265.0" prefHeight="18.0" prefWidth="262.0" textFill="RED" />
-            <Label fx:id="emailValidationLabel" layoutX="178.0" layoutY="312.0" prefHeight="18.0" prefWidth="262.0" textFill="RED" />
-            <Label fx:id="phoneNValidationLabel" layoutX="178.0" layoutY="359.0" prefHeight="18.0" prefWidth="262.0" textFill="RED" />
-            <Label fx:id="countryValidationLabel" layoutX="127.0" layoutY="429.0" prefHeight="18.0" prefWidth="162.0" textFill="RED" />
-            <Label fx:id="cityValidationLabel" layoutX="351.0" layoutY="429.0" prefHeight="18.0" prefWidth="141.0" textFill="RED" />
-            <Label fx:id="streetNValidationLabel" layoutX="127.0" layoutY="500.0" prefHeight="18.0" prefWidth="262.0" textFill="RED" />
+            <Label fx:id="passwordValidationLabel" layoutX="182.0" layoutY="306.0" prefHeight="18.0" prefWidth="262.0" textFill="RED" />
+            <Label fx:id="emailValidationLabel" layoutX="182.0" layoutY="353.0" prefHeight="18.0" prefWidth="262.0" textFill="RED" />
+            <Label fx:id="phoneNValidationLabel" layoutX="182.0" layoutY="400.0" prefHeight="18.0" prefWidth="262.0" textFill="RED" />
+            <Label fx:id="countryValidationLabel" layoutX="131.0" layoutY="470.0" prefHeight="18.0" prefWidth="162.0" textFill="RED" />
+            <Label fx:id="cityValidationLabel" layoutX="355.0" layoutY="470.0" prefHeight="18.0" prefWidth="141.0" textFill="RED" />
+            <Label fx:id="streetNValidationLabel" layoutX="131.0" layoutY="541.0" prefHeight="18.0" prefWidth="262.0" textFill="RED" />
          </children>
       </AnchorPane>
    </children>

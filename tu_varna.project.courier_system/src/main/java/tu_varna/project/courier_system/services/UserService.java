@@ -32,6 +32,8 @@ public interface UserService {
 			int firm_id);
 
 	Shipment SearchShipment(int id, String phone);
+	
+	Company SearchCompany(int bulstat);
 
 	User SearchUser(String name, String phone);
 
@@ -50,6 +52,8 @@ public interface UserService {
 	void deleteShipment(int number);
 
 	User SearchUserByPhone(String phoneNmb);
+	
+	User SearchUserByUsername(String username); 
 
 	int getBulstatByFirmName(String name);
 

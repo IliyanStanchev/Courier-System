@@ -8,7 +8,7 @@
    <children>
       <AnchorPane layoutY="-2.0" prefHeight="572.0" prefWidth="842.0" style="-fx-background-color: #ffffff;">
          <children>
-            <TableView fx:id="deliveredShipmentsView" layoutY="7.0" prefHeight="556.0" prefWidth="842.0">
+            <TableView fx:id="deliveredShipmentsView" layoutY="7.0" prefHeight="556.0" prefWidth="842.0" stylesheets="@tableView.css">
                <columns>
                   <TableColumn fx:id="numberColumn" prefWidth="117.60003662109375" text="Shipment №" />
                   <TableColumn fx:id="fromColumn" prefWidth="189.59999084472656" text="From" />

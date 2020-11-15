@@ -1,17 +1,14 @@
 package tu_varna.project.courier_system.controllers;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.helper.BuiltInForm;
@@ -20,13 +17,17 @@ import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
-public class ClientWorkspaceFormController implements Initializable {
+public class ClientWorkspaceFormController {
 
 	private static final Logger logger = LogManager.getLogger(ClientWorkspaceFormController.class);
-
 	private UserService service = new UserServiceImpl();
 	@FXML
 	private AnchorPane workPane;
+	@FXML
+	private Label welcomeUser;
+	@FXML
+	private ImageView notiIcon;
+	private static int id;
 
 	public AnchorPane getPane() {
 		return workPane;
@@ -36,16 +37,18 @@ public class ClientWorkspaceFormController implements Initializable {
 		id = client_id;
 		welcomeUser.setText("Welcome " + service.getUserName(id));
 		logger.info("Client with id: " + id + " successfully logged in!");
-
 	}
-
-	@FXML
-	private Label welcomeUser;
-
-	private static int id;
 
 	public static int getID() {
 		return id;
+	}
+
+	@FXML
+	private void notificationsView(ActionEvent event) throws IOException {
+		FXMLLoader loader = BuiltInForm.built_inForm("NotificationsForm.fxml", workPane);
+		setNotiIcon((Client)service.getUserByID(id));
+		NotificationsFormController next = loader.getController();
+		next.setNotifications((Client) service.getUserByID(id));
 	}
 
 	@FXML
@@ -86,15 +89,24 @@ public class ClientWorkspaceFormController implements Initializable {
 		OpenNewForm.openNewForm("WelcomeForm.fxml", "Welcome");
 	}
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-
-	}
-
 	@FXML
 	private void viewNotifications(ActionEvent event) {
 		FXMLLoader loader = BuiltInForm.built_inForm("NotificationsForm.fxml", workPane);
 		NotificationsFormController next = loader.getController();
 		next.setNotifications((Client) service.getUserByID(id));
 	}
+
+	public void setNotiIcon(Client client) {
+
+		{
+			Image iconWithNoNotifications = new Image("tu_varna/project/courier_system/img/noNoti.png");
+			Image iconWithNotifications = new Image("tu_varna/project/courier_system/img/withNoti .png");
+			if (client.getNotifications().isEmpty()) {
+				notiIcon.setImage(iconWithNoNotifications);
+			} else
+				notiIcon.setImage(iconWithNotifications);
+
+		}
+	}
+
 }

@@ -44,7 +44,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Text>
-            <TableView fx:id="shipmentsInProcessView" layoutX="262.0" layoutY="281.0" prefHeight="309.0" prefWidth="614.0">
+            <TableView fx:id="shipmentsInProcessView" editable="true" layoutX="262.0" layoutY="281.0" prefHeight="309.0" prefWidth="614.0">
               <columns>
                 <TableColumn fx:id="numberColumn" prefWidth="157.5999755859375" text="Shimpent №:" />
                   <TableColumn fx:id="courierColumn" prefWidth="456.79998779296875" text="Courier:" />
@@ -55,7 +55,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Text>
-            <Label fx:id="resultLabel" layoutX="22.0" layoutY="240.0" prefHeight="22.0" prefWidth="542.0" text="Label" textFill="#ea2929">
+            <Label fx:id="resultLabel" layoutX="22.0" layoutY="240.0" prefHeight="22.0" prefWidth="542.0" textFill="#ea2929">
                <font>
                   <Font size="15.0" />
                </font>

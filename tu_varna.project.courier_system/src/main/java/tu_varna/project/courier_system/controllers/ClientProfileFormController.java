@@ -1,14 +1,9 @@
 package tu_varna.project.courier_system.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -20,64 +15,47 @@ import tu_varna.project.courier_system.helper.FieldValidation;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
-public class ClientProfileFormController implements Initializable {
+public class ClientProfileFormController {
 
 	private static final Logger logger = LogManager.getLogger(ClientProfileFormController.class);
 
 	UserService service = new UserServiceImpl();
 
 	private Client client;
-
 	@FXML
 	private PasswordField password;
-
 	@FXML
 	private TextField email;
-
 	@FXML
 	private TextField phoneN;
-
 	@FXML
 	private TextField city;
-
 	@FXML
 	private Label name;
-
 	@FXML
 	private TextField streetN;
-
 	@FXML
 	private TextField country;
 	@FXML
 	private Button passwordSaveB;
-
 	@FXML
 	private Button emailSaveB;
-
 	@FXML
 	private Button phoneNSaveB;
-
 	@FXML
 	private Button addressSaveB;
-
 	@FXML
 	private Label username;
-
 	@FXML
 	private Label passwordValidationLabel;
-
 	@FXML
 	private Label emailValidationLabel;
-
 	@FXML
 	private Label phoneNValidationLabel;
-
 	@FXML
 	private Label countryValidationLabel;
-
 	@FXML
 	private Label cityValidationLabel;
-
 	@FXML
 	private Label streetNValidationLabel;
 
@@ -105,7 +83,6 @@ public class ClientProfileFormController implements Initializable {
 
 	@FXML
 	private void saveAddress(ActionEvent event) {
-
 		service.ChangeUserAddress(client, country.getText(), city.getText(), streetN.getText());
 		logger.info("Client with id: " + client.getId() + " updated his address!");
 		this.country.setDisable(true);
@@ -116,7 +93,6 @@ public class ClientProfileFormController implements Initializable {
 
 	@FXML
 	private void saveEmail(ActionEvent event) {
-
 		service.ChangeUserEmail(client, email.getText());
 		logger.info("Client with id: " + client.getId() + " updated his email!");
 		this.email.setDisable(true);
@@ -125,7 +101,6 @@ public class ClientProfileFormController implements Initializable {
 
 	@FXML
 	private void savePassword(ActionEvent event) {
-
 		service.ChangeUserPassword(client, password.getText());
 		logger.info("Client with id: " + client.getId() + " updated his password!");
 		this.password.setDisable(true);
@@ -134,7 +109,6 @@ public class ClientProfileFormController implements Initializable {
 
 	@FXML
 	private void savePhoneN(ActionEvent event) {
-
 		service.ChangeUserPhone(client, phoneN.getText());
 		logger.info("Client with id: " + client.getId() + " updated his phone number!");
 		this.phoneN.setDisable(true);
@@ -143,7 +117,6 @@ public class ClientProfileFormController implements Initializable {
 
 	@FXML
 	private void passwordValidation(KeyEvent event) {
-
 		this.passwordSaveB.setDisable(true);
 		boolean isEmpty = DataValidation.textFieldisEmpty(this.password, this.passwordValidationLabel,
 				"The field is empty.");
@@ -153,12 +126,10 @@ public class ClientProfileFormController implements Initializable {
 
 	@FXML
 	private void emailValidation(KeyEvent event) {
-
 		this.emailSaveB.setDisable(true);
 		boolean isCorrect = FieldValidation.emailValidation(this.email, this.emailValidationLabel);
 		if (isCorrect)
 			this.emailSaveB.setDisable(false);
-
 	}
 
 	@FXML
@@ -183,7 +154,6 @@ public class ClientProfileFormController implements Initializable {
 		boolean isCorrect = FieldValidation.alphabetValidation(this.city, this.cityValidationLabel);
 		if (isCorrect)
 			this.addressSaveB.setDisable(false);
-
 	}
 
 	@FXML
@@ -192,21 +162,6 @@ public class ClientProfileFormController implements Initializable {
 		boolean isCorrect = FieldValidation.streetNValidation(this.streetN, this.streetNValidationLabel);
 		if (isCorrect)
 			this.addressSaveB.setDisable(false);
-
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-
-		// name.setText(DBGetUserName());
-		// username.setText(DBGetUserUsername());
-		// password.setText(DBGetUSerPassword());
-		// email.setText(DBGetUserEmail());
-		// phoneN.setText(DBGetUSerPhoneN());
-		// country.setText(DBGetUserCountry());
-		// city.
-		// streetN.
-
 	}
 
 	public void setClientInformation(Client client) {

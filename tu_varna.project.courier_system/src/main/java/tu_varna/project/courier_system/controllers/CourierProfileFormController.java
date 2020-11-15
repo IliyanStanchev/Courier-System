@@ -20,7 +20,7 @@ import tu_varna.project.courier_system.helper.FieldValidation;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
-public class CourierProfileFormController implements Initializable {
+public class CourierProfileFormController {
 
 	private static final Logger logger = LogManager.getLogger(CourierProfileFormController.class);
 
@@ -28,58 +28,40 @@ public class CourierProfileFormController implements Initializable {
 
 	@FXML
 	private Label company;
-
 	@FXML
 	private Label name;
-
 	@FXML
 	private PasswordField password;
-
 	@FXML
 	private TextField email;
-
 	@FXML
 	private TextField phoneN;
-
 	@FXML
 	private TextField streetN;
-
 	@FXML
 	private TextField city;
-
 	@FXML
 	private TextField country;
-
 	@FXML
 	private Button passwordSaveB;
-
 	@FXML
 	private Button emailSaveB;
-
 	@FXML
 	private Button phoneNSaveB;
-
 	@FXML
 	private Button addressSaveB;
-
 	@FXML
 	private Label phoneNValidationLabel;
-
 	@FXML
 	private Label emailValidationLabel;
-
 	@FXML
 	private Label passwordValidationLabel;
-
 	@FXML
 	private Label countryValidationLabel;
-
 	@FXML
 	private Label cityValidationLabel;
-
 	@FXML
 	private Label streetNValidationLabel;
-
 	private Courier courier;
 
 	@FXML
@@ -91,32 +73,32 @@ public class CourierProfileFormController implements Initializable {
 
 	@FXML
 	void editPassword(ActionEvent event) {
-
 		this.password.setDisable(false);
 
 	}
 
 	@FXML
-	void editEmail(ActionEvent event) {
+	private void editEmail(ActionEvent event) {
 		this.email.setDisable(false);
 	}
 
 	@FXML
-	void editPhoneN(ActionEvent event) {
+	private void editPhoneN(ActionEvent event) {
 		this.phoneN.setDisable(false);
 	}
 
 	@FXML
-	void saveAddress(ActionEvent event) {
+	private void saveAddress(ActionEvent event) {
 		service.ChangeUserAddress(courier, country.getText(), city.getText(), streetN.getText());
 		logger.info("Courier with id: " + courier.getId() + " updated his address!");
 		this.country.setDisable(true);
 		this.city.setDisable(true);
 		this.streetN.setDisable(true);
+		this.addressSaveB.setDisable(true);
 	}
 
 	@FXML
-	void saveEmail(ActionEvent event) {
+	private void saveEmail(ActionEvent event) {
 		service.ChangeUserEmail(courier, email.getText());
 		logger.info("Courier with id: " + courier.getId() + " updated his email!");
 		this.email.setDisable(true);
@@ -125,7 +107,7 @@ public class CourierProfileFormController implements Initializable {
 	}
 
 	@FXML
-	void savePassword(ActionEvent event) {
+	private void savePassword(ActionEvent event) {
 		service.ChangeUserPassword(courier, password.getText());
 		logger.info("Courier with id: " + courier.getId() + " updated his password!");
 		this.password.setDisable(true);
@@ -133,7 +115,7 @@ public class CourierProfileFormController implements Initializable {
 	}
 
 	@FXML
-	void savePhoneN(ActionEvent event) {
+	private void savePhoneN(ActionEvent event) {
 		service.ChangeUserPhone(courier, phoneN.getText());
 		logger.info("Courier with id: " + courier.getId() + " updated his phone number!");
 		this.phoneN.setDisable(true);
@@ -190,11 +172,6 @@ public class CourierProfileFormController implements Initializable {
 		boolean isCorrect = FieldValidation.streetNValidation(this.streetN, this.streetNValidationLabel);
 		if (isCorrect)
 			this.addressSaveB.setDisable(false);
-
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
 
 	}
 

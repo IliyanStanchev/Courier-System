@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,26 +23,19 @@ import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 public class RequestedShipmentsFormController implements Initializable {
 
 	UserService service = new UserServiceImpl();
-
 	@FXML
 	private TableView<ShipmentView> shipmentView;
-
 	@FXML
 	private TableColumn<ShipmentView, Integer> shipmentNColumn;
-
 	@FXML
 	private TableColumn<ShipmentView, String> receiverColumn;
-
 	@FXML
 	private TableColumn<ShipmentView, String> companyColumn;
-
 	@FXML
 	private Label resultLabel;
-
 	private ObservableList<ShipmentView> shipments = FXCollections.observableArrayList();
 
 	public void setClient(Client user) {
-
 		List<ShipmentView> list = user.getRequestedShipments();
 		for (ShipmentView shipment : list) {
 			addToListTabel(shipment);
@@ -61,7 +53,6 @@ public class RequestedShipmentsFormController implements Initializable {
 			next.setSelectedShipment(service.SearchShipmentByID(selectedShipment.getNumber()).getStatus());
 		} else
 			resultLabel.setText("First select.");
-
 	}
 
 	@Override
@@ -69,10 +60,9 @@ public class RequestedShipmentsFormController implements Initializable {
 		this.shipmentNColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
 		this.receiverColumn.setCellValueFactory(new PropertyValueFactory<>("receiver"));
 		this.companyColumn.setCellValueFactory(new PropertyValueFactory<>("company"));
-
 	}
 
-	public void addToListTabel(ShipmentView shipment) {
+	private void addToListTabel(ShipmentView shipment) {
 		shipments.add(shipment);
 	}
 

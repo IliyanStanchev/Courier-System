@@ -1,5 +1,6 @@
 package tu_varna.project.courier_system.helper;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,7 +22,11 @@ public class OpenNewForm {
 			stage.getIcons().add(new Image(new OpenNewForm().getClass()
 					.getResourceAsStream("/tu_varna/project/courier_system/img/appIcon.png")));
 			stage.show();
-
+			if (fxmlFileName.equals("AdministratorWorkspaceForm.fxml")
+					|| fxmlFileName.equals("ClientWorkspaceForm.fxml")
+					|| fxmlFileName.equals("CourierWorkspaceForm.fxml")) {
+				stage.setOnCloseRequest(e -> Platform.exit());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Can't load new window. ");

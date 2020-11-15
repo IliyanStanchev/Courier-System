@@ -10,18 +10,18 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.CourierControlFormController">
    <children>
-      <AnchorPane prefHeight="746.0" prefWidth="582.0" style="-fx-background-color: #ffffff;">
+      <AnchorPane prefHeight="758.0" prefWidth="595.0" style="-fx-background-color: #ffffff;">
          <children>
-            <Button layoutX="77.0" layoutY="623.0" mnemonicParsing="false" onAction="#addCourier" prefHeight="56.0" prefWidth="138.0" style="-fx-background-color: #FFFF99;" text="Add courier" />
-            <Button layoutX="347.0" layoutY="623.0" mnemonicParsing="false" onAction="#removeCourier" prefHeight="56.0" prefWidth="137.0" style="-fx-background-color: #FFFF99;" text="Remove courier" />
-            <TableView fx:id="courierView" layoutY="141.0" prefHeight="464.0" prefWidth="582.0">
+            <Button layoutX="91.0" layoutY="664.0" mnemonicParsing="false" onAction="#addCourier" prefHeight="56.0" prefWidth="138.0" style="-fx-background-color: #FFFF99;" text="Create courier" />
+            <Button layoutX="359.0" layoutY="664.0" mnemonicParsing="false" onAction="#removeCourier" prefHeight="56.0" prefWidth="137.0" style="-fx-background-color: #FFFF99;" text="Remove courier" />
+            <TableView fx:id="courierView" layoutY="141.0" prefHeight="464.0" prefWidth="595.0" stylesheets="@tableView.css">
                <columns>
-                  <TableColumn fx:id="nameColumn" prefWidth="160.00000303983688" text="Name:" />
-                  <TableColumn fx:id="phoneNColumn" minWidth="0.0" prefWidth="204.7999725341797" text="Phone number:" />
-                  <TableColumn fx:id="companyColumn" prefWidth="217.5999755859375" text="Company name:" />
+                  <TableColumn fx:id="nameColumn" prefWidth="180.00002747774124" text="Name:" />
+                  <TableColumn fx:id="phoneNColumn" minWidth="0.0" prefWidth="209.59999084472656" text="Phone number:" />
+                  <TableColumn fx:id="companyColumn" prefWidth="204.800048828125" text="Company name:" />
                </columns>
             </TableView>
-            <Label fx:id="resultLabel" layoutX="77.0" layoutY="696.0" prefHeight="0.0" prefWidth="429.0" text="Label" textFill="#fa0000">
+            <Label fx:id="resultLabel" layoutX="50.0" layoutY="611.0" prefHeight="31.0" prefWidth="438.0" textFill="#fa0000">
                <font>
                   <Font size="15.0" />
                </font>

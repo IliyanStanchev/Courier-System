@@ -8,9 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-
 import org.controlsfx.control.Notifications;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -91,18 +89,14 @@ public class Notification {
 		ClientWorkspaceFormController next = new ClientWorkspaceFormController();
 		Image img = new Image("tu_varna/project/courier_system/img/notification.png");
 		Notifications not = Notifications.create();
-		not.title("Notification").text(text).hideAfter(new Duration(9999999)).hideCloseButton().owner(next.getPane())
+		not.title("Notification").text(text).hideAfter(new Duration(15)).hideCloseButton().owner(next.getPane())
 				.graphic(new ImageView(img)).onAction(new EventHandler<ActionEvent>() {
-
 					@Override
 					public void handle(ActionEvent event) {
-
 						FXMLLoader loader = OpenNewForm.openNewForm("NotificationsForm.fxml", "Notifications");
 						NotificationsFormController next = loader.getController();
 						next.setNotifications(client);
-
 					}
-
 				});
 		not.show();
 	}

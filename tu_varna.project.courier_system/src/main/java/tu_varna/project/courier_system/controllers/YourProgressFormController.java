@@ -3,7 +3,6 @@ package tu_varna.project.courier_system.controllers;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,23 +16,18 @@ import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.entity.Shipment;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
-public class DailyProgressFormController implements Initializable {
+public class YourProgressFormController implements Initializable {
 
 	@FXML
 	private Label deliveredShipments;
-
 	@FXML
 	private Label cancelledShipments;
-
 	@FXML
 	private TextField date;
-
 	@FXML
 	private TableView<ShipmentView> shipmentsView;
-
 	@FXML
 	private TableColumn<ShipmentView, Integer> numberColumn;
-
 	private ObservableList<ShipmentView> shipmentsInProcess = FXCollections.observableArrayList();
 
 	@Override
@@ -49,10 +43,9 @@ public class DailyProgressFormController implements Initializable {
 		for (Shipment shipment : courier.getShipmentsInProgress()) {
 			addToListTabel(shipment.getId());
 		}
-
 	}
 
-	public void addToListTabel(int number) {
+	private void addToListTabel(int number) {
 		shipmentsInProcess.add(new ShipmentView(number));
 	}
 

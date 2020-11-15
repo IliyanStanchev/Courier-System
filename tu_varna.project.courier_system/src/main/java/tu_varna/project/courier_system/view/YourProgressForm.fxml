@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.DailyProgressFormController">
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.YourProgressFormController">
    <children>
       <AnchorPane prefHeight="510.0" prefWidth="561.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -22,12 +22,12 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Label fx:id="deliveredShipments" layoutX="232.0" layoutY="124.0" text="Label">
+            <Label fx:id="deliveredShipments" layoutX="232.0" layoutY="124.0" prefHeight="26.0" prefWidth="98.0">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="cancelledShipments" layoutX="232.0" layoutY="174.0" text="Label">
+            <Label fx:id="cancelledShipments" layoutX="232.0" layoutY="174.0" prefHeight="26.0" prefWidth="98.0">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -39,14 +39,14 @@
             </Text>
             <TextField fx:id="date" alignment="CENTER" disable="true" layoutX="232.0" layoutY="49.0" prefHeight="26.0" prefWidth="235.0">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font></TextField>
             <Text layoutX="65.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In the process:">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <TableView fx:id="shipmentsView" layoutX="238.0" layoutY="217.0" prefHeight="291.0" prefWidth="327.0">
+            <TableView fx:id="shipmentsView" editable="true" layoutX="238.0" layoutY="217.0" prefHeight="291.0" prefWidth="327.0">
                <columns>
                   <TableColumn fx:id="numberColumn" prefWidth="326.4000274658203" text="Shimpent №:" />
                </columns>

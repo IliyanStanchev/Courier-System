@@ -2,8 +2,12 @@ package tu_varna.project.courier_system.helper;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import tu_varna.project.courier_system.services.UserService;
+import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class DataValidation {
+
+	private static UserService service = new UserServiceImpl();
 
 	public static boolean textFieldisEmpty(TextField inputTextField, Label inputLabel, String validationText) {
 		boolean isEmpty = false;
@@ -17,11 +21,10 @@ public class DataValidation {
 	}
 
 	public static boolean dataLength(TextField inputTextField, Label inputLabel, String validationText,
-			String requiredLength) {
+			int requiredLength) {
 		boolean isDataLength = true;
 		String validationString = null;
-
-		if (!inputTextField.getText().matches("\\b\\w" + "{" + requiredLength + "}")) {
+		if (inputTextField.getText().length() < requiredLength) {
 			isDataLength = false;
 			validationString = validationText;
 
@@ -93,7 +96,7 @@ public class DataValidation {
 		boolean isPrice = true;
 		String validationString = null;
 
-		if (!inputTextField.getText().matches("[0-9]+.[0-9]")) {
+		if (!inputTextField.getText().matches("[0-9]+([.][0-9]{1,2})?")) {
 			isPrice = false;
 			validationString = validationText;
 
@@ -102,5 +105,35 @@ public class DataValidation {
 		return isPrice;
 
 	}
+
+	public static boolean isUsername(TextField inputTextField, Label inputLabel, String validationText) {
+		boolean isUsername = true;
+		String validationString = null;
+		if (!inputTextField.getText().matches("^[a-zA-Z0-9_.-]*$")) {
+			isUsername = false;
+			validationString = validationText;
+		}
+		inputLabel.setText(validationString);
+		return isUsername;
+	}
+
+	/*
+	 * public static boolean isUnique(String check, TextField inputTextField, Label
+	 * inputLabel, String validationText) { boolean isUnique = true; String
+	 * validationString = null; if (check.equalsIgnoreCase("phonenumber")) isUnique
+	 * = (service.SearchUserByPhone(inputTextField.getText()) == null); else if
+	 * (check.equalsIgnoreCase("username")) { isUnique =
+	 * (service.SearchUserByUsername(inputTextField.getText()) == null); } else if
+	 * (check.equalsIgnoreCase("bulstat")) { isUnique =
+	 * (service.SearchCompany(Integer.parseInt((inputTextField.getText()))) ==
+	 * null);
+	 * 
+	 * } if (!isUnique) { validationString = validationText; }
+	 * inputLabel.setText(validationString);
+	 * 
+	 * return isUnique;
+	 * 
+	 * }
+	 */
 
 }

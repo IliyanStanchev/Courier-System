@@ -53,14 +53,14 @@
                   </PasswordField>
                   <Label fx:id="passwordLabel" layoutX="40.0" layoutY="397.0" prefHeight="22.0" prefWidth="290.0" textFill="#f00707">
                      <font>
-                        <Font name="System Bold" size="13.0" />
+                        <Font size="13.0" />
                      </font></Label>
                   <Label fx:id="usernameLabel" layoutX="40.0" layoutY="318.0" prefHeight="22.0" prefWidth="290.0" textFill="#f00707">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="resultLabel" layoutX="39.0" layoutY="441.0" prefHeight="22.0" prefWidth="290.0" textFill="#f00707">
+                  <Label fx:id="resultLabel" layoutX="40.0" layoutY="419.0" prefHeight="22.0" prefWidth="290.0" textFill="#f00707">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>

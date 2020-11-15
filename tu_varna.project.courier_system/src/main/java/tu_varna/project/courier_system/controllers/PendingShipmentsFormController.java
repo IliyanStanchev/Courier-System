@@ -3,10 +3,8 @@ package tu_varna.project.courier_system.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,45 +29,32 @@ public class PendingShipmentsFormController implements Initializable {
 	private static final Logger logger = LogManager.getLogger(PendingShipmentsFormController.class);
 
 	UserService service = new UserServiceImpl();
-
 	private int courier_id;
-
 	@FXML
 	private TableView<ShipmentView> requestedShipmentsView;
-
 	@FXML
 	private TableView<ShipmentView> acceptedShipmentsView;
-
 	@FXML
 	private TableColumn<ShipmentView, Integer> numberColumn;
-
 	@FXML
 	private TableColumn<ShipmentView, Address> fromColumn;
-
 	@FXML
 	private TableColumn<ShipmentView, Address> toColumn;
 	@FXML
 	private TableColumn<ShipmentView, Integer> numberAColumn;
-
 	@FXML
 	private TableColumn<ShipmentView, Address> fromAColumn;
-
 	@FXML
 	private TableColumn<ShipmentView, Address> toAColumn;
-
 	@FXML
 	private Label acceptValidationLabel;
-
 	@FXML
 	private Label detailValidationLabel;
-
 	private ObservableList<ShipmentView> requestedShipments = FXCollections.observableArrayList();
-
 	private ObservableList<ShipmentView> acceptedShipments = FXCollections.observableArrayList();
 
 	@FXML
-	void acceptRequest(ActionEvent event) {
-
+	private void acceptRequest(ActionEvent event) {
 		ShipmentView selectedShipment = requestedShipmentsView.getSelectionModel().getSelectedItem();
 		if (selectedShipment != null) {
 			acceptedShipments.add(selectedShipment);
@@ -109,11 +94,11 @@ public class PendingShipmentsFormController implements Initializable {
 
 	}
 
-	public void addToListTabel(int number, Address from, Address to) {
+	private void addToListTabel(int number, Address from, Address to) {
 		requestedShipments.add(new ShipmentView(number, from, to));
 	}
 
-	public void addToCourierShipmentsTable(int number, Address from, Address to) {
+	private void addToCourierShipmentsTable(int number, Address from, Address to) {
 		acceptedShipments.add(new ShipmentView(number, from, to));
 	}
 
