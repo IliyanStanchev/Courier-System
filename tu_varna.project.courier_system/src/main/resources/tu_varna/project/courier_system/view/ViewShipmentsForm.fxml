@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -8,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.ShipmentsViewFormController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.ShipmentsViewFormController">
    <children>
       <AnchorPane prefHeight="704.0" prefWidth="535.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -16,8 +20,8 @@
               <columns>
                 <TableColumn fx:id="numberColumn" prefWidth="115.2000732421875" text="Shipment №" />
                 <TableColumn fx:id="dateColumn" prefWidth="129.60003662109375" text="Date created" />
-                  <TableColumn fx:id="phoneNmbColumn" prefWidth="186.39996337890625" text="Contact phone number" />
-                  <TableColumn fx:id="statusColumn" prefWidth="101.60002441406255" text="Status" />
+                  <TableColumn fx:id="phoneNmbColumn" prefWidth="117.0" text="Contact phone" />
+                  <TableColumn fx:id="statusColumn" prefWidth="172.0" text="Status" />
               </columns>
             </TableView>
             <Button layoutX="64.0" layoutY="586.0" mnemonicParsing="false" onAction="#createShipment" prefHeight="56.0" prefWidth="143.0" style="-fx-background-color: #FFFF99;" text="Create shipment " />

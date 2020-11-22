@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -7,9 +12,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.ReturnedShipmentFormController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.ReturnedShipmentFormController">
    <children>
-      <AnchorPane prefHeight="310.0" prefWidth="616.0" style="-fx-background-color: #ffffff;">
+      <AnchorPane prefHeight="310.0" prefWidth="737.0" style="-fx-background-color: #ffffff;">
          <children>
             <ImageView fitHeight="191.0" fitWidth="219.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -17,7 +22,7 @@
                </image>
             </ImageView>
             <Button layoutX="340.0" layoutY="225.0" mnemonicParsing="false" onAction="#okay" prefHeight="43.0" prefWidth="168.0" style="-fx-background-color: #FFFF66;" text="Okay" />
-            <Label fx:id="notificationInfoLabel" layoutX="26.0" layoutY="56.0" prefHeight="62.0" prefWidth="578.0">
+            <Label fx:id="notificationInfoLabel" layoutX="26.0" layoutY="56.0" prefHeight="62.0" prefWidth="704.0">
                <font>
                   <Font name="Californian FB Bold" size="20.0" />
                </font>

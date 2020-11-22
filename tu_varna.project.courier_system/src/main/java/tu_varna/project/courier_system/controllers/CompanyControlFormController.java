@@ -1,10 +1,11 @@
 package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,15 +18,16 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tu_varna.project.courier_system.helper.OpenNewForm;
-import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.services.CompanyService;
+import tu_varna.project.courier_system.services.CompanyServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 
 public class CompanyControlFormController implements Initializable {
 
 	private static final Logger logger = LogManager.getLogger(CompanyControlFormController.class);
 
-	private UserService serv = new UserServiceImpl();
+	private CompanyService companyService = new CompanyServiceImpl();
+
 	@FXML
 	private TableView<CompanyView> companyView;
 	@FXML
@@ -36,22 +38,9 @@ public class CompanyControlFormController implements Initializable {
 	private TextField bulstat;
 	@FXML
 	private Label resultLabel;
+
 	private ObservableList<CompanyView> companies = FXCollections.observableArrayList();
 	private FilteredList<CompanyView> filteredData = new FilteredList<>(companies, b -> true);
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-		this.bulstatColumn.setCellValueFactory(new PropertyValueFactory<>("bulstat"));
-		List<Object[]> list = serv.getAllCompanies();
-		for (Object[] column : list) {
-			addToListTabel((String) column[0], (Integer) column[1]);
-		}
-		companyView.setItems(companies);
-		wrapListAndAddFiltering();
-		companyView.setItems(filteredData);
-
-	}
 
 	@FXML
 	private void createCompany(ActionEvent event) {
@@ -62,11 +51,32 @@ public class CompanyControlFormController implements Initializable {
 	private void deleteCompany(ActionEvent event) {
 		CompanyView selectedCompany = companyView.getSelectionModel().getSelectedItem();
 		if (selectedCompany != null) {
-			serv.DeleteCompany(selectedCompany.getBulstat());
+			companyService.deleteCompany(companyService.getCompanyByID(selectedCompany.getBulstat()));
 			remove(selectedCompany);
 			logger.info("Company with id: " + selectedCompany.getBulstat() + " successfully removed from database!");
 		} else
 			resultLabel.setText("First select");
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+		this.bulstatColumn.setCellValueFactory(new PropertyValueFactory<>("bulstat"));
+
+		for (CompanyView company : companyService.getAllCompanies()) {
+			addToListTabel(company);
+		}
+
+		companyView.setItems(companies);
+		wrapListAndAddFiltering();
+		companyView.setItems(filteredData);
+
+	}
+
+	private void remove(CompanyView item) {
+		companies.remove(item);
+		wrapListAndAddFiltering();
+		companyView.setItems(filteredData);
 	}
 
 	private void wrapListAndAddFiltering() {
@@ -84,14 +94,8 @@ public class CompanyControlFormController implements Initializable {
 		});
 	}
 
-	private void remove(CompanyView item) {
-		companies.remove(item);
-		wrapListAndAddFiltering();
-		companyView.setItems(filteredData);
-	}
-
-	public void addToListTabel(String name, int bulstat) {
-		companies.add(new CompanyView(name, bulstat));
+	public void addToListTabel(CompanyView company) {
+		companies.add(company);
 	}
 
 }

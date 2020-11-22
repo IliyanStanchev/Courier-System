@@ -5,12 +5,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import tu_varna.project.courier_system.entity.Shipment;
-import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.services.ShipmentService;
+import tu_varna.project.courier_system.services.ShipmentServiceImpl;
 
 public class AboutShipmentFormController {
 
-	private UserService service = new UserServiceImpl();
+	private ShipmentService shipmentService = new ShipmentServiceImpl();
 	@FXML
 	private TextField number;
 	@FXML
@@ -36,22 +36,8 @@ public class AboutShipmentFormController {
 	@FXML
 	private Label resultLabel;
 
-	@FXML
-	private void searchShipment(ActionEvent event) {
-		resultLabel.setText("");
-		try {
-			Shipment shipment = service.SearchShipmentByID(Integer.parseInt(this.number.getText()));
-			if (shipment != null) {
-				loadInfo(shipment);
-			} else {
-				resultLabel.setText("Shipment not found!");
-			}
-		} catch (Exception e) {
-			resultLabel.setText("Shipment not found!");
-		}
-	}
-
 	public void loadInfo(Shipment shipment) {
+
 		String officeOrAddress = "address";
 		if (shipment.getToOffice() != null) {
 			officeOrAddress = "office";
@@ -68,4 +54,33 @@ public class AboutShipmentFormController {
 		this.price.setText(Double.toString(shipment.getShipmentPrice()));
 	}
 
+	@FXML
+	private void searchShipment(ActionEvent event) {
+		this.cleanFields();
+		resultLabel.setText("");
+		try {
+			Shipment shipment = shipmentService.getShipmentByID(Integer.parseInt(this.number.getText()));
+			if (shipment != null) {
+				loadInfo(shipment);
+			} else {
+				resultLabel.setText("Shipment not found!");
+			}
+		} catch (Exception e) {
+			resultLabel.setText("Shipment not found!");
+		}
+	}
+
+	private void cleanFields() {
+		this.state.setText("");
+		this.company.setText("");
+		this.dateOfOrdering.setText("");
+		this.from.setText("");
+		this.to.setText("");
+		this.oORa.setText("");
+		this.senderName.setText("");
+		this.receiverName.setText("");
+		this.type.setText("");
+		this.price.setText("");
+
+	}
 }

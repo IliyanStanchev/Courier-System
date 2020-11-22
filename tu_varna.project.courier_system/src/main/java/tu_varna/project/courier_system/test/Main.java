@@ -6,6 +6,10 @@ import tu_varna.project.courier_system.helper.OpenNewForm;
 
 public class Main extends Application {
 
+	public static void main(String[] args) {
+		launch(args);
+	}
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
@@ -13,9 +17,5 @@ public class Main extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	public static void main(String[] args) {
-		launch(args);
 	}
 }

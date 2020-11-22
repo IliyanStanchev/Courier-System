@@ -1,10 +1,11 @@
 package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -22,11 +23,12 @@ import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CourierView;
 
-
 public class CourierControlFormController implements Initializable {
 
 	private static final Logger logger = LogManager.getLogger(CourierControlFormController.class);
-	private UserService service = new UserServiceImpl();
+
+	private UserService userService = new UserServiceImpl();
+
 	@FXML
 	private TableView<CourierView> courierView;
 	@FXML
@@ -39,17 +41,25 @@ public class CourierControlFormController implements Initializable {
 	private TextField name;
 	@FXML
 	private Label resultLabel;
+
 	private ObservableList<CourierView> couriers = FXCollections.observableArrayList();
 	private FilteredList<CourierView> filteredData = new FilteredList<>(couriers, b -> true);
 
+	@FXML
+	private void addCourier(ActionEvent event) {
+		OpenNewForm.openNewForm("CreateCourierForm.fxml", "Create Courier");
+
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-		this.phoneNColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNmb")); // kak raboti?
+		this.phoneNColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNmb"));
 		this.companyColumn.setCellValueFactory(new PropertyValueFactory<>("company"));
-		List<Object[]> list = service.getAllCouriers();
-		for (Object[] column : list) {
-			addToListTabel((String) column[0], (String) column[1], (String) column[2]);
+
+		for (CourierView courier : userService.getAllCouriers()) {
+			addToListTable(courier);
 		}
 		SortedList<CourierView> sortedData = new SortedList<>(filteredData);
 		sortedData.comparatorProperty().bind(courierView.comparatorProperty());
@@ -60,12 +70,12 @@ public class CourierControlFormController implements Initializable {
 
 	}
 
-	
 	@FXML
 	void removeCourier(ActionEvent event) {
+
 		CourierView selectedCourier = courierView.getSelectionModel().getSelectedItem();
 		if (selectedCourier != null) {
-			service.DeleteUser(service.SearchUserByPhone(selectedCourier.getPhoneNmb()));
+			userService.deleteUser(userService.getUserByPhone(selectedCourier.getPhoneNmb()));
 			remove(selectedCourier);
 			logger.info("Courier [" + selectedCourier.getName() + " , " + selectedCourier.getPhoneNmb()
 					+ " ] successfully deleted by administrator!");
@@ -73,12 +83,6 @@ public class CourierControlFormController implements Initializable {
 			resultLabel.setText("First select");
 	}
 
-	@FXML
-	private void addCourier(ActionEvent event) {
-		OpenNewForm.openNewForm("CreateCourierForm.fxml", "Create Courier");
-
-	}
-	
 	private void wrapListAndAddFiltering() {
 
 		name.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -95,20 +99,20 @@ public class CourierControlFormController implements Initializable {
 				}
 
 				else
-					return false; 
+					return false;
 
 			});
 		});
 	}
-	
+
 	private void remove(CourierView item) {
 		couriers.remove(item);
 		wrapListAndAddFiltering();
 		courierView.setItems(filteredData);
 	}
 
-	public void addToListTabel(String name, String phoneNmb, String company) {
-		couriers.add(new CourierView(name, phoneNmb, company));
+	public void addToListTable(CourierView courier) {
+		couriers.add(courier);
 	}
 
 }

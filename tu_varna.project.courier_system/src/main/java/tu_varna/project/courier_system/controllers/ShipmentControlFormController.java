@@ -1,8 +1,8 @@
 package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,14 +17,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tu_varna.project.courier_system.helper.OpenNewForm;
-import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.services.CompanyService;
+import tu_varna.project.courier_system.services.CompanyServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
-
 
 public class ShipmentControlFormController implements Initializable {
 
-	private UserService service = new UserServiceImpl();
+	private CompanyService companyService = new CompanyServiceImpl();
+
 	@FXML
 	private TextField name;
 	@FXML
@@ -35,18 +35,19 @@ public class ShipmentControlFormController implements Initializable {
 	private TableColumn<CompanyView, String> nameColumn;
 	@FXML
 	private TableColumn<CompanyView, Integer> bulstatColumn;
+
 	private ObservableList<CompanyView> company = FXCollections.observableArrayList();
 	private FilteredList<CompanyView> filteredData = new FilteredList<>(company, b -> true);
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		this.bulstatColumn.setCellValueFactory(new PropertyValueFactory<>("bulstat"));
 		companyView.setItems(company);
-		List<Object[]> list = service.getAllCompanies();
-		for (Object[] column : list) {
-			addToListTabel((String) column[0], (Integer) column[1]);
+
+		for (CompanyView company : companyService.getAllCompanies()) {
+			addToListTable(company);
 		}
 
 		SortedList<CompanyView> sortedData = new SortedList<>(filteredData);
@@ -66,7 +67,7 @@ public class ShipmentControlFormController implements Initializable {
 			try {
 				FXMLLoader loader = OpenNewForm.openNewForm("ViewShipmentsForm.fxml", "List of shipments");
 				ShipmentsViewFormController next = loader.getController();
-				next.setChoosedCompany(service.getCompanyByID(selectedCompany.getBulstat()));
+				next.setChoosedCompany(companyService.getCompanyByID(selectedCompany.getBulstat()));
 				next.viewShipmentsList();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -78,7 +79,7 @@ public class ShipmentControlFormController implements Initializable {
 			isSelectedLabel.setText("First select");
 
 	}
-	
+
 	private void wrapListAndAddFiltering() {
 
 		name.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -100,8 +101,7 @@ public class ShipmentControlFormController implements Initializable {
 		});
 	}
 
-	
-	private void addToListTabel(String name, int bulstat) {
-		company.add(new CompanyView(name, bulstat));
+	private void addToListTable(CompanyView comp) {
+		company.add(comp);
 	}
 }

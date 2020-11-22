@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -10,21 +15,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="479.0" prefWidth="787.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.ClientStatisticsFormController">
+<AnchorPane prefHeight="479.0" prefWidth="787.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.ClientStatisticsFormController">
    <children>
-      <AnchorPane layoutY="6.0" prefHeight="586.0" prefWidth="879.0" style="-fx-background-color: #ffffff;">
+      <AnchorPane layoutY="-4.0" prefHeight="600.0" prefWidth="879.0" style="-fx-background-color: #E5CCFF;">
          <children>
-            <TextField fx:id="name" layoutX="40.0" layoutY="82.0" prefHeight="39.0" prefWidth="198.0" promptText="name" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
+            <TextField fx:id="phoneNmb" layoutX="39.0" layoutY="119.0" prefHeight="39.0" prefWidth="239.0" promptText="phone number" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="phoneNmb" layoutX="40.0" layoutY="168.0" prefHeight="39.0" prefWidth="197.0" promptText="phone number" style="-fx-border-color: #660066; -fx-border-width: 0px 2px 2px 2px; -fx-background-color: transparent;">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </TextField>
-            <Button layoutX="65.0" layoutY="333.0" mnemonicParsing="false" onAction="#searchClient" prefHeight="58.0" prefWidth="134.0" style="-fx-background-color: #FFFF66;" text="Search" textFill="#131313" textOverrun="CLIP">
+            <Button layoutX="83.0" layoutY="182.0" mnemonicParsing="false" onAction="#searchClient" prefHeight="58.0" prefWidth="134.0" style="-fx-background-color: #FFFF66;" text="Search" textFill="#131313" textOverrun="CLIP">
                <effect>
                   <DropShadow />
                </effect>
@@ -44,22 +44,27 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Text>
-            <TableView fx:id="shipmentsInProcessView" editable="true" layoutX="262.0" layoutY="281.0" prefHeight="309.0" prefWidth="614.0">
+            <TableView fx:id="shipmentsInProcessView" editable="true" layoutX="262.0" layoutY="281.0" prefHeight="309.0" prefWidth="614.0" stylesheets="@tableView.css">
               <columns>
                 <TableColumn fx:id="numberColumn" prefWidth="157.5999755859375" text="Shimpent №:" />
                   <TableColumn fx:id="courierColumn" prefWidth="456.79998779296875" text="Courier:" />
               </columns>
             </TableView>
-            <Text layoutX="492.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In the process of delivery:">
+            <Text layoutX="489.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In the process of delivery:">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Text>
-            <Label fx:id="resultLabel" layoutX="22.0" layoutY="240.0" prefHeight="22.0" prefWidth="542.0" textFill="#ea2929">
+            <Label fx:id="resultLabel" layoutX="27.0" layoutY="250.0" prefHeight="22.0" prefWidth="542.0" textFill="#ea2929">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
+            <Text layoutX="39.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter client phone number:">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Text>
          </children></AnchorPane>
    </children>
 </AnchorPane>

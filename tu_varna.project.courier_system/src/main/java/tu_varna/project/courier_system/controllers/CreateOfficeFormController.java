@@ -1,7 +1,6 @@
 package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import org.apache.logging.log4j.LogManager;
@@ -17,14 +16,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import tu_varna.project.courier_system.helper.FieldValidation;
-import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.services.CompanyService;
+import tu_varna.project.courier_system.services.CompanyServiceImpl;
+import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 
 public class CreateOfficeFormController implements Initializable {
 
 	private static final Logger logger = LogManager.getLogger(CreateOfficeFormController.class);
 
-	UserService service = new UserServiceImpl();
+	CompanyService companyService = new CompanyServiceImpl();
+
 	@FXML
 	private TextField country;
 	@FXML
@@ -40,7 +41,7 @@ public class CreateOfficeFormController implements Initializable {
 	@FXML
 	private Label phoneNmbValidationLabel;
 	@FXML
-	private ComboBox<String> companyCombo;
+	private ComboBox<CompanyView> companyCombo;
 	@FXML
 	private Label comboLabel;
 	@FXML
@@ -51,67 +52,17 @@ public class CreateOfficeFormController implements Initializable {
 	private Label countryValidationLabel;
 	@FXML
 	private Label cityValidationLabel;
-	private ObservableList<String> companyList = FXCollections.observableArrayList();
+	private ObservableList<CompanyView> companyList = FXCollections.observableArrayList();
+
 	private boolean countryV;
 	private boolean cityV;
 	private boolean streetV;
 	private boolean agentV;
 	private boolean numberV;
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		List<Object[]> list = service.getAllCompanies();
-		for (Object[] column : list) {
-			fillCompanyCombo((String) column[0]);
-		}
-		companyCombo.setItems(companyList);
-	}
-
-	@FXML
-	private void countryValidation(KeyEvent event) {
-		countryV = FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
-	}
-
-	@FXML
-	void cityValidation(KeyEvent event) {
-		cityV = FieldValidation.alphabetValidation(this.city, this.cityValidationLabel);
-	}
-
-	@FXML
-	private void streetNValidation(KeyEvent event) {
-		streetV = FieldValidation.streetNValidation(this.streetN, this.streetNValidationLabel);
-	}
-
 	@FXML
 	private void agentValidation(KeyEvent event) {
 		agentV = FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
-	}
-
-	@FXML
-	private void phoneNValidation(KeyEvent event) {
-		numberV = FieldValidation.numberValidation(this.phoneNmb, this.phoneNmbValidationLabel);
-	}
-
-	@FXML
-	void createOffice(ActionEvent event) {
-		resultLabel.setText("");
-		this.comboLabel.setText("");
-		if (areAllFieldsFull() && isSelectedFromComboBox()) {
-			String country = this.country.getText();
-			String city = this.city.getText();
-			String streetN = this.streetN.getText();
-			String agent = this.agent.getText();
-			String phoneNmb = this.phoneNmb.getText();
-			String company = this.companyCombo.getSelectionModel().getSelectedItem().toString();
-			boolean check = service.CreateOffice(company, country, city, streetN, agent, phoneNmb,
-					service.getBulstatByFirmName(company));
-			if (check) {
-				resultLabel.setText("Courier succesfully created!");
-				logger.info("Office [ " + company + " , " + streetN + " ] successfully created by administrator! ");
-			} else {
-				resultLabel.setText("Error! Office cannot be created!");
-			}
-		}
 	}
 
 	private boolean areAllFieldsFull() {
@@ -120,6 +71,52 @@ public class CreateOfficeFormController implements Initializable {
 			this.resultLabel.setText("Fill in all fields!");
 		}
 		return areCorrect;
+	}
+
+	@FXML
+	void cityValidation(KeyEvent event) {
+		cityV = FieldValidation.alphabetValidation(this.city, this.cityValidationLabel);
+	}
+
+	@FXML
+	private void countryValidation(KeyEvent event) {
+		countryV = FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
+	}
+
+	@FXML
+	void createOffice(ActionEvent event) {
+
+		resultLabel.setText("");
+		this.comboLabel.setText("");
+		if (areAllFieldsFull() && isSelectedFromComboBox()) {
+			String country = this.country.getText();
+			String city = this.city.getText();
+			String streetN = this.streetN.getText();
+			String agent = this.agent.getText();
+			String phoneNmb = this.phoneNmb.getText();
+			CompanyView company = this.companyCombo.getSelectionModel().getSelectedItem();
+			boolean check = companyService.createOffice(company.getName(), country, city, streetN, agent, phoneNmb,
+					company.getBulstat());
+			if (check) {
+				resultLabel.setText("Office succesfully created!");
+				logger.info("Office [ " + company + " , " + streetN + " ] successfully created by administrator! ");
+			} else {
+				resultLabel.setText("Error! Office cannot be created!");
+			}
+		}
+	}
+
+	public void fillCompanyCombo(CompanyView companyName) {
+		companyList.add(companyName);
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		for (CompanyView company : companyService.getAllCompanies()) {
+			fillCompanyCombo(company);
+		}
+		companyCombo.setItems(companyList);
 	}
 
 	private boolean isSelectedFromComboBox() {
@@ -131,8 +128,14 @@ public class CreateOfficeFormController implements Initializable {
 
 	}
 
-	public void fillCompanyCombo(String companyName) {
-		companyList.add(companyName);
+	@FXML
+	private void phoneNValidation(KeyEvent event) {
+		numberV = FieldValidation.numberValidation(this.phoneNmb, this.phoneNmbValidationLabel);
+	}
+
+	@FXML
+	private void streetNValidation(KeyEvent event) {
+		streetV = FieldValidation.streetNValidation(this.streetN, this.streetNValidationLabel);
 	}
 
 }

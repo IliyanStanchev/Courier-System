@@ -1,8 +1,9 @@
 package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
-import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,8 +12,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tu_varna.project.courier_system.entity.Address;
-import tu_varna.project.courier_system.entity.Courier;
-import tu_varna.project.courier_system.entity.Shipment;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
 public class DeliveredShipmentsFormController implements Initializable {
@@ -27,6 +26,7 @@ public class DeliveredShipmentsFormController implements Initializable {
 	private TableColumn<ShipmentView, Address> toColumn;
 	@FXML
 	private TableColumn<ShipmentView, Address> deliveryDateColumn;
+
 	private ObservableList<ShipmentView> deliveredShipments = FXCollections.observableArrayList();
 
 	@Override
@@ -38,16 +38,15 @@ public class DeliveredShipmentsFormController implements Initializable {
 
 	}
 
-	private void addToListTabel(int number, Address from, Address to, LocalDate deliveryDate) {
-		deliveredShipments.add(new ShipmentView(number, from, to, deliveryDate));
-	}
-
-	public void setCourier(Courier courier) {
-		for (Shipment shipment : courier.getDeliveredOrders()) {
-			addToListTabel(shipment.getId(), shipment.getSender().getAddress(), shipment.getReceiver().getAddress(),
-					shipment.getDateShipped());
+	public void setCourierDeliveredShipments(List<ShipmentView> list) {
+		for (ShipmentView shipment : list) {
+			addToListTable(shipment);
 		}
 		this.deliveredShipmentsView.setItems(deliveredShipments);
+	}
+
+	private void addToListTable(ShipmentView shipment) {
+		deliveredShipments.add(shipment);
 	}
 
 }

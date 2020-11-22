@@ -15,12 +15,12 @@ public class NotificationsView {
 		return notificationId;
 	}
 
-	public void setNotificationId(int notificationId) {
-		this.notificationId = notificationId;
-	}
-
 	public String getNotificationText() {
 		return notificationText;
+	}
+
+	public void setNotificationId(int notificationId) {
+		this.notificationId = notificationId;
 	}
 
 	public void setNotificationText(String notificationText) {

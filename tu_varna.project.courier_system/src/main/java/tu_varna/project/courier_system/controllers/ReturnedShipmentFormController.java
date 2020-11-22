@@ -3,22 +3,29 @@ package tu_varna.project.courier_system.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.entity.Notification;
+import tu_varna.project.courier_system.helper.CloseForm;
+import tu_varna.project.courier_system.services.NotificationService;
+import tu_varna.project.courier_system.services.NotificationServiceImpl;
 
 public class ReturnedShipmentFormController {
 
-	private UserService service = new UserServiceImpl();
+	private NotificationService notificationService = new NotificationServiceImpl();
+	private Notification selectedNotification;
 	@FXML
 	private Label notificationInfoLabel;
 
-	public void setSelectedNotification(int notificationID) {
-		this.notificationInfoLabel.setText(service.SearchNotificationByID(notificationID).getNotification_text());
-	}
-	   @FXML
-	    void okay(ActionEvent event) {
+	@FXML
+	void okay(ActionEvent event) {
+		notificationService.setSeenStatus(selectedNotification);
+		// notificationService.deleteNotification(selectedNotification);
+		CloseForm.closeForm(event);
 
-	    }
+	}
+
+	public void setSelectedNotification(Notification notification) {
+		this.selectedNotification = notification;
+		this.notificationInfoLabel.setText(notification.getNotification_text());
+	}
 
 }
-

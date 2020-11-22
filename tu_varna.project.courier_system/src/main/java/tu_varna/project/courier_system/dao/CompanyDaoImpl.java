@@ -4,23 +4,21 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
-import javax.persistence.Query;
 
+import tu_varna.project.courier_system.dao.manager.entityManager;
 import tu_varna.project.courier_system.entity.Company;
 
-public class CourierFirmDaoImpl extends entityManager implements BaseDao<Company> {
+public class CompanyDaoImpl implements BaseDao<Company> {
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Company> getAll() {
-		Query query = getEntityManager().createQuery("SELECT e FROM CourierFirm e");
-		return query.getResultList();
+	public Company get(int id) {
+		return entityManager.getEntityManager().find(Company.class, id);
 	}
 
 	@Override
 	public boolean save(Company t) {
 		try {
-			executeInsideTransaction(entityManager -> entityManager.persist(t));
+			entityManager.executeInsideTransaction(entityManager -> entityManager.persist(t));
 		} catch (PersistenceException e) {
 			System.out.println("Error saving object!");
 			return false;
@@ -32,7 +30,7 @@ public class CourierFirmDaoImpl extends entityManager implements BaseDao<Company
 	@Override
 	public void update(Company t) {
 		try {
-			executeInsideTransaction(entityManager -> entityManager.merge(t));
+			entityManager.executeInsideTransaction(entityManager -> entityManager.merge(t));
 		} catch (PersistenceException e) {
 			System.out.println("Error updating object!");
 		}
@@ -42,22 +40,24 @@ public class CourierFirmDaoImpl extends entityManager implements BaseDao<Company
 	@Override
 	public void delete(Company t) {
 		try {
-			executeInsideTransaction(entityManager -> entityManager.remove(t));
+			entityManager.executeInsideTransaction(entityManager -> entityManager.remove(t));
 		} catch (PersistenceException e) {
 			System.out.println("Error deleting object!");
 		}
 
 	}
 
-	@Override
-	public Company get(int id) {
-		return getEntityManager().find(Company.class, id);
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getAllCompanies() {
+
+		return entityManager.getEntityManager().createQuery("SELECT f.id, f.companyName FROM Firm f").getResultList();
+
 	}
 
 	public Company getFirmByIdAndName(String name, int bulstat) {
 		Company firm;
 		try {
-			firm = (Company) getEntityManager()
+			firm = (Company) entityManager.getEntityManager()
 					.createQuery("FROM Firm WHERE bulstat=: bulstat AND companyName=: name").setParameter("name", name)
 					.setParameter("bulstat", bulstat).getSingleResult();
 		} catch (NoResultException e) {
@@ -65,19 +65,6 @@ public class CourierFirmDaoImpl extends entityManager implements BaseDao<Company
 		}
 		return firm;
 
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Object[]> getAllCompanies() {
-
-		return getEntityManager().createQuery("SELECT f.companyName, f.id FROM Firm f").getResultList();
-
-	}
-
-	public int getBulstatByFirmName(String name) {
-
-		return (int) getEntityManager().createQuery("SELECT f.id FROM Firm f WHERE f.companyName=: name")
-				.setParameter("name", name).getSingleResult();
 	}
 
 }

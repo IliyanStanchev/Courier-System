@@ -1,14 +1,10 @@
 package tu_varna.project.courier_system.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import tu_varna.project.courier_system.entity.Shipment;
 
-public class ShipmentDetailFormController implements Initializable {
+public class ShipmentDetailFormController {
 
 	@FXML
 	private Label dateOfOrdering;
@@ -52,11 +48,6 @@ public class ShipmentDetailFormController implements Initializable {
 		receiverName.setText(shipment.getReceiver().getName());
 		type.setText(shipment.getType().toString());
 		dueAmount.setText(Double.toString(shipment.getShipmentPrice()));
-
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
 
 	}
 }

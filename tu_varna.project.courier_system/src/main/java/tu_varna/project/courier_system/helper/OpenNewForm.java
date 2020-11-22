@@ -19,6 +19,7 @@ public class OpenNewForm {
 			Stage stage = new Stage();
 			stage.setTitle(formTitle);
 			stage.setScene(new Scene(root));
+			stage.setResizable(false);
 			stage.getIcons().add(new Image(new OpenNewForm().getClass()
 					.getResourceAsStream("/tu_varna/project/courier_system/img/appIcon.png")));
 			stage.show();

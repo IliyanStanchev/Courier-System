@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,15 +15,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.helper.OpenNewForm;
-import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.services.ShipmentService;
+import tu_varna.project.courier_system.services.ShipmentServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
 public class RequestedShipmentsFormController implements Initializable {
 
-	UserService service = new UserServiceImpl();
+	ShipmentService shipmentService = new ShipmentServiceImpl();
+
 	@FXML
 	private TableView<ShipmentView> shipmentView;
 	@FXML
@@ -33,10 +34,21 @@ public class RequestedShipmentsFormController implements Initializable {
 	private TableColumn<ShipmentView, String> companyColumn;
 	@FXML
 	private Label resultLabel;
+
 	private ObservableList<ShipmentView> shipments = FXCollections.observableArrayList();
 
-	public void setClient(Client user) {
-		List<ShipmentView> list = user.getRequestedShipments();
+	private void addToListTabel(ShipmentView shipment) {
+		shipments.add(shipment);
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		this.shipmentNColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
+		this.receiverColumn.setCellValueFactory(new PropertyValueFactory<>("receiver"));
+		this.companyColumn.setCellValueFactory(new PropertyValueFactory<>("company"));
+	}
+
+	public void setRequestedShipments(List<ShipmentView> list) {
 		for (ShipmentView shipment : list) {
 			addToListTabel(shipment);
 		}
@@ -50,20 +62,9 @@ public class RequestedShipmentsFormController implements Initializable {
 		if (selectedShipment != null) {
 			FXMLLoader loader = OpenNewForm.openNewForm("TrackShipmentForm.fxml", "Shipment state");
 			TrackShipmentFormController next = loader.getController();
-			next.setSelectedShipment(service.SearchShipmentByID(selectedShipment.getNumber()).getStatus());
+			next.setSelectedShipment(shipmentService.getShipmentByID(selectedShipment.getNumber()).getStatus());
 		} else
 			resultLabel.setText("First select.");
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.shipmentNColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
-		this.receiverColumn.setCellValueFactory(new PropertyValueFactory<>("receiver"));
-		this.companyColumn.setCellValueFactory(new PropertyValueFactory<>("company"));
-	}
-
-	private void addToListTabel(ShipmentView shipment) {
-		shipments.add(shipment);
 	}
 
 }

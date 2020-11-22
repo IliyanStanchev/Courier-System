@@ -8,12 +8,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import tu_varna.project.courier_system.entity.Courier;
+import tu_varna.project.courier_system.services.ShipmentService;
+import tu_varna.project.courier_system.services.ShipmentServiceImpl;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class AboutCourierFormController {
 
-	UserService service = new UserServiceImpl();
+	UserService userService = new UserServiceImpl();
+	ShipmentService shipmentService = new ShipmentServiceImpl();
+
 	@FXML
 	private AnchorPane workPane;
 	@FXML
@@ -33,20 +37,30 @@ public class AboutCourierFormController {
 	@FXML
 	private Label date;
 	@FXML
-	private TextField name;
-	@FXML
 	private TextField phoneNmb;
 	@FXML
 	private Label resultLabel;
 	@FXML
 	private Label deliveredShipments;
-	
-	
+
+	private void loadInfo(Courier courier) {
+		this.nameL.setText(courier.getName());
+		this.companyName.setText(courier.getFirm().getCompanyName());
+		this.username.setText(courier.getLoginUsername());
+		this.password.setText(courier.getLoginPassword());
+		this.email.setText(courier.getEmail());
+		this.phoneN.setText(courier.getPhoneNumber());
+		this.address.setText(courier.getAddress().toString());
+		this.deliveredShipments.setText(Integer.toString(shipmentService.getCourierDeliveredShipments(courier).size()));
+		this.date.setText(LocalDate.now().toString());
+	}
+
 	@FXML
 	private void searchCourier(ActionEvent event) {
+		this.cleanFields();
 		resultLabel.setText("");
 		try {
-			Courier courier = (Courier) service.SearchUser(this.name.getText(), this.phoneNmb.getText());
+			Courier courier = (Courier) userService.getUserByPhone(this.phoneNmb.getText());
 			if (courier != null) {
 				loadInfo(courier);
 			} else {
@@ -57,16 +71,17 @@ public class AboutCourierFormController {
 		}
 	}
 
-	private void loadInfo(Courier courier) {
-		this.nameL.setText(courier.getName());
-		this.companyName.setText(courier.getFirm().getCompanyName());
-		this.username.setText(courier.getLoginUsername());
-		this.password.setText(courier.getLoginPassword());
-		this.email.setText(courier.getEmail());
-		this.phoneN.setText(courier.getPhoneNumber());
-		this.address.setText(courier.getAddress().toString());
-		this.deliveredShipments.setText(Integer.toString(courier.getDeliveredOrders().size()));
-		this.date.setText(LocalDate.now().toString());
+	private void cleanFields() {
+		this.nameL.setText("");
+		this.companyName.setText("");
+		this.username.setText("");
+		this.password.setText("");
+		this.email.setText("");
+		this.phoneN.setText("");
+		this.address.setText("");
+		this.deliveredShipments.setText("");
+		this.date.setText("");
+
 	}
 
 }

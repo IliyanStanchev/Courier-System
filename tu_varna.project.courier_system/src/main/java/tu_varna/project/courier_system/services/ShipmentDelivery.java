@@ -14,10 +14,11 @@ import tu_varna.project.courier_system.entity.Status.status;
 
 public class ShipmentDelivery implements Runnable {
 
-	private ShipmentDaoImpl ship = new ShipmentDaoImpl();
+	private ShipmentDaoImpl shipmentDao = new ShipmentDaoImpl();
 	private NotificationDaoImpl notif = new NotificationDaoImpl();
 	private UserDaoImpl user = new UserDaoImpl();
 	private Shipment shipment = new Shipment();
+	private NotificationService notificationService = new NotificationServiceImpl();
 
 	public ShipmentDelivery(Shipment shipment) {
 		this.shipment = shipment;
@@ -27,40 +28,41 @@ public class ShipmentDelivery implements Runnable {
 
 	@Override
 	public void run() {
-		boolean isAcceptable=true;
+		boolean isAcceptable = true;
 		if (shipment.getStatus() == status.in_proccess_of_return) {
-			isAcceptable=false;
+			isAcceptable = false;
 		}
 		try {
-
-				Thread.sleep(5000);
-				ship.ChangeShipmentStatus(this.shipment, status.in_proccess_of_delivery);
-				Thread.sleep(5000);
-				ship.ChangeShipmentStatus(this.shipment, status.delivered);
-				ship.setShipmentDateShipped(this.shipment, LocalDate.now());
-			
+			shipment.setStatus(status.taken_by_courier);
+			shipmentDao.update(shipment);
+			Thread.sleep(5000);
+			shipment.setStatus(status.in_proccess_of_delivery);
+			shipmentDao.update(shipment);
+			Thread.sleep(5000);
+			shipment.setStatus(status.delivered);
+			shipment.setDateShipped(LocalDate.now());
+			shipmentDao.update(shipment);
 
 		} catch (InterruptedException e) {
 
 			e.printStackTrace();
 		}
-		if(isAcceptable==true)
-		{
-		sendNotification("A " + this.shipment.getType().toString() + " from " + this.shipment.getSender().getName()
-				+ " has been send to you. Due amount: " + this.shipment.getShipmentPrice(),true);
-		}
-		else
-		{
+		if (isAcceptable == true) {
 			sendNotification("A " + this.shipment.getType().toString() + " from " + this.shipment.getSender().getName()
-					+ " has been returned back to you. ",false);
-			ship.ChangeShipmentStatus(shipment, status.accepted);
+					+ " has been send to you. Due amount: " + this.shipment.getShipmentPrice(), true);
+		} else {
+			sendNotification("A " + this.shipment.getType().toString() + " from " + this.shipment.getSender().getName()
+					+ " has been returned back to you. ", false);
+			shipment.setStatus(status.accepted);
+			shipmentDao.update(shipment);
+
 		}
-		
+
 	}
 
-	public void sendNotification(String text,boolean isAcceptable) {
-		
-		Notification notification = new Notification(this.shipment.getReceiver(),text,isAcceptable, this.shipment);
+	public void sendNotification(String text, boolean isAcceptable) {
+
+		Notification notification = new Notification(this.shipment.getReceiver(), text, isAcceptable, this.shipment);
 		notif.save(notification);
 		notification = new Notification(this.shipment.getSender(),
 				"Your shipment to " + shipment.getReceiver().getName() + " was successfully delivered!", false);
@@ -69,10 +71,11 @@ public class ShipmentDelivery implements Runnable {
 			@Override
 			public void run() {
 				if (ClientWorkspaceFormController.getID() == user.get(shipment.getReceiver().getId()).getId()) {
-					Notification.sendNotification("A shipment was delivered to you right now!",
+					notificationService.sendNotification("A shipment was delivered to you right now!",
 							(Client) user.get(shipment.getReceiver().getId()));
-				} else if (ClientWorkspaceFormController.getID() == user.get(shipment.getSender().getId()).getId()) {
-					Notification.sendNotification(
+				}
+				if (ClientWorkspaceFormController.getID() == user.get(shipment.getSender().getId()).getId()) {
+					notificationService.sendNotification(
 							"Your shipment to " + shipment.getReceiver().getName() + " was successfully delivered!",
 							(Client) user.get(shipment.getSender().getId()));
 				}

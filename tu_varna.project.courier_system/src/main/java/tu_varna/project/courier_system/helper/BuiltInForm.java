@@ -7,10 +7,6 @@ import javafx.scene.layout.AnchorPane;
 
 public class BuiltInForm {
 
-	private BuiltInForm() {
-
-	}
-
 	public static FXMLLoader built_inForm(String fxmlFileName, AnchorPane workPane) {
 		FXMLLoader fxmlLoad = null;
 		try {
@@ -24,6 +20,10 @@ public class BuiltInForm {
 			System.out.println("Cant built-in form.");
 		}
 		return fxmlLoad;
+
+	}
+
+	private BuiltInForm() {
 
 	}
 }

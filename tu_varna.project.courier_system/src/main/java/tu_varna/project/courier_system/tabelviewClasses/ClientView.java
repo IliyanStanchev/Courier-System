@@ -14,12 +14,12 @@ public class ClientView {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getPhoneNmb() {
 		return phoneNmb;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setPhoneNmb(String phoneNmb) {

@@ -29,72 +29,29 @@ public class Client extends User {
 	public Client(String loginUsername, String loginPassword, String name, String email, String phoneNumber,
 			String country, String city, String street) {
 		super(loginUsername, loginPassword, name, email, phoneNumber, country, city, street);
-		// TODO Auto-generated constructor stub
 	}
 
 	public List<Shipment> getReceivedShipments() {
 		return receivedShipments;
 	}
 
-	public void setReceivedShipments(List<Shipment> receivedShipments) {
-		this.receivedShipments = receivedShipments;
-	}
-
 	public List<Shipment> getSendShipments() {
 		return sendShipments;
+	}
+
+	public void setReceivedShipments(List<Shipment> receivedShipments) {
+		this.receivedShipments = receivedShipments;
 	}
 
 	public void setSendShipments(List<Shipment> sendShipments) {
 		this.sendShipments = sendShipments;
 	}
 
-	public List<ShipmentView> getExpectedShipments() {
+	public List<ShipmentView> getShipmentInProcess() {
 		List<ShipmentView> toReturn = new ArrayList<ShipmentView>();
 		for (Shipment shipment : receivedShipments) {
 			if (shipment.getStatus() != status.delivered && shipment.getStatus() != status.declined
 					&& shipment.getStatus() != status.accepted) {
-				toReturn.add(new ShipmentView(shipment.getId(), shipment.getSender().getName(),
-						shipment.getShipmentPrice(), shipment.getFirm().getCompanyName()));
-			}
-		}
-		return toReturn;
-	}
-
-	public List<ShipmentView> getRequestedShipments() {
-		List<ShipmentView> toReturn = new ArrayList<ShipmentView>();
-		for (Shipment shipment : sendShipments) {
-
-			toReturn.add(new ShipmentView(shipment.getId(), shipment.getReceiver().getName(),
-					shipment.getFirm().getCompanyName()));
-
-		}
-		return toReturn;
-	}
-
-	public int getReceivedShipments(int company_id) {
-		int number = 0;
-		for (Shipment s : receivedShipments) {
-			if (s.getFirm().getId() == company_id && s.getStatus() == status.delivered) {
-				number++;
-			}
-		}
-		return number;
-	}
-
-	public int getDeclinedShipments(int company_id) {
-		int number = 0;
-		for (Shipment s : receivedShipments) {
-			if (s.getFirm().getId() == company_id && s.getStatus() == status.declined) {
-				number++;
-			}
-		}
-		return number;
-	}
-
-	public List<ShipmentView> getShipmentInProcess() {
-		List<ShipmentView> toReturn = new ArrayList<ShipmentView>();
-		for (Shipment shipment : receivedShipments) {
-			if (shipment.getStatus() != status.delivered && shipment.getStatus() != status.declined) {
 				if (shipment.getCourier() != null) {
 					toReturn.add(new ShipmentView(shipment.getId(),
 							shipment.getCourier().getName() + " " + shipment.getCourier().getPhoneNumber()));
@@ -107,17 +64,34 @@ public class Client extends User {
 		return toReturn;
 	}
 
+	public int getDeclinedShipments(int company_id) {
+		int number = 0;
+		for (Shipment s : receivedShipments) {
+			if (s.getFirm().getId() == company_id && s.getStatus() == status.declined) {
+				number++;
+			}
+		}
+		return number;
+	}
+
+	public int getReceivedShipments(int company_id) {
+		int number = 0;
+		for (Shipment s : receivedShipments) {
+			if (s.getFirm().getId() == company_id && s.getStatus() == status.delivered
+					|| s.getStatus() == status.accepted) {
+				number++;
+			}
+		}
+		return number;
+	}
+
 	@Override
 	public void loadController() {
 
 		FXMLLoader loader = OpenNewForm.openNewForm("ClientWorkspaceForm.fxml", "Client workspace");
 		ClientWorkspaceFormController next = loader.getController();
-		next.setUserID(this.getId());
-		next.setNotiIcon(this);
-		if (this.getNotifications().size() != 0) {
-			Notification.sendNotification("You have new notifications about shipments!.", this);
-		}
-
+		next.setUser(this);
+		next.setNotiIcon();
 	}
 
 }

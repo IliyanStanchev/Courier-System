@@ -1,10 +1,11 @@
 package tu_varna.project.courier_system.controllers;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,16 +16,23 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import tu_varna.project.courier_system.helper.DataValidation;
+import tu_varna.project.courier_system.entity.Company;
+import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.helper.FieldValidation;
+import tu_varna.project.courier_system.services.CompanyService;
+import tu_varna.project.courier_system.services.CompanyServiceImpl;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 
 public class CreateCourierFormController implements Initializable {
 
 	private static final Logger logger = LogManager.getLogger(CreateCourierFormController.class);
 
-	private UserService service = new UserServiceImpl();
+	private UserService userService = new UserServiceImpl();
+
+	private CompanyService companyService = new CompanyServiceImpl();
+
 	@FXML
 	private TextField username;
 	@FXML
@@ -62,12 +70,14 @@ public class CreateCourierFormController implements Initializable {
 	@FXML
 	private Label streetNValidationLabel;
 	@FXML
-	private ComboBox<String> companyCombo;
+	private ComboBox<CompanyView> companyCombo;
 	@FXML
 	private Label comboValidationLabel;
 	@FXML
 	private Label resultLabel;
-	private ObservableList<String> companyList = FXCollections.observableArrayList();
+
+	private ObservableList<CompanyView> companyList = FXCollections.observableArrayList();
+
 	private boolean countryV;
 	private boolean passwordV;
 	private boolean cityV;
@@ -81,27 +91,11 @@ public class CreateCourierFormController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		List<Object[]> list = service.getAllCompanies();
-		for (Object[] column : list) {
-			fillCompanyCombo((String) column[0]);
+		for (CompanyView company : companyService.getAllCompanies()) {
+			fillCompanyCombo(company);
 		}
 		companyCombo.setItems(companyList);
 
-	}
-
-	@FXML
-	private void confirmPasswordValidation(KeyEvent event) {
-		this.confirmPWValidationLabel.setText("");
-		confirmPV = this.password.getText().equals(this.confirmPW.getText());
-		if (confirmPV == false) {
-			this.confirmPWValidationLabel.setText("The passwords do not match");
-		}
-
-	}
-
-	@FXML
-	private void countryValidation(KeyEvent event) {
-		countryV = FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
 	}
 
 	@FXML
@@ -110,13 +104,17 @@ public class CreateCourierFormController implements Initializable {
 	}
 
 	@FXML
-	private void streetNValidation(KeyEvent event) {
-		streetV = FieldValidation.streetNValidation(this.streetN, this.streetNValidationLabel);
+	private void countryValidation(KeyEvent event) {
+		countryV = FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
 	}
 
 	@FXML
 	private void emailValidation(KeyEvent event) {
 		emailV = FieldValidation.emailValidation(this.email, this.emailValidationLabel);
+	}
+
+	private void fillCompanyCombo(CompanyView company) {
+		companyList.add(company);
 	}
 
 	@FXML
@@ -135,8 +133,23 @@ public class CreateCourierFormController implements Initializable {
 	}
 
 	@FXML
+	private void streetNValidation(KeyEvent event) {
+		streetV = FieldValidation.streetNValidation(this.streetN, this.streetNValidationLabel);
+	}
+
+	@FXML
 	private void usernameValidation(KeyEvent event) {
 		usernameV = FieldValidation.usernameValidation(this.username, this.usernameValidationLabel);
+	}
+
+	@FXML
+	private void confirmPasswordValidation(KeyEvent event) {
+		this.confirmPWValidationLabel.setText("");
+		confirmPV = this.password.getText().equals(this.confirmPW.getText());
+		if (confirmPV == false) {
+			this.confirmPWValidationLabel.setText("The passwords do not match");
+		}
+
 	}
 
 	@FXML
@@ -152,9 +165,11 @@ public class CreateCourierFormController implements Initializable {
 			String country = this.country.getText();
 			String city = this.city.getText();
 			String streetN = this.streetN.getText();
-			String company = this.companyCombo.getSelectionModel().getSelectedItem().toString();
-			boolean check = service.CreateCourier(username, password, name, phoneNmb, email, country, city, streetN,
-					service.getBulstatByFirmName(company));
+			CompanyView companyView = this.companyCombo.getSelectionModel().getSelectedItem();
+			Company company = companyService.getCompanyByID(companyView.getBulstat());
+
+			boolean check = userService.createCourier(
+					new Courier(username, password, name, email, phoneNmb, country, city, streetN, company));
 			if (check) {
 				this.resultLabel.setText("Courier created  succesfully !");
 				logger.info("Courier [ " + username + " , " + password + " ] successfully created by administrator! ");
@@ -181,10 +196,6 @@ public class CreateCourierFormController implements Initializable {
 		}
 		return !isEmpty;
 
-	}
-
-	private void fillCompanyCombo(String companyName) {
-		companyList.add(companyName);
 	}
 
 }

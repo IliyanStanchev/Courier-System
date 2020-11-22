@@ -1,16 +1,12 @@
 package tu_varna.project.courier_system.dao;
 
-import java.util.List;
-
 public interface BaseDao<T> {
 
-	T get(int id);
+	void delete(T t);
 
-	List<T> getAll();
+	T get(int id);
 
 	boolean save(T t);
 
 	void update(T t);
-
-	void delete(T t);
 }

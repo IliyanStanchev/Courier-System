@@ -8,26 +8,26 @@ public class Manager {
 	String managerName;
 	String managerPhone;
 
+	public Manager() {
+
+	}
+
 	public Manager(String managerName, String managerPhone) {
 
 		this.managerName = managerName;
 		this.managerPhone = managerPhone;
 	}
 
-	public Manager() {
-
-	}
-
 	public String getManagerName() {
 		return managerName;
 	}
 
-	public void setManagerName(String managerName) {
-		this.managerName = managerName;
-	}
-
 	public String getManagerPhone() {
 		return managerPhone;
+	}
+
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
 	}
 
 	public void setManagerPhone(String managerPhone) {

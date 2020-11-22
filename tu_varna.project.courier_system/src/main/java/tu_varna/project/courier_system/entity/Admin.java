@@ -23,7 +23,7 @@ public class Admin extends User {
 	public void loadController() {
 		FXMLLoader loader = OpenNewForm.openNewForm("AdministratorWorkspaceForm.fxml", "Admin workspace");
 		AdminFormController next = loader.getController();
-		next.setUserID(this.getId());
+		next.setUser(this);
 
 	}
 }

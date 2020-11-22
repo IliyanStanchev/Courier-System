@@ -14,11 +14,49 @@ public class FieldValidation {
 		return false;
 	}
 
+	public static boolean bulstatValidation(TextField field, Label validationLabel) {
+		boolean isEmpty = DataValidation.textFieldisEmpty(field, validationLabel, "The field is empty.");
+		if (!isEmpty) {
+			boolean isNumeric = DataValidation.textNumeric(field, validationLabel, "Wrong numeric format.");
+			return isNumeric;
+		}
+		return false;
+	}
+
 	public static boolean emailValidation(TextField field, Label validationLabel) {
 		boolean isEmpty = DataValidation.textFieldisEmpty(field, validationLabel, "The field is empty.");
 		if (!isEmpty) {
 			boolean isEmail = DataValidation.emailFormat(field, validationLabel, "Wrong email format.");
 			return isEmail;
+		}
+		return false;
+
+	}
+
+	public static boolean numberValidation(TextField field, Label validationLabel) {
+		boolean isEmpty = DataValidation.textFieldisEmpty(field, validationLabel, "The field is empty.");
+		if (!isEmpty) {
+			boolean isNumeric = DataValidation.textNumeric(field, validationLabel, "Wrong phone number format.");
+			return isNumeric;
+		}
+		return false;
+	}
+
+	public static boolean passwordLength(TextField field, Label validationLabel) {
+		boolean isEmpty = DataValidation.textFieldisEmpty(field, validationLabel, "The field is empty.");
+		if (!isEmpty) {
+			boolean isSixSymbolsLong = DataValidation.dataLength(field, validationLabel,
+					"Password must be at least 6 characters long.", 6);
+			return isSixSymbolsLong;
+		}
+		return false;
+	}
+
+	public static boolean priceValidation(TextField field, Label validationLabel) {
+		boolean isEmpty = DataValidation.textFieldisEmpty(field, validationLabel, "The field is empty.");
+		if (!isEmpty) {
+			boolean isPrice = DataValidation.priceFormat(field, validationLabel, "Wrong price format.");
+			return isPrice;
 		}
 		return false;
 
@@ -35,25 +73,6 @@ public class FieldValidation {
 
 	}
 
-	public static boolean priceValidation(TextField field, Label validationLabel) {
-		boolean isEmpty = DataValidation.textFieldisEmpty(field, validationLabel, "The field is empty.");
-		if (!isEmpty) {
-			boolean isPrice = DataValidation.priceFormat(field, validationLabel, "Wrong price format.");
-			return isPrice;
-		}
-		return false;
-
-	}
-
-	public static boolean numberValidation(TextField field, Label validationLabel) {
-		boolean isEmpty = DataValidation.textFieldisEmpty(field, validationLabel, "The field is empty.");
-		if (!isEmpty) {
-			boolean isNumeric = DataValidation.textNumeric(field, validationLabel, "Wrong phone number format.");
-			return isNumeric;
-		}
-		return false;
-	}
-
 	public static boolean usernameValidation(TextField field, Label validationLabel) {
 		boolean isEmpty = DataValidation.textFieldisEmpty(field, validationLabel, "The field is empty.");
 		if (!isEmpty) {
@@ -61,29 +80,11 @@ public class FieldValidation {
 			 * boolean isUnique = DataValidation.isUnique("username", field,
 			 * validationLabel, "This username is already taken!"); return isUnique;
 			 */
-			boolean isUsername = DataValidation.isUsername(field, validationLabel, "Username may contain only letters, numbers, _ , -, .");
+			boolean isUsername = DataValidation.isUsername(field, validationLabel,
+					"Username may contain only letters, numbers, _ , -, .");
 			return isUsername;
 		}
 
-		return false;
-	}
-
-	public static boolean bulstatValidation(TextField field, Label validationLabel) {
-		boolean isEmpty = DataValidation.textFieldisEmpty(field, validationLabel, "The field is empty.");
-		if (!isEmpty) {
-			boolean isNumeric = DataValidation.textNumeric(field, validationLabel, "Wrong numeric format.");
-			return isNumeric;
-		}
-		return false;
-	}
-
-	public static boolean passwordLength(TextField field, Label validationLabel) {
-		boolean isEmpty = DataValidation.textFieldisEmpty(field, validationLabel, "The field is empty.");
-		if (!isEmpty) {
-			boolean isSixSymbolsLong = DataValidation.dataLength(field, validationLabel,
-					"Password must be at least 6 characters long.", 6);
-			return isSixSymbolsLong;
-		}
 		return false;
 	}
 }

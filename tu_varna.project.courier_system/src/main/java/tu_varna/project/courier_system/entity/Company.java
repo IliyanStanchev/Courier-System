@@ -44,81 +44,71 @@ public class Company {
 
 	}
 
-	public Company(int id, String companyName, String manager, String phone_number, String country, String city,
-			String street) {
-
-		this.id = id;
-		this.companyName = companyName;
-		this.manager = new Manager(manager, phone_number);
-		this.setAddress(new Address(country, city, street));
-		this.dateOfCreation = LocalDate.now();
-	}
-
-	public Manager getManager() {
-		return manager;
-	}
-
-	public void setManager(Manager manager) {
-		this.manager = manager;
-	}
-
-	public List<Office> getOffices() {
-		return offices;
-	}
-
-	public void setOffices(List<Office> offices) {
-		this.offices = offices;
+	public Address getAddress() {
+		return address;
 	}
 
 	public String getCompanyName() {
 		return companyName;
 	}
 
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
+	public LocalDate getDateOfCreation() {
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+		return dateOfCreation;
 	}
 
 	public List<Courier> getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(List<Courier> employees) {
-		this.employees = employees;
+	public int getId() {
+		return id;
 	}
 
-	@Override
-	public String toString() {
-		return "CourierFirm [id=" + id + ", companyName=" + companyName + ", manager=" + manager + "]";
+	public Manager getManager() {
+		return manager;
+	}
+
+	public List<Office> getOffices() {
+		return offices;
 	}
 
 	public List<Shipment> getShipments() {
 		return shipments;
 	}
 
-	public void setShipments(List<Shipment> shipments) {
-		this.shipments = shipments;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
 	public void setAddress(Address address) {
 		this.address = address;
 	}
 
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public void setEmployees(List<Courier> employees) {
+		this.employees = employees;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
+
+	public void setOffices(List<Office> offices) {
+		this.offices = offices;
+	}
+
+	public void setShipments(List<Shipment> shipments) {
+		this.shipments = shipments;
+	}
+	
 	public int getSuccesfulOrders() {
 		int number = 0;
 		for (Shipment s : this.shipments) {
-			if (s.getStatus() == status.delivered)
+			if (s.getStatus() == status.delivered || s.getStatus() == status.accepted)
 				number++;
 		}
 		return number;
@@ -132,29 +122,27 @@ public class Company {
 		}
 		return number;
 	}
+	
+	public Company(int id, String companyName, String manager, String phone_number, String country, String city,
+			String street) {
+
+		this.id = id;
+		this.companyName = companyName;
+		this.manager = new Manager(manager, phone_number);
+		this.setAddress(new Address(country, city, street));
+		this.dateOfCreation = LocalDate.now();
+	}
 
 	public int getActiveOrders() {
 		int number = 0;
 		for (Shipment s : this.shipments) {
-			if (s.getStatus() != status.delivered && s.getStatus() != status.declined)
+			if (s.getStatus() != status.delivered && s.getStatus() != status.declined
+					&& s.getStatus() != status.accepted)
 				number++;
 		}
 		return number;
 	}
 
-	public List<Shipment> getPendingOrders() {
-		List<Shipment> toReturn = new ArrayList<Shipment>();
-		for (Shipment s : this.shipments) {
-			if (s.getStatus() == status.pending || s.getStatus()==status.in_proccess_of_return) {
-				toReturn.add(s);
-			}
-		}
-		return toReturn;
-	}
 
-	public LocalDate getDateOfCreation() {
-
-		return dateOfCreation;
-	}
 
 }

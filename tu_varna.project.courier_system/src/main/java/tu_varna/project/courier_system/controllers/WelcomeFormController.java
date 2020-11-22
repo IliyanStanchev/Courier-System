@@ -6,13 +6,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import tu_varna.project.courier_system.entity.User;
+import tu_varna.project.courier_system.helper.CloseForm;
 import tu_varna.project.courier_system.helper.DataValidation;
-import tu_varna.project.courier_system.helper.LogOut;
 import tu_varna.project.courier_system.services.LoginService;
+import tu_varna.project.courier_system.services.LoginServiceImpl;
 
 public class WelcomeFormController {
 
-	private LoginService login = new LoginService();
+	private LoginService loginService = new LoginServiceImpl();
 
 	@FXML
 	private TextField username;
@@ -36,16 +37,17 @@ public class WelcomeFormController {
 
 		boolean usernameIsEmpty = DataValidation.textFieldisEmpty(this.username, this.usernameLabel, "No data");
 		boolean passwordIsEmpty = DataValidation.textFieldisEmpty(this.password, this.passwordLabel, "No data");
+
 		if (!usernameIsEmpty && !passwordIsEmpty) {
 			String username = this.username.getText();
 			String password = this.password.getText();
 
-			User user = login.authenticateUserLogin(username, password);
+			User user = loginService.authenticateUserLogin(username, password);
 			if (user != null) {
 
 				user.loadController();
-					LogOut.logOut(event);
-			
+				CloseForm.closeForm(event);
+
 			} else {
 				resultLabel.setText("Wrong username or password");
 				this.username.clear();

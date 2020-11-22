@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polyline?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="577.0" prefWidth="576.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tu_varna.project.courier_system.controllers.BillOfLoadingFormController">
+   <children>
+      <AnchorPane layoutX="-14.0" prefHeight="582.0" prefWidth="590.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <ImageView fitHeight="107.0" fitWidth="146.0" layoutX="427.0" layoutY="406.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/circle.jpg" />
+               </image>
+            </ImageView>
+            <Label fx:id="companyName" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="61.0" prefWidth="296.0" text="Label">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Label>
+            <Line endX="288.79998779296875" endY="-14.000001907348633" layoutX="61.0" layoutY="15.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="4.0" />
+            <Line endX="288.79998779296875" endY="-18.999998092651367" layoutX="80.0" layoutY="19.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="5.0" />
+            <Line endX="288.79998779296875" endY="-14.000001907348633" layoutX="71.0" layoutY="16.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="4.0" />
+            <Line endX="288.79998779296875" endY="-14.000001907348633" layoutX="83.0" layoutY="15.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="3.0" />
+            <Line endX="288.79998779296875" endY="-18.999998092651367" layoutX="102.0" layoutY="19.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="2.0" />
+            <Line endX="288.79998779296875" endY="-14.000001907348633" layoutX="93.0" layoutY="16.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="4.0" />
+            <Line endX="288.79998779296875" endY="-14.000001907348633" layoutX="105.0" layoutY="15.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="7.0" />
+            <Line endX="288.79998779296875" endY="-18.999998092651367" layoutX="124.0" layoutY="19.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="2.0" />
+            <Line endX="288.79998779296875" endY="-14.000001907348633" layoutX="115.0" layoutY="16.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="4.0" />
+            <Line endX="288.79998779296875" endY="-14.000001907348633" layoutX="127.0" layoutY="15.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="3.0" />
+            <Line endX="288.79998779296875" endY="-18.999998092651367" layoutX="146.0" layoutY="19.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="2.0" />
+            <Line endX="288.79998779296875" endY="-14.000001907348633" layoutX="137.0" layoutY="16.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="4.0" />
+            <Line endX="288.79998779296875" endY="-14.000001907348633" layoutX="149.0" layoutY="13.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="3.0" />
+            <Line endX="288.79998779296875" endY="-18.999998092651367" layoutX="168.0" layoutY="17.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="2.0" />
+            <Line endX="288.79998779296875" endY="-14.000001907348633" layoutX="159.0" layoutY="14.0" startX="288.79998779296875" startY="70.12892150878906" strokeWidth="4.0" />
+            <Label fx:id="companyBulstat" layoutX="467.0" layoutY="31.0" prefHeight="26.0" prefWidth="66.0" text="bulstat" />
+            <Line endX="-1.8000001907348633" endY="87.19998168945312" layoutX="17.0" layoutY="98.0" startX="568.5999755859375" startY="87.19998168945312" strokeWidth="4.0" />
+            <Line endX="118.00000762939453" endY="87.20001220703125" layoutX="-102.0" layoutY="184.0" startX="692.4000244140625" startY="87.20001220703125" strokeWidth="4.0" />
+            <Label layoutX="24.0" layoutY="96.0" prefHeight="26.0" prefWidth="66.0" text="Sender:" />
+            <Label layoutX="328.0" layoutY="96.0" prefHeight="26.0" prefWidth="66.0" text="Receiver:" />
+            <Label fx:id="senderName" layoutX="24.0" layoutY="122.0" prefHeight="26.0" prefWidth="266.0" text="Label">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="senderAddress" layoutX="24.0" layoutY="148.0" prefHeight="26.0" prefWidth="266.0" text="Label">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="receiverName" layoutX="326.0" layoutY="122.0" prefHeight="26.0" prefWidth="226.0" text="Label">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="receiverAddress" layoutX="328.0" layoutY="148.0" prefHeight="26.0" prefWidth="219.0" text="Label">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="24.0" layoutY="197.0" prefHeight="26.0" prefWidth="66.0" text="Type:" />
+            <Label fx:id="type" layoutX="24.0" layoutY="232.0" prefHeight="26.0" prefWidth="266.0" text="Label">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="326.0" layoutY="197.0" prefHeight="26.0" prefWidth="66.0" text="Price:" />
+            <Label fx:id="price" layoutX="325.0" layoutY="232.0" prefHeight="26.0" prefWidth="219.0" text="Label">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="322.0" layoutY="289.0" prefHeight="26.0" prefWidth="66.0" text="Receiver:" />
+            <Line endX="108.80001068115234" endY="87.20001220703125" layoutX="-92.0" layoutY="196.0" startX="679.9999389648438" startY="87.20001220703125" strokeWidth="4.0" />
+            <Line endX="113.00001525878906" endY="87.19998168945312" layoutX="-95.0" layoutY="274.0" startX="676.9999389648438" startY="87.19998168945312" strokeWidth="4.0" />
+            <Label layoutX="22.0" layoutY="289.0" prefHeight="26.0" prefWidth="66.0" text="Sender:" />
+            <Label layoutX="27.0" layoutY="315.0" prefHeight="26.0" prefWidth="226.0" text="/ /">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="332.0" layoutY="315.0" prefHeight="26.0" prefWidth="226.0" text="/ /">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Line endX="83.19999694824219" endY="87.20001220703125" layoutX="-64.0" layoutY="404.0" startX="369.6000061035156" startY="87.20001220703125" strokeWidth="4.0" />
+            <Label fx:id="shipmentNumer" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="391.0" prefHeight="62.0" prefWidth="266.0" text="shipmentN">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="500.0" prefHeight="26.0" prefWidth="66.0" text="Courier:" />
+            <Label layoutX="27.0" layoutY="526.0" prefHeight="26.0" prefWidth="226.0" text="/ /">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="308.0" layoutY="406.0" opacity="0.43" prefHeight="26.0" prefWidth="276.0" text="CASH ON DELIVERY">
+               <font>
+                  <Font name="Arial" size="28.0" />
+               </font>
+            </Label>
+            <Line endX="288.79998779296875" endY="-14.000001907348633" layoutX="13.0" layoutY="21.0" startX="288.7999572753906" startY="556.0" strokeWidth="10.0" />
+            <Label fx:id="date" layoutX="332.0" layoutY="501.0" prefHeight="50.0" prefWidth="167.0" text="date">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Polyline fill="WHITE" layoutX="479.0" layoutY="469.0" points="-43.0, -32.800018310546875, 43.4000244140625, -32.800018310546875, -3.0, 39.199981689453125, -43.0, -32.800018310546875" strokeType="INSIDE" />
+            <Label layoutX="442.0" layoutY="453.0" prefHeight="62.0" prefWidth="113.0" text="CS">
+               <font>
+                  <Font name="Bodoni MT Condensed Bold Italic" size="32.0" />
+               </font>
+            </Label>
+            <Label fx:id="companyName2" layoutX="453.0" layoutY="444.0" prefHeight="10.0" prefWidth="86.0" text="Label">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Line endX="4.399975776672363" endY="87.20000457763672" startX="557.2000122070312" startY="87.20000457763672" strokeWidth="10.0" />
+   </children>
+</AnchorPane>

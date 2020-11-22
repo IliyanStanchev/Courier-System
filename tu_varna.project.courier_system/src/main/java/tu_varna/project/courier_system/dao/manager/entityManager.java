@@ -1,4 +1,4 @@
-package tu_varna.project.courier_system.dao;
+package tu_varna.project.courier_system.dao.manager;
 
 import java.util.function.Consumer;
 
@@ -9,14 +9,10 @@ import javax.persistence.Persistence;
 
 public class entityManager {
 
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistence");
-	private EntityManager entityManager = emf.createEntityManager();
+	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistence");
+	private static final EntityManager entityManager = emf.createEntityManager();
 
-	public EntityManager getEntityManager() {
-		return entityManager;
-	}
-
-	public void executeInsideTransaction(Consumer<EntityManager> action) {
+	public static void executeInsideTransaction(Consumer<EntityManager> action) {
 		EntityTransaction tx = entityManager.getTransaction();
 		try {
 			tx.begin();
@@ -26,6 +22,10 @@ public class entityManager {
 			tx.rollback();
 			throw e;
 		}
+	}
+
+	public static EntityManager getEntityManager() {
+		return entityManager;
 	}
 
 }

@@ -2,21 +2,24 @@ package tu_varna.project.courier_system.controllers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.helper.FieldValidation;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.UserServiceImpl;
 
-public class CreateClientFormController{
+public class CreateClientFormController {
 
 	private static final Logger logger = LogManager.getLogger(CreateClientFormController.class);
 
-	private UserService service = new UserServiceImpl();
+	private UserService userService = new UserServiceImpl();
+
 	@FXML
 	private TextField username;
 	@FXML
@@ -55,6 +58,7 @@ public class CreateClientFormController{
 	private Label streetNValidationLabel;
 	@FXML
 	private Label resultLabel;
+
 	private boolean countryV;
 	private boolean passwordV;
 	private boolean cityV;
@@ -64,8 +68,12 @@ public class CreateClientFormController{
 	private boolean emailV;
 	private boolean usernameV;
 	private boolean confirmPV;
-	
-	
+
+	@FXML
+	void cityValidation(KeyEvent event) {
+		cityV = FieldValidation.alphabetValidation(this.city, this.cityValidationLabel);
+	}
+
 	@FXML
 	private void confirmPasswordValidation(KeyEvent event) {
 		this.confirmPWValidationLabel.setText("");
@@ -74,14 +82,10 @@ public class CreateClientFormController{
 			this.confirmPWValidationLabel.setText("The passwords do not match");
 		}
 	}
+
 	@FXML
 	private void countryValidation(KeyEvent event) {
 		countryV = FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
-	}
-
-	@FXML
-	void cityValidation(KeyEvent event) {
-		cityV = FieldValidation.alphabetValidation(this.city, this.cityValidationLabel);
 	}
 
 	@FXML
@@ -114,38 +118,39 @@ public class CreateClientFormController{
 		usernameV = FieldValidation.usernameValidation(this.username, this.usernameValidationLabel);
 	}
 
-
 	@FXML
 	public void createClient(ActionEvent event) {
-		if(areAllFieldsFull()) {
-		String username = this.username.getText();
-		String password = this.password.getText();
-		String name = this.name.getText();
-		String phoneNmb = this.phoneNmb.getText();
-		String email = this.email.getText();
-		String country = this.country.getText();
-		String city = this.city.getText();
-		String streetN = this.streetN.getText();
-		System.out.println(password);
 
-		boolean check = service.CreateClient(username, password, name, email, phoneNmb, country, city, streetN);
-		if (check) {
-			resultLabel.setText("Client created succesfully!");
-			logger.info("Client [ " + username + " , " + password + " ] successfully created by administrator! ");
+		if (areAllFieldsFull()) {
 
-		} else 
-			resultLabel.setText("Error! Client username or phone are already taken!");
-		
+			String username = this.username.getText();
+			String password = this.password.getText();
+			String name = this.name.getText();
+			String phoneNmb = this.phoneNmb.getText();
+			String email = this.email.getText();
+			String country = this.country.getText();
+			String city = this.city.getText();
+			String streetN = this.streetN.getText();
 
+			boolean check = userService
+					.createClient(new Client(username, password, name, email, phoneNmb, country, city, streetN));
+			if (check) {
+				resultLabel.setText("Client created succesfully!");
+				logger.info("Client [ " + username + " , " + password + " ] successfully created by administrator! ");
+
+			} else
+				resultLabel.setText("Error! Client username or phone are already taken!");
+
+		}
 	}
-	}
+
 	private boolean areAllFieldsFull() {
-		boolean areCorrect = passwordV && confirmPV && usernameV && streetV && countryV && cityV && emailV && nameV && numberV;
+		boolean areCorrect = passwordV && confirmPV && usernameV && streetV && countryV && cityV && emailV && nameV
+				&& numberV;
 		if (!areCorrect) {
 			this.resultLabel.setText("Fill in all fields!");
 		}
 		return areCorrect;
 	}
 
-	
 }

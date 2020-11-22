@@ -3,8 +3,10 @@ package tu_varna.project.courier_system.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,20 +18,23 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tu_varna.project.courier_system.entity.Address;
+import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.entity.Shipment;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.ShipmentDelivery;
-import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.services.ShipmentService;
+import tu_varna.project.courier_system.services.ShipmentServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
 public class PendingShipmentsFormController implements Initializable {
 
 	private static final Logger logger = LogManager.getLogger(PendingShipmentsFormController.class);
 
-	UserService service = new UserServiceImpl();
-	private int courier_id;
+	private ShipmentService shipmentService = new ShipmentServiceImpl();
+
+	private Courier courier;
+
 	@FXML
 	private TableView<ShipmentView> requestedShipmentsView;
 	@FXML
@@ -50,17 +55,20 @@ public class PendingShipmentsFormController implements Initializable {
 	private Label acceptValidationLabel;
 	@FXML
 	private Label detailValidationLabel;
+
 	private ObservableList<ShipmentView> requestedShipments = FXCollections.observableArrayList();
 	private ObservableList<ShipmentView> acceptedShipments = FXCollections.observableArrayList();
 
 	@FXML
 	private void acceptRequest(ActionEvent event) {
+
 		ShipmentView selectedShipment = requestedShipmentsView.getSelectionModel().getSelectedItem();
 		if (selectedShipment != null) {
 			acceptedShipments.add(selectedShipment);
-			Shipment shipment = service.SearchShipmentByID(selectedShipment.getNumber());
-			service.setShipmentCourier(shipment, courier_id);
-			logger.info("Shipment with id: " + shipment.getId() + " has been taken by courier with id: " + courier_id);
+			Shipment shipment = shipmentService.getShipmentByID(selectedShipment.getNumber());
+			shipmentService.setCourierOfShipment(shipment, courier);
+			logger.info(
+					"Shipment with id: " + shipment.getId() + " has been taken by courier with id: " + courier.getId());
 			new ShipmentDelivery(shipment);
 			requestedShipmentsView.getItems().remove(selectedShipment);
 		} else
@@ -68,48 +76,49 @@ public class PendingShipmentsFormController implements Initializable {
 
 	}
 
-	@FXML
-	private void shipmentDetails(ActionEvent event) throws IOException {
-		ShipmentView selectedShipment = acceptedShipmentsView.getSelectionModel().getSelectedItem();
-		if (selectedShipment != null) {
-			FXMLLoader loader = OpenNewForm.openNewForm("ShipmentDetailsForm.fxml", "Details");
-			ShipmentDetailFormController next = loader.getController();
-			Shipment shipment = service.SearchShipmentByID(selectedShipment.getNumber());
-			next.setChoosedShipment(shipment);
-		} else
-			detailValidationLabel.setText("First select");
+	private void addToCourierShipmentsTable(ShipmentView shipment) {
+		acceptedShipments.add(shipment);
+	}
 
+	private void addToListTable(ShipmentView shipment) {
+		requestedShipments.add(shipment);
+	}
+
+	public void getPendingShipments(Courier courier, Company company) {
+
+		this.courier = courier;
+
+		for (ShipmentView shipment : shipmentService.getPendingOrders(company)) {
+			addToListTable(shipment);
+		}
+		for (ShipmentView shipment : shipmentService.getCourierActiveShipments(courier)) {
+			addToCourierShipmentsTable(shipment);
+		}
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.numberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
-		this.fromColumn.setCellValueFactory(new PropertyValueFactory<>("from")); // kak raboti?
+		this.fromColumn.setCellValueFactory(new PropertyValueFactory<>("from"));
 		this.toColumn.setCellValueFactory(new PropertyValueFactory<>("to"));
 		this.numberAColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
-		this.fromAColumn.setCellValueFactory(new PropertyValueFactory<>("from")); // kak raboti?
+		this.fromAColumn.setCellValueFactory(new PropertyValueFactory<>("from"));
 		this.toAColumn.setCellValueFactory(new PropertyValueFactory<>("to"));
 		requestedShipmentsView.setItems(requestedShipments);
 		acceptedShipmentsView.setItems(acceptedShipments);
 
 	}
 
-	private void addToListTabel(int number, Address from, Address to) {
-		requestedShipments.add(new ShipmentView(number, from, to));
-	}
+	@FXML
+	private void shipmentDetails(ActionEvent event) throws IOException {
 
-	private void addToCourierShipmentsTable(int number, Address from, Address to) {
-		acceptedShipments.add(new ShipmentView(number, from, to));
-	}
+		ShipmentView selectedShipment = acceptedShipmentsView.getSelectionModel().getSelectedItem();
+		if (selectedShipment != null) {
+			FXMLLoader loader = OpenNewForm.openNewForm("ShipmentDetailsForm.fxml", "Details");
+			ShipmentDetailFormController next = loader.getController();
+			next.setChoosedShipment(shipmentService.getShipmentByID(selectedShipment.getNumber()));
+		} else
+			detailValidationLabel.setText("First select");
 
-	public void getPendingShipments(int courier_id, int company_id) {
-		Courier courier = (Courier) service.getUserByID(courier_id);
-		this.courier_id = courier_id;
-		for (Shipment s : service.SearchCourierFirm(company_id).getPendingOrders()) {
-			addToListTabel(s.getId(), s.getSender().getAddress(), s.getReceiver().getAddress());
-		}
-		for (Shipment s : courier.getShipmentsInProgress()) {
-			addToCourierShipmentsTable(s.getId(), s.getSender().getAddress(), s.getReceiver().getAddress());
-		}
 	}
 }

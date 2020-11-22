@@ -37,8 +37,6 @@ public abstract class User {
 
 	private Address address;
 
-	public abstract void loadController();
-
 	public User() {
 
 	}
@@ -54,64 +52,66 @@ public abstract class User {
 		this.address = new Address(country, city, street);
 	}
 
-	public List<Notification> getNotifications() {
-		return notifications;
-	}
-
-	public void setNotifications(List<Notification> notifications) {
-		this.notifications = notifications;
-	}
-
 	public Address getAddress() {
 		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getLoginUsername() {
-		return loginUsername;
-	}
-
-	public void setLoginUsername(String loginUsername) {
-		this.loginUsername = loginUsername;
-	}
-
-	public String getLoginPassword() {
-		return loginPassword;
-	}
-
-	public void setLoginPassword(String loginPassword) {
-		this.loginPassword = loginPassword;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public int getId() {
+		return id;
+	}
+
+	public String getLoginPassword() {
+		return loginPassword;
+	}
+
+	public String getLoginUsername() {
+		return loginUsername;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public List<Notification> getNotifications() {
+		return notifications;
 	}
 
 	public String getPhoneNumber() {
 		return phoneNumber;
+	}
+
+	public abstract void loadController();
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setLoginPassword(String loginPassword) {
+		this.loginPassword = loginPassword;
+	}
+
+	public void setLoginUsername(String loginUsername) {
+		this.loginUsername = loginUsername;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
@@ -122,6 +122,15 @@ public abstract class User {
 	public String toString() {
 		return "User id=" + id + ", loginUsername=" + loginUsername + ", loginPassword=" + loginPassword + ", name="
 				+ name + ", email=" + email + ", phoneNumber=" + phoneNumber + ", address=" + address + "\n";
+	}
+
+	public boolean hasNotifications() {
+		for (Notification notification : notifications) {
+			if (notification.Isseen() == false) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

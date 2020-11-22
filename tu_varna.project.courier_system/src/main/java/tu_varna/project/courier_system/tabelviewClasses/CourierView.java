@@ -12,28 +12,28 @@ public class CourierView {
 		this.company = company;
 	}
 
-	public String getName() {
-		return name;
+	public String getCompany() {
+		return company;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getName() {
+		return name;
 	}
 
 	public String getPhoneNmb() {
 		return phoneNmb;
 	}
 
-	public void setPhoneNmb(String phoneNmb) {
-		this.phoneNmb = phoneNmb;
-	}
-
-	public String getCompany() {
-		return company;
-	}
-
 	public void setCompany(String company) {
 		this.company = company;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPhoneNmb(String phoneNmb) {
+		this.phoneNmb = phoneNmb;
 	}
 
 }

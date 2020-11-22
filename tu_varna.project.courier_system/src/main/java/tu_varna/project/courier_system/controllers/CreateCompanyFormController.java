@@ -2,19 +2,22 @@ package tu_varna.project.courier_system.controllers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import tu_varna.project.courier_system.helper.FieldValidation;
-import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.services.CompanyService;
+import tu_varna.project.courier_system.services.CompanyServiceImpl;
 
 public class CreateCompanyFormController {
 
 	private static final Logger logger = LogManager.getLogger(CreateCompanyFormController.class);
-	private UserService service = new UserServiceImpl();
+
+	private CompanyService companyService = new CompanyServiceImpl();
+
 	@FXML
 	private TextField name;
 	@FXML
@@ -45,6 +48,7 @@ public class CreateCompanyFormController {
 	private Label cityValidationLabel;
 	@FXML
 	private Label streetNValidationLabel;
+
 	private boolean countryV;
 	private boolean cityV;
 	private boolean numberV;
@@ -54,8 +58,8 @@ public class CreateCompanyFormController {
 	private boolean bulstatV;
 
 	@FXML
-	private void countryValidation(KeyEvent event) {
-		countryV = FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
+	private void bulstatValidation(KeyEvent event) {
+		bulstatV = FieldValidation.bulstatValidation(this.bulstat, this.bulstatValidationLabel);
 	}
 
 	@FXML
@@ -64,18 +68,13 @@ public class CreateCompanyFormController {
 	}
 
 	@FXML
-	private void streetNValidation(KeyEvent event) {
-		streetV = FieldValidation.streetNValidation(this.streetN, this.streetNValidationLabel);
+	private void countryValidation(KeyEvent event) {
+		countryV = FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
 	}
 
 	@FXML
-	private void phoneNmbValidation(KeyEvent event) {
-		numberV = FieldValidation.numberValidation(this.phoneNmb, this.phoneNmbValidationLabel);
-	}
-
-	@FXML
-	private void bulstatValidation(KeyEvent event) {
-		bulstatV = FieldValidation.bulstatValidation(this.bulstat, this.bulstatValidationLabel);
+	void managerValidation(KeyEvent event) {
+		managerV = FieldValidation.alphabetValidation(this.manager, this.managerValidationLabel);
 	}
 
 	@FXML
@@ -84,8 +83,13 @@ public class CreateCompanyFormController {
 	}
 
 	@FXML
-	void managerValidation(KeyEvent event) {
-		managerV = FieldValidation.alphabetValidation(this.manager, this.managerValidationLabel);
+	private void phoneNmbValidation(KeyEvent event) {
+		numberV = FieldValidation.numberValidation(this.phoneNmb, this.phoneNmbValidationLabel);
+	}
+
+	@FXML
+	private void streetNValidation(KeyEvent event) {
+		streetV = FieldValidation.streetNValidation(this.streetN, this.streetNValidationLabel);
 	}
 
 	@FXML
@@ -98,7 +102,7 @@ public class CreateCompanyFormController {
 			String country = this.country.getText();
 			String city = this.city.getText();
 			String streetN = this.streetN.getText();
-			boolean check = service.CreateCourierFirm(bulstat, name, manager, phoneNmb, country, city, streetN);
+			boolean check = companyService.createCompany(bulstat, name, manager, phoneNmb, country, city, streetN);
 			if (check) {
 				resultLabel.setText("Company created succesfully!");
 				logger.info("Company [ " + bulstat + " , " + name + " ] successfully created by administrator! ");

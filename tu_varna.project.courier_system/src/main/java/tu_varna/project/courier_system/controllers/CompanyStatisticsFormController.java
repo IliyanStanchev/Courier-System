@@ -1,13 +1,17 @@
 package tu_varna.project.courier_system.controllers;
 
-
 import java.time.format.DateTimeFormatter;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import tu_varna.project.courier_system.entity.Company;
+import tu_varna.project.courier_system.services.ShipmentService;
+import tu_varna.project.courier_system.services.ShipmentServiceImpl;
 
 public class CompanyStatisticsFormController {
+
+	private ShipmentService shipmentService = new ShipmentServiceImpl();
 
 	@FXML
 	private Label companyName;
@@ -27,8 +31,8 @@ public class CompanyStatisticsFormController {
 		this.companyName.setText(company.getCompanyName());
 		this.dateOfceation.setText(company.getDateOfCreation().format(DateTimeFormatter.ofPattern("dd.MMMM yyyy")));
 		this.couriersNumber.setText(Integer.toString(company.getEmployees().size()));
-		this.successfullyOrders.setText(Integer.toString(company.getSuccesfulOrders()));
-		this.unsuccessfullyOrders.setText(Integer.toString(company.getUnsuccesfulOrders()));
+		this.successfullyOrders.setText(Long.toString(shipmentService.getOrders(company, true)));
+		this.unsuccessfullyOrders.setText(Long.toString(shipmentService.getOrders(company, false)));
 		this.officesNumber.setText(Integer.toString(company.getOffices().size()));
 	}
 

@@ -2,6 +2,7 @@ package tu_varna.project.courier_system.controllers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,9 +20,10 @@ public class ClientProfileFormController {
 
 	private static final Logger logger = LogManager.getLogger(ClientProfileFormController.class);
 
-	UserService service = new UserServiceImpl();
+	UserService userService = new UserServiceImpl();
 
 	private Client client;
+
 	@FXML
 	private PasswordField password;
 	@FXML
@@ -82,37 +84,27 @@ public class ClientProfileFormController {
 	}
 
 	@FXML
-	private void saveAddress(ActionEvent event) {
-		service.ChangeUserAddress(client, country.getText(), city.getText(), streetN.getText());
-		logger.info("Client with id: " + client.getId() + " updated his address!");
-		this.country.setDisable(true);
-		this.city.setDisable(true);
-		this.streetN.setDisable(true);
+	private void cityValidation(KeyEvent event) {
 		this.addressSaveB.setDisable(true);
+		boolean isCorrect = FieldValidation.alphabetValidation(this.city, this.cityValidationLabel);
+		if (isCorrect)
+			this.addressSaveB.setDisable(false);
 	}
 
 	@FXML
-	private void saveEmail(ActionEvent event) {
-		service.ChangeUserEmail(client, email.getText());
-		logger.info("Client with id: " + client.getId() + " updated his email!");
-		this.email.setDisable(true);
+	private void countryValidation(KeyEvent event) {
+		this.addressSaveB.setDisable(true);
+		boolean isCorrect = FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
+		if (isCorrect)
+			this.addressSaveB.setDisable(false);
+	}
+
+	@FXML
+	private void emailValidation(KeyEvent event) {
 		this.emailSaveB.setDisable(true);
-	}
-
-	@FXML
-	private void savePassword(ActionEvent event) {
-		service.ChangeUserPassword(client, password.getText());
-		logger.info("Client with id: " + client.getId() + " updated his password!");
-		this.password.setDisable(true);
-		this.passwordSaveB.setDisable(true);
-	}
-
-	@FXML
-	private void savePhoneN(ActionEvent event) {
-		service.ChangeUserPhone(client, phoneN.getText());
-		logger.info("Client with id: " + client.getId() + " updated his phone number!");
-		this.phoneN.setDisable(true);
-		this.phoneNSaveB.setDisable(true);
+		boolean isCorrect = FieldValidation.emailValidation(this.email, this.emailValidationLabel);
+		if (isCorrect)
+			this.emailSaveB.setDisable(false);
 	}
 
 	@FXML
@@ -125,35 +117,11 @@ public class ClientProfileFormController {
 	}
 
 	@FXML
-	private void emailValidation(KeyEvent event) {
-		this.emailSaveB.setDisable(true);
-		boolean isCorrect = FieldValidation.emailValidation(this.email, this.emailValidationLabel);
-		if (isCorrect)
-			this.emailSaveB.setDisable(false);
-	}
-
-	@FXML
 	private void phoneNmbValidation(KeyEvent event) {
 		this.phoneNSaveB.setDisable(true);
 		boolean isCorrect = FieldValidation.numberValidation(this.phoneN, this.phoneNValidationLabel);
 		if (isCorrect)
 			this.phoneNSaveB.setDisable(false);
-	}
-
-	@FXML
-	private void countryValidation(KeyEvent event) {
-		this.addressSaveB.setDisable(true);
-		boolean isCorrect = FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
-		if (isCorrect)
-			this.addressSaveB.setDisable(false);
-	}
-
-	@FXML
-	private void cityValidation(KeyEvent event) {
-		this.addressSaveB.setDisable(true);
-		boolean isCorrect = FieldValidation.alphabetValidation(this.city, this.cityValidationLabel);
-		if (isCorrect)
-			this.addressSaveB.setDisable(false);
 	}
 
 	@FXML
@@ -164,8 +132,43 @@ public class ClientProfileFormController {
 			this.addressSaveB.setDisable(false);
 	}
 
+	@FXML
+	private void saveAddress(ActionEvent event) {
+		userService.changeUserAddress(client, country.getText(), city.getText(), streetN.getText());
+		logger.info("Client with id: " + client.getId() + " updated his address!");
+		this.country.setDisable(true);
+		this.city.setDisable(true);
+		this.streetN.setDisable(true);
+		this.addressSaveB.setDisable(true);
+	}
+
+	@FXML
+	private void saveEmail(ActionEvent event) {
+		userService.changeUserEmail(client, email.getText());
+		logger.info("Client with id: " + client.getId() + " updated his email!");
+		this.email.setDisable(true);
+		this.emailSaveB.setDisable(true);
+	}
+
+	@FXML
+	private void savePassword(ActionEvent event) {
+		userService.changeUserPassword(client, password.getText());
+		logger.info("Client with id: " + client.getId() + " updated his password!");
+		this.password.setDisable(true);
+		this.passwordSaveB.setDisable(true);
+	}
+
+	@FXML
+	private void savePhoneN(ActionEvent event) {
+		userService.changeUserPhone(client, phoneN.getText());
+		logger.info("Client with id: " + client.getId() + " updated his phone number!");
+		this.phoneN.setDisable(true);
+		this.phoneNSaveB.setDisable(true);
+	}
+
 	public void setClientInformation(Client client) {
-		this.client = client;
+
+		this.client = (Client) userService.getUserByID(client.getId());
 		name.setText(client.getName());
 		username.setText(client.getLoginUsername());
 		password.setText(client.getLoginPassword());
