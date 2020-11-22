@@ -16,7 +16,6 @@ public class Admin extends User {
 	public Admin(String loginUsername, String loginPassword, String name, String email, String phoneNumber,
 			String country, String city, String street) {
 		super(loginUsername, loginPassword, name, email, phoneNumber, country, city, street);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

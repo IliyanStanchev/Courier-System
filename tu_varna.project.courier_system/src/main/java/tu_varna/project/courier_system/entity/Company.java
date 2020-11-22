@@ -39,6 +39,16 @@ public class Company {
 	@OneToMany(mappedBy = "firm", cascade = CascadeType.REMOVE)
 	private List<Shipment> shipments = new ArrayList<Shipment>();
 
+	public Company(int id, String companyName, String manager, String phone_number, String country, String city,
+			String street) {
+
+		this.id = id;
+		this.companyName = companyName;
+		this.manager = new Manager(manager, phone_number);
+		this.setAddress(new Address(country, city, street));
+		this.dateOfCreation = LocalDate.now();
+	}
+
 	public Company() {
 		this.dateOfCreation = LocalDate.now();
 
@@ -104,7 +114,7 @@ public class Company {
 	public void setShipments(List<Shipment> shipments) {
 		this.shipments = shipments;
 	}
-	
+
 	public int getSuccesfulOrders() {
 		int number = 0;
 		for (Shipment s : this.shipments) {
@@ -122,16 +132,6 @@ public class Company {
 		}
 		return number;
 	}
-	
-	public Company(int id, String companyName, String manager, String phone_number, String country, String city,
-			String street) {
-
-		this.id = id;
-		this.companyName = companyName;
-		this.manager = new Manager(manager, phone_number);
-		this.setAddress(new Address(country, city, street));
-		this.dateOfCreation = LocalDate.now();
-	}
 
 	public int getActiveOrders() {
 		int number = 0;
@@ -142,7 +142,5 @@ public class Company {
 		}
 		return number;
 	}
-
-
 
 }

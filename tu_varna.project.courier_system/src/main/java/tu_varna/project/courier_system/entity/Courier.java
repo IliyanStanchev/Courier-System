@@ -34,6 +34,22 @@ public class Courier extends User {
 
 	}
 
+	public Company getFirm() {
+		return firm;
+	}
+
+	public List<Shipment> getShipmentsForDelivery() {
+		return shipmentsForDelivery;
+	}
+
+	public void setFirm(Company firm) {
+		this.firm = firm;
+	}
+
+	public void setShipmentsForDelivery(List<Shipment> shipmentsForDelivery) {
+		this.shipmentsForDelivery = shipmentsForDelivery;
+	}
+
 	public int getCancelledShipments() {
 		int number = 0;
 		for (Shipment s : this.shipmentsForDelivery) {
@@ -44,28 +60,12 @@ public class Courier extends User {
 
 	}
 
-	public Company getFirm() {
-		return firm;
-	}
-
-	public List<Shipment> getShipmentsForDelivery() {
-		return shipmentsForDelivery;
-	}
-
 	@Override
 	public void loadController() {
 		FXMLLoader loader = OpenNewForm.openNewForm("CourierWorkspaceForm.fxml", "Courier workspace");
 		CourierWorkspaceFormController next = loader.getController();
 		next.setUser(this);
 
-	}
-
-	public void setFirm(Company firm) {
-		this.firm = firm;
-	}
-
-	public void setShipmentsForDelivery(List<Shipment> shipmentsForDelivery) {
-		this.shipmentsForDelivery = shipmentsForDelivery;
 	}
 
 }
