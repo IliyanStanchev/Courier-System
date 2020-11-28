@@ -1,5 +1,6 @@
 package tu_varna.project.courier_system.test;
 
+import tu_varna.project.courier_system.dao.entityManager;
 import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.entity.Courier;
@@ -10,6 +11,7 @@ import tu_varna.project.courier_system.services.UserServiceImpl;
 
 public class App {
 	public static void main(String[] args) {
+		entityManager.initEntityManager("persistence");
 
 		UserService serv = new UserServiceImpl();
 

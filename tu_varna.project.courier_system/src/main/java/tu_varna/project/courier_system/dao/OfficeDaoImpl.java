@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.PersistenceException;
 
-import tu_varna.project.courier_system.dao.manager.entityManager;
 import tu_varna.project.courier_system.entity.Office;
 
 public class OfficeDaoImpl implements BaseDao<Office> {

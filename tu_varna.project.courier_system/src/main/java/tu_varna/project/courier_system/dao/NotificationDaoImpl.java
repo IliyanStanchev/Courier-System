@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.PersistenceException;
 
-import tu_varna.project.courier_system.dao.manager.entityManager;
 import tu_varna.project.courier_system.entity.Notification;
 
 public class NotificationDaoImpl implements BaseDao<Notification> {

@@ -22,7 +22,7 @@ import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.entity.Shipment;
 import tu_varna.project.courier_system.helper.OpenNewForm;
-import tu_varna.project.courier_system.services.ShipmentDelivery;
+import tu_varna.project.courier_system.services.ShipmentDeliveryService;
 import tu_varna.project.courier_system.services.ShipmentService;
 import tu_varna.project.courier_system.services.ShipmentServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
@@ -32,6 +32,7 @@ public class PendingShipmentsFormController implements Initializable {
 	private static final Logger logger = LogManager.getLogger(PendingShipmentsFormController.class);
 
 	private ShipmentService shipmentService = new ShipmentServiceImpl();
+	private ShipmentDeliveryService delivery;
 
 	private Courier courier;
 
@@ -69,7 +70,8 @@ public class PendingShipmentsFormController implements Initializable {
 			shipmentService.setCourierOfShipment(shipment, courier);
 			logger.info(
 					"Shipment with id: " + shipment.getId() + " has been taken by courier with id: " + courier.getId());
-			new ShipmentDelivery(shipment);
+			delivery =new ShipmentDeliveryService(shipment);
+			delivery.startDelivery();
 			requestedShipmentsView.getItems().remove(selectedShipment);
 		} else
 			acceptValidationLabel.setText("First select");

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 
-import tu_varna.project.courier_system.dao.manager.entityManager;
 import tu_varna.project.courier_system.entity.User;
 
 public class UserDaoImpl implements BaseDao<User> {

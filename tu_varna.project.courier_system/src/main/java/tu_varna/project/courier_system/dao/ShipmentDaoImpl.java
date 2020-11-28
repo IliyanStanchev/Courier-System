@@ -4,9 +4,8 @@ import java.util.List;
 
 import javax.persistence.PersistenceException;
 
-import tu_varna.project.courier_system.dao.manager.entityManager;
 import tu_varna.project.courier_system.entity.Shipment;
-import tu_varna.project.courier_system.entity.Status;
+
 
 public class ShipmentDaoImpl implements BaseDao<Shipment> {
 
@@ -37,13 +36,6 @@ public class ShipmentDaoImpl implements BaseDao<Shipment> {
 	public void delete(Shipment t) {
 		entityManager.executeInsideTransaction(entityManager -> entityManager.remove(t));
 
-	}
-
-	@SuppressWarnings({ "unchecked" })
-	public List<Object[]> getShipmentsByCourier(int courier_id, Status.status status) {
-		return entityManager.getEntityManager().createQuery(
-				"SELECT e.id, e.dateCreated,u.phoneNumber,e.status FROM Shipment e, User u, Courier c WHERE e.courier = c.id AND c.id=: courier_id AND e.receiver = u.id AND e.status=: status")
-				.setParameter("courier_id", courier_id).setParameter("status", status).getResultList();
 	}
 
 	@SuppressWarnings("unchecked")

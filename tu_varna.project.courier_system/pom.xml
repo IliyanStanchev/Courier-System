@@ -2,7 +2,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>tu_varna.project.courier_system</groupId>
   <artifactId>tu_varna.project.courier_system</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
+
   
  
     <dependencies>
@@ -11,9 +12,33 @@
 <dependency>
     <groupId>org.junit.jupiter</groupId>
     <artifactId>junit-jupiter-engine</artifactId>
-    <version>5.3.1</version>
+    <version>5.7.0</version>
+     <scope>test</scope>
+  
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-runner -->
+<dependency>
+    <groupId>org.junit.platform</groupId>
+    <artifactId>junit-platform-runner</artifactId>
+    <version>1.7.0</version>
     <scope>test</scope>
 </dependency>
+
+<!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher -->
+<dependency>
+    <groupId>org.junit.platform</groupId>
+    <artifactId>junit-platform-launcher</artifactId>
+    <version>1.7.0</version>
+    <scope>test</scope>
+</dependency>
+
+ <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.7.0</version>
+             <scope>test</scope>
+           
+        </dependency>
 
 <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
 <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
@@ -27,16 +52,24 @@
 <dependency>
     <groupId>org.mockito</groupId>
     <artifactId>mockito-junit-jupiter</artifactId>
-    <version>2.23.0</version>
+    <version>3.6.0</version>
     <scope>test</scope>
 </dependency>
+
+<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <version>1.4.200</version>
+</dependency>
+
 
 
 
     <dependency>
     <groupId>org.hibernate</groupId>
     <artifactId>hibernate-core</artifactId>
-    <version>5.4.22.Final</version>
+    <version>5.4.24.Final</version>
 </dependency>
 <!-- https://mvnrepository.com/artifact/org.controlsfx/controlsfx -->
 <dependency>
@@ -44,54 +77,92 @@
     <artifactId>controlsfx</artifactId>
     <version>11.0.3</version>
 </dependency>
+<dependency>
+    <groupId>org.openjfx</groupId>
+    <artifactId>javafx-fxml</artifactId>
+    <version>16-ea+4</version>
+</dependency>
+ 
+       
 
+       
+    
 <dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
-			<version>15.0.1</version>
+			<version>16-ea+4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-graphics </artifactId>
-			<version>15.0.1</version>
+			<version>16-ea+4</version>
 		</dependency>
   <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
-    <version>8.0.21</version>
+    <version>8.0.22</version>
 </dependency>
  <dependency>
     <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j-api</artifactId>
-    <version>2.13.3</version>
+    <version>2.14.0</version>
   </dependency>
   <dependency>
     <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j-core</artifactId>
-    <version>2.13.3</version>
+    <version>2.14.0</version>
   </dependency>
-<!-- https://mvnrepository.com/artifact/log4j/log4j -->
-
+  <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
 
 
  
   </dependencies>
-  <build>
+
+<build>
   <plugins>
-  <plugin>
-    <artifactId>maven-surefire-plugin</artifactId>
-    <version>2.19.1</version>
-    <dependencies>
-        <dependency>
-             <groupId>org.junit.platform</groupId>
-             <artifactId>junit-platform-surefire-provider</artifactId>
-             <version>1.0.1</version>
-         </dependency>
-     </dependencies>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>13</source>
+          <target>13</target>
+        </configuration>
+        </plugin>
+    <plugin>
+    <artifactId>maven-shade-plugin</artifactId>
+    <version>3.2.1</version>
+    <executions>
+        <execution>
+            <phase>package</phase>
+            <goals>
+                <goal>shade</goal>
+            </goals>
+            <configuration>
+                <transformers>
+                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                        <mainClass>tu_varna.project.courier_system.test.SuperMain</mainClass>
+                    </transformer>
+                </transformers>
+            </configuration>
+        </execution>
+    </executions>
 </plugin>
+    </plugins>
+</build>
+
+   
   
-  </plugins>
-  </build>
+
+
+  <properties>
+    <maven.compiler.source>13</maven.compiler.source>
+    <maven.compiler.target>13</maven.compiler.target>
+  </properties>
+
+  
+ 
+
   
 </project>

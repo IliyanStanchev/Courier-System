@@ -1,4 +1,4 @@
-package tu_varna.project.courier_system.dao.manager;
+package tu_varna.project.courier_system.dao;
 
 import java.util.function.Consumer;
 
@@ -9,8 +9,14 @@ import javax.persistence.Persistence;
 
 public class entityManager {
 
-	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistence");
-	private static final EntityManager entityManager = emf.createEntityManager();
+	private static EntityManagerFactory emf;
+	private static EntityManager entityManager;
+	
+	public static void initEntityManager(String persistence_unit)
+	{
+		emf = Persistence.createEntityManagerFactory(persistence_unit);
+		entityManager = emf.createEntityManager();
+	}
 
 	public static void executeInsideTransaction(Consumer<EntityManager> action) {
 		EntityTransaction tx = entityManager.getTransaction();

@@ -28,6 +28,9 @@ public class DatabaseGenerator {
 		client.setPhoneNumber("1111111111");
 		client.setEmail("system@gmail.com");
 		client.setName("system_client");
+		
+	
+		
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistence");
 		EntityManager entityManager = emf.createEntityManager();

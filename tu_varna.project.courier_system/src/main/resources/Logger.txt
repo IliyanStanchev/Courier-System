@@ -1,4 +1,0 @@
-22-11-2020 19:15:20 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
-22-11-2020 19:15:22 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged out!
-22-11-2020 19:15:27 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged in!
-22-11-2020 19:24:39 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 3 successfully logged out!
