@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import tu_varna.project.courier_system.entity.Notification;
 import tu_varna.project.courier_system.helper.CloseForm;
 import tu_varna.project.courier_system.services.NotificationService;
-import tu_varna.project.courier_system.services.NotificationServiceImpl;
+import tu_varna.project.courier_system.services.impl.NotificationServiceImpl;
 
 public class ReturnedShipmentFormController {
 

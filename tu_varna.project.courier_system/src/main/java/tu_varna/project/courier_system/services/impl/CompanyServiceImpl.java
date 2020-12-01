@@ -1,21 +1,24 @@
-package tu_varna.project.courier_system.services;
+package tu_varna.project.courier_system.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import tu_varna.project.courier_system.dao.CompanyDaoImpl;
-import tu_varna.project.courier_system.dao.OfficeDaoImpl;
+import tu_varna.project.courier_system.dao.CompanyDao;
+import tu_varna.project.courier_system.dao.OfficeDao;
+import tu_varna.project.courier_system.dao.impl.CompanyDaoImpl;
+import tu_varna.project.courier_system.dao.impl.OfficeDaoImpl;
 import tu_varna.project.courier_system.entity.Address;
 import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.entity.Manager;
 import tu_varna.project.courier_system.entity.Office;
+import tu_varna.project.courier_system.services.CompanyService;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 import tu_varna.project.courier_system.tabelviewClasses.OfficeView;
 
 public class CompanyServiceImpl implements CompanyService {
 
-	private CompanyDaoImpl companyDao = new CompanyDaoImpl();
-	private OfficeDaoImpl officeDao = new OfficeDaoImpl();
+	private CompanyDao companyDao = new CompanyDaoImpl();
+	private OfficeDao officeDao = new OfficeDaoImpl();
 
 	@Override
 	public List<CompanyView> getAllCompanies() {
@@ -100,7 +103,7 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public void setDaos(CompanyDaoImpl companyDao, OfficeDaoImpl officeDao) {
+	public void setDaos(CompanyDao companyDao, OfficeDao officeDao) {
 		this.companyDao = companyDao;
 		this.officeDao = officeDao;
 

@@ -20,9 +20,9 @@ import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.helper.FieldValidation;
 import tu_varna.project.courier_system.services.CompanyService;
-import tu_varna.project.courier_system.services.CompanyServiceImpl;
 import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.services.impl.CompanyServiceImpl;
+import tu_varna.project.courier_system.services.impl.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 
 public class CreateCourierFormController implements Initializable {

@@ -1,4 +1,4 @@
-package tu_varna.project.courier_system.dao;
+package tu_varna.project.courier_system.dao.em;
 
 import java.util.function.Consumer;
 

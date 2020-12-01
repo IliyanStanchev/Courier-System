@@ -9,9 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.services.ShipmentService;
-import tu_varna.project.courier_system.services.ShipmentServiceImpl;
 import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
+import tu_varna.project.courier_system.services.impl.UserServiceImpl;
 
 public class AboutCourierFormController {
 

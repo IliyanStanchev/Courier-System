@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.services.CompanyService;
-import tu_varna.project.courier_system.services.CompanyServiceImpl;
+import tu_varna.project.courier_system.services.impl.CompanyServiceImpl;
 
 public class AboutCourierCompanyFormController {
 

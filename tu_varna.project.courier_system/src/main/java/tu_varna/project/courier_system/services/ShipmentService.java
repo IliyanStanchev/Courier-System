@@ -2,7 +2,7 @@ package tu_varna.project.courier_system.services;
 
 import java.util.List;
 
-import tu_varna.project.courier_system.dao.ShipmentDaoImpl;
+import tu_varna.project.courier_system.dao.ShipmentDao;
 import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.entity.Courier;
@@ -36,6 +36,6 @@ public interface ShipmentService {
 
 	void changeShipmentStatus(Shipment shipment, status status);
 
-	void setShipmentDao(ShipmentDaoImpl shipmentDao);
+	void setShipmentDao(ShipmentDao shipmentDao);
 
 }

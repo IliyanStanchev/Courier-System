@@ -3,23 +3,29 @@ package tu_varna.project.courier_system.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 
+import tu_varna.project.courier_system.dao.em.entityManager;
+import tu_varna.project.courier_system.dao.impl.CompanyDaoImpl;
 import tu_varna.project.courier_system.entity.Company;
 
 @RunWith(JUnitPlatform.class)
-class CompanyDaoImplTest {
+class CompanyDaoTest {
 
-	private CompanyDaoImpl companyDao= new CompanyDaoImpl();
+	CompanyDao companyDao= new CompanyDaoImpl();
+		
 	
 	@BeforeEach
 	void init() {
-		entityManager.initEntityManager("persistence_test");
 		companyDao=new CompanyDaoImpl();
+		entityManager.initEntityManager("persistence_test");
+		
 	}
+	
 	
 	@Test
 	void testSaveAndThenGet() {

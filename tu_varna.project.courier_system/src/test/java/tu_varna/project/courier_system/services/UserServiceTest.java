@@ -13,18 +13,19 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import tu_varna.project.courier_system.dao.UserDaoImpl;
+import tu_varna.project.courier_system.dao.impl.UserDaoImpl;
 import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.entity.User;
+import tu_varna.project.courier_system.services.impl.UserServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
 
 class UserServiceTest {
 
-	UserServiceImpl userService;
+	UserService userService;
 
 	@Mock
 	UserDaoImpl userDao;

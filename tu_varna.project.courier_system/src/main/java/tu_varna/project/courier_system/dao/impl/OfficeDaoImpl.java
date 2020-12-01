@@ -1,13 +1,16 @@
-package tu_varna.project.courier_system.dao;
+package tu_varna.project.courier_system.dao.impl;
 
 import java.util.List;
 
 import javax.persistence.PersistenceException;
 
+import tu_varna.project.courier_system.dao.OfficeDao;
+import tu_varna.project.courier_system.dao.em.entityManager;
 import tu_varna.project.courier_system.entity.Office;
 
-public class OfficeDaoImpl implements BaseDao<Office> {
+public class OfficeDaoImpl implements OfficeDao {
 
+	
 	@Override
 	public boolean save(Office t) {
 		try {
@@ -20,23 +23,27 @@ public class OfficeDaoImpl implements BaseDao<Office> {
 
 	}
 
+	
 	@Override
 	public Office get(int id) {
 		return entityManager.getEntityManager().find(Office.class, id);
 	}
 
+	
 	@Override
 	public void update(Office t) {
 		entityManager.executeInsideTransaction(entityManager -> entityManager.merge(t));
 
 	}
 
+	
 	@Override
 	public void delete(Office t) {
 		entityManager.executeInsideTransaction(entityManager -> entityManager.remove(t));
 
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getAllOffices() {
 		return entityManager.getEntityManager().createQuery("SELECT o.id, o.manager, o.firm, o.address FROM Office o")
@@ -44,6 +51,7 @@ public class OfficeDaoImpl implements BaseDao<Office> {
 
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getOfficesByFirm(int bulstat) {
 

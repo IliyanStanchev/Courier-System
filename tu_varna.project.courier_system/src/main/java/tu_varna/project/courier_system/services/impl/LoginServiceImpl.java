@@ -1,13 +1,15 @@
-package tu_varna.project.courier_system.services;
+package tu_varna.project.courier_system.services.impl;
 
-import tu_varna.project.courier_system.dao.UserDaoImpl;
+import tu_varna.project.courier_system.dao.UserDao;
+import tu_varna.project.courier_system.dao.impl.UserDaoImpl;
 import tu_varna.project.courier_system.entity.User;
+import tu_varna.project.courier_system.services.LoginService;
 
 public class LoginServiceImpl implements LoginService {
 
-	private UserDaoImpl userDao = new UserDaoImpl();
+	private UserDao userDao = new UserDaoImpl();
 
-	public void setUserDao(UserDaoImpl userDao) {
+	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
 

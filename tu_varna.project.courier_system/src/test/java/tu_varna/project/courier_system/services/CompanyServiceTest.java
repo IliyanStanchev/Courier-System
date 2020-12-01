@@ -13,22 +13,23 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import tu_varna.project.courier_system.dao.CompanyDaoImpl;
-import tu_varna.project.courier_system.dao.OfficeDaoImpl;
+import tu_varna.project.courier_system.dao.impl.CompanyDaoImpl;
+import tu_varna.project.courier_system.dao.impl.OfficeDaoImpl;
 import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.entity.Office;
+import tu_varna.project.courier_system.services.impl.CompanyServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-class CompanyServiceImplTest {
+class CompanyServiceTest {
 
 	CompanyService companyService;
 
 	@Mock
-	CompanyDaoImpl companyDao = new CompanyDaoImpl();
+	CompanyDaoImpl companyDao;
 
 	@Mock
-	OfficeDaoImpl officeDao = new OfficeDaoImpl();
+	OfficeDaoImpl officeDao;
 
 	@BeforeEach
 	void init() {

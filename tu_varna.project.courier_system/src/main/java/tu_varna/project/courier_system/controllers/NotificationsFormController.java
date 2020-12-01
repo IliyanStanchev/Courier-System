@@ -16,7 +16,7 @@ import javafx.scene.input.MouseEvent;
 import tu_varna.project.courier_system.entity.Notification;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.NotificationService;
-import tu_varna.project.courier_system.services.NotificationServiceImpl;
+import tu_varna.project.courier_system.services.impl.NotificationServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.NotificationsView;
 
 public class NotificationsFormController implements Initializable {

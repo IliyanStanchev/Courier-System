@@ -1,17 +1,21 @@
-package tu_varna.project.courier_system.dao;
+package tu_varna.project.courier_system.dao.impl;
 
 import java.util.List;
 
 import javax.persistence.PersistenceException;
 
+import tu_varna.project.courier_system.dao.NotificationDao;
+import tu_varna.project.courier_system.dao.em.entityManager;
 import tu_varna.project.courier_system.entity.Notification;
 
-public class NotificationDaoImpl implements BaseDao<Notification> {
+public class NotificationDaoImpl implements NotificationDao  {
+
 
 	@Override
 	public Notification get(int id) {
 		return entityManager.getEntityManager().find(Notification.class, id);
 	}
+
 
 	@Override
 	public boolean save(Notification t) {
@@ -25,11 +29,13 @@ public class NotificationDaoImpl implements BaseDao<Notification> {
 
 	}
 
+
 	@Override
 	public void update(Notification t) {
 		entityManager.executeInsideTransaction(entityManager -> entityManager.merge(t));
 
 	}
+
 
 	@Override
 	public void delete(Notification t) {
@@ -38,6 +44,7 @@ public class NotificationDaoImpl implements BaseDao<Notification> {
 
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Notification> getUserNotifications(int id) {
 		return entityManager.getEntityManager()

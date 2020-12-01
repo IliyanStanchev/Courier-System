@@ -2,7 +2,7 @@ package tu_varna.project.courier_system.test;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import tu_varna.project.courier_system.dao.entityManager;
+import tu_varna.project.courier_system.dao.em.entityManager;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 
 public class Main extends Application {

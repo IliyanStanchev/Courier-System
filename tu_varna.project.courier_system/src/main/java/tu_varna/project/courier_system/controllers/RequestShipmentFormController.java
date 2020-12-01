@@ -32,11 +32,11 @@ import tu_varna.project.courier_system.helper.DataValidation;
 import tu_varna.project.courier_system.helper.FieldValidation;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.CompanyService;
-import tu_varna.project.courier_system.services.CompanyServiceImpl;
 import tu_varna.project.courier_system.services.ShipmentService;
-import tu_varna.project.courier_system.services.ShipmentServiceImpl;
 import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.services.impl.CompanyServiceImpl;
+import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
+import tu_varna.project.courier_system.services.impl.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 import tu_varna.project.courier_system.tabelviewClasses.OfficeView;
 

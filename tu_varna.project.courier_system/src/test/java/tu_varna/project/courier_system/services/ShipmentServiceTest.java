@@ -13,14 +13,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import tu_varna.project.courier_system.dao.ShipmentDaoImpl;
+import tu_varna.project.courier_system.dao.impl.ShipmentDaoImpl;
 import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.entity.Shipment;
 import tu_varna.project.courier_system.entity.Status;
+import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-class ShipmentServiceImplTest {
+class ShipmentServiceTest {
 
 	ShipmentService shipmentService;
 

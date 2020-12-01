@@ -7,16 +7,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 
+import tu_varna.project.courier_system.dao.em.entityManager;
+import tu_varna.project.courier_system.dao.impl.NotificationDaoImpl;
+import tu_varna.project.courier_system.dao.impl.UserDaoImpl;
 import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.entity.Notification;
 import tu_varna.project.courier_system.entity.User;
 
 @RunWith(JUnitPlatform.class)
-class NotificationDaoImplTest {
+class NotificationDaoTest {
 	
-	UserDaoImpl userDao;
+	UserDao userDao;
 	
-	NotificationDaoImpl notificationDao;
+	NotificationDao notificationDao;
 
 
 	@BeforeEach

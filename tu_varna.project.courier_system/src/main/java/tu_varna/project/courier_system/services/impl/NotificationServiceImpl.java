@@ -1,4 +1,4 @@
-package tu_varna.project.courier_system.services;
+package tu_varna.project.courier_system.services.impl;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,23 +13,23 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import tu_varna.project.courier_system.controllers.ClientWorkspaceFormController;
 import tu_varna.project.courier_system.controllers.NotificationsFormController;
-import tu_varna.project.courier_system.dao.NotificationDaoImpl;
-import tu_varna.project.courier_system.dao.ShipmentDaoImpl;
+import tu_varna.project.courier_system.dao.NotificationDao;
+import tu_varna.project.courier_system.dao.ShipmentDao;
+import tu_varna.project.courier_system.dao.impl.NotificationDaoImpl;
+import tu_varna.project.courier_system.dao.impl.ShipmentDaoImpl;
 import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.entity.Notification;
 import tu_varna.project.courier_system.entity.Shipment;
 import tu_varna.project.courier_system.entity.Status.status;
 import tu_varna.project.courier_system.helper.OpenNewForm;
+import tu_varna.project.courier_system.services.NotificationService;
 
 public class NotificationServiceImpl implements NotificationService {
 
-	private NotificationDaoImpl notificationDao = new NotificationDaoImpl();
-	private ShipmentDaoImpl shipmentDao = new ShipmentDaoImpl();
+	private NotificationDao notificationDao = new NotificationDaoImpl();
+	private ShipmentDao shipmentDao = new ShipmentDaoImpl();
 
-	public void setNotificationDao(NotificationDaoImpl notificationDao) {
-		this.notificationDao = notificationDao;
-
-	}
+	
 
 	@Override
 	public void sendNotification(String text, Client client) {
@@ -92,6 +92,15 @@ public class NotificationServiceImpl implements NotificationService {
 		notification.setIsSeen(true);
 		notificationDao.update(notification);
 
+	}
+
+	@Override
+	public void setNotificationDao(NotificationDaoImpl notificationDao) {
+		
+			this.notificationDao = notificationDao;
+
+		
+		
 	}
 
 }

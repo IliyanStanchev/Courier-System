@@ -16,15 +16,16 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import tu_varna.project.courier_system.dao.NotificationDaoImpl;
+import tu_varna.project.courier_system.dao.impl.NotificationDaoImpl;
 import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.entity.Notification;
+import tu_varna.project.courier_system.services.impl.NotificationServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-class NotificationServiceImplTest {
+class NotificationServiceTest {
 
-	NotificationServiceImpl notificationService;
+	NotificationService notificationService;
 
 	@Mock
 	NotificationDaoImpl notificationDao;

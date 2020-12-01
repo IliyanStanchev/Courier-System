@@ -8,13 +8,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 
+import tu_varna.project.courier_system.dao.em.entityManager;
+import tu_varna.project.courier_system.dao.impl.CompanyDaoImpl;
+import tu_varna.project.courier_system.dao.impl.OfficeDaoImpl;
 import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.entity.Office;
 @RunWith(JUnitPlatform.class)
-class OfficeDaoImplTest {
+class OfficeDaoTest {
 	
-	OfficeDaoImpl officeDao;
-	CompanyDaoImpl companyDao;
+	OfficeDao officeDao;
+	CompanyDao companyDao;
 	
 	@BeforeEach
 	void init()

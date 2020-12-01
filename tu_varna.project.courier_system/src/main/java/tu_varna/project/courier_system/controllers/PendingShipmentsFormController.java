@@ -24,7 +24,8 @@ import tu_varna.project.courier_system.entity.Shipment;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.ShipmentDeliveryService;
 import tu_varna.project.courier_system.services.ShipmentService;
-import tu_varna.project.courier_system.services.ShipmentServiceImpl;
+import tu_varna.project.courier_system.services.impl.ShipmentDeliveryServiceImpl;
+import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
 public class PendingShipmentsFormController implements Initializable {
@@ -70,7 +71,7 @@ public class PendingShipmentsFormController implements Initializable {
 			shipmentService.setCourierOfShipment(shipment, courier);
 			logger.info(
 					"Shipment with id: " + shipment.getId() + " has been taken by courier with id: " + courier.getId());
-			delivery =new ShipmentDeliveryService(shipment);
+			delivery =new ShipmentDeliveryServiceImpl(shipment);
 			delivery.startDelivery();
 			requestedShipmentsView.getItems().remove(selectedShipment);
 		} else

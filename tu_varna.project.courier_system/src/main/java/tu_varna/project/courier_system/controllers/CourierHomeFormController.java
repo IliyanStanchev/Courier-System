@@ -9,7 +9,7 @@ import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.ShipmentService;
-import tu_varna.project.courier_system.services.ShipmentServiceImpl;
+import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
 
 public class CourierHomeFormController {
 

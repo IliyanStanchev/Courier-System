@@ -9,16 +9,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 
+import tu_varna.project.courier_system.dao.em.entityManager;
+import tu_varna.project.courier_system.dao.impl.CompanyDaoImpl;
+import tu_varna.project.courier_system.dao.impl.ShipmentDaoImpl;
+import tu_varna.project.courier_system.dao.impl.UserDaoImpl;
 import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.entity.Shipment;
 import tu_varna.project.courier_system.entity.Status.status;
 
 @RunWith(JUnitPlatform.class)
-class ShipmentDaoImplTest {
+class ShipmentDaoTest {
 	
-	ShipmentDaoImpl shipmentDao;
-	CompanyDaoImpl companyDao;
-	UserDaoImpl userDao;
+	ShipmentDao shipmentDao;
+	CompanyDao companyDao;
+	UserDao userDao;
 	
 	@BeforeEach
 	public void init()

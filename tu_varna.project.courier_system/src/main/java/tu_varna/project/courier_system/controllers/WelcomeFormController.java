@@ -9,7 +9,7 @@ import tu_varna.project.courier_system.entity.User;
 import tu_varna.project.courier_system.helper.CloseForm;
 import tu_varna.project.courier_system.helper.DataValidation;
 import tu_varna.project.courier_system.services.LoginService;
-import tu_varna.project.courier_system.services.LoginServiceImpl;
+import tu_varna.project.courier_system.services.impl.LoginServiceImpl;
 
 public class WelcomeFormController {
 

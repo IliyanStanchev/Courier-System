@@ -21,7 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import tu_varna.project.courier_system.entity.Status.status;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.ShipmentService;
-import tu_varna.project.courier_system.services.ShipmentServiceImpl;
+import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
 public class ExpectedShipmentsFormController implements Initializable {

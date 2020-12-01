@@ -18,9 +18,9 @@ import tu_varna.project.courier_system.helper.BuiltInForm;
 import tu_varna.project.courier_system.helper.CloseForm;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.NotificationService;
-import tu_varna.project.courier_system.services.NotificationServiceImpl;
 import tu_varna.project.courier_system.services.ShipmentService;
-import tu_varna.project.courier_system.services.ShipmentServiceImpl;
+import tu_varna.project.courier_system.services.impl.NotificationServiceImpl;
+import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
 
 public class ClientWorkspaceFormController {
 
@@ -114,7 +114,6 @@ public class ClientWorkspaceFormController {
 		id = client.getId();
 		welcomeUser.setText("Welcome " + client.getName());
 		logger.info("Client with id: " + client.getId() + " successfully logged in!");
-		// if (this.client.getNotifications().size() != 0) {
 		if (this.client.hasNotifications()) {
 			notificationService.sendNotification("You have new notifications about shipments!.", this.client);
 		}

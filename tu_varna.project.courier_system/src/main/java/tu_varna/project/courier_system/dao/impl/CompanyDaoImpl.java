@@ -1,18 +1,22 @@
-package tu_varna.project.courier_system.dao;
+package tu_varna.project.courier_system.dao.impl;
 
 import java.util.List;
 
 import javax.persistence.PersistenceException;
 
+import tu_varna.project.courier_system.dao.CompanyDao;
+import tu_varna.project.courier_system.dao.em.entityManager;
 import tu_varna.project.courier_system.entity.Company;
 
-public class CompanyDaoImpl implements BaseDao<Company> {
+public class CompanyDaoImpl implements CompanyDao  {
 
+	
 	@Override
 	public Company get(int id) {
 		return entityManager.getEntityManager().find(Company.class, id);
 	}
 
+	
 	@Override
 	public boolean save(Company t) {
 		try {
@@ -25,6 +29,7 @@ public class CompanyDaoImpl implements BaseDao<Company> {
 
 	}
 
+	
 	@Override
 	public void update(Company t) {
 		try {
@@ -35,6 +40,7 @@ public class CompanyDaoImpl implements BaseDao<Company> {
 
 	}
 
+	
 	@Override
 	public void delete(Company t) {
 		try {
@@ -45,6 +51,7 @@ public class CompanyDaoImpl implements BaseDao<Company> {
 
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getAllCompanies() {
 

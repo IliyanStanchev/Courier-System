@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.CompanyService;
-import tu_varna.project.courier_system.services.CompanyServiceImpl;
+import tu_varna.project.courier_system.services.impl.CompanyServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 
 public class ShipmentControlFormController implements Initializable {

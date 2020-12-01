@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 
+import tu_varna.project.courier_system.dao.em.entityManager;
+import tu_varna.project.courier_system.dao.impl.CompanyDaoImpl;
+import tu_varna.project.courier_system.dao.impl.UserDaoImpl;
 import tu_varna.project.courier_system.entity.Admin;
 import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.entity.Company;
@@ -16,10 +19,10 @@ import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.entity.User;
 
 @RunWith(JUnitPlatform.class)
-class UserDaoImplTest {
+class UserDaoTest {
 	
-	UserDaoImpl userDao;
-	CompanyDaoImpl companyDao;
+	UserDao userDao;
+	CompanyDao companyDao;
 	
 	
 	@BeforeEach

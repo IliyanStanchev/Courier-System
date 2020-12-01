@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import tu_varna.project.courier_system.helper.FieldValidation;
 import tu_varna.project.courier_system.services.CompanyService;
-import tu_varna.project.courier_system.services.CompanyServiceImpl;
+import tu_varna.project.courier_system.services.impl.CompanyServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 
 public class CreateOfficeFormController implements Initializable {

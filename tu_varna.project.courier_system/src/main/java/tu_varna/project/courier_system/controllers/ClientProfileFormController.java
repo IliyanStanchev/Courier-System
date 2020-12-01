@@ -14,7 +14,7 @@ import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.helper.DataValidation;
 import tu_varna.project.courier_system.helper.FieldValidation;
 import tu_varna.project.courier_system.services.UserService;
-import tu_varna.project.courier_system.services.UserServiceImpl;
+import tu_varna.project.courier_system.services.impl.UserServiceImpl;
 
 public class ClientProfileFormController {
 

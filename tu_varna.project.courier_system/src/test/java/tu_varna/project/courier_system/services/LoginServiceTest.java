@@ -13,13 +13,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import tu_varna.project.courier_system.dao.UserDaoImpl;
+import tu_varna.project.courier_system.dao.impl.UserDaoImpl;
 import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.entity.User;
+import tu_varna.project.courier_system.services.impl.LoginServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-class LoginServiceImplTest {
+class LoginServiceTest {
 
 	LoginServiceImpl loginService;
 

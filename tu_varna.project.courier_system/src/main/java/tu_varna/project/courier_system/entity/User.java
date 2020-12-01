@@ -29,13 +29,13 @@ public abstract class User {
 
 	private String email;
 
-	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
-	private List<Notification> notifications;
-
 	@Column(unique = true)
 	private String phoneNumber;
 
 	private Address address;
+	
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+	private List<Notification> notifications;
 
 	public User() {
 

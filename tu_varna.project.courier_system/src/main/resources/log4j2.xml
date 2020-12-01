@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Configuration status="info">
-    <Properties>
-        <Property name="layout">%d{dd-MM-YYYY HH:mm:ss} %logger - %m%n</Property>
-    </Properties>
-  
-    <Appenders>
-  
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${layout}" />
-        </Console>     
-        
-         <File name="logger" fileName="C:\Users\My-PC\git\Courier-System\tu_varna.project.courier_system\src\main\resources\Logger.txt" append="false">
-            <PatternLayout pattern="${layout}"/>
-        </File>   
+	<Properties>
+		<Property name="layout">%d{dd-MM-YYYY HH:mm:ss} %logger - %m%n</Property>
+	</Properties>
 
-    </Appenders>
-    
-    <Loggers>
-    
-        
-       <Logger name="org.hibernate" level="fatal" additivity="false">
-      <AppenderRef ref="Console" />
-    </Logger>
-    
-    <Logger name="org.hibernate.SQL" level="fatal" additivity="false">
-      <AppenderRef ref="Console" />     
-    </Logger>
+	<Appenders>
 
-        <Logger name="tu_varna.project.courier_system" level="info" additivity="false" >
-            <AppenderRef ref="logger" />
-        </Logger>
-    
-        <Root level="error">
-            <AppenderRef ref="Console" />
-        </Root>    
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${layout}" />
+		</Console>
 
-    </Loggers>
+		<File name="logger"
+			fileName="C:\Users\My-PC\git\Courier-System\tu_varna.project.courier_system\src\main\resources\Logger.txt"
+			append="false">
+			<PatternLayout pattern="${layout}" />
+		</File>
+
+	</Appenders>
+
+	<Loggers>
+
+
+		<Logger name="org.hibernate" level="fatal" additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+
+		<Logger name="org.hibernate.SQL" level="fatal"
+			additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+
+		<Logger name="tu_varna.project.courier_system" level="info"
+			additivity="false">
+			<AppenderRef ref="logger" />
+		</Logger>
+
+		<Root level="error">
+			<AppenderRef ref="Console" />
+		</Root>
+
+	</Loggers>
 </Configuration>

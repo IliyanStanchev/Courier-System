@@ -1,19 +1,23 @@
-package tu_varna.project.courier_system.dao;
+package tu_varna.project.courier_system.dao.impl;
 
 import java.util.List;
 
 import javax.persistence.PersistenceException;
 
+import tu_varna.project.courier_system.dao.ShipmentDao;
+import tu_varna.project.courier_system.dao.em.entityManager;
 import tu_varna.project.courier_system.entity.Shipment;
 
 
-public class ShipmentDaoImpl implements BaseDao<Shipment> {
+public class ShipmentDaoImpl implements ShipmentDao  {
 
+	
 	@Override
 	public Shipment get(int id) {
 		return entityManager.getEntityManager().find(Shipment.class, id);
 	}
 
+	
 	@Override
 	public boolean save(Shipment t) {
 		try {
@@ -26,18 +30,21 @@ public class ShipmentDaoImpl implements BaseDao<Shipment> {
 
 	}
 
+	
 	@Override
 	public void update(Shipment t) {
 		entityManager.executeInsideTransaction(entityManager -> entityManager.merge(t));
 
 	}
 
+	
 	@Override
 	public void delete(Shipment t) {
 		entityManager.executeInsideTransaction(entityManager -> entityManager.remove(t));
 
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getExpectedShipments(int client_id) {
 		return entityManager.getEntityManager().createQuery(
@@ -45,6 +52,7 @@ public class ShipmentDaoImpl implements BaseDao<Shipment> {
 				.setParameter("id", client_id).getResultList();
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getRequestedShipments(int client_id) {
 		return entityManager.getEntityManager().createQuery(
@@ -52,6 +60,7 @@ public class ShipmentDaoImpl implements BaseDao<Shipment> {
 				.setParameter("id", client_id).getResultList();
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getCourierDeliveredShipments(int courier_id) {
 		return entityManager.getEntityManager().createQuery(
@@ -59,6 +68,7 @@ public class ShipmentDaoImpl implements BaseDao<Shipment> {
 				.setParameter("id", courier_id).getResultList();
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getCourierActiveShipments(int courier_id) {
 		return entityManager.getEntityManager().createQuery(
@@ -67,6 +77,7 @@ public class ShipmentDaoImpl implements BaseDao<Shipment> {
 
 	}
 
+	@Override
 	@SuppressWarnings({ "unchecked" })
 	public List<Object[]> getShipmentsByCompany(int bulstat) {
 		return entityManager.getEntityManager().createQuery(
@@ -75,6 +86,7 @@ public class ShipmentDaoImpl implements BaseDao<Shipment> {
 
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getPendingOrdersByCompany(int bulstat) {
 		return entityManager.getEntityManager().createQuery(
@@ -82,6 +94,7 @@ public class ShipmentDaoImpl implements BaseDao<Shipment> {
 				.setParameter("bulstat", bulstat).getResultList();
 	}
 
+	@Override
 	public long getSuccesfulOrders(int bulstat) {
 		return (long) entityManager.getEntityManager().createQuery(
 				"SELECT count(e) FROM Shipment e, Firm f WHERE f.id=: bulstat AND f.id = e.firm AND (e.status='accepted' OR e.status='delivered')")
@@ -89,6 +102,7 @@ public class ShipmentDaoImpl implements BaseDao<Shipment> {
 
 	}
 
+	@Override
 	public long getUnsuccesfulOrders(int bulstat) {
 		return (long) entityManager.getEntityManager().createQuery(
 				"SELECT count(e) FROM Shipment e, Firm f WHERE f.id=: bulstat AND f.id = e.firm AND e.status='declined'")

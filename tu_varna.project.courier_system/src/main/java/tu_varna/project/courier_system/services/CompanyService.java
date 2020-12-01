@@ -2,8 +2,8 @@ package tu_varna.project.courier_system.services;
 
 import java.util.List;
 
-import tu_varna.project.courier_system.dao.CompanyDaoImpl;
-import tu_varna.project.courier_system.dao.OfficeDaoImpl;
+import tu_varna.project.courier_system.dao.CompanyDao;
+import tu_varna.project.courier_system.dao.OfficeDao;
 import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.entity.Office;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
@@ -35,6 +35,6 @@ public interface CompanyService {
 
 	List<OfficeView> getOfficesList(int bulstat);
 
-	void setDaos(CompanyDaoImpl companyDao, OfficeDaoImpl officeDao);
+	void setDaos(CompanyDao companyDao, OfficeDao officeDao);
 
 }

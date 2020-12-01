@@ -1,10 +1,11 @@
-package tu_varna.project.courier_system.services;
+package tu_varna.project.courier_system.services.impl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import tu_varna.project.courier_system.dao.ShipmentDaoImpl;
+import tu_varna.project.courier_system.dao.ShipmentDao;
+import tu_varna.project.courier_system.dao.impl.ShipmentDaoImpl;
 import tu_varna.project.courier_system.entity.Address;
 import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.entity.Company;
@@ -12,12 +13,13 @@ import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.entity.Shipment;
 import tu_varna.project.courier_system.entity.Status;
 import tu_varna.project.courier_system.entity.Status.status;
+import tu_varna.project.courier_system.services.ShipmentService;
 import tu_varna.project.courier_system.entity.User;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
 public class ShipmentServiceImpl implements ShipmentService {
 
-	private ShipmentDaoImpl shipmentDao = new ShipmentDaoImpl();
+	private ShipmentDao shipmentDao = new ShipmentDaoImpl();
 
 	@Override
 	public List<ShipmentView> getExpectedShipments(Client client) {
@@ -155,7 +157,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 	}
 
 	@Override
-	public void setShipmentDao(ShipmentDaoImpl shipmentDao) {
+	public void setShipmentDao(ShipmentDao shipmentDao) {
 		this.shipmentDao = shipmentDao;
 
 	}

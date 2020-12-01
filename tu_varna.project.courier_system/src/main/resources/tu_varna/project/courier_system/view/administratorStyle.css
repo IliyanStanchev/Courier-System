@@ -1,13 +1,12 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-
  * Property
  */
- Button:focused{
- 	-fx-border-color:  #660066;
- 	-fx-border-width: 2px;
- 	
- }
- Button:hover
- {
- 	-fx-border-color: #FFFF66;
- 	-fx-border-width: 0.0px 0.0px 2.0px;
- }
+Button:focused {
+	-fx-border-color: #660066;
+	-fx-border-width: 2px;
+}
+
+Button:hover {
+	-fx-border-color: #FFFF66;
+	-fx-border-width: 0.0px 0.0px 2.0px;
+}

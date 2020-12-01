@@ -1,24 +1,22 @@
-package tu_varna.project.courier_system.services;
+package tu_varna.project.courier_system.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import tu_varna.project.courier_system.dao.UserDaoImpl;
+import tu_varna.project.courier_system.dao.UserDao;
+import tu_varna.project.courier_system.dao.impl.UserDaoImpl;
 import tu_varna.project.courier_system.entity.Address;
 import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.entity.Courier;
 import tu_varna.project.courier_system.entity.User;
+import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.tabelviewClasses.ClientView;
 import tu_varna.project.courier_system.tabelviewClasses.CourierView;
 
 public class UserServiceImpl implements UserService {
 
-	private UserDaoImpl userDao = new UserDaoImpl();
+	private UserDao userDao = new UserDaoImpl();
 
-	public void setUserDao(UserDaoImpl userDao) {
-
-		this.userDao = userDao;
-	}
 
 	@Override
 	public boolean createClient(Client client) {
@@ -95,6 +93,12 @@ public class UserServiceImpl implements UserService {
 		user.setPhoneNumber(phone);
 		userDao.update(user);
 
+	}
+
+	@Override
+	public void setUserDao(UserDaoImpl userDao) {
+		this.userDao = userDao;
+		
 	}
 
 }

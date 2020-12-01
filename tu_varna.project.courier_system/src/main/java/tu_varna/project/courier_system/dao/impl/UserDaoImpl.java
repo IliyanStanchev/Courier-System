@@ -1,13 +1,15 @@
-package tu_varna.project.courier_system.dao;
+package tu_varna.project.courier_system.dao.impl;
 
 import java.util.List;
 
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 
+import tu_varna.project.courier_system.dao.UserDao;
+import tu_varna.project.courier_system.dao.em.entityManager;
 import tu_varna.project.courier_system.entity.User;
 
-public class UserDaoImpl implements BaseDao<User> {
+public class UserDaoImpl implements UserDao  {
 
 	@Override
 	public boolean save(User t) {
@@ -21,6 +23,7 @@ public class UserDaoImpl implements BaseDao<User> {
 
 	}
 
+
 	@Override
 	public User get(int id) {
 		User user;
@@ -33,6 +36,7 @@ public class UserDaoImpl implements BaseDao<User> {
 		return user;
 	}
 
+
 	@Override
 	public void update(User t) {
 		try {
@@ -42,6 +46,7 @@ public class UserDaoImpl implements BaseDao<User> {
 		}
 	}
 
+	
 	@Override
 	public void delete(User t) {
 
@@ -54,6 +59,7 @@ public class UserDaoImpl implements BaseDao<User> {
 
 	}
 
+	@Override
 	public User getUserByPhone(String phoneNmb) {
 		User user;
 		try {
@@ -66,6 +72,7 @@ public class UserDaoImpl implements BaseDao<User> {
 
 	}
 
+	@Override
 	public User getUserByUsername(String name) {
 		User user;
 		try {
@@ -78,12 +85,14 @@ public class UserDaoImpl implements BaseDao<User> {
 
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getAllClients() {
 		return entityManager.getEntityManager()
 				.createQuery("SELECT u.name, u.phoneNumber FROM User u, Client c WHERE u.id = c.id").getResultList();
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getAllCouriers() {
 
