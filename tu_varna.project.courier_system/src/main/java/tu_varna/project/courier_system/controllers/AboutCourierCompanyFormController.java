@@ -10,7 +10,8 @@ import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.services.CompanyService;
 import tu_varna.project.courier_system.services.impl.CompanyServiceImpl;
 
-public class AboutCourierCompanyFormController {
+public class AboutCourierCompanyFormController
+{
 
 	private CompanyService companyService = new CompanyServiceImpl();
 
@@ -41,7 +42,8 @@ public class AboutCourierCompanyFormController {
 	@FXML
 	private Label date;
 
-	private void loadInfo(Company firm) {
+	private void loadInfo(Company firm)
+	{
 
 		this.name.setText(firm.getCompanyName());
 		this.bulstatL.setText(Integer.toString(firm.getId()));
@@ -57,22 +59,28 @@ public class AboutCourierCompanyFormController {
 	}
 
 	@FXML
-	private void searchCompany(ActionEvent event) {
+	private void searchCompany(ActionEvent event)
+	{
 		this.cleanFields();
 		resultLabel.setText("");
-		try {
+		try
+		{
 			Company firm = companyService.getCompanyByID(Integer.parseInt(this.bulstat.getText()));
-			if (firm != null) {
+			if (firm != null)
+			{
 				loadInfo(firm);
-			} else {
+			} else
+			{
 				resultLabel.setText("Company not found!");
 			}
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			resultLabel.setText("Company not found!");
 		}
 	}
 
-	private void cleanFields() {
+	private void cleanFields()
+	{
 		this.name.setText("");
 		this.bulstatL.setText("");
 		this.couriersNumber.setText("");

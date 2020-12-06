@@ -4,7 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import tu_varna.project.courier_system.entity.Shipment;
 
-public class ShipmentDetailFormController {
+public class ShipmentDetailFormController
+{
 
 	@FXML
 	private Label dateOfOrdering;
@@ -36,7 +37,8 @@ public class ShipmentDetailFormController {
 	@FXML
 	private Label receiverName;
 
-	public void setChoosedShipment(Shipment shipment) {
+	public void setChoosedShipment(Shipment shipment)
+	{
 
 		number.setText(Integer.toString(shipment.getId()));
 		dateOfOrdering.setText(shipment.getDateCreated().toString());

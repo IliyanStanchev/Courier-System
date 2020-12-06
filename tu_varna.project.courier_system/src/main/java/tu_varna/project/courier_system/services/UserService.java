@@ -9,7 +9,8 @@ import tu_varna.project.courier_system.entity.User;
 import tu_varna.project.courier_system.tabelviewClasses.ClientView;
 import tu_varna.project.courier_system.tabelviewClasses.CourierView;
 
-public interface UserService {
+public interface UserService
+{
 
 	boolean createClient(Client client);
 

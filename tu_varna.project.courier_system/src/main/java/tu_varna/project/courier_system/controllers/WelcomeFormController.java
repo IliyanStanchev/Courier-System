@@ -11,7 +11,8 @@ import tu_varna.project.courier_system.helper.DataValidation;
 import tu_varna.project.courier_system.services.LoginService;
 import tu_varna.project.courier_system.services.impl.LoginServiceImpl;
 
-public class WelcomeFormController {
+public class WelcomeFormController
+{
 
 	private LoginService loginService = new LoginServiceImpl();
 
@@ -31,24 +32,28 @@ public class WelcomeFormController {
 	private Label passwordLabel;
 
 	@FXML
-	private void Login(ActionEvent event) {
+	private void Login(ActionEvent event)
+	{
 
 		resultLabel.setText("");
 
 		boolean usernameIsEmpty = DataValidation.textFieldisEmpty(this.username, this.usernameLabel, "No data");
 		boolean passwordIsEmpty = DataValidation.textFieldisEmpty(this.password, this.passwordLabel, "No data");
 
-		if (!usernameIsEmpty && !passwordIsEmpty) {
+		if (!usernameIsEmpty && !passwordIsEmpty)
+		{
 			String username = this.username.getText();
 			String password = this.password.getText();
 
 			User user = loginService.authenticateUserLogin(username, password);
-			if (user != null) {
+			if (user != null)
+			{
 
 				user.loadController();
 				CloseForm.closeForm(event);
 
-			} else {
+			} else
+			{
 				resultLabel.setText("Wrong username or password");
 				this.username.clear();
 				this.password.clear();

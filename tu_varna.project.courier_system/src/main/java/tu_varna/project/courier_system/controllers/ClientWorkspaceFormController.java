@@ -22,7 +22,8 @@ import tu_varna.project.courier_system.services.ShipmentService;
 import tu_varna.project.courier_system.services.impl.NotificationServiceImpl;
 import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
 
-public class ClientWorkspaceFormController {
+public class ClientWorkspaceFormController
+{
 
 	private static final Logger logger = LogManager.getLogger(ClientWorkspaceFormController.class);
 
@@ -40,7 +41,8 @@ public class ClientWorkspaceFormController {
 	private ImageView notiIcon;
 
 	@FXML
-	private void notificationsView(ActionEvent event) throws IOException {
+	private void notificationsView(ActionEvent event) throws IOException
+	{
 
 		setNotiIcon();
 		FXMLLoader loader = OpenNewForm.openNewForm("NotificationsForm.fxml", "Notifications");
@@ -50,14 +52,16 @@ public class ClientWorkspaceFormController {
 	}
 
 	@FXML
-	private void requestShipment(ActionEvent event) throws IOException {
+	private void requestShipment(ActionEvent event) throws IOException
+	{
 		FXMLLoader loader = OpenNewForm.openNewForm("RequestShipmentForm.fxml", "Create shipment");
 		RequestShipmentFormController next = loader.getController();
 		next.getCompanyForClient(client);
 	}
 
 	@FXML
-	private void clientShipments(ActionEvent event) throws IOException {
+	private void clientShipments(ActionEvent event) throws IOException
+	{
 		FXMLLoader loader = BuiltInForm.built_inForm("ExpectedShipmentsForm.fxml", workPane);
 		ExpectedShipmentsFormController next = loader.getController();
 		next.setExpectedShipments(shipmentService.getExpectedShipments(client));
@@ -65,7 +69,8 @@ public class ClientWorkspaceFormController {
 	}
 
 	@FXML
-	private void requestedShipment(ActionEvent event) throws IOException {
+	private void requestedShipment(ActionEvent event) throws IOException
+	{
 		FXMLLoader loader = BuiltInForm.built_inForm("RequestedShipmentsForm.fxml", workPane);
 		RequestedShipmentsFormController next = loader.getController();
 		next.setRequestedShipments(shipmentService.getRequestedShipments(client));
@@ -73,7 +78,8 @@ public class ClientWorkspaceFormController {
 	}
 
 	@FXML
-	private void viewProfile(ActionEvent event) throws IOException {
+	private void viewProfile(ActionEvent event) throws IOException
+	{
 		FXMLLoader loader = BuiltInForm.built_inForm("ClientProfileForm.fxml", workPane);
 		ClientProfileFormController next = loader.getController();
 		next.setClientInformation(client);
@@ -81,27 +87,32 @@ public class ClientWorkspaceFormController {
 	}
 
 	@FXML
-	private void logOut(ActionEvent event) throws IOException {
+	private void logOut(ActionEvent event) throws IOException
+	{
 		CloseForm.closeForm(event);
 		logger.info("Client with id: " + client.getId() + " successfully logged out!");
 		id = 0;
 		OpenNewForm.openNewForm("WelcomeForm.fxml", "Welcome");
 	}
 
-	public static int getID() {
+	public static int getID()
+	{
 		return id;
 	}
 
-	public AnchorPane getPane() {
+	public AnchorPane getPane()
+	{
 		return workPane;
 	}
 
-	public void setNotiIcon() {
+	public void setNotiIcon()
+	{
 
 		{
 			Image iconWithNoNotifications = new Image("tu_varna/project/courier_system/img/noNoti.png");
 			Image iconWithNotifications = new Image("tu_varna/project/courier_system/img/withNoti .png");
-			if (notificationService.getListNotifications(client).isEmpty()) {
+			if (notificationService.getListNotifications(client).isEmpty())
+			{
 				notiIcon.setImage(iconWithNoNotifications);
 			} else
 				notiIcon.setImage(iconWithNotifications);
@@ -109,12 +120,14 @@ public class ClientWorkspaceFormController {
 		}
 	}
 
-	public void setUser(User user) {
+	public void setUser(User user)
+	{
 		client = (Client) user;
 		id = client.getId();
 		welcomeUser.setText("Welcome " + client.getName());
 		logger.info("Client with id: " + client.getId() + " successfully logged in!");
-		if (this.client.hasNotifications()) {
+		if (notificationService.getListNotifications(client).size() != 0)
+		{
 			notificationService.sendNotification("You have new notifications about shipments!.", this.client);
 		}
 	}

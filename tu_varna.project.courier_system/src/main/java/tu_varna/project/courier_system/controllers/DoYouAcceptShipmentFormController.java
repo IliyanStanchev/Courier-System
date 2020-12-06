@@ -13,7 +13,8 @@ import tu_varna.project.courier_system.helper.CloseForm;
 import tu_varna.project.courier_system.services.NotificationService;
 import tu_varna.project.courier_system.services.impl.NotificationServiceImpl;
 
-public class DoYouAcceptShipmentFormController {
+public class DoYouAcceptShipmentFormController
+{
 
 	private static final Logger logger = LogManager.getLogger(DoYouAcceptShipmentFormController.class);
 
@@ -25,7 +26,8 @@ public class DoYouAcceptShipmentFormController {
 	private Label notificationInfoLabel;
 
 	@FXML
-	void acceptShipment(ActionEvent event) {
+	void acceptShipment(ActionEvent event)
+	{
 
 		notificationService.handleUserNotificationAnswer(true, selectedNotification);
 		logger.info("Client with id:" + selectedNotification.getShipment().getReceiver().getId()
@@ -35,7 +37,8 @@ public class DoYouAcceptShipmentFormController {
 	}
 
 	@FXML
-	void declineShipment(ActionEvent event) {
+	void declineShipment(ActionEvent event)
+	{
 
 		notificationService.handleUserNotificationAnswer(false, selectedNotification);
 		logger.info("Client with id:" + selectedNotification.getShipment().getReceiver().getId()
@@ -49,7 +52,8 @@ public class DoYouAcceptShipmentFormController {
 		alert.show();
 	}
 
-	public void setSelectedNotification(Notification notification) {
+	public void setSelectedNotification(Notification notification)
+	{
 		this.selectedNotification = notification;
 		this.notificationInfoLabel.setText(notification.getNotification_text());
 	}

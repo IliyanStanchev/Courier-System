@@ -6,7 +6,8 @@ import tu_varna.project.courier_system.dao.impl.NotificationDaoImpl;
 import tu_varna.project.courier_system.entity.Client;
 import tu_varna.project.courier_system.entity.Notification;
 
-public interface NotificationService {
+public interface NotificationService
+{
 
 	void sendNotification(String text, Client client);
 

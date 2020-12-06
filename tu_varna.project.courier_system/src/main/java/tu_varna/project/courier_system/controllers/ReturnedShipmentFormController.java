@@ -8,7 +8,8 @@ import tu_varna.project.courier_system.helper.CloseForm;
 import tu_varna.project.courier_system.services.NotificationService;
 import tu_varna.project.courier_system.services.impl.NotificationServiceImpl;
 
-public class ReturnedShipmentFormController {
+public class ReturnedShipmentFormController
+{
 
 	private NotificationService notificationService = new NotificationServiceImpl();
 	private Notification selectedNotification;
@@ -16,14 +17,16 @@ public class ReturnedShipmentFormController {
 	private Label notificationInfoLabel;
 
 	@FXML
-	void okay(ActionEvent event) {
+	void okay(ActionEvent event)
+	{
 		notificationService.setSeenStatus(selectedNotification);
 		// notificationService.deleteNotification(selectedNotification);
 		CloseForm.closeForm(event);
 
 	}
 
-	public void setSelectedNotification(Notification notification) {
+	public void setSelectedNotification(Notification notification)
+	{
 		this.selectedNotification = notification;
 		this.notificationInfoLabel.setText(notification.getNotification_text());
 	}

@@ -6,7 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import tu_varna.project.courier_system.entity.Shipment;
 
-public class BillOfLoadingFormController {
+public class BillOfLoadingFormController
+{
 
 	@FXML
 	private Label companyName;
@@ -31,7 +32,8 @@ public class BillOfLoadingFormController {
 	@FXML
 	private Label companyName2;
 
-	public void setCreatedShipment(Shipment shipment) {
+	public void setCreatedShipment(Shipment shipment)
+	{
 		this.companyName.setText(shipment.getFirm().getCompanyName());
 		this.companyBulstat.setText(((Integer) shipment.getFirm().getId()).toString());
 		this.senderName.setText(shipment.getSender().getName());

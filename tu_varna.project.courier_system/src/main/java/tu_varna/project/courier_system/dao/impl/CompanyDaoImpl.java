@@ -8,20 +8,23 @@ import tu_varna.project.courier_system.dao.CompanyDao;
 import tu_varna.project.courier_system.dao.em.entityManager;
 import tu_varna.project.courier_system.entity.Company;
 
-public class CompanyDaoImpl implements CompanyDao  {
+public class CompanyDaoImpl implements CompanyDao
+{
 
-	
 	@Override
-	public Company get(int id) {
+	public Company get(int id)
+	{
 		return entityManager.getEntityManager().find(Company.class, id);
 	}
 
-	
 	@Override
-	public boolean save(Company t) {
-		try {
+	public boolean save(Company t)
+	{
+		try
+		{
 			entityManager.executeInsideTransaction(entityManager -> entityManager.persist(t));
-		} catch (PersistenceException e) {
+		} catch (PersistenceException e)
+		{
 			System.out.println("Error saving object!");
 			return false;
 		}
@@ -29,23 +32,27 @@ public class CompanyDaoImpl implements CompanyDao  {
 
 	}
 
-	
 	@Override
-	public void update(Company t) {
-		try {
+	public void update(Company t)
+	{
+		try
+		{
 			entityManager.executeInsideTransaction(entityManager -> entityManager.merge(t));
-		} catch (PersistenceException e) {
+		} catch (PersistenceException e)
+		{
 			System.out.println("Error updating object!");
 		}
 
 	}
 
-	
 	@Override
-	public void delete(Company t) {
-		try {
+	public void delete(Company t)
+	{
+		try
+		{
 			entityManager.executeInsideTransaction(entityManager -> entityManager.remove(t));
-		} catch (PersistenceException e) {
+		} catch (PersistenceException e)
+		{
 			System.out.println("Error deleting object!");
 		}
 
@@ -53,7 +60,8 @@ public class CompanyDaoImpl implements CompanyDao  {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Object[]> getAllCompanies() {
+	public List<Object[]> getAllCompanies()
+	{
 
 		return entityManager.getEntityManager().createQuery("SELECT f.id, f.companyName FROM Firm f").getResultList();
 

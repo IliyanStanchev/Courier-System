@@ -1,13 +1,15 @@
 package tu_varna.project.courier_system.tabelviewClasses;
 
-public class OfficeView {
+public class OfficeView
+{
 	private int code;
 	private String agent;
 	private String company;
 	private String city;
 	private String name;
 
-	public OfficeView(int id, String agent, String company, String city) {
+	public OfficeView(int id, String agent, String company, String city)
+	{
 
 		this.code = id;
 		this.agent = agent;
@@ -15,53 +17,65 @@ public class OfficeView {
 		this.city = city;
 	}
 
-	public OfficeView(int id, String name) {
+	public OfficeView(int id, String name)
+	{
 		this.code = id;
 		this.name = name;
 	}
 
-	public String getAgent() {
+	public String getAgent()
+	{
 		return agent;
 	}
 
-	public String getCity() {
+	public String getCity()
+	{
 		return city;
 	}
 
-	public String getCompany() {
+	public String getCompany()
+	{
 		return company;
 	}
 
-	public void setAgent(String agent) {
+	public void setAgent(String agent)
+	{
 		this.agent = agent;
 	}
 
-	public void setCity(String city) {
+	public void setCity(String city)
+	{
 		this.city = city;
 	}
 
-	public void setCompany(String company) {
+	public void setCompany(String company)
+	{
 		this.company = company;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public int getCode() {
+	public int getCode()
+	{
 		return code;
 	}
 
-	public void setCode(int id) {
+	public void setCode(int id)
+	{
 		this.code = id;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return name;
 	}
 

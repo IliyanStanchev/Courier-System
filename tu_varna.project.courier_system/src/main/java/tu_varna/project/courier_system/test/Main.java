@@ -5,18 +5,23 @@ import javafx.stage.Stage;
 import tu_varna.project.courier_system.dao.em.entityManager;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 
-public class Main extends Application {
+public class Main extends Application
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		launch(args);
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) throws Exception
+	{
 		entityManager.initEntityManager("persistence");
-		try {
+		try
+		{
 			OpenNewForm.openNewForm("WelcomeForm.fxml", "Welcome! ");
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}

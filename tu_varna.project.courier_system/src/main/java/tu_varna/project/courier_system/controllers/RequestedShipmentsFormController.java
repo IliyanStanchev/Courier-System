@@ -20,7 +20,8 @@ import tu_varna.project.courier_system.services.ShipmentService;
 import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
-public class RequestedShipmentsFormController implements Initializable {
+public class RequestedShipmentsFormController implements Initializable
+{
 
 	ShipmentService shipmentService = new ShipmentServiceImpl();
 
@@ -37,29 +38,35 @@ public class RequestedShipmentsFormController implements Initializable {
 
 	private ObservableList<ShipmentView> shipments = FXCollections.observableArrayList();
 
-	private void addToListTabel(ShipmentView shipment) {
+	private void addToListTabel(ShipmentView shipment)
+	{
 		shipments.add(shipment);
 	}
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{
 		this.shipmentNColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
 		this.receiverColumn.setCellValueFactory(new PropertyValueFactory<>("receiver"));
 		this.companyColumn.setCellValueFactory(new PropertyValueFactory<>("company"));
 	}
 
-	public void setRequestedShipments(List<ShipmentView> list) {
-		for (ShipmentView shipment : list) {
+	public void setRequestedShipments(List<ShipmentView> list)
+	{
+		for (ShipmentView shipment : list)
+		{
 			addToListTabel(shipment);
 		}
 		shipmentView.setItems(shipments);
 	}
 
 	@FXML
-	private void trackShipment(ActionEvent event) throws IOException {
+	private void trackShipment(ActionEvent event) throws IOException
+	{
 		resultLabel.setText("");
 		ShipmentView selectedShipment = shipmentView.getSelectionModel().getSelectedItem();
-		if (selectedShipment != null) {
+		if (selectedShipment != null)
+		{
 			FXMLLoader loader = OpenNewForm.openNewForm("TrackShipmentForm.fxml", "Shipment state");
 			TrackShipmentFormController next = loader.getController();
 			next.setSelectedShipment(shipmentService.getShipmentByID(selectedShipment.getNumber()).getStatus());

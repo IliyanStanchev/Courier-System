@@ -4,7 +4,8 @@ import java.util.List;
 
 import tu_varna.project.courier_system.entity.Notification;
 
-public interface NotificationDao {
+public interface NotificationDao
+{
 
 	Notification get(int id);
 

@@ -16,7 +16,8 @@ import tu_varna.project.courier_system.helper.FieldValidation;
 import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.impl.UserServiceImpl;
 
-public class CourierProfileFormController {
+public class CourierProfileFormController
+{
 
 	private static final Logger logger = LogManager.getLogger(CourierProfileFormController.class);
 
@@ -61,30 +62,35 @@ public class CourierProfileFormController {
 	private Label streetNValidationLabel;
 
 	@FXML
-	private void editAddress(ActionEvent event) {
+	private void editAddress(ActionEvent event)
+	{
 		this.country.setDisable(false);
 		this.city.setDisable(false);
 		this.streetN.setDisable(false);
 	}
 
 	@FXML
-	private void editEmail(ActionEvent event) {
+	private void editEmail(ActionEvent event)
+	{
 		this.email.setDisable(false);
 	}
 
 	@FXML
-	private void editPassword(ActionEvent event) {
+	private void editPassword(ActionEvent event)
+	{
 		this.password.setDisable(false);
 
 	}
 
 	@FXML
-	private void editPhoneN(ActionEvent event) {
+	private void editPhoneN(ActionEvent event)
+	{
 		this.phoneN.setDisable(false);
 	}
 
 	@FXML
-	private void emailValidation(KeyEvent event) {
+	private void emailValidation(KeyEvent event)
+	{
 		this.emailSaveB.setDisable(true);
 		boolean isCorrect = FieldValidation.emailValidation(this.email, this.emailValidationLabel);
 		if (isCorrect)
@@ -93,7 +99,8 @@ public class CourierProfileFormController {
 	}
 
 	@FXML
-	private void passwordValidation(KeyEvent event) {
+	private void passwordValidation(KeyEvent event)
+	{
 		this.passwordSaveB.setDisable(true);
 		boolean isEmpty = DataValidation.textFieldisEmpty(this.password, this.passwordValidationLabel,
 				"The field is empty.");
@@ -102,7 +109,8 @@ public class CourierProfileFormController {
 	}
 
 	@FXML
-	private void phoneNmbValidation(KeyEvent event) {
+	private void phoneNmbValidation(KeyEvent event)
+	{
 		this.phoneNSaveB.setDisable(true);
 		boolean isCorrect = FieldValidation.numberValidation(this.phoneN, this.phoneNValidationLabel);
 		if (isCorrect)
@@ -110,7 +118,8 @@ public class CourierProfileFormController {
 	}
 
 	@FXML
-	private void streetNValidation(KeyEvent event) {
+	private void streetNValidation(KeyEvent event)
+	{
 		this.addressSaveB.setDisable(true);
 		boolean isCorrect = FieldValidation.streetNValidation(this.streetN, this.streetNValidationLabel);
 		if (isCorrect)
@@ -119,7 +128,8 @@ public class CourierProfileFormController {
 	}
 
 	@FXML
-	private void cityValidation(KeyEvent event) {
+	private void cityValidation(KeyEvent event)
+	{
 		this.addressSaveB.setDisable(true);
 		boolean isCorrect = FieldValidation.alphabetValidation(this.city, this.cityValidationLabel);
 		if (isCorrect)
@@ -128,7 +138,8 @@ public class CourierProfileFormController {
 	}
 
 	@FXML
-	private void countryValidation(KeyEvent event) {
+	private void countryValidation(KeyEvent event)
+	{
 		this.addressSaveB.setDisable(true);
 		boolean isCorrect = FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
 		if (isCorrect)
@@ -136,7 +147,8 @@ public class CourierProfileFormController {
 	}
 
 	@FXML
-	private void saveAddress(ActionEvent event) {
+	private void saveAddress(ActionEvent event)
+	{
 
 		userService.changeUserAddress(courier, country.getText(), city.getText(), streetN.getText());
 		logger.info("Courier with id: " + courier.getId() + " updated his address!");
@@ -147,7 +159,8 @@ public class CourierProfileFormController {
 	}
 
 	@FXML
-	private void saveEmail(ActionEvent event) {
+	private void saveEmail(ActionEvent event)
+	{
 
 		userService.changeUserEmail(courier, email.getText());
 		logger.info("Courier with id: " + courier.getId() + " updated his email!");
@@ -157,7 +170,8 @@ public class CourierProfileFormController {
 	}
 
 	@FXML
-	private void savePassword(ActionEvent event) {
+	private void savePassword(ActionEvent event)
+	{
 
 		userService.changeUserPassword(courier, password.getText());
 		logger.info("Courier with id: " + courier.getId() + " updated his password!");
@@ -166,7 +180,8 @@ public class CourierProfileFormController {
 	}
 
 	@FXML
-	private void savePhoneN(ActionEvent event) {
+	private void savePhoneN(ActionEvent event)
+	{
 
 		userService.changeUserPhone(courier, phoneN.getText());
 		logger.info("Courier with id: " + courier.getId() + " updated his phone number!");
@@ -175,7 +190,8 @@ public class CourierProfileFormController {
 
 	}
 
-	public void setCourier(Courier courier) {
+	public void setCourier(Courier courier)
+	{
 		this.courier = courier;
 		name.setText(courier.getName());
 		company.setText(courier.getFirm().getCompanyName());

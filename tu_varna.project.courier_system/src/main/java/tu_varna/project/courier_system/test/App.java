@@ -9,8 +9,10 @@ import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.impl.CompanyServiceImpl;
 import tu_varna.project.courier_system.services.impl.UserServiceImpl;
 
-public class App {
-	public static void main(String[] args) {
+public class App
+{
+	public static void main(String[] args)
+	{
 		entityManager.initEntityManager("persistence");
 
 		UserService serv = new UserServiceImpl();
@@ -26,7 +28,8 @@ public class App {
 				"Bulgaria", "Kotel", "Luda Kamchia #48"));
 		serv.createClient(new Client("client3", "client3", "Boris Petkov", "boris@gmail.com", "0897832323", "Bulgaria",
 				"Varna", "Basanovich #15"));
-		companyService.createOffice("Econt", "Bulgaria", "Varna", "Seliminski #4", "Desi", "021312312", 12314);
+		companyService.createOffice("Econt", "Bulgaria", "Varna", "Seliminski #4", "Desislava Paunova", "021312312", 12314);
+		companyService.createOffice("Econt", "Bulgaria", "Varna", "Vasil Stavrev #2", "Iliyan Stanchev", "023211111", 12314);
 
 	}
 }

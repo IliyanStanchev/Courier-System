@@ -9,9 +9,11 @@ import tu_varna.project.courier_system.entity.Address;
 import tu_varna.project.courier_system.entity.Admin;
 import tu_varna.project.courier_system.entity.Client;
 
-public class DatabaseGenerator {
+public class DatabaseGenerator
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 
 		Admin adm = new Admin();
 		adm.setAddress(new Address("Bulgaria", "Varna", "Dobrovnik"));
@@ -28,9 +30,6 @@ public class DatabaseGenerator {
 		client.setPhoneNumber("1111111111");
 		client.setEmail("system@gmail.com");
 		client.setName("system_client");
-		
-	
-		
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistence");
 		EntityManager entityManager = emf.createEntityManager();

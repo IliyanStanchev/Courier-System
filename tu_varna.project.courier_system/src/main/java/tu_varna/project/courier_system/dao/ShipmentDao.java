@@ -4,10 +4,11 @@ import java.util.List;
 
 import tu_varna.project.courier_system.entity.Shipment;
 
-public interface ShipmentDao {
+public interface ShipmentDao
+{
 
 	boolean save(Shipment t);
-	
+
 	Shipment get(int id);
 
 	void update(Shipment t);

@@ -11,8 +11,8 @@
 		</Console>
 
 		<File name="logger"
-			fileName="C:\Users\My-PC\git\Courier-System\tu_varna.project.courier_system\src\main\resources\Logger.txt"
-			append="false">
+			fileName="C:\Users\ench3\git\Courier-System\tu_varna.project.courier_system\src\main\resources\Logger.txt"
+			append="true">
 			<PatternLayout pattern="${layout}" />
 		</File>
 

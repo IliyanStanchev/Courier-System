@@ -24,22 +24,24 @@ import tu_varna.project.courier_system.entity.Status.status;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 import tu_varna.project.courier_system.services.NotificationService;
 
-public class NotificationServiceImpl implements NotificationService {
+public class NotificationServiceImpl implements NotificationService
+{
 
 	private NotificationDao notificationDao = new NotificationDaoImpl();
 	private ShipmentDao shipmentDao = new ShipmentDaoImpl();
 
-	
-
 	@Override
-	public void sendNotification(String text, Client client) {
+	public void sendNotification(String text, Client client)
+	{
 		ClientWorkspaceFormController next = new ClientWorkspaceFormController();
 		Image img = new Image("tu_varna/project/courier_system/img/notification.png");
 		Notifications not = Notifications.create();
 		not.title("Notification").text(text).hideAfter(new Duration(5000)).hideCloseButton().owner(next.getPane())
-				.graphic(new ImageView(img)).onAction(new EventHandler<ActionEvent>() {
+				.graphic(new ImageView(img)).onAction(new EventHandler<ActionEvent>()
+				{
 					@Override
-					public void handle(ActionEvent event) {
+					public void handle(ActionEvent event)
+					{
 						FXMLLoader loader = OpenNewForm.openNewForm("NotificationsForm.fxml", "Notifications");
 						NotificationsFormController next = loader.getController();
 						next.setNotifications(getListNotifications(client));
@@ -49,18 +51,22 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
-	public List<Notification> getListNotifications(Client client) {
+	public List<Notification> getListNotifications(Client client)
+	{
 		return notificationDao.getUserNotifications(client.getId());
 	}
 
 	@Override
-	public void handleUserNotificationAnswer(boolean answer, Notification notification) {
+	public void handleUserNotificationAnswer(boolean answer, Notification notification)
+	{
 		Shipment shipment = notification.getShipment();
-		if (answer == true) {
+		if (answer == true)
+		{
 			shipment.setStatus(status.accepted);
 			shipmentDao.update(shipment);
 
-		} else if (answer == false) {
+		} else if (answer == false)
+		{
 			shipment.setStatus(status.declined);
 			shipmentDao.update(shipment);
 			Shipment new_shipment = new Shipment(status.in_proccess_of_return, shipment.getType(), LocalDate.now(),
@@ -77,30 +83,32 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
-	public Notification getNotificationByID(int id) {
+	public Notification getNotificationByID(int id)
+	{
 		return notificationDao.get(id);
 	}
 
 	@Override
-	public void deleteNotification(Notification notification) {
+	public void deleteNotification(Notification notification)
+	{
 		notificationDao.delete(notification);
 
 	}
 
 	@Override
-	public void setSeenStatus(Notification notification) {
+	public void setSeenStatus(Notification notification)
+	{
 		notification.setIsSeen(true);
 		notificationDao.update(notification);
 
 	}
 
 	@Override
-	public void setNotificationDao(NotificationDaoImpl notificationDao) {
-		
-			this.notificationDao = notificationDao;
+	public void setNotificationDao(NotificationDaoImpl notificationDao)
+	{
 
-		
-		
+		this.notificationDao = notificationDao;
+
 	}
 
 }

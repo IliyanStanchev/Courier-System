@@ -1,2 +1,11 @@
-01-12-2020 16:25:06 tu_varna.project.courier_system.controllers.AdminFormController - Administrator successfully logged in!
-01-12-2020 16:25:15 tu_varna.project.courier_system.controllers.AdminFormController - Administrator successfully logged out!
+06-12-2020 13:38:24 tu_varna.project.courier_system.controllers.ClientWorkspaceFormController - Client with id: 6 successfully logged in!
+06-12-2020 16:40:31 tu_varna.project.courier_system.controllers.AdminFormController - Administrator successfully logged in!
+06-12-2020 16:41:03 tu_varna.project.courier_system.controllers.CreateOfficeFormController - Office [ Econt , Dobrovnik #4 ] successfully created by administrator! 
+06-12-2020 21:37:46 tu_varna.project.courier_system.controllers.AdminFormController - Administrator successfully logged in!
+06-12-2020 21:38:19 tu_varna.project.courier_system.controllers.CreateOfficeFormController - Office [ Econt , Ivan Kishelski #4 ] successfully created by administrator! 
+06-12-2020 21:42:13 tu_varna.project.courier_system.controllers.AdminFormController - Administrator successfully logged in!
+06-12-2020 21:42:56 tu_varna.project.courier_system.controllers.CreateOfficeFormController - Office [ Econt , Vasil Stavrev #4 ] successfully created by administrator! 
+06-12-2020 21:43:20 tu_varna.project.courier_system.controllers.CreateOfficeFormController - Office [ Econt , Vasil Ivanov #2 ] successfully created by administrator! 
+06-12-2020 22:28:24 tu_varna.project.courier_system.controllers.AdminFormController - Administrator successfully logged in!
+06-12-2020 22:28:44 tu_varna.project.courier_system.controllers.OfficesControlFormController - Office [ Econt , 16 ] successfully deleted by administrator!
+06-12-2020 22:29:42 tu_varna.project.courier_system.controllers.CreateOfficeFormController - Office [ Econt , Vasil Levski #4 ] successfully created by administrator! 

@@ -22,7 +22,8 @@ import tu_varna.project.courier_system.services.CompanyService;
 import tu_varna.project.courier_system.services.impl.CompanyServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.OfficeView;
 
-public class OfficesControlFormController implements Initializable {
+public class OfficesControlFormController implements Initializable
+{
 
 	private static final Logger logger = LogManager.getLogger(OfficesControlFormController.class);
 
@@ -49,15 +50,18 @@ public class OfficesControlFormController implements Initializable {
 	private FilteredList<OfficeView> filteredData = new FilteredList<>(offices, b -> true);
 
 	@FXML
-	private void createOffice(ActionEvent event) {
+	private void createOffice(ActionEvent event)
+	{
 		OpenNewForm.openNewForm("CreateOfficeForm.fxml", "Create Office");
 	}
 
 	@FXML
-	private void deleteOffice(ActionEvent event) {
+	private void deleteOffice(ActionEvent event)
+	{
 
 		OfficeView selectedOffice = officeView.getSelectionModel().getSelectedItem();
-		if (selectedOffice != null) {
+		if (selectedOffice != null)
+		{
 			companyService.deleteOffice(companyService.getOfficeById(selectedOffice.getCode()));
 			remove(selectedOffice);
 			logger.info("Office [ " + selectedOffice.getCompany() + " , " + selectedOffice.getCode()
@@ -67,14 +71,16 @@ public class OfficesControlFormController implements Initializable {
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize(URL location, ResourceBundle resources)
+	{
 
 		this.codeColumn.setCellValueFactory(new PropertyValueFactory<>("code"));
 		this.agentColumn.setCellValueFactory(new PropertyValueFactory<>("agent"));
 		this.companyColumn.setCellValueFactory(new PropertyValueFactory<>("company"));
 		this.cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
 
-		for (OfficeView office : companyService.getAllOffices()) {
+		for (OfficeView office : companyService.getAllOffices())
+		{
 
 			addToListTabel(office);
 		}
@@ -84,20 +90,26 @@ public class OfficesControlFormController implements Initializable {
 		officeView.setItems(filteredData);
 	}
 
-	private void remove(OfficeView item) {
+	private void remove(OfficeView item)
+	{
 		offices.remove(item);
 		wrapListAndAddFiltering();
 		officeView.setItems(filteredData);
 	}
 
-	private void wrapListAndAddFiltering() {
-		city.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredData.setPredicate(office -> {
-				if (newValue == null || newValue.isEmpty()) {
+	private void wrapListAndAddFiltering()
+	{
+		city.textProperty().addListener((observable, oldValue, newValue) ->
+		{
+			filteredData.setPredicate(office ->
+			{
+				if (newValue == null || newValue.isEmpty())
+				{
 					return true;
 				}
 				String lowerCaseFilter = newValue.toLowerCase();
-				if (office.getCity().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+				if (office.getCity().toLowerCase().indexOf(lowerCaseFilter) != -1)
+				{
 					return true;
 				} else
 					return false;
@@ -106,7 +118,8 @@ public class OfficesControlFormController implements Initializable {
 
 	}
 
-	public void addToListTabel(OfficeView office) {
+	public void addToListTabel(OfficeView office)
+	{
 		offices.add(office);
 	}
 

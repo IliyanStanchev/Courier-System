@@ -8,7 +8,8 @@ import tu_varna.project.courier_system.entity.Shipment;
 import tu_varna.project.courier_system.services.ShipmentService;
 import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
 
-public class AboutShipmentFormController {
+public class AboutShipmentFormController
+{
 
 	private ShipmentService shipmentService = new ShipmentServiceImpl();
 	@FXML
@@ -36,10 +37,12 @@ public class AboutShipmentFormController {
 	@FXML
 	private Label resultLabel;
 
-	public void loadInfo(Shipment shipment) {
+	public void loadInfo(Shipment shipment)
+	{
 
 		String officeOrAddress = "address";
-		if (shipment.getToOffice() != null) {
+		if (shipment.getToOffice() != null)
+		{
 			officeOrAddress = "office";
 		}
 		this.state.setText(shipment.getStatus().toString());
@@ -55,22 +58,28 @@ public class AboutShipmentFormController {
 	}
 
 	@FXML
-	private void searchShipment(ActionEvent event) {
+	private void searchShipment(ActionEvent event)
+	{
 		this.cleanFields();
 		resultLabel.setText("");
-		try {
+		try
+		{
 			Shipment shipment = shipmentService.getShipmentByID(Integer.parseInt(this.number.getText()));
-			if (shipment != null) {
+			if (shipment != null)
+			{
 				loadInfo(shipment);
-			} else {
+			} else
+			{
 				resultLabel.setText("Shipment not found!");
 			}
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			resultLabel.setText("Shipment not found!");
 		}
 	}
 
-	private void cleanFields() {
+	private void cleanFields()
+	{
 		this.state.setText("");
 		this.company.setText("");
 		this.dateOfOrdering.setText("");

@@ -25,7 +25,8 @@ import tu_varna.project.courier_system.services.impl.CompanyServiceImpl;
 import tu_varna.project.courier_system.services.impl.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 
-public class CreateCourierFormController implements Initializable {
+public class CreateCourierFormController implements Initializable
+{
 
 	private static final Logger logger = LogManager.getLogger(CreateCourierFormController.class);
 
@@ -89,9 +90,11 @@ public class CreateCourierFormController implements Initializable {
 	private boolean confirmPV;
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{
 
-		for (CompanyView company : companyService.getAllCompanies()) {
+		for (CompanyView company : companyService.getAllCompanies())
+		{
 			fillCompanyCombo(company);
 		}
 		companyCombo.setItems(companyList);
@@ -99,64 +102,77 @@ public class CreateCourierFormController implements Initializable {
 	}
 
 	@FXML
-	void cityValidation(KeyEvent event) {
+	void cityValidation(KeyEvent event)
+	{
 		cityV = FieldValidation.alphabetValidation(this.city, this.cityValidationLabel);
 	}
 
 	@FXML
-	private void countryValidation(KeyEvent event) {
+	private void countryValidation(KeyEvent event)
+	{
 		countryV = FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
 	}
 
 	@FXML
-	private void emailValidation(KeyEvent event) {
+	private void emailValidation(KeyEvent event)
+	{
 		emailV = FieldValidation.emailValidation(this.email, this.emailValidationLabel);
 	}
 
-	private void fillCompanyCombo(CompanyView company) {
+	private void fillCompanyCombo(CompanyView company)
+	{
 		companyList.add(company);
 	}
 
 	@FXML
-	private void nameValidation(KeyEvent event) {
+	private void nameValidation(KeyEvent event)
+	{
 		nameV = FieldValidation.alphabetValidation(this.name, this.nameValidationLabel);
 	}
 
 	@FXML
-	private void passwordValidation(KeyEvent event) {
+	private void passwordValidation(KeyEvent event)
+	{
 		passwordV = FieldValidation.passwordLength(this.password, this.passwordValidationLabel);
 	}
 
 	@FXML
-	private void phoneNmbValidation(KeyEvent event) {
+	private void phoneNmbValidation(KeyEvent event)
+	{
 		numberV = FieldValidation.numberValidation(this.phoneNmb, this.phoneNValidationLabel);
 	}
 
 	@FXML
-	private void streetNValidation(KeyEvent event) {
+	private void streetNValidation(KeyEvent event)
+	{
 		streetV = FieldValidation.streetNValidation(this.streetN, this.streetNValidationLabel);
 	}
 
 	@FXML
-	private void usernameValidation(KeyEvent event) {
+	private void usernameValidation(KeyEvent event)
+	{
 		usernameV = FieldValidation.usernameValidation(this.username, this.usernameValidationLabel);
 	}
 
 	@FXML
-	private void confirmPasswordValidation(KeyEvent event) {
+	private void confirmPasswordValidation(KeyEvent event)
+	{
 		this.confirmPWValidationLabel.setText("");
 		confirmPV = this.password.getText().equals(this.confirmPW.getText());
-		if (confirmPV == false) {
+		if (confirmPV == false)
+		{
 			this.confirmPWValidationLabel.setText("The passwords do not match");
 		}
 
 	}
 
 	@FXML
-	private void createCourier(ActionEvent event) {
+	private void createCourier(ActionEvent event)
+	{
 		this.resultLabel.setText("");
 		this.comboValidationLabel.setText("");
-		if (areAllFieldsFull() && isSelectedFromComboBox()) {
+		if (areAllFieldsFull() && isSelectedFromComboBox())
+		{
 			String username = this.username.getText();
 			String password = this.password.getText();
 			String name = this.name.getText();
@@ -170,7 +186,8 @@ public class CreateCourierFormController implements Initializable {
 
 			boolean check = userService.createCourier(
 					new Courier(username, password, name, email, phoneNmb, country, city, streetN, company));
-			if (check) {
+			if (check)
+			{
 				this.resultLabel.setText("Courier created  succesfully !");
 				logger.info("Courier [ " + username + " , " + password + " ] successfully created by administrator! ");
 
@@ -179,19 +196,23 @@ public class CreateCourierFormController implements Initializable {
 		}
 	}
 
-	private boolean areAllFieldsFull() {
+	private boolean areAllFieldsFull()
+	{
 		boolean areCorrect = passwordV && confirmPV && usernameV && streetV && countryV && cityV && emailV && nameV
 				&& numberV;
-		if (!areCorrect) {
+		if (!areCorrect)
+		{
 			this.resultLabel.setText("Fill in all fields!");
 		}
 		return areCorrect;
 	}
 
-	private boolean isSelectedFromComboBox() {
+	private boolean isSelectedFromComboBox()
+	{
 		boolean isEmpty = this.companyCombo.getSelectionModel().isEmpty();
 
-		if (isEmpty == true) {
+		if (isEmpty == true)
+		{
 			this.comboValidationLabel.setText("First select");
 		}
 		return !isEmpty;

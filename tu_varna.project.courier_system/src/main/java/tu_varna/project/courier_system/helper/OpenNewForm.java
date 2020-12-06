@@ -7,11 +7,14 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class OpenNewForm {
+public class OpenNewForm
+{
 
-	public static FXMLLoader openNewForm(String fxmlFileName, String formTitle) {
+	public static FXMLLoader openNewForm(String fxmlFileName, String formTitle)
+	{
 		FXMLLoader fxmlLoad = null;
-		try {
+		try
+		{
 			fxmlLoad = new FXMLLoader(
 					new OpenNewForm().getClass().getResource("/tu_varna/project/courier_system/view/" + fxmlFileName));
 
@@ -25,10 +28,12 @@ public class OpenNewForm {
 			stage.show();
 			if (fxmlFileName.equals("AdministratorWorkspaceForm.fxml")
 					|| fxmlFileName.equals("ClientWorkspaceForm.fxml")
-					|| fxmlFileName.equals("CourierWorkspaceForm.fxml")) {
+					|| fxmlFileName.equals("CourierWorkspaceForm.fxml"))
+			{
 				stage.setOnCloseRequest(e -> Platform.exit());
 			}
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 			System.out.println("Can't load new window. ");
 		}

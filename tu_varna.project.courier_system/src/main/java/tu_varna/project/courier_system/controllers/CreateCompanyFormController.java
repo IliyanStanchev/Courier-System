@@ -12,7 +12,8 @@ import tu_varna.project.courier_system.helper.FieldValidation;
 import tu_varna.project.courier_system.services.CompanyService;
 import tu_varna.project.courier_system.services.impl.CompanyServiceImpl;
 
-public class CreateCompanyFormController {
+public class CreateCompanyFormController
+{
 
 	private static final Logger logger = LogManager.getLogger(CreateCompanyFormController.class);
 
@@ -58,43 +59,52 @@ public class CreateCompanyFormController {
 	private boolean bulstatV;
 
 	@FXML
-	private void bulstatValidation(KeyEvent event) {
+	private void bulstatValidation(KeyEvent event)
+	{
 		bulstatV = FieldValidation.bulstatValidation(this.bulstat, this.bulstatValidationLabel);
 	}
 
 	@FXML
-	void cityValidation(KeyEvent event) {
+	void cityValidation(KeyEvent event)
+	{
 		cityV = FieldValidation.alphabetValidation(this.city, this.cityValidationLabel);
 	}
 
 	@FXML
-	private void countryValidation(KeyEvent event) {
+	private void countryValidation(KeyEvent event)
+	{
 		countryV = FieldValidation.alphabetValidation(this.country, this.countryValidationLabel);
 	}
 
 	@FXML
-	void managerValidation(KeyEvent event) {
+	void managerValidation(KeyEvent event)
+	{
 		managerV = FieldValidation.alphabetValidation(this.manager, this.managerValidationLabel);
 	}
 
 	@FXML
-	void nameValidation(KeyEvent event) {
+	void nameValidation(KeyEvent event)
+	{
 		nameV = FieldValidation.alphabetValidation(this.name, this.nameValidationLabel);
 	}
 
 	@FXML
-	private void phoneNmbValidation(KeyEvent event) {
+	private void phoneNmbValidation(KeyEvent event)
+	{
 		numberV = FieldValidation.numberValidation(this.phoneNmb, this.phoneNmbValidationLabel);
 	}
 
 	@FXML
-	private void streetNValidation(KeyEvent event) {
+	private void streetNValidation(KeyEvent event)
+	{
 		streetV = FieldValidation.streetNValidation(this.streetN, this.streetNValidationLabel);
 	}
 
 	@FXML
-	void createCompany(ActionEvent event) {
-		if (areAllFieldsFull()) {
+	void createCompany(ActionEvent event)
+	{
+		if (areAllFieldsFull())
+		{
 			String name = this.name.getText();
 			int bulstat = Integer.parseInt(this.bulstat.getText());
 			String manager = this.manager.getText();
@@ -103,18 +113,22 @@ public class CreateCompanyFormController {
 			String city = this.city.getText();
 			String streetN = this.streetN.getText();
 			boolean check = companyService.createCompany(bulstat, name, manager, phoneNmb, country, city, streetN);
-			if (check) {
+			if (check)
+			{
 				resultLabel.setText("Company created succesfully!");
 				logger.info("Company [ " + bulstat + " , " + name + " ] successfully created by administrator! ");
-			} else {
+			} else
+			{
 				resultLabel.setText("Error! Company name or bulstat are already taken!");
 			}
 		}
 	}
 
-	private boolean areAllFieldsFull() {
+	private boolean areAllFieldsFull()
+	{
 		boolean areCorrect = managerV && bulstatV && streetV && countryV && cityV && numberV && nameV;
-		if (!areCorrect) {
+		if (!areCorrect)
+		{
 			this.resultLabel.setText("Fill in all fields!");
 		}
 		return areCorrect;

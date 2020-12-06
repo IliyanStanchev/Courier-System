@@ -19,7 +19,8 @@ import tu_varna.project.courier_system.services.NotificationService;
 import tu_varna.project.courier_system.services.impl.NotificationServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.NotificationsView;
 
-public class NotificationsFormController implements Initializable {
+public class NotificationsFormController implements Initializable
+{
 
 	private NotificationService notificationService = new NotificationServiceImpl();
 
@@ -33,7 +34,8 @@ public class NotificationsFormController implements Initializable {
 	private ObservableList<NotificationsView> notifications = FXCollections.observableArrayList();
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{
 		this.numberColumn.setCellValueFactory(new PropertyValueFactory<>("notificationId"));
 		this.notificationColumn.setCellValueFactory(new PropertyValueFactory<>("notificationText"));
 		notificationsTable.getItems().clear();
@@ -41,17 +43,21 @@ public class NotificationsFormController implements Initializable {
 	}
 
 	@FXML
-	private void processNoti(MouseEvent event) {
+	private void processNoti(MouseEvent event)
+	{
 
 		NotificationsView selected = notificationsTable.getSelectionModel().getSelectedItem();
-		if (selected != null) {
+		if (selected != null)
+		{
 			Notification notification = notificationService.getNotificationByID(selected.getNotificationId());
-			if (notification.isForAccept()) {
+			if (notification.isForAccept())
+			{
 				FXMLLoader loader = OpenNewForm.openNewForm("DoYouAcceptShipmentForm.fxml", "New shipment");
 				DoYouAcceptShipmentFormController next = loader.getController();
 				next.setSelectedNotification(notification);
 
-			} else {
+			} else
+			{
 				FXMLLoader loader = OpenNewForm.openNewForm("ReturnedShipmentForm.fxml", "Returned shipment");
 				ReturnedShipmentFormController next = loader.getController();
 				next.setSelectedNotification(notification);
@@ -61,16 +67,19 @@ public class NotificationsFormController implements Initializable {
 		}
 	}
 
-	public void setNotifications(List<Notification> list) {
+	public void setNotifications(List<Notification> list)
+	{
 
-		for (Notification notif : list) {
+		for (Notification notif : list)
+		{
 			addToListTable(notif.getId(), notif.getNotification_text());
 
 		}
 		notificationsTable.setItems(notifications);
 	}
 
-	private void addToListTable(Integer number, String text) {
+	private void addToListTable(Integer number, String text)
+	{
 		this.notifications.add(new NotificationsView(number, text));
 	}
 

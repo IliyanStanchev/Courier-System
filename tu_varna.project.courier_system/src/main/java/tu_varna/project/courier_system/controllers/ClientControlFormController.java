@@ -22,7 +22,8 @@ import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.impl.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.ClientView;
 
-public class ClientControlFormController implements Initializable {
+public class ClientControlFormController implements Initializable
+{
 
 	private static final Logger logger = LogManager.getLogger(ClientControlFormController.class);
 
@@ -43,16 +44,19 @@ public class ClientControlFormController implements Initializable {
 	private FilteredList<ClientView> filteredData = new FilteredList<>(clients, b -> true);
 
 	@FXML
-	private void createClient(ActionEvent event) {
+	private void createClient(ActionEvent event)
+	{
 		OpenNewForm.openNewForm("CreateClientForm.fxml", "Create client");
 	}
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{
 
 		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		this.phoneNmbColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNmb"));
-		for (ClientView client : userService.getAllClients()) {
+		for (ClientView client : userService.getAllClients())
+		{
 			addToListTabel(client);
 		}
 		clientView.setItems(clients);
@@ -61,9 +65,11 @@ public class ClientControlFormController implements Initializable {
 	}
 
 	@FXML
-	private void removeClient(ActionEvent event) {
+	private void removeClient(ActionEvent event)
+	{
 		ClientView selectedClient = clientView.getSelectionModel().getSelectedItem();
-		if (selectedClient != null) {
+		if (selectedClient != null)
+		{
 			userService.deleteUser(userService.getUserByPhone(selectedClient.getPhoneNmb()));
 			remove(selectedClient);
 			logger.info("Client [" + selectedClient.getName() + " , " + selectedClient.getPhoneNmb()
@@ -72,15 +78,20 @@ public class ClientControlFormController implements Initializable {
 			resultLabel.setText("First select");
 	}
 
-	private void wrapListAndAddFiltering() {
+	private void wrapListAndAddFiltering()
+	{
 
-		phoneNmb.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredData.setPredicate(client -> {
-				if (newValue == null || newValue.isEmpty()) {
+		phoneNmb.textProperty().addListener((observable, oldValue, newValue) ->
+		{
+			filteredData.setPredicate(client ->
+			{
+				if (newValue == null || newValue.isEmpty())
+				{
 					return true;
 				}
 				String lowerCaseFilter = newValue.toLowerCase();
-				if (client.getPhoneNmb().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+				if (client.getPhoneNmb().toLowerCase().indexOf(lowerCaseFilter) != -1)
+				{
 					return true;
 				} else
 					return false;
@@ -88,13 +99,15 @@ public class ClientControlFormController implements Initializable {
 		});
 	}
 
-	private void remove(ClientView item) {
+	private void remove(ClientView item)
+	{
 		clients.remove(item);
 		wrapListAndAddFiltering();
 		clientView.setItems(filteredData);
 	}
 
-	public void addToListTabel(ClientView client) {
+	public void addToListTabel(ClientView client)
+	{
 		clients.add(client);
 	}
 

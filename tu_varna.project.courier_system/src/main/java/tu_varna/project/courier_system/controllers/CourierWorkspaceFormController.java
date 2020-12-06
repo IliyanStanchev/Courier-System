@@ -16,7 +16,8 @@ import tu_varna.project.courier_system.helper.BuiltInForm;
 import tu_varna.project.courier_system.helper.CloseForm;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 
-public class CourierWorkspaceFormController {
+public class CourierWorkspaceFormController
+{
 
 	private static final Logger logger = LogManager.getLogger(CourierWorkspaceFormController.class);
 
@@ -32,7 +33,8 @@ public class CourierWorkspaceFormController {
 	private AnchorPane workPane;
 
 	@FXML
-	private void loadHomePage(ActionEvent event) throws IOException {
+	private void loadHomePage(ActionEvent event) throws IOException
+	{
 		FXMLLoader loader = BuiltInForm.built_inForm("CourierHomeForm.fxml", workPane);
 		CourierHomeFormController next = loader.getController();
 		next.setCourier(courier);
@@ -40,7 +42,8 @@ public class CourierWorkspaceFormController {
 	}
 
 	@FXML
-	private void viewProfile(ActionEvent event) throws IOException {
+	private void viewProfile(ActionEvent event) throws IOException
+	{
 		FXMLLoader loader = BuiltInForm.built_inForm("CourierProfileForm.fxml", workPane);
 		CourierProfileFormController next = loader.getController();
 		next.setCourier(courier);
@@ -48,13 +51,15 @@ public class CourierWorkspaceFormController {
 	}
 
 	@FXML
-	private void logOut(ActionEvent event) throws IOException {
+	private void logOut(ActionEvent event) throws IOException
+	{
 		CloseForm.closeForm(event);
 		logger.info("Courier with id: " + courier.getId() + " successfully logged out!");
 		OpenNewForm.openNewForm("WelcomeForm.fxml", "Welcome");
 	}
 
-	public void setUser(User user) {
+	public void setUser(User user)
+	{
 
 		this.courier = (Courier) user;
 		welcomeUser.setText("Welcome " + courier.getName());

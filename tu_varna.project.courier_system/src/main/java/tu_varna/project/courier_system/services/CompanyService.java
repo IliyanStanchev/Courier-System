@@ -9,7 +9,8 @@ import tu_varna.project.courier_system.entity.Office;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 import tu_varna.project.courier_system.tabelviewClasses.OfficeView;
 
-public interface CompanyService {
+public interface CompanyService
+{
 
 	List<CompanyView> getAllCompanies();
 

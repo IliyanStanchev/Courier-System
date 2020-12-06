@@ -1,33 +1,40 @@
 package tu_varna.project.courier_system.tabelviewClasses;
 
-public class CompanyView {
+public class CompanyView
+{
 	private String name;
 	private int bulstat;
 
-	public CompanyView(int bulstat, String name) {
+	public CompanyView(int bulstat, String name)
+	{
 		this.bulstat = bulstat;
 		this.name = name;
 
 	}
 
-	public int getBulstat() {
+	public int getBulstat()
+	{
 		return bulstat;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setBulstat(int bulstat) {
+	public void setBulstat(int bulstat)
+	{
 		this.bulstat = bulstat;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return name;
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,8 +14,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "role")
+public abstract class User
+{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,16 +36,18 @@ public abstract class User {
 	private String phoneNumber;
 
 	private Address address;
-	
+
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
 	private List<Notification> notifications;
 
-	public User() {
+	public User()
+	{
 
 	}
 
 	public User(String loginUsername, String loginPassword, String name, String email, String phoneNumber,
-			String country, String city, String street) {
+			String country, String city, String street)
+	{
 
 		this.loginUsername = loginUsername;
 		this.loginPassword = loginPassword;
@@ -52,85 +57,93 @@ public abstract class User {
 		this.address = new Address(country, city, street);
 	}
 
-	public Address getAddress() {
+	public Address getAddress()
+	{
 		return address;
 	}
 
-	public String getEmail() {
+	public String getEmail()
+	{
 		return email;
 	}
 
-	public int getId() {
+	public int getId()
+	{
 		return id;
 	}
 
-	public String getLoginPassword() {
+	public String getLoginPassword()
+	{
 		return loginPassword;
 	}
 
-	public String getLoginUsername() {
+	public String getLoginUsername()
+	{
 		return loginUsername;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public List<Notification> getNotifications() {
+	public List<Notification> getNotifications()
+	{
 		return notifications;
 	}
 
-	public String getPhoneNumber() {
+	public String getPhoneNumber()
+	{
 		return phoneNumber;
 	}
 
 	public abstract void loadController();
 
-	public void setAddress(Address address) {
+	public void setAddress(Address address)
+	{
 		this.address = address;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(String email)
+	{
 		this.email = email;
 	}
 
-	public void setId(int id) {
+	public void setId(int id)
+	{
 		this.id = id;
 	}
 
-	public void setLoginPassword(String loginPassword) {
+	public void setLoginPassword(String loginPassword)
+	{
 		this.loginPassword = loginPassword;
 	}
 
-	public void setLoginUsername(String loginUsername) {
+	public void setLoginUsername(String loginUsername)
+	{
 		this.loginUsername = loginUsername;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public void setNotifications(List<Notification> notifications) {
+	public void setNotifications(List<Notification> notifications)
+	{
 		this.notifications = notifications;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber)
+	{
 		this.phoneNumber = phoneNumber;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "User id=" + id + ", loginUsername=" + loginUsername + ", loginPassword=" + loginPassword + ", name="
 				+ name + ", email=" + email + ", phoneNumber=" + phoneNumber + ", address=" + address + "\n";
-	}
-
-	public boolean hasNotifications() {
-		for (Notification notification : notifications) {
-			if (notification.Isseen() == false) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 }

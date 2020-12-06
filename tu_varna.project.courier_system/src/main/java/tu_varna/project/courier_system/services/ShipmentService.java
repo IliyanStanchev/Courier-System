@@ -10,7 +10,8 @@ import tu_varna.project.courier_system.entity.Shipment;
 import tu_varna.project.courier_system.entity.Status.status;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
-public interface ShipmentService {
+public interface ShipmentService
+{
 
 	List<ShipmentView> getExpectedShipments(Client client);
 

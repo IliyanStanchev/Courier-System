@@ -15,17 +15,20 @@ import tu_varna.project.courier_system.services.CompanyService;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 import tu_varna.project.courier_system.tabelviewClasses.OfficeView;
 
-public class CompanyServiceImpl implements CompanyService {
+public class CompanyServiceImpl implements CompanyService
+{
 
 	private CompanyDao companyDao = new CompanyDaoImpl();
 	private OfficeDao officeDao = new OfficeDaoImpl();
 
 	@Override
-	public List<CompanyView> getAllCompanies() {
+	public List<CompanyView> getAllCompanies()
+	{
 
 		List<CompanyView> toReturn = new ArrayList<CompanyView>();
 		List<Object[]> list = companyDao.getAllCompanies();
-		for (Object[] column : list) {
+		for (Object[] column : list)
+		{
 			toReturn.add(new CompanyView((Integer) column[0], (String) column[1]));
 		}
 		return toReturn;
@@ -33,49 +36,57 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public Company getCompanyByID(int id) {
+	public Company getCompanyByID(int id)
+	{
 		return companyDao.get(id);
 	}
 
 	@Override
-	public void deleteCompany(Company company) {
+	public void deleteCompany(Company company)
+	{
 		companyDao.delete(company);
 
 	}
 
 	@Override
-	public boolean createCompany(Company company) {
+	public boolean createCompany(Company company)
+	{
 		return companyDao.save(company);
 
 	}
 
 	@Override
 	public boolean createCompany(int bulstat, String companyName, String manager, String phone, String country,
-			String city, String street) {
+			String city, String street)
+	{
 		return companyDao.save(new Company(bulstat, companyName, manager, phone, country, city, street));
 	}
 
 	@Override
 	public boolean createOffice(String companyName, String country, String city, String streetN, String agent,
-			String phoneNmb, int bulstat) {
+			String phoneNmb, int bulstat)
+	{
 
-		return officeDao.save(new Office(companyName + " " + streetN, country, city, streetN, agent, phoneNmb,
+		return officeDao.save(new Office(companyName + " "+ city + " " + streetN, country, city, streetN, agent, phoneNmb,
 				companyDao.get(bulstat)));
 	}
 
 	@Override
-	public void deleteOffice(Office office) {
+	public void deleteOffice(Office office)
+	{
 
 		officeDao.delete(office);
 
 	}
 
 	@Override
-	public List<OfficeView> getAllOffices() {
+	public List<OfficeView> getAllOffices()
+	{
 
 		List<OfficeView> toReturn = new ArrayList<OfficeView>();
 		List<Object[]> list = officeDao.getAllOffices();
-		for (Object[] column : list) {
+		for (Object[] column : list)
+		{
 			Manager manager = (Manager) column[1];
 			Address address = (Address) column[3];
 			Company firm = (Company) column[2];
@@ -87,30 +98,35 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public Office getOfficeById(int id) {
+	public Office getOfficeById(int id)
+	{
 		return officeDao.get(id);
 	}
 
 	@Override
-	public List<OfficeView> getOfficesList(int bulstat) {
+	public List<OfficeView> getOfficesList(int bulstat)
+	{
 
 		List<OfficeView> toReturn = new ArrayList<OfficeView>();
 		List<Object[]> list = officeDao.getOfficesByFirm(bulstat);
-		for (Object[] column : list) {
+		for (Object[] column : list)
+		{
 			toReturn.add(new OfficeView((Integer) column[0], (String) column[1]));
 		}
 		return toReturn;
 	}
 
 	@Override
-	public void setDaos(CompanyDao companyDao, OfficeDao officeDao) {
+	public void setDaos(CompanyDao companyDao, OfficeDao officeDao)
+	{
 		this.companyDao = companyDao;
 		this.officeDao = officeDao;
 
 	}
 
 	@Override
-	public boolean createOffice(Office office) {
+	public boolean createOffice(Office office)
+	{
 		return officeDao.save(office);
 	}
 

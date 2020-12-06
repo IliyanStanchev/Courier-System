@@ -21,7 +21,8 @@ import tu_varna.project.courier_system.services.CompanyService;
 import tu_varna.project.courier_system.services.impl.CompanyServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 
-public class ShipmentControlFormController implements Initializable {
+public class ShipmentControlFormController implements Initializable
+{
 
 	private CompanyService companyService = new CompanyServiceImpl();
 
@@ -40,13 +41,15 @@ public class ShipmentControlFormController implements Initializable {
 	private FilteredList<CompanyView> filteredData = new FilteredList<>(company, b -> true);
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{
 
 		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		this.bulstatColumn.setCellValueFactory(new PropertyValueFactory<>("bulstat"));
 		companyView.setItems(company);
 
-		for (CompanyView company : companyService.getAllCompanies()) {
+		for (CompanyView company : companyService.getAllCompanies())
+		{
 			addToListTable(company);
 		}
 
@@ -60,16 +63,20 @@ public class ShipmentControlFormController implements Initializable {
 	}
 
 	@FXML
-	private void viewShipmentsList(ActionEvent event) {
+	private void viewShipmentsList(ActionEvent event)
+	{
 		isSelectedLabel.setText("");
 		CompanyView selectedCompany = companyView.getSelectionModel().getSelectedItem();
-		if (selectedCompany != null) {
-			try {
+		if (selectedCompany != null)
+		{
+			try
+			{
 				FXMLLoader loader = OpenNewForm.openNewForm("ViewShipmentsForm.fxml", "List of shipments");
 				ShipmentsViewFormController next = loader.getController();
 				next.setChoosedCompany(companyService.getCompanyByID(selectedCompany.getBulstat()));
 				next.viewShipmentsList();
-			} catch (Exception e) {
+			} catch (Exception e)
+			{
 				e.printStackTrace();
 				System.out.println("loader is null.");
 			}
@@ -80,18 +87,23 @@ public class ShipmentControlFormController implements Initializable {
 
 	}
 
-	private void wrapListAndAddFiltering() {
+	private void wrapListAndAddFiltering()
+	{
 
-		name.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredData.setPredicate(company -> {
+		name.textProperty().addListener((observable, oldValue, newValue) ->
+		{
+			filteredData.setPredicate(company ->
+			{
 
-				if (newValue == null || newValue.isEmpty()) {
+				if (newValue == null || newValue.isEmpty())
+				{
 					return true;
 				}
 
 				String lowerCaseFilter = newValue.toLowerCase();
 
-				if (company.getName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+				if (company.getName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+				{
 					return true;
 				}
 
@@ -101,7 +113,8 @@ public class ShipmentControlFormController implements Initializable {
 		});
 	}
 
-	private void addToListTable(CompanyView comp) {
+	private void addToListTable(CompanyView comp)
+	{
 		company.add(comp);
 	}
 }

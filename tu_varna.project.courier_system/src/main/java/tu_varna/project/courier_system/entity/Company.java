@@ -15,7 +15,8 @@ import tu_varna.project.courier_system.entity.Status.status;
 
 @Entity(name = "Firm")
 @Table(name = "Firm")
-public class Company {
+public class Company
+{
 
 	@Id
 	@Column(name = "bulstat", unique = true)
@@ -40,7 +41,8 @@ public class Company {
 	private List<Shipment> shipments = new ArrayList<Shipment>();
 
 	public Company(int id, String companyName, String manager, String phone_number, String country, String city,
-			String street) {
+			String street)
+	{
 
 		this.id = id;
 		this.companyName = companyName;
@@ -49,93 +51,115 @@ public class Company {
 		this.dateOfCreation = LocalDate.now();
 	}
 
-	public Company() {
+	public Company()
+	{
 		this.dateOfCreation = LocalDate.now();
 
 	}
 
-	public Address getAddress() {
+	public Address getAddress()
+	{
 		return address;
 	}
 
-	public String getCompanyName() {
+	public String getCompanyName()
+	{
 		return companyName;
 	}
 
-	public LocalDate getDateOfCreation() {
+	public LocalDate getDateOfCreation()
+	{
 
 		return dateOfCreation;
 	}
 
-	public List<Courier> getEmployees() {
+	public List<Courier> getEmployees()
+	{
 		return employees;
 	}
 
-	public int getId() {
+	public int getId()
+	{
 		return id;
 	}
 
-	public Manager getManager() {
+	public Manager getManager()
+	{
 		return manager;
 	}
 
-	public List<Office> getOffices() {
+	public List<Office> getOffices()
+	{
 		return offices;
 	}
 
-	public List<Shipment> getShipments() {
+	public List<Shipment> getShipments()
+	{
 		return shipments;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(Address address)
+	{
 		this.address = address;
 	}
 
-	public void setCompanyName(String companyName) {
+	public void setCompanyName(String companyName)
+	{
 		this.companyName = companyName;
 	}
 
-	public void setEmployees(List<Courier> employees) {
+	public void setEmployees(List<Courier> employees)
+	{
 		this.employees = employees;
 	}
 
-	public void setId(int id) {
+	public void setId(int id)
+	{
 		this.id = id;
 	}
 
-	public void setManager(Manager manager) {
+	public void setManager(Manager manager)
+	{
 		this.manager = manager;
 	}
 
-	public void setOffices(List<Office> offices) {
+	public void setOffices(List<Office> offices)
+	{
 		this.offices = offices;
 	}
 
-	public void setShipments(List<Shipment> shipments) {
+	public void setShipments(List<Shipment> shipments)
+	{
 		this.shipments = shipments;
 	}
 
-	public int getSuccesfulOrders() {
+	public int getSuccesfulOrders()
+	{
 		int number = 0;
-		for (Shipment s : this.shipments) {
+		for (Shipment s : this.shipments)
+		{
 			if (s.getStatus() == status.delivered || s.getStatus() == status.accepted)
 				number++;
 		}
 		return number;
 	}
 
-	public int getUnsuccesfulOrders() {
+	public int getUnsuccesfulOrders()
+	{
 		int number = 0;
-		for (Shipment s : this.shipments) {
+		for (Shipment s : this.shipments)
+		{
 			if (s.getStatus() == status.declined)
 				number++;
 		}
 		return number;
 	}
 
-	public int getActiveOrders() {
+	public int getActiveOrders()
+	{
 		int number = 0;
-		for (Shipment s : this.shipments) {
+		for (Shipment s : this.shipments)
+		{
 			if (s.getStatus() != status.delivered && s.getStatus() != status.declined
 					&& s.getStatus() != status.accepted)
 				number++;

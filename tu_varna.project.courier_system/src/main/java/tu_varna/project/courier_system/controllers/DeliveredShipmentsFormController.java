@@ -14,7 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import tu_varna.project.courier_system.entity.Address;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
-public class DeliveredShipmentsFormController implements Initializable {
+public class DeliveredShipmentsFormController implements Initializable
+{
 
 	@FXML
 	private TableView<ShipmentView> deliveredShipmentsView;
@@ -30,7 +31,8 @@ public class DeliveredShipmentsFormController implements Initializable {
 	private ObservableList<ShipmentView> deliveredShipments = FXCollections.observableArrayList();
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{
 		this.numberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
 		this.fromColumn.setCellValueFactory(new PropertyValueFactory<>("from"));
 		this.toColumn.setCellValueFactory(new PropertyValueFactory<>("to"));
@@ -38,14 +40,17 @@ public class DeliveredShipmentsFormController implements Initializable {
 
 	}
 
-	public void setCourierDeliveredShipments(List<ShipmentView> list) {
-		for (ShipmentView shipment : list) {
+	public void setCourierDeliveredShipments(List<ShipmentView> list)
+	{
+		for (ShipmentView shipment : list)
+		{
 			addToListTable(shipment);
 		}
 		this.deliveredShipmentsView.setItems(deliveredShipments);
 	}
 
-	private void addToListTable(ShipmentView shipment) {
+	private void addToListTable(ShipmentView shipment)
+	{
 		deliveredShipments.add(shipment);
 	}
 

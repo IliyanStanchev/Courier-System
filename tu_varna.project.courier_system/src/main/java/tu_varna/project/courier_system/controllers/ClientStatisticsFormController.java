@@ -18,7 +18,8 @@ import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.impl.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
-public class ClientStatisticsFormController implements Initializable {
+public class ClientStatisticsFormController implements Initializable
+{
 
 	private UserService userService = new UserServiceImpl();
 
@@ -43,7 +44,8 @@ public class ClientStatisticsFormController implements Initializable {
 	private ObservableList<ShipmentView> shipmentsInProcess = FXCollections.observableArrayList();
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{
 		this.numberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
 		this.courierColumn.setCellValueFactory(new PropertyValueFactory<>("courier"));
 		this.shipmentsInProcessView.setItems(shipmentsInProcess);
@@ -51,33 +53,41 @@ public class ClientStatisticsFormController implements Initializable {
 	}
 
 	@FXML
-	private void searchClient(ActionEvent event) {
+	private void searchClient(ActionEvent event)
+	{
 		shipmentsInProcess.clear();
 		resultLabel.setText("");
-		try {
+		try
+		{
 			this.wantedClient = (Client) userService.getUserByPhone(this.phoneNmb.getText());
-			if (this.wantedClient != null) {
-				for (ShipmentView shipment : wantedClient.getShipmentInProcess()) {
+			if (this.wantedClient != null)
+			{
+				for (ShipmentView shipment : wantedClient.getShipmentInProcess())
+				{
 					addToListTabel(shipment);
 				}
 				this.cancelledShipments.setText(Integer.toString(wantedClient.getDeclinedShipments(company_id)));
 				this.recievedShipments.setText(Integer.toString(wantedClient.getReceivedShipments(company_id)));
 				this.shipmentsInProcessView.setItems(shipmentsInProcess);
-			} else {
+			} else
+			{
 				resultLabel.setText("The client doesn't exist. Check client phone number and name.");
 				phoneNmb.requestFocus();
 			}
-		} catch (ClassCastException e) {
+		} catch (ClassCastException e)
+		{
 			resultLabel.setText("User with this username and phone is not Client!");
 			phoneNmb.requestFocus();
 		}
 	}
 
-	private void addToListTabel(ShipmentView shipment) {
+	private void addToListTabel(ShipmentView shipment)
+	{
 		shipmentsInProcess.add(shipment);
 	}
 
-	public void setCompanyID(int id) {
+	public void setCompanyID(int id)
+	{
 		this.company_id = id;
 	}
 

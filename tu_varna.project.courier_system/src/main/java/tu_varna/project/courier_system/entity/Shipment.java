@@ -14,7 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Shipment {
+public class Shipment
+{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,12 +40,14 @@ public class Shipment {
 	@OneToOne(mappedBy = "shipment", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private Notification notification;
 
-	public Shipment() {
+	public Shipment()
+	{
 
 	}
 
 	public Shipment(Status.status status, Type.type type, LocalDate localDate, double shipmentPrice, User sender,
-			User receiver, Company firm) {
+			User receiver, Company firm)
+	{
 		this.type = type;
 		this.dateCreated = localDate;
 		this.shipmentPrice = shipmentPrice;
@@ -54,8 +57,8 @@ public class Shipment {
 		this.status = status;
 	}
 
-	public Shipment(Type.type type, LocalDate localDate, double shipmentPrice, User sender, User receiver,
-			Company firm) {
+	public Shipment(Type.type type, LocalDate localDate, double shipmentPrice, User sender, User receiver, Company firm)
+	{
 		this.type = type;
 		this.dateCreated = localDate;
 		this.shipmentPrice = shipmentPrice;
@@ -66,7 +69,8 @@ public class Shipment {
 	}
 
 	public Shipment(Type.type type, LocalDate localDate, double shipmentPrice, User sender, User receiver, Company firm,
-			Office toOffice) {
+			Office toOffice)
+	{
 		this.type = type;
 		this.dateCreated = localDate;
 		this.shipmentPrice = shipmentPrice;
@@ -77,96 +81,119 @@ public class Shipment {
 		this.status = Status.status.pending;
 	}
 
-	public Courier getCourier() {
+	public Courier getCourier()
+	{
 		return courier;
 	}
 
-	public LocalDate getDateCreated() {
+	public LocalDate getDateCreated()
+	{
 		return dateCreated;
 	}
 
-	public LocalDate getDateShipped() {
+	public LocalDate getDateShipped()
+	{
 		return dateShipped;
 	}
 
-	public Company getFirm() {
+	public Company getFirm()
+	{
 		return firm;
 	}
 
-	public int getId() {
+	public int getId()
+	{
 		return id;
 	}
 
-	public Client getReceiver() {
+	public Client getReceiver()
+	{
 		return receiver;
 	}
 
-	public Client getSender() {
+	public Client getSender()
+	{
 		return sender;
 	}
 
-	public double getShipmentPrice() {
+	public double getShipmentPrice()
+	{
 		return shipmentPrice;
 	}
 
-	public Status.status getStatus() {
+	public Status.status getStatus()
+	{
 		return status;
 	}
 
-	public Office getToOffice() {
+	public Office getToOffice()
+	{
 		return toOffice;
 	}
 
-	public Type.type getType() {
+	public Type.type getType()
+	{
 		return type;
 	}
 
-	public void setCourier(Courier courier) {
+	public void setCourier(Courier courier)
+	{
 		this.courier = courier;
 	}
 
-	public void setDateCreated(LocalDate dateCreated) {
+	public void setDateCreated(LocalDate dateCreated)
+	{
 		this.dateCreated = dateCreated;
 	}
 
-	public void setDateShipped(LocalDate dateShipped) {
+	public void setDateShipped(LocalDate dateShipped)
+	{
 		this.dateShipped = dateShipped;
 	}
 
-	public void setFirm(Company firm) {
+	public void setFirm(Company firm)
+	{
 		this.firm = firm;
 	}
 
-	public void setId(int id) {
+	public void setId(int id)
+	{
 		this.id = id;
 	}
 
-	public void setReceiver(Client receiver) {
+	public void setReceiver(Client receiver)
+	{
 		this.receiver = receiver;
 	}
 
-	public void setSender(Client sender) {
+	public void setSender(Client sender)
+	{
 		this.sender = sender;
 	}
 
-	public void setShipmentPrice(double shipmentPrice) {
+	public void setShipmentPrice(double shipmentPrice)
+	{
 		this.shipmentPrice = shipmentPrice;
 	}
 
-	public void setStatus(Status.status status) {
+	public void setStatus(Status.status status)
+	{
 		this.status = status;
 	}
 
-	public void setToOffice(Office toOffice) {
+	public void setToOffice(Office toOffice)
+	{
 		this.toOffice = toOffice;
 	}
 
-	public void setType(Type.type type) {
+	public void setType(Type.type type)
+	{
 		this.type = type;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "Shipment id=" + id + ", status=" + status + ", type=" + type + "date created: " + dateCreated + "\n";
 
 	}

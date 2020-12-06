@@ -13,7 +13,8 @@ import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
 import tu_varna.project.courier_system.services.impl.UserServiceImpl;
 
-public class AboutCourierFormController {
+public class AboutCourierFormController
+{
 
 	UserService userService = new UserServiceImpl();
 	ShipmentService shipmentService = new ShipmentServiceImpl();
@@ -43,7 +44,8 @@ public class AboutCourierFormController {
 	@FXML
 	private Label deliveredShipments;
 
-	private void loadInfo(Courier courier) {
+	private void loadInfo(Courier courier)
+	{
 		this.nameL.setText(courier.getName());
 		this.companyName.setText(courier.getFirm().getCompanyName());
 		this.username.setText(courier.getLoginUsername());
@@ -56,22 +58,28 @@ public class AboutCourierFormController {
 	}
 
 	@FXML
-	private void searchCourier(ActionEvent event) {
+	private void searchCourier(ActionEvent event)
+	{
 		this.cleanFields();
 		resultLabel.setText("");
-		try {
+		try
+		{
 			Courier courier = (Courier) userService.getUserByPhone(this.phoneNmb.getText());
-			if (courier != null) {
+			if (courier != null)
+			{
 				loadInfo(courier);
-			} else {
+			} else
+			{
 				resultLabel.setText("Courier not found!");
 			}
-		} catch (ClassCastException e) {
+		} catch (ClassCastException e)
+		{
 			resultLabel.setText("User with this username and phone is not Courier!");
 		}
 	}
 
-	private void cleanFields() {
+	private void cleanFields()
+	{
 		this.nameL.setText("");
 		this.companyName.setText("");
 		this.username.setText("");

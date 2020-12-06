@@ -24,7 +24,8 @@ import tu_varna.project.courier_system.services.ShipmentService;
 import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
-public class ExpectedShipmentsFormController implements Initializable {
+public class ExpectedShipmentsFormController implements Initializable
+{
 
 	private static final Logger logger = LogManager.getLogger(ExpectedShipmentsFormController.class);
 
@@ -45,18 +46,22 @@ public class ExpectedShipmentsFormController implements Initializable {
 	private ObservableList<ShipmentView> shipments = FXCollections.observableArrayList();
 
 	@FXML
-	private void cancelShipment(ActionEvent event) {
+	private void cancelShipment(ActionEvent event)
+	{
 		resultLabel.setText("");
 		ShipmentView selectedShipment = shipmentView.getSelectionModel().getSelectedItem();
-		if (selectedShipment != null) {
-			if (selectedShipment.getStatus() == status.pending) {
+		if (selectedShipment != null)
+		{
+			if (selectedShipment.getStatus() == status.pending)
+			{
 				shipmentService.changeShipmentStatus(shipmentService.getShipmentByID(selectedShipment.getNumber()),
 						status.declined);
 				shipmentView.getItems().remove(selectedShipment);
 				resultLabel.setText("Status set to declined!");
 				logger.info("Shipment with id: " + selectedShipment.getNumber()
 						+ " has been declined by client with phone: " + selectedShipment.getPhoneNmb());
-			} else {
+			} else
+			{
 				resultLabel.setText("You cannot decline shipments that are already in proccess of delivery! ");
 			}
 		} else
@@ -64,7 +69,8 @@ public class ExpectedShipmentsFormController implements Initializable {
 	}
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{
 		this.shipmentNColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
 		this.senderColumn.setCellValueFactory(new PropertyValueFactory<>("sender"));
 		this.companyColumn.setCellValueFactory(new PropertyValueFactory<>("company"));
@@ -73,10 +79,12 @@ public class ExpectedShipmentsFormController implements Initializable {
 	}
 
 	@FXML
-	private void trackShipment(ActionEvent event) throws IOException {
+	private void trackShipment(ActionEvent event) throws IOException
+	{
 		resultLabel.setText("");
 		ShipmentView selectedShipment = shipmentView.getSelectionModel().getSelectedItem();
-		if (selectedShipment != null) {
+		if (selectedShipment != null)
+		{
 			FXMLLoader loader = OpenNewForm.openNewForm("TrackShipmentForm.fxml", "Shipment state");
 			TrackShipmentFormController next = loader.getController();
 			next.setSelectedShipment(shipmentService.getShipmentByID(selectedShipment.getNumber()).getStatus());
@@ -84,14 +92,17 @@ public class ExpectedShipmentsFormController implements Initializable {
 			resultLabel.setText("First select.");
 	}
 
-	public void setExpectedShipments(List<ShipmentView> list) {
-		for (ShipmentView shipment : list) {
+	public void setExpectedShipments(List<ShipmentView> list)
+	{
+		for (ShipmentView shipment : list)
+		{
 			addToListTable(shipment);
 		}
 		shipmentView.setItems(shipments);
 	}
 
-	private void addToListTable(ShipmentView shipment) {
+	private void addToListTable(ShipmentView shipment)
+	{
 		shipments.add(shipment);
 	}
 

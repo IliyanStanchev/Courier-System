@@ -15,7 +15,8 @@ import tu_varna.project.courier_system.entity.Status.status;
 import tu_varna.project.courier_system.helper.OpenNewForm;
 
 @Entity
-public class Courier extends User {
+public class Courier extends User
+{
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
 	private Company firm;
@@ -23,36 +24,44 @@ public class Courier extends User {
 	@OneToMany(mappedBy = "courier", cascade = CascadeType.REMOVE)
 	private List<Shipment> shipmentsForDelivery = new ArrayList<Shipment>();
 
-	public Courier() {
+	public Courier()
+	{
 
 	}
 
 	public Courier(String loginUsername, String loginPassword, String name, String email, String phoneNumber,
-			String country, String city, String street, Company firm) {
+			String country, String city, String street, Company firm)
+	{
 		super(loginUsername, loginPassword, name, email, phoneNumber, country, city, street);
 		this.firm = firm;
 
 	}
 
-	public Company getFirm() {
+	public Company getFirm()
+	{
 		return firm;
 	}
 
-	public List<Shipment> getShipmentsForDelivery() {
+	public List<Shipment> getShipmentsForDelivery()
+	{
 		return shipmentsForDelivery;
 	}
 
-	public void setFirm(Company firm) {
+	public void setFirm(Company firm)
+	{
 		this.firm = firm;
 	}
 
-	public void setShipmentsForDelivery(List<Shipment> shipmentsForDelivery) {
+	public void setShipmentsForDelivery(List<Shipment> shipmentsForDelivery)
+	{
 		this.shipmentsForDelivery = shipmentsForDelivery;
 	}
 
-	public int getCancelledShipments() {
+	public int getCancelledShipments()
+	{
 		int number = 0;
-		for (Shipment s : this.shipmentsForDelivery) {
+		for (Shipment s : this.shipmentsForDelivery)
+		{
 			if (s.getStatus() == status.declined)
 				number++;
 		}
@@ -61,7 +70,8 @@ public class Courier extends User {
 	}
 
 	@Override
-	public void loadController() {
+	public void loadController()
+	{
 		FXMLLoader loader = OpenNewForm.openNewForm("CourierWorkspaceForm.fxml", "Courier workspace");
 		CourierWorkspaceFormController next = loader.getController();
 		next.setUser(this);

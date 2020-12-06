@@ -4,7 +4,8 @@ import java.util.List;
 
 import tu_varna.project.courier_system.entity.Office;
 
-public interface OfficeDao {
+public interface OfficeDao
+{
 
 	boolean save(Office t);
 

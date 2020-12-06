@@ -28,7 +28,8 @@ import tu_varna.project.courier_system.services.impl.ShipmentDeliveryServiceImpl
 import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
-public class PendingShipmentsFormController implements Initializable {
+public class PendingShipmentsFormController implements Initializable
+{
 
 	private static final Logger logger = LogManager.getLogger(PendingShipmentsFormController.class);
 
@@ -62,16 +63,18 @@ public class PendingShipmentsFormController implements Initializable {
 	private ObservableList<ShipmentView> acceptedShipments = FXCollections.observableArrayList();
 
 	@FXML
-	private void acceptRequest(ActionEvent event) {
+	private void acceptRequest(ActionEvent event)
+	{
 
 		ShipmentView selectedShipment = requestedShipmentsView.getSelectionModel().getSelectedItem();
-		if (selectedShipment != null) {
+		if (selectedShipment != null)
+		{
 			acceptedShipments.add(selectedShipment);
 			Shipment shipment = shipmentService.getShipmentByID(selectedShipment.getNumber());
 			shipmentService.setCourierOfShipment(shipment, courier);
 			logger.info(
 					"Shipment with id: " + shipment.getId() + " has been taken by courier with id: " + courier.getId());
-			delivery =new ShipmentDeliveryServiceImpl(shipment);
+			delivery = new ShipmentDeliveryServiceImpl(shipment);
 			delivery.startDelivery();
 			requestedShipmentsView.getItems().remove(selectedShipment);
 		} else
@@ -79,28 +82,34 @@ public class PendingShipmentsFormController implements Initializable {
 
 	}
 
-	private void addToCourierShipmentsTable(ShipmentView shipment) {
+	private void addToCourierShipmentsTable(ShipmentView shipment)
+	{
 		acceptedShipments.add(shipment);
 	}
 
-	private void addToListTable(ShipmentView shipment) {
+	private void addToListTable(ShipmentView shipment)
+	{
 		requestedShipments.add(shipment);
 	}
 
-	public void getPendingShipments(Courier courier, Company company) {
+	public void getPendingShipments(Courier courier, Company company)
+	{
 
 		this.courier = courier;
 
-		for (ShipmentView shipment : shipmentService.getPendingOrders(company)) {
+		for (ShipmentView shipment : shipmentService.getPendingOrders(company))
+		{
 			addToListTable(shipment);
 		}
-		for (ShipmentView shipment : shipmentService.getCourierActiveShipments(courier)) {
+		for (ShipmentView shipment : shipmentService.getCourierActiveShipments(courier))
+		{
 			addToCourierShipmentsTable(shipment);
 		}
 	}
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{
 		this.numberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
 		this.fromColumn.setCellValueFactory(new PropertyValueFactory<>("from"));
 		this.toColumn.setCellValueFactory(new PropertyValueFactory<>("to"));
@@ -113,10 +122,12 @@ public class PendingShipmentsFormController implements Initializable {
 	}
 
 	@FXML
-	private void shipmentDetails(ActionEvent event) throws IOException {
+	private void shipmentDetails(ActionEvent event) throws IOException
+	{
 
 		ShipmentView selectedShipment = acceptedShipmentsView.getSelectionModel().getSelectedItem();
-		if (selectedShipment != null) {
+		if (selectedShipment != null)
+		{
 			FXMLLoader loader = OpenNewForm.openNewForm("ShipmentDetailsForm.fxml", "Details");
 			ShipmentDetailFormController next = loader.getController();
 			next.setChoosedShipment(shipmentService.getShipmentByID(selectedShipment.getNumber()));

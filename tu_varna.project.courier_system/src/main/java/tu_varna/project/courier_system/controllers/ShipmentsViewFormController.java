@@ -25,7 +25,8 @@ import tu_varna.project.courier_system.services.ShipmentService;
 import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.ShipmentView;
 
-public class ShipmentsViewFormController implements Initializable {
+public class ShipmentsViewFormController implements Initializable
+{
 
 	private static final Logger logger = LogManager.getLogger(ShipmentsViewFormController.class);
 
@@ -53,7 +54,8 @@ public class ShipmentsViewFormController implements Initializable {
 	private Company choosedCompany;
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{
 		numberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
 		dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 		phoneNmbColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNmb"));
@@ -62,40 +64,49 @@ public class ShipmentsViewFormController implements Initializable {
 	}
 
 	@FXML
-	private void createShipment(ActionEvent event) {
-		try {
+	private void createShipment(ActionEvent event)
+	{
+		try
+		{
 			FXMLLoader loader = OpenNewForm.openNewForm("RequestShipmentForm.fxml", "Create Shipment");
 			RequestShipmentFormController next = loader.getController();
 			next.getCompanyForAdmin(choosedCompany);
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 			System.out.println("loader is null.");
 		}
 	}
 
 	@FXML
-	private void deleteShipment(ActionEvent event) {
+	private void deleteShipment(ActionEvent event)
+	{
 
 		resultLabel.setText("");
 		ShipmentView selectedShipment = shipmentsView.getSelectionModel().getSelectedItem();
-		if (selectedShipment != null) {
+		if (selectedShipment != null)
+		{
 			shipmentService.deleteShipment(shipmentService.getShipmentByID(selectedShipment.getNumber()));
 			remove(selectedShipment);
 			logger.info(
 					"Shipment with id: " + selectedShipment.getNumber() + " successfully removed by administrator!");
-		} else {
+		} else
+		{
 			resultLabel.setText("First select");
 		}
 	}
 
-	public void setChoosedCompany(Company choosedCompany) {
+	public void setChoosedCompany(Company choosedCompany)
+	{
 		this.choosedCompany = choosedCompany;
 
 	}
 
-	public void viewShipmentsList() {
+	public void viewShipmentsList()
+	{
 
-		for (ShipmentView shipment : shipmentService.getShipmentsByCompany(choosedCompany)) {
+		for (ShipmentView shipment : shipmentService.getShipmentsByCompany(choosedCompany))
+		{
 			addToListTable(shipment);
 		}
 
@@ -105,18 +116,23 @@ public class ShipmentsViewFormController implements Initializable {
 
 	}
 
-	private void wrapListAndAddFiltering() {
+	private void wrapListAndAddFiltering()
+	{
 
-		number.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredData.setPredicate(shipment -> {
+		number.textProperty().addListener((observable, oldValue, newValue) ->
+		{
+			filteredData.setPredicate(shipment ->
+			{
 
-				if (newValue == null || newValue.isEmpty()) {
+				if (newValue == null || newValue.isEmpty())
+				{
 					return true;
 				}
 
 				String lowerCaseFilter = newValue.toLowerCase();
 
-				if (((Integer) shipment.getNumber()).toString().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+				if (((Integer) shipment.getNumber()).toString().toLowerCase().indexOf(lowerCaseFilter) != -1)
+				{
 					return true;
 				}
 
@@ -127,13 +143,15 @@ public class ShipmentsViewFormController implements Initializable {
 
 	}
 
-	private void remove(ShipmentView item) {
+	private void remove(ShipmentView item)
+	{
 		shipments.remove(item);
 		wrapListAndAddFiltering();
 		shipmentsView.setItems(filteredData);
 	}
 
-	private void addToListTable(ShipmentView shipment) {
+	private void addToListTable(ShipmentView shipment)
+	{
 		shipments.add(shipment);
 	}
 

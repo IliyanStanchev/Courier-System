@@ -4,7 +4,8 @@ import java.util.List;
 
 import tu_varna.project.courier_system.entity.Company;
 
-public interface CompanyDao {
+public interface CompanyDao
+{
 
 	Company get(int id);
 

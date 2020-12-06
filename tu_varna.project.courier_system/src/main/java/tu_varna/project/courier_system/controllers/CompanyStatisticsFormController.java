@@ -9,7 +9,8 @@ import tu_varna.project.courier_system.entity.Company;
 import tu_varna.project.courier_system.services.ShipmentService;
 import tu_varna.project.courier_system.services.impl.ShipmentServiceImpl;
 
-public class CompanyStatisticsFormController {
+public class CompanyStatisticsFormController
+{
 
 	private ShipmentService shipmentService = new ShipmentServiceImpl();
 
@@ -26,7 +27,8 @@ public class CompanyStatisticsFormController {
 	@FXML
 	private TextField unsuccessfullyOrders;
 
-	public void setCompany(Company company) {
+	public void setCompany(Company company)
+	{
 
 		this.companyName.setText(company.getCompanyName());
 		this.dateOfceation.setText(company.getDateOfCreation().format(DateTimeFormatter.ofPattern("dd.MMMM yyyy")));

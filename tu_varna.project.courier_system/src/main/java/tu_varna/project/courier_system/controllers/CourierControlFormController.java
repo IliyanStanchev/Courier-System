@@ -23,7 +23,8 @@ import tu_varna.project.courier_system.services.UserService;
 import tu_varna.project.courier_system.services.impl.UserServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CourierView;
 
-public class CourierControlFormController implements Initializable {
+public class CourierControlFormController implements Initializable
+{
 
 	private static final Logger logger = LogManager.getLogger(CourierControlFormController.class);
 
@@ -46,19 +47,22 @@ public class CourierControlFormController implements Initializable {
 	private FilteredList<CourierView> filteredData = new FilteredList<>(couriers, b -> true);
 
 	@FXML
-	private void addCourier(ActionEvent event) {
+	private void addCourier(ActionEvent event)
+	{
 		OpenNewForm.openNewForm("CreateCourierForm.fxml", "Create Courier");
 
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize(URL location, ResourceBundle resources)
+	{
 
 		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		this.phoneNColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNmb"));
 		this.companyColumn.setCellValueFactory(new PropertyValueFactory<>("company"));
 
-		for (CourierView courier : userService.getAllCouriers()) {
+		for (CourierView courier : userService.getAllCouriers())
+		{
 			addToListTable(courier);
 		}
 		SortedList<CourierView> sortedData = new SortedList<>(filteredData);
@@ -71,10 +75,12 @@ public class CourierControlFormController implements Initializable {
 	}
 
 	@FXML
-	void removeCourier(ActionEvent event) {
+	void removeCourier(ActionEvent event)
+	{
 
 		CourierView selectedCourier = courierView.getSelectionModel().getSelectedItem();
-		if (selectedCourier != null) {
+		if (selectedCourier != null)
+		{
 			userService.deleteUser(userService.getUserByPhone(selectedCourier.getPhoneNmb()));
 			remove(selectedCourier);
 			logger.info("Courier [" + selectedCourier.getName() + " , " + selectedCourier.getPhoneNmb()
@@ -83,18 +89,23 @@ public class CourierControlFormController implements Initializable {
 			resultLabel.setText("First select");
 	}
 
-	private void wrapListAndAddFiltering() {
+	private void wrapListAndAddFiltering()
+	{
 
-		name.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredData.setPredicate(courier -> {
+		name.textProperty().addListener((observable, oldValue, newValue) ->
+		{
+			filteredData.setPredicate(courier ->
+			{
 
-				if (newValue == null || newValue.isEmpty()) {
+				if (newValue == null || newValue.isEmpty())
+				{
 					return true;
 				}
 
 				String lowerCaseFilter = newValue.toLowerCase();
 
-				if (courier.getName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+				if (courier.getName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+				{
 					return true;
 				}
 
@@ -105,13 +116,15 @@ public class CourierControlFormController implements Initializable {
 		});
 	}
 
-	private void remove(CourierView item) {
+	private void remove(CourierView item)
+	{
 		couriers.remove(item);
 		wrapListAndAddFiltering();
 		courierView.setItems(filteredData);
 	}
 
-	public void addToListTable(CourierView courier) {
+	public void addToListTable(CourierView courier)
+	{
 		couriers.add(courier);
 	}
 

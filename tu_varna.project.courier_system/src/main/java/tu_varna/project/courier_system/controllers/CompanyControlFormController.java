@@ -22,7 +22,8 @@ import tu_varna.project.courier_system.services.CompanyService;
 import tu_varna.project.courier_system.services.impl.CompanyServiceImpl;
 import tu_varna.project.courier_system.tabelviewClasses.CompanyView;
 
-public class CompanyControlFormController implements Initializable {
+public class CompanyControlFormController implements Initializable
+{
 
 	private static final Logger logger = LogManager.getLogger(CompanyControlFormController.class);
 
@@ -43,14 +44,17 @@ public class CompanyControlFormController implements Initializable {
 	private FilteredList<CompanyView> filteredData = new FilteredList<>(companies, b -> true);
 
 	@FXML
-	private void createCompany(ActionEvent event) {
+	private void createCompany(ActionEvent event)
+	{
 		OpenNewForm.openNewForm("CreateCompanyForm.fxml", "Create company");
 	}
 
 	@FXML
-	private void deleteCompany(ActionEvent event) {
+	private void deleteCompany(ActionEvent event)
+	{
 		CompanyView selectedCompany = companyView.getSelectionModel().getSelectedItem();
-		if (selectedCompany != null) {
+		if (selectedCompany != null)
+		{
 			companyService.deleteCompany(companyService.getCompanyByID(selectedCompany.getBulstat()));
 			remove(selectedCompany);
 			logger.info("Company with id: " + selectedCompany.getBulstat() + " successfully removed from database!");
@@ -59,11 +63,13 @@ public class CompanyControlFormController implements Initializable {
 	}
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{
 		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		this.bulstatColumn.setCellValueFactory(new PropertyValueFactory<>("bulstat"));
 
-		for (CompanyView company : companyService.getAllCompanies()) {
+		for (CompanyView company : companyService.getAllCompanies())
+		{
 			addToListTabel(company);
 		}
 
@@ -73,20 +79,26 @@ public class CompanyControlFormController implements Initializable {
 
 	}
 
-	private void remove(CompanyView item) {
+	private void remove(CompanyView item)
+	{
 		companies.remove(item);
 		wrapListAndAddFiltering();
 		companyView.setItems(filteredData);
 	}
 
-	private void wrapListAndAddFiltering() {
-		bulstat.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredData.setPredicate(company -> {
-				if (newValue == null || newValue.isEmpty()) {
+	private void wrapListAndAddFiltering()
+	{
+		bulstat.textProperty().addListener((observable, oldValue, newValue) ->
+		{
+			filteredData.setPredicate(company ->
+			{
+				if (newValue == null || newValue.isEmpty())
+				{
 					return true;
 				}
 				String lowerCaseFilter = newValue.toLowerCase();
-				if (((Integer) company.getBulstat()).toString().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+				if (((Integer) company.getBulstat()).toString().toLowerCase().indexOf(lowerCaseFilter) != -1)
+				{
 					return true;
 				} else
 					return false;
@@ -94,7 +106,8 @@ public class CompanyControlFormController implements Initializable {
 		});
 	}
 
-	public void addToListTabel(CompanyView company) {
+	public void addToListTabel(CompanyView company)
+	{
 		companies.add(company);
 	}
 
