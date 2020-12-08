@@ -28,7 +28,7 @@ public interface UserService
 
 	void changeUserPassword(User user1, String password);
 
-	void changeUserPhone(User user1, String phone);
+	boolean changeUserPhone(User user1, String phone);
 
 	List<ClientView> getAllClients();
 

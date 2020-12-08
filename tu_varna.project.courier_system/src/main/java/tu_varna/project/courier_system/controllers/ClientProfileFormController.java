@@ -175,10 +175,14 @@ public class ClientProfileFormController
 	@FXML
 	private void savePhoneN(ActionEvent event)
 	{
-		userService.changeUserPhone(client, phoneN.getText());
-		logger.info("Client with id: " + client.getId() + " updated his phone number!");
-		this.phoneN.setDisable(true);
-		this.phoneNSaveB.setDisable(true);
+		boolean isChanged = userService.changeUserPhone(client, phoneN.getText());
+		if (isChanged)
+		{
+			logger.info("Client with id: " + client.getId() + " updated his phone number!");
+			this.phoneN.setDisable(true);
+			this.phoneNSaveB.setDisable(true);
+		} else
+			this.phoneNValidationLabel.setText("This phone is already taken!");
 	}
 
 	public void setClientInformation(Client client)

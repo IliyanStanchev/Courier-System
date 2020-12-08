@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao
 	}
 
 	@Override
-	public void update(User t)
+	public boolean update(User t)
 	{
 		try
 		{
@@ -51,7 +51,9 @@ public class UserDaoImpl implements UserDao
 		} catch (PersistenceException e)
 		{
 			System.out.println("Error updating object!");
+			return false;
 		}
+		return true;
 	}
 
 	@Override
@@ -105,8 +107,9 @@ public class UserDaoImpl implements UserDao
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getAllClients()
 	{
-		return entityManager.getEntityManager()
-				.createQuery("SELECT u.name, u.phoneNumber FROM User u, Client c WHERE u.id = c.id").getResultList();
+		return entityManager.getEntityManager().createQuery(
+				"SELECT u.name, u.phoneNumber FROM User u, Client c WHERE u.id = c.id AND u.phoneNumber != 'system'")
+				.getResultList();
 	}
 
 	@Override

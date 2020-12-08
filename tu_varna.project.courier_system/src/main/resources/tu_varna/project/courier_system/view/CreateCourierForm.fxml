@@ -82,7 +82,7 @@
                   <Font size="13.0" />
                </font>
             </Text>
-            <Label fx:id="passwordValidationLabel" layoutX="36.0" layoutY="170.0" prefHeight="18.0" prefWidth="203.0" textFill="#fa0000" />
+            <Label fx:id="passwordValidationLabel" layoutX="36.0" layoutY="170.0" prefHeight="18.0" prefWidth="274.0" textFill="#fa0000" />
             <Label fx:id="usernameValidationLabel" layoutX="36.0" layoutY="105.0" prefHeight="0.0" prefWidth="429.0" textFill="#fa0000" />
             <Label fx:id="confirmPWValidationLabel" layoutX="309.0" layoutY="170.0" prefHeight="18.0" prefWidth="192.0" textFill="#fa0000" />
             <Label fx:id="nameValidationLabel" layoutX="33.0" layoutY="247.0" prefHeight="18.0" prefWidth="412.0" textFill="#fa0000" />

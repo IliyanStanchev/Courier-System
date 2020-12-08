@@ -182,11 +182,14 @@ public class CourierProfileFormController
 	@FXML
 	private void savePhoneN(ActionEvent event)
 	{
-
-		userService.changeUserPhone(courier, phoneN.getText());
-		logger.info("Courier with id: " + courier.getId() + " updated his phone number!");
-		this.phoneN.setDisable(true);
-		this.phoneNSaveB.setDisable(true);
+		boolean isChange = userService.changeUserPhone(courier, phoneN.getText());
+		if (isChange)
+		{
+			logger.info("Courier with id: " + courier.getId() + " updated his phone number!");
+			this.phoneN.setDisable(true);
+			this.phoneNSaveB.setDisable(true);
+		} else
+			this.phoneNValidationLabel.setText("This phone is already taken!");
 
 	}
 

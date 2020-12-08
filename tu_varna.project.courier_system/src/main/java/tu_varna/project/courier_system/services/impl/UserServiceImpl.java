@@ -101,10 +101,10 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
-	public void changeUserPhone(User user, String phone)
+	public boolean changeUserPhone(User user, String phone)
 	{
 		user.setPhoneNumber(phone);
-		userDao.update(user);
+		return userDao.update(user);
 
 	}
 

@@ -27,7 +27,7 @@ public class DatabaseGenerator
 		client.setLoginPassword("system");
 		client.setLoginUsername("system");
 		client.setAddress(new Address("address", "address", "address #1"));
-		client.setPhoneNumber("1111111111");
+		client.setPhoneNumber("system");
 		client.setEmail("system@gmail.com");
 		client.setName("system_client");
 

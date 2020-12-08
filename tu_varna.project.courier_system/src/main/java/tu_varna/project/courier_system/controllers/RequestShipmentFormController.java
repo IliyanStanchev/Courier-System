@@ -44,7 +44,7 @@ public class RequestShipmentFormController implements Initializable
 {
 
 	private static final Logger LOGGER = LogManager.getLogger(RequestShipmentFormController.class);
-	private final String SYSTEM_CLIENT = "1111111111";
+	private final String SYSTEM_CLIENT = "system";
 
 	private UserService userService = new UserServiceImpl();
 	private CompanyService companyService = new CompanyServiceImpl();

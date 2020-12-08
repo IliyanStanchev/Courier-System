@@ -39,7 +39,7 @@ public class CourierControlFormController implements Initializable
 	@FXML
 	private TableColumn<CourierView, String> companyColumn;
 	@FXML
-	private TextField name;
+	private TextField companyname;
 	@FXML
 	private Label resultLabel;
 
@@ -92,7 +92,7 @@ public class CourierControlFormController implements Initializable
 	private void wrapListAndAddFiltering()
 	{
 
-		name.textProperty().addListener((observable, oldValue, newValue) ->
+		companyname.textProperty().addListener((observable, oldValue, newValue) ->
 		{
 			filteredData.setPredicate(courier ->
 			{
@@ -104,7 +104,7 @@ public class CourierControlFormController implements Initializable
 
 				String lowerCaseFilter = newValue.toLowerCase();
 
-				if (courier.getName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+				if (courier.getCompany().toLowerCase().indexOf(lowerCaseFilter) != -1)
 				{
 					return true;
 				}
